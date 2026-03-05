@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 import '../models/fermentation.dart';
 import '../services/fermentation_service.dart';
 import '../widgets/time_progress.dart';
@@ -19,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Fermentation? _fermentation;
   Timer? _timer;
-  bool _notificationSent = false;
 
   @override
   void initState() {
@@ -29,12 +31,23 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _initNotifications() async {
-    const androidSettings =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+    tz.initializeTimeZones();
+    final tzInfo = await FlutterTimezone.getLocalTimezone();
+    final String timeZoneName = tzInfo.identifier;
+    tz.setLocalLocation(tz.getLocation(timeZoneName));
+
+    const androidSettings = AndroidInitializationSettings('ic_stat_kefir');
     const darwinSettings = DarwinInitializationSettings();
     const initSettings =
         InitializationSettings(android: androidSettings, iOS: darwinSettings);
     await _notificationsPlugin.initialize(initSettings);
+
+    final androidPlugin =
+        _notificationsPlugin.resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>();
+    if (androidPlugin != null) {
+      await androidPlugin.requestNotificationsPermission();
+    }
   }
 
   Future<void> _loadData() async {
@@ -51,47 +64,59 @@ class _HomeScreenState extends State<HomeScreen> {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {});
-      _checkNotification();
+      if (_fermentation != null && _fermentation!.progress >= 1.0) {
+        _timer?.cancel();
+      }
     });
   }
 
-  Future<void> _checkNotification() async {
-    if (_fermentation == null || _notificationSent) return;
+  Future<void> _scheduleNotification(DateTime scheduledDate) async {
+    const androidDetails = AndroidNotificationDetails(
+      'kefir_control_channel',
+      'Kefir Control',
+      channelDescription:
+          'Notificaciones de finalización de fermentación de kéfir',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+    const iosDetails = DarwinNotificationDetails();
+    const details =
+        NotificationDetails(android: androidDetails, iOS: iosDetails);
 
-    if (_fermentation!.progress >= 1.0) {
-      _notificationSent = true;
-      const androidDetails = AndroidNotificationDetails(
-        'kefir_control_channel',
-        'Kefir Control',
-        channelDescription:
-            'Notificaciones de finalización de fermentación de kéfir',
-        importance: Importance.max,
-        priority: Priority.high,
-      );
-      const iosDetails = DarwinNotificationDetails();
-      const details =
-          NotificationDetails(android: androidDetails, iOS: iosDetails);
+    final eventDate = tz.TZDateTime.from(scheduledDate, tz.local);
+    final now = tz.TZDateTime.now(tz.local);
 
-      await _notificationsPlugin.show(
-        0,
-        'Fermentación Completa',
-        'Tu fermentación de kéfir ha alcanzado el tiempo objetivo.',
-        details,
-      );
-    }
+    // Ignore if time is already in the past
+    if (eventDate.isBefore(now)) return;
+
+    await _notificationsPlugin.zonedSchedule(
+      0,
+      'Fermentación Completa',
+      'Tu fermentación de kéfir ha alcanzado el tiempo objetivo.',
+      eventDate,
+      details,
+      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+    );
   }
 
   void _startFermentation(int hours, {DateTime? customStartTime}) async {
+    final startTime = customStartTime ?? DateTime.now();
+    final targetDuration = Duration(hours: hours);
     final newFermentation = Fermentation(
-      startTime: customStartTime ?? DateTime.now(),
-      targetDuration: Duration(hours: hours),
+      startTime: startTime,
+      targetDuration: targetDuration,
     );
     await _service.saveFermentation(newFermentation);
     setState(() {
       _fermentation = newFermentation;
-      _notificationSent = false;
     });
     _startTimer();
+
+    // Cancela cualquier notificación anterior y programa la nueva
+    await _notificationsPlugin.cancelAll();
+    await _scheduleNotification(startTime.add(targetDuration));
   }
 
   Future<void> _showManualStartDialog() async {
@@ -176,9 +201,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void _stopFermentation() async {
     await _service.clearFermentation();
     _timer?.cancel();
+    await _notificationsPlugin.cancelAll();
     setState(() {
       _fermentation = null;
-      _notificationSent = false;
     });
   }
 
@@ -242,6 +267,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       label: const Text('Finalizar fermentación',
                           style: TextStyle(color: Colors.red)),
                     ),
+                  const SizedBox(height: 16),
+                  TextButton.icon(
+                    onPressed: () {
+                      _scheduleNotification(
+                          DateTime.now().add(const Duration(seconds: 10)));
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text(
+                              'Notificación programada en 10 segundos. ¡Minimiza la app!')));
+                    },
+                    icon: const Icon(Icons.science, color: Colors.grey),
+                    label: const Text('Probar Notificación en 10s',
+                        style: TextStyle(color: Colors.grey)),
+                  ),
                 ],
               ),
             ),

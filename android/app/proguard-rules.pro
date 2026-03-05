@@ -1,0 +1,5 @@
+-keepattributes Signature
+-keep class com.google.gson.** { *; }
+-keep class com.dexterous.flutterlocalnotifications.models.** { *; }
+-keep class com.dexterous.flutterlocalnotifications.** { *; }
+-keep class androidx.core.app.NotificationManagerCompat { *; }
