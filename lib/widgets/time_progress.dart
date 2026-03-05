@@ -12,10 +12,51 @@ class TimeProgress extends StatelessWidget {
     return '${hours}h ${minutes}m';
   }
 
-  String _formatTime(DateTime time) {
+  String _getSpanishDay(int weekday) {
+    switch (weekday) {
+      case DateTime.monday:
+        return 'lunes';
+      case DateTime.tuesday:
+        return 'martes';
+      case DateTime.wednesday:
+        return 'miércoles';
+      case DateTime.thursday:
+        return 'jueves';
+      case DateTime.friday:
+        return 'viernes';
+      case DateTime.saturday:
+        return 'sábado';
+      case DateTime.sunday:
+        return 'domingo';
+      default:
+        return '';
+    }
+  }
+
+  String _formatDateTime(DateTime time) {
+    final day = _getSpanishDay(time.weekday);
     final h = time.hour.toString().padLeft(2, '0');
     final m = time.minute.toString().padLeft(2, '0');
-    return '$h:$m';
+    return '$day $h:$m';
+  }
+
+  String _formatRemainingDuration(Duration duration) {
+    if (duration.isNegative) return '0 minutos';
+    final days = duration.inDays;
+    final hours = duration.inHours.remainder(24);
+    final minutes = duration.inMinutes.remainder(60);
+
+    List<String> parts = [];
+    if (days > 0) {
+      parts.add('$days ${days == 1 ? "día" : "días"}');
+    }
+    if (hours > 0) {
+      parts.add('$hours ${hours == 1 ? "hora" : "horas"}');
+    }
+    if (minutes > 0 || parts.isEmpty) {
+      parts.add('$minutes ${minutes == 1 ? "minuto" : "minutos"}');
+    }
+    return parts.join(' ');
   }
 
   @override
@@ -24,7 +65,7 @@ class TimeProgress extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Fermentando desde ${_formatTime(fermentation.startTime)}',
+          'Inicio fermentación: ${_formatDateTime(fermentation.startTime)}',
           style: const TextStyle(fontSize: 18),
         ),
         const SizedBox(height: 24),
@@ -49,12 +90,12 @@ class TimeProgress extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         Text(
-          'Restante: ${_formatDuration(fermentation.remaining)}',
+          'Restante: ${_formatRemainingDuration(fermentation.remaining)}',
           style: const TextStyle(fontSize: 20),
         ),
         const SizedBox(height: 8),
         Text(
-          'Listo a las: ${_formatTime(fermentation.estimatedFinishTime)}',
+          'Fin fermentación: ${_formatDateTime(fermentation.estimatedFinishTime)}',
           style: const TextStyle(fontSize: 16, color: Colors.grey),
         ),
       ],
