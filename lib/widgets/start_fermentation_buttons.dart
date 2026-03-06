@@ -18,7 +18,7 @@ class StartFermentationButtons extends StatelessWidget {
         FilledButton.icon(
           onPressed: onStartNow,
           icon: const Icon(Icons.play_circle_fill),
-          label: const Text("Iniciar fermentación ahora"),
+          label: const Text("Iniciar fermentación"),
           style: FilledButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 16),
               textStyle:
@@ -28,7 +28,7 @@ class StartFermentationButtons extends StatelessWidget {
         OutlinedButton.icon(
           onPressed: onStartPast,
           icon: const Icon(Icons.history),
-          label: const Text("Registrar fermentación pasada/futura"),
+          label: const Text("Registrar fermentación pasada"),
           style: OutlinedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 12),
           ),
