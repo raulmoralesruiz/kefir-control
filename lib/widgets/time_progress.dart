@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/fermentation.dart';
+import 'fermentation_stepper.dart';
 
 class TimeProgress extends StatelessWidget {
   final Fermentation fermentation;
@@ -82,21 +83,25 @@ class TimeProgress extends StatelessWidget {
             borderRadius: BorderRadius.circular(6),
           ),
         ),
-        const SizedBox(height: 8),
-        Text(
-          fermentation.stage,
-          style: const TextStyle(
-              fontSize: 16, fontStyle: FontStyle.italic, color: Colors.grey),
-        ),
-        const SizedBox(height: 24),
-        Text(
-          'Restante: ${_formatRemainingDuration(fermentation.remaining)}',
-          style: const TextStyle(fontSize: 20),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Fin fermentación: ${_formatDateTime(fermentation.estimatedFinishTime)}',
-          style: const TextStyle(fontSize: 16, color: Colors.grey),
+        const SizedBox(height: 16),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                FermentationStepper(fermentation: fermentation),
+                Text(
+                  'Restante: ${_formatRemainingDuration(fermentation.remaining)}',
+                  style: const TextStyle(fontSize: 20),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Fin fermentación: ${_formatDateTime(fermentation.estimatedFinishTime)}',
+                  style: const TextStyle(fontSize: 16, color: Colors.grey),
+                ),
+                const SizedBox(height: 32),
+              ],
+            ),
+          ),
         ),
       ],
     );
