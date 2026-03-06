@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../models/fermentation.dart';
 import '../services/fermentation_service.dart';
 import '../services/notification_service.dart';
-import '../widgets/quick_start_buttons.dart';
+import '../widgets/start_fermentation_buttons.dart';
+import '../widgets/stop_fermentation_button.dart';
 import '../widgets/manual_start_dialog.dart';
 import '../widgets/time_progress.dart';
 
@@ -71,8 +72,9 @@ class _HomeScreenState extends State<HomeScreen> {
         .scheduleFermentationComplete(startTime.add(targetDuration));
   }
 
-  Future<void> _showManualStartDialog() async {
-    final result = await ManualStartDialog.show(context);
+  Future<void> _showStartDialog({required bool askForDate}) async {
+    final result =
+        await ManualStartDialog.show(context, askForDate: askForDate);
     if (result != null) {
       _startFermentation(result.hours, customStartTime: result.customStartTime);
     }
@@ -118,17 +120,14 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   if (_fermentation == null || _fermentation!.progress >= 1.0)
-                    QuickStartButtons(
-                      onStartFermentation: _startFermentation,
-                      onManualStart: _showManualStartDialog,
+                    StartFermentationButtons(
+                      onStartNow: () => _showStartDialog(askForDate: false),
+                      onStartPast: () => _showStartDialog(askForDate: true),
                     ),
                   const SizedBox(height: 16),
                   if (_fermentation != null)
-                    TextButton.icon(
-                      onPressed: _stopFermentation,
-                      icon: const Icon(Icons.stop_circle, color: Colors.red),
-                      label: const Text('Finalizar fermentación',
-                          style: TextStyle(color: Colors.red)),
+                    StopFermentationButton(
+                      onStop: _stopFermentation,
                     ),
                   const SizedBox(height: 16),
                   TextButton.icon(

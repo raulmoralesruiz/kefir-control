@@ -8,29 +8,34 @@ class ManualStartResult {
 }
 
 class ManualStartDialog {
-  static Future<ManualStartResult?> show(BuildContext context) async {
-    final DateTime? date = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now().subtract(const Duration(days: 7)),
-      lastDate: DateTime.now(),
-    );
-    if (date == null) return null;
+  static Future<ManualStartResult?> show(BuildContext context,
+      {bool askForDate = true}) async {
+    DateTime customDateTime = DateTime.now();
 
-    if (!context.mounted) return null;
-    final TimeOfDay? time = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-    if (time == null) return null;
+    if (askForDate) {
+      final DateTime? date = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now().subtract(const Duration(days: 7)),
+        lastDate: DateTime.now(),
+      );
+      if (date == null) return null;
 
-    final customDateTime = DateTime(
-      date.year,
-      date.month,
-      date.day,
-      time.hour,
-      time.minute,
-    );
+      if (!context.mounted) return null;
+      final TimeOfDay? time = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+      );
+      if (time == null) return null;
+
+      customDateTime = DateTime(
+        date.year,
+        date.month,
+        date.day,
+        time.hour,
+        time.minute,
+      );
+    }
 
     int selectedHours = 24;
 
