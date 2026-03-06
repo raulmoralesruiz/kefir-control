@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_timezone/flutter_timezone.dart';
-import 'package:timezone/data/latest_all.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 import '../models/fermentation.dart';
 import '../services/fermentation_service.dart';
+import '../services/notification_service.dart';
+import '../widgets/quick_start_buttons.dart';
+import '../widgets/manual_start_dialog.dart';
 import '../widgets/time_progress.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,8 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final FermentationService _service = FermentationService();
-  final FlutterLocalNotificationsPlugin _notificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  final NotificationService _notificationService = NotificationService();
 
   Fermentation? _fermentation;
   Timer? _timer;
@@ -31,23 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _initNotifications() async {
-    tz.initializeTimeZones();
-    final tzInfo = await FlutterTimezone.getLocalTimezone();
-    final String timeZoneName = tzInfo.identifier;
-    tz.setLocalLocation(tz.getLocation(timeZoneName));
-
-    const androidSettings = AndroidInitializationSettings('ic_stat_kefir');
-    const darwinSettings = DarwinInitializationSettings();
-    const initSettings =
-        InitializationSettings(android: androidSettings, iOS: darwinSettings);
-    await _notificationsPlugin.initialize(initSettings);
-
-    final androidPlugin =
-        _notificationsPlugin.resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>();
-    if (androidPlugin != null) {
-      await androidPlugin.requestNotificationsPermission();
-    }
+    await _notificationService.init();
   }
 
   Future<void> _loadData() async {
@@ -70,37 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Future<void> _scheduleNotification(DateTime scheduledDate) async {
-    const androidDetails = AndroidNotificationDetails(
-      'kefir_control_channel',
-      'Kefir Control',
-      channelDescription:
-          'Notificaciones de finalización de fermentación de kéfir',
-      importance: Importance.max,
-      priority: Priority.high,
-    );
-    const iosDetails = DarwinNotificationDetails();
-    const details =
-        NotificationDetails(android: androidDetails, iOS: iosDetails);
-
-    final eventDate = tz.TZDateTime.from(scheduledDate, tz.local);
-    final now = tz.TZDateTime.now(tz.local);
-
-    // Ignore if time is already in the past
-    if (eventDate.isBefore(now)) return;
-
-    await _notificationsPlugin.zonedSchedule(
-      0,
-      'Fermentación Completa',
-      'Tu fermentación de kéfir ha alcanzado el tiempo objetivo.',
-      eventDate,
-      details,
-      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-    );
-  }
-
   void _startFermentation(int hours, {DateTime? customStartTime}) async {
     final startTime = customStartTime ?? DateTime.now();
     final targetDuration = Duration(hours: hours);
@@ -115,93 +66,22 @@ class _HomeScreenState extends State<HomeScreen> {
     _startTimer();
 
     // Cancela cualquier notificación anterior y programa la nueva
-    await _notificationsPlugin.cancelAll();
-    await _scheduleNotification(startTime.add(targetDuration));
+    await _notificationService.cancelAll();
+    await _notificationService
+        .scheduleFermentationComplete(startTime.add(targetDuration));
   }
 
   Future<void> _showManualStartDialog() async {
-    final DateTime? date = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now().subtract(const Duration(days: 7)),
-      lastDate: DateTime.now(),
-    );
-    if (date == null) return;
-
-    if (!mounted) return;
-    final TimeOfDay? time = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-    if (time == null) return;
-
-    final customDateTime = DateTime(
-      date.year,
-      date.month,
-      date.day,
-      time.hour,
-      time.minute,
-    );
-
-    int selectedHours = 24;
-
-    if (!mounted) return;
-
-    await showDialog(
-      context: context,
-      builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setState) {
-            return AlertDialog(
-              title: const Text('Selecciona la duración'),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  RadioListTile<int>(
-                    title: const Text('24 horas'),
-                    value: 24,
-                    groupValue: selectedHours,
-                    onChanged: (val) => setState(() => selectedHours = val!),
-                  ),
-                  RadioListTile<int>(
-                    title: const Text('36 horas'),
-                    value: 36,
-                    groupValue: selectedHours,
-                    onChanged: (val) => setState(() => selectedHours = val!),
-                  ),
-                  RadioListTile<int>(
-                    title: const Text('48 horas'),
-                    value: 48,
-                    groupValue: selectedHours,
-                    onChanged: (val) => setState(() => selectedHours = val!),
-                  ),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('Cancelar'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    _startFermentation(selectedHours,
-                        customStartTime: customDateTime);
-                  },
-                  child: const Text('Iniciar'),
-                ),
-              ],
-            );
-          },
-        );
-      },
-    );
+    final result = await ManualStartDialog.show(context);
+    if (result != null) {
+      _startFermentation(result.hours, customStartTime: result.customStartTime);
+    }
   }
 
   void _stopFermentation() async {
     await _service.clearFermentation();
     _timer?.cancel();
-    await _notificationsPlugin.cancelAll();
+    await _notificationService.cancelAll();
     setState(() {
       _fermentation = null;
     });
@@ -237,27 +117,9 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () => _startFermentation(24),
-                        child: const Text('24h'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () => _startFermentation(36),
-                        child: const Text('36h'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () => _startFermentation(48),
-                        child: const Text('48h'),
-                      ),
-                      IconButton(
-                        onPressed: _showManualStartDialog,
-                        icon: const Icon(Icons.edit_calendar),
-                        tooltip: 'Inicio Manual',
-                      ),
-                    ],
+                  QuickStartButtons(
+                    onStartFermentation: _startFermentation,
+                    onManualStart: _showManualStartDialog,
                   ),
                   const SizedBox(height: 16),
                   if (_fermentation != null)
@@ -270,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 16),
                   TextButton.icon(
                     onPressed: () {
-                      _scheduleNotification(
+                      _notificationService.scheduleFermentationComplete(
                           DateTime.now().add(const Duration(seconds: 10)));
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text(
