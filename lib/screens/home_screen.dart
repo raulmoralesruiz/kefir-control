@@ -110,19 +110,6 @@ class _HomeScreenState extends State<HomeScreen> {
           StopFermentationButton(
             onStop: _stopFermentation,
           ),
-        const SizedBox(height: 16),
-        TextButton.icon(
-          onPressed: () {
-            _notificationService.scheduleFermentationComplete(
-                DateTime.now().add(const Duration(seconds: 10)));
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text(
-                    'Notificación programada en 10 segundos. ¡Minimiza la app!')));
-          },
-          icon: const Icon(Icons.science, color: Colors.grey),
-          label: const Text('Probar Notificación en 10s',
-              style: TextStyle(color: Colors.grey)),
-        ),
       ],
     );
   }
