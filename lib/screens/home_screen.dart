@@ -95,6 +95,38 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
+  Widget _buildActionButtons() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if (_fermentation == null || _fermentation!.progress >= 1.0)
+          StartFermentationButtons(
+            onStartNow: () => _showStartDialog(askForDate: false),
+            onStartPast: () => _showStartDialog(askForDate: true),
+          ),
+        const SizedBox(height: 16),
+        if (_fermentation != null)
+          StopFermentationButton(
+            onStop: _stopFermentation,
+          ),
+        const SizedBox(height: 16),
+        TextButton.icon(
+          onPressed: () {
+            _notificationService.scheduleFermentationComplete(
+                DateTime.now().add(const Duration(seconds: 10)));
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text(
+                    'Notificación programada en 10 segundos. ¡Minimiza la app!')));
+          },
+          icon: const Icon(Icons.science, color: Colors.grey),
+          label: const Text('Probar Notificación en 10s',
+              style: TextStyle(color: Colors.grey)),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,50 +135,27 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: _fermentation == null
-                  ? const Center(
+        child: _fermentation == null
+            ? Column(
+                children: [
+                  const Expanded(
+                    child: Center(
                       child: Text(
                         'No hay fermentación activa.',
                         style: TextStyle(fontSize: 18),
                       ),
-                    )
-                  : TimeProgress(fermentation: _fermentation!),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  if (_fermentation == null || _fermentation!.progress >= 1.0)
-                    StartFermentationButtons(
-                      onStartNow: () => _showStartDialog(askForDate: false),
-                      onStartPast: () => _showStartDialog(askForDate: true),
                     ),
-                  const SizedBox(height: 16),
-                  if (_fermentation != null)
-                    StopFermentationButton(
-                      onStop: _stopFermentation,
-                    ),
-                  const SizedBox(height: 16),
-                  TextButton.icon(
-                    onPressed: () {
-                      _notificationService.scheduleFermentationComplete(
-                          DateTime.now().add(const Duration(seconds: 10)));
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text(
-                              'Notificación programada en 10 segundos. ¡Minimiza la app!')));
-                    },
-                    icon: const Icon(Icons.science, color: Colors.grey),
-                    label: const Text('Probar Notificación en 10s',
-                        style: TextStyle(color: Colors.grey)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: _buildActionButtons(),
                   ),
                 ],
+              )
+            : TimeProgress(
+                fermentation: _fermentation!,
+                actionButtons: _buildActionButtons(),
               ),
-            ),
-          ],
-        ),
       ),
     );
   }
