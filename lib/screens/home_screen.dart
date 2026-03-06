@@ -117,10 +117,11 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  QuickStartButtons(
-                    onStartFermentation: _startFermentation,
-                    onManualStart: _showManualStartDialog,
-                  ),
+                  if (_fermentation == null || _fermentation!.progress >= 1.0)
+                    QuickStartButtons(
+                      onStartFermentation: _startFermentation,
+                      onManualStart: _showManualStartDialog,
+                    ),
                   const SizedBox(height: 16),
                   if (_fermentation != null)
                     TextButton.icon(
