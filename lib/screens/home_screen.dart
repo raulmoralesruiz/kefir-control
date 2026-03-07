@@ -7,6 +7,7 @@ import '../widgets/start_fermentation_buttons.dart';
 import '../widgets/stop_fermentation_button.dart';
 import '../widgets/manual_start_dialog.dart';
 import '../widgets/time_progress.dart';
+import 'info_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -120,6 +121,18 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Kéfir Control'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            tooltip: 'Información y Guía',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const InfoScreen()),
+              );
+            },
+          ),
+        ],
       ),
       body: SafeArea(
         child: _fermentation == null
