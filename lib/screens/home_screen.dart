@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../models/fermentation.dart';
+import '../models/fermentation_history_item.dart';
 import '../services/fermentation_service.dart';
 import '../services/notification_service.dart';
 import '../widgets/start_fermentation_buttons.dart';
@@ -8,6 +9,7 @@ import '../widgets/stop_fermentation_button.dart';
 import '../widgets/manual_start_dialog.dart';
 import '../widgets/time_progress.dart';
 import 'info_screen.dart';
+import 'history_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -82,6 +84,47 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _stopFermentation() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Finalizar fermentación'),
+        content: const Text(
+            '¿Estás seguro de que deseas finalizar la fermentación actual?'),
+        actions: [
+          FilledButton.tonal(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancelar'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: FilledButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.error,
+              foregroundColor: Theme.of(context).colorScheme.onError,
+            ),
+            child: const Text('Finalizar'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true) return;
+
+    if (_fermentation != null) {
+      final now = DateTime.now();
+      final isSuccess = now.isAfter(
+              _fermentation!.startTime.add(_fermentation!.targetDuration)) ||
+          now.isAtSameMomentAs(
+              _fermentation!.startTime.add(_fermentation!.targetDuration));
+
+      final historyItem = FermentationHistoryItem(
+        startTime: _fermentation!.startTime,
+        targetDuration: _fermentation!.targetDuration,
+        completedAt: now,
+        isSuccess: isSuccess,
+      );
+      await _service.addHistoryEntry(historyItem);
+    }
+
     await _service.clearFermentation();
     _timer?.cancel();
     await _notificationService.cancelAll();
@@ -101,12 +144,11 @@ class _HomeScreenState extends State<HomeScreen> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (_fermentation == null || _fermentation!.progress >= 1.0)
+        if (_fermentation == null)
           StartFermentationButtons(
             onStartNow: () => _showStartDialog(askForDate: false),
             onStartPast: () => _showStartDialog(askForDate: true),
           ),
-        const SizedBox(height: 16),
         if (_fermentation != null)
           StopFermentationButton(
             onStop: _stopFermentation,
@@ -122,6 +164,16 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Kéfir Control'),
         centerTitle: true,
         actions: [
+          IconButton(
+            icon: const Icon(Icons.history),
+            tooltip: 'Historial',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HistoryScreen()),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.info_outline),
             tooltip: 'Información y Guía',

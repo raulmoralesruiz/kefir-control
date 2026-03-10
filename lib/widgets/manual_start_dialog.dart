@@ -18,6 +18,8 @@ class ManualStartDialog {
         initialDate: DateTime.now(),
         firstDate: DateTime.now().subtract(const Duration(days: 7)),
         lastDate: DateTime.now(),
+        cancelText: 'Cancelar',
+        confirmText: 'Aceptar',
       );
       if (date == null) return null;
 
@@ -25,6 +27,8 @@ class ManualStartDialog {
       final TimeOfDay? time = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.now(),
+        cancelText: 'Cancelar',
+        confirmText: 'Aceptar',
       );
       if (time == null) return null;
 
@@ -70,11 +74,11 @@ class ManualStartDialog {
                 ),
               ),
               actions: [
-                TextButton(
+                FilledButton.tonal(
                   onPressed: () => Navigator.pop(context),
                   child: const Text('Cancelar'),
                 ),
-                TextButton(
+                FilledButton(
                   onPressed: () {
                     Navigator.pop(
                       context,
