@@ -47,3 +47,8 @@ app.*.map.json
 .agent/
 
 TODO.md
+
+# Archivos sensibles de firma Android
+key.properties
+*.jks
+*.keystore
