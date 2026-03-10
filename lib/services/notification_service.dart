@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -10,6 +11,8 @@ class NotificationService {
   bool _isInit = false;
 
   Future<void> init() async {
+    if (kIsWeb)
+      return; // Las notificaciones locales nativas no funcionan en web base
     if (_isInit) return;
 
     tz.initializeTimeZones();
@@ -34,6 +37,8 @@ class NotificationService {
   }
 
   Future<void> scheduleFermentationComplete(DateTime scheduledDate) async {
+    if (kIsWeb) return; // No intentamos programar en web
+
     const androidDetails = AndroidNotificationDetails(
       'kefir_control_channel',
       'Kefir Control',
@@ -65,6 +70,7 @@ class NotificationService {
   }
 
   Future<void> cancelAll() async {
+    if (kIsWeb) return;
     await _notificationsPlugin.cancelAll();
   }
 }

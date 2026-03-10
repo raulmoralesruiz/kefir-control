@@ -1,0 +1,8 @@
+Kéfir Control nació de la necesidad de recordar cuándo la fermentación del kéfir de leche está en su punto perfecto. Si se deja demasiado tiempo, el kéfir se vuelve excesivamente ácido y el suero se separa en exceso. Esta aplicación simplifica ese proceso con notificaciones locales programadas y un temporizador visual.
+
+Características Principales:
+- Temporizadores Rápidos: Selecciona entre 24h, 36h o 48h de fermentación.
+- Registro de Fermentaciones Pasadas: Si olvidaste iniciar el temporizador, puedes configurar la hora de inicio manualmente.
+- Notificaciones Locales (Off-grid): La app programa la alarma usando tu propio dispositivo, funcionando sin conexión a internet y sin servidores.
+- Historial Completo: Guarda un registro de todas tus cosechas para llevar un control estricto.
+- Privacidad Primero: Sin cuentas de usuario, sin analytics y sin seguimiento cruzado. Los datos viven exclusivamente en tu dispositivo.
