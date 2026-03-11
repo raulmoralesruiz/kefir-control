@@ -11,8 +11,9 @@ class NotificationService {
   bool _isInit = false;
 
   Future<void> init() async {
-    if (kIsWeb)
+    if (kIsWeb) {
       return; // Las notificaciones locales nativas no funcionan en web base
+    }
     if (_isInit) return;
 
     tz.initializeTimeZones();
