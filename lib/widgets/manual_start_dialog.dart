@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kefir_control/l10n/app_localizations.dart';
 
 class ManualStartResult {
   final int hours;
@@ -18,8 +19,8 @@ class ManualStartDialog {
         initialDate: DateTime.now(),
         firstDate: DateTime.now().subtract(const Duration(days: 7)),
         lastDate: DateTime.now(),
-        cancelText: 'Cancelar',
-        confirmText: 'Aceptar',
+        cancelText: AppLocalizations.of(context)!.cancel,
+        confirmText: AppLocalizations.of(context)!.accept,
       );
       if (date == null) return null;
 
@@ -27,8 +28,8 @@ class ManualStartDialog {
       final TimeOfDay? time = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.now(),
-        cancelText: 'Cancelar',
-        confirmText: 'Aceptar',
+        cancelText: AppLocalizations.of(context)!.cancel,
+        confirmText: AppLocalizations.of(context)!.accept,
       );
       if (time == null) return null;
 
@@ -51,23 +52,23 @@ class ManualStartDialog {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: const Text('Selecciona la duración'),
+              title: Text(AppLocalizations.of(context)!.dialogManualDuration),
               content: RadioGroup<int>(
                 groupValue: selectedHours,
                 onChanged: (val) => setState(() => selectedHours = val!),
-                child: const Column(
+                child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     RadioListTile<int>(
-                      title: Text('24 horas'),
+                      title: Text(AppLocalizations.of(context)!.dialogOption24h),
                       value: 24,
                     ),
                     RadioListTile<int>(
-                      title: Text('36 horas'),
+                      title: Text(AppLocalizations.of(context)!.dialogOption36h),
                       value: 36,
                     ),
                     RadioListTile<int>(
-                      title: Text('48 horas'),
+                      title: Text(AppLocalizations.of(context)!.dialogOption48h),
                       value: 48,
                     ),
                   ],
@@ -76,7 +77,7 @@ class ManualStartDialog {
               actions: [
                 FilledButton.tonal(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Cancelar'),
+                  child: Text(AppLocalizations.of(context)!.cancel),
                 ),
                 FilledButton(
                   onPressed: () {
@@ -88,7 +89,7 @@ class ManualStartDialog {
                       ),
                     );
                   },
-                  child: const Text('Iniciar'),
+                  child: Text(AppLocalizations.of(context)!.dialogManualBtnStart),
                 ),
               ],
             );

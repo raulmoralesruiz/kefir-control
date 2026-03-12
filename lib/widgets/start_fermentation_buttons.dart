@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kefir_control/l10n/app_localizations.dart';
 
 class StartFermentationButtons extends StatelessWidget {
   final VoidCallback onStartNow;
@@ -18,7 +19,7 @@ class StartFermentationButtons extends StatelessWidget {
         FilledButton.icon(
           onPressed: onStartNow,
           icon: const Icon(Icons.play_circle_fill),
-          label: const Text("Iniciar fermentación"),
+          label: Text(AppLocalizations.of(context)!.btnStartFermentation),
           style: FilledButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 16),
               textStyle:
@@ -28,7 +29,7 @@ class StartFermentationButtons extends StatelessWidget {
         OutlinedButton.icon(
           onPressed: onStartPast,
           icon: const Icon(Icons.history),
-          label: const Text("Registrar fermentación pasada"),
+          label: Text(AppLocalizations.of(context)!.btnStartPastFermentation),
           style: OutlinedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 12),
           ),

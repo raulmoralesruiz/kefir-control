@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kefir_control/l10n/app_localizations.dart';
 import '../models/fermentation.dart';
 
 class FermentationElapsedTime extends StatelessWidget {
@@ -28,22 +29,22 @@ class FermentationElapsedTime extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (dur.inDays > 0) ...const [
-                  Text("DÍAS",
-                      style: TextStyle(
+                if (dur.inDays > 0) ...[
+                  Text(AppLocalizations.of(context)!.timeDays,
+                      style: const TextStyle(
                           color: Colors.grey, fontSize: 12, letterSpacing: 2)),
-                  SizedBox(width: 32),
+                  const SizedBox(width: 32),
                 ],
-                const Text("HORAS",
-                    style: TextStyle(
+                Text(AppLocalizations.of(context)!.timeHours,
+                    style: const TextStyle(
                         color: Colors.grey, fontSize: 12, letterSpacing: 2)),
                 const SizedBox(width: 32),
-                const Text("MINUTOS",
-                    style: TextStyle(
+                Text(AppLocalizations.of(context)!.timeMinutes,
+                    style: const TextStyle(
                         color: Colors.grey, fontSize: 12, letterSpacing: 2)),
                 const SizedBox(width: 32),
-                const Text("SEGUNDOS",
-                    style: TextStyle(
+                Text(AppLocalizations.of(context)!.timeSeconds,
+                    style: const TextStyle(
                         color: Colors.grey, fontSize: 12, letterSpacing: 2)),
               ],
             )

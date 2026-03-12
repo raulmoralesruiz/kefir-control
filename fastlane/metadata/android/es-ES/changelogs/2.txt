@@ -1,0 +1,6 @@
+• Soporte completo para español e inglés.
+• Nuevo diseño Material 3 con menú lateral de navegación.
+• Interfaz optimizada con botón de acción flotante dinámico (FAB).
+• Añadida opción de donación vía PayPal para apoyar el proyecto.
+• Historial mejorado con función de deslizar para eliminar registros.
+• Refinamientos visuales en el progreso e información del kéfir.

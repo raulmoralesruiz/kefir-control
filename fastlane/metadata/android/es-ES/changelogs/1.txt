@@ -1,0 +1,4 @@
+Lanzamiento inicial de Kéfir Control. 
+Realiza un seguimiento de tus fermentaciones de kéfir de leche con estados en tiempo real
+Temporizadores (24h, 36h, 48h)
+Notificaciones automáticas.

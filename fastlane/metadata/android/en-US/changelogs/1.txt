@@ -1,0 +1,4 @@
+Initial release of Kefir Control.
+Track your milk kefir fermentations easily with status updates.
+Target duration timers (24h, 36h, 48h).
+Automatic notifications.

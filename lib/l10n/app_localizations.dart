@@ -1,0 +1,655 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart' as intl;
+
+import 'app_localizations_en.dart';
+import 'app_localizations_es.dart';
+
+// ignore_for_file: type=lint
+
+/// Callers can lookup localized strings with an instance of AppLocalizations
+/// returned by `AppLocalizations.of(context)`.
+///
+/// Applications need to include `AppLocalizations.delegate()` in their app's
+/// `localizationDelegates` list, and the locales they support in the app's
+/// `supportedLocales` list. For example:
+///
+/// ```dart
+/// import 'l10n/app_localizations.dart';
+///
+/// return MaterialApp(
+///   localizationsDelegates: AppLocalizations.localizationsDelegates,
+///   supportedLocales: AppLocalizations.supportedLocales,
+///   home: MyApplicationHome(),
+/// );
+/// ```
+///
+/// ## Update pubspec.yaml
+///
+/// Please make sure to update your pubspec.yaml to include the following
+/// packages:
+///
+/// ```yaml
+/// dependencies:
+///   # Internationalization support.
+///   flutter_localizations:
+///     sdk: flutter
+///   intl: any # Use the pinned version from flutter_localizations
+///
+///   # Rest of dependencies
+/// ```
+///
+/// ## iOS Applications
+///
+/// iOS applications define key application metadata, including supported
+/// locales, in an Info.plist file that is built into the application bundle.
+/// To configure the locales supported by your app, you’ll need to edit this
+/// file.
+///
+/// First, open your project’s ios/Runner.xcworkspace Xcode workspace file.
+/// Then, in the Project Navigator, open the Info.plist file under the Runner
+/// project’s Runner folder.
+///
+/// Next, select the Information Property List item, select Add Item from the
+/// Editor menu, then select Localizations from the pop-up menu.
+///
+/// Select and expand the newly-created Localizations item then, for each
+/// locale your application supports, add a new item and select the locale
+/// you wish to add from the pop-up menu in the Value field. This list should
+/// be consistent with the languages listed in the AppLocalizations.supportedLocales
+/// property.
+abstract class AppLocalizations {
+  AppLocalizations(String locale)
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+
+  final String localeName;
+
+  static AppLocalizations? of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  }
+
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
+
+  /// A list of this localizations delegate along with the default localizations
+  /// delegates.
+  ///
+  /// Returns a list of localizations delegates containing this delegate along with
+  /// GlobalMaterialLocalizations.delegate, GlobalCupertinoLocalizations.delegate,
+  /// and GlobalWidgetsLocalizations.delegate.
+  ///
+  /// Additional delegates can be added by appending to this list in
+  /// MaterialApp. This list does not have to be used at all if a custom list
+  /// of delegates is preferred or required.
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
+
+  /// A list of this localizations delegate's supported locales.
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
+    Locale('es')
+  ];
+
+  /// No description provided for @appTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Kéfir Control'**
+  String get appTitle;
+
+  /// No description provided for @accept.
+  ///
+  /// In es, this message translates to:
+  /// **'Aceptar'**
+  String get accept;
+
+  /// No description provided for @cancel.
+  ///
+  /// In es, this message translates to:
+  /// **'Cancelar'**
+  String get cancel;
+
+  /// No description provided for @history.
+  ///
+  /// In es, this message translates to:
+  /// **'Historial'**
+  String get history;
+
+  /// No description provided for @changeLanguage.
+  ///
+  /// In es, this message translates to:
+  /// **'Cambiar idioma'**
+  String get changeLanguage;
+
+  /// No description provided for @drawerDonate.
+  ///
+  /// In es, this message translates to:
+  /// **'Invítame a un café ☕'**
+  String get drawerDonate;
+
+  /// No description provided for @drawerDonateSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Apoya el desarrollo vía PayPal'**
+  String get drawerDonateSubtitle;
+
+  /// No description provided for @historyTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Historial'**
+  String get historyTitle;
+
+  /// No description provided for @historyEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay fermentaciones registradas.'**
+  String get historyEmpty;
+
+  /// No description provided for @historyClear.
+  ///
+  /// In es, this message translates to:
+  /// **'Limpiar'**
+  String get historyClear;
+
+  /// No description provided for @historyClearTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Borrar historial?'**
+  String get historyClearTitle;
+
+  /// No description provided for @historyClearContent.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta acción no se puede deshacer.'**
+  String get historyClearContent;
+
+  /// No description provided for @historyClearConfirm.
+  ///
+  /// In es, this message translates to:
+  /// **'Borrar'**
+  String get historyClearConfirm;
+
+  /// No description provided for @homeNoActiveFermentationTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin fermentación activa'**
+  String get homeNoActiveFermentationTitle;
+
+  /// No description provided for @homeNoActiveFermentationDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Selecciona una opción del menú para comenzar.'**
+  String get homeNoActiveFermentationDesc;
+
+  /// No description provided for @homeEstimatedFinish.
+  ///
+  /// In es, this message translates to:
+  /// **'Tiempo estimado'**
+  String get homeEstimatedFinish;
+
+  /// No description provided for @homeRemainingTime.
+  ///
+  /// In es, this message translates to:
+  /// **'Quedan'**
+  String get homeRemainingTime;
+
+  /// No description provided for @homeCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Completado'**
+  String get homeCompleted;
+
+  /// No description provided for @homeStopTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Finalizar fermentación anticipadamente?'**
+  String get homeStopTitle;
+
+  /// No description provided for @homeStopContent.
+  ///
+  /// In es, this message translates to:
+  /// **'Estás a punto de parar el temporizador. Asegúrate de colar los nódulos.'**
+  String get homeStopContent;
+
+  /// No description provided for @homeStopConfirm.
+  ///
+  /// In es, this message translates to:
+  /// **'Finalizar'**
+  String get homeStopConfirm;
+
+  /// No description provided for @btnStartFermentation.
+  ///
+  /// In es, this message translates to:
+  /// **'Iniciar fermentación'**
+  String get btnStartFermentation;
+
+  /// No description provided for @btnStartPastFermentation.
+  ///
+  /// In es, this message translates to:
+  /// **'Registrar fermentación pasada'**
+  String get btnStartPastFermentation;
+
+  /// No description provided for @btnStopFermentation.
+  ///
+  /// In es, this message translates to:
+  /// **'Finalizar fermentación'**
+  String get btnStopFermentation;
+
+  /// No description provided for @dialogManualTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Iniciar fermentación pasada'**
+  String get dialogManualTitle;
+
+  /// No description provided for @dialogManualDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Selecciona la fecha y hora a la que mezclaste la leche con los nódulos para calcular el progreso actual y programar la alarma.'**
+  String get dialogManualDesc;
+
+  /// No description provided for @dialogManualDate.
+  ///
+  /// In es, this message translates to:
+  /// **'Fecha de inicio'**
+  String get dialogManualDate;
+
+  /// No description provided for @dialogManualTime.
+  ///
+  /// In es, this message translates to:
+  /// **'Hora de inicio'**
+  String get dialogManualTime;
+
+  /// No description provided for @dialogManualDuration.
+  ///
+  /// In es, this message translates to:
+  /// **'Duración objetivo'**
+  String get dialogManualDuration;
+
+  /// No description provided for @dialogManualBtnStart.
+  ///
+  /// In es, this message translates to:
+  /// **'Iniciar'**
+  String get dialogManualBtnStart;
+
+  /// No description provided for @dialogOption24h.
+  ///
+  /// In es, this message translates to:
+  /// **'24 horas'**
+  String get dialogOption24h;
+
+  /// No description provided for @dialogOption36h.
+  ///
+  /// In es, this message translates to:
+  /// **'36 horas'**
+  String get dialogOption36h;
+
+  /// No description provided for @dialogOption48h.
+  ///
+  /// In es, this message translates to:
+  /// **'48 horas'**
+  String get dialogOption48h;
+
+  /// No description provided for @infoTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Información y Guía'**
+  String get infoTitle;
+
+  /// No description provided for @infoCard1Title.
+  ///
+  /// In es, this message translates to:
+  /// **'🥛 ¿Qué es el Kéfir de leche?'**
+  String get infoCard1Title;
+
+  /// No description provided for @infoCard1Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'El kéfir de leche es una bebida fermentada rica en probióticos que se elabora añadiendo nódulos de kéfir a leche entera a temperatura ambiente.'**
+  String get infoCard1Desc;
+
+  /// No description provided for @infoCard2Title.
+  ///
+  /// In es, this message translates to:
+  /// **'⏱️ Tiempos de Fermentación'**
+  String get infoCard2Title;
+
+  /// No description provided for @infoCard2Subtitle1.
+  ///
+  /// In es, this message translates to:
+  /// **'24 Horas'**
+  String get infoCard2Subtitle1;
+
+  /// No description provided for @infoCard2Desc1.
+  ///
+  /// In es, this message translates to:
+  /// **'Sabor suave y consistencia líquida, parecido a un yogur para beber con toques dulces. Efecto ligeramente laxante. Ideal si la temperatura ambiente es alta (>25ºC).'**
+  String get infoCard2Desc1;
+
+  /// No description provided for @infoCard2Subtitle2.
+  ///
+  /// In es, this message translates to:
+  /// **'36 Horas'**
+  String get infoCard2Subtitle2;
+
+  /// No description provided for @infoCard2Desc2.
+  ///
+  /// In es, this message translates to:
+  /// **'El punto más equilibrado. Textura más cremosa que separa ligeramente el suero. Efecto regulador intestinal.'**
+  String get infoCard2Desc2;
+
+  /// No description provided for @infoCard2Subtitle3.
+  ///
+  /// In es, this message translates to:
+  /// **'48 Horas'**
+  String get infoCard2Subtitle3;
+
+  /// No description provided for @infoCard2Desc3.
+  ///
+  /// In es, this message translates to:
+  /// **'Sabor ácido y fuerte. El suero formará una bolsa de líquido evidente en la base. Efecto astringente. Recomendado solo si la temperatura ambiente es muy baja o se busca un kéfir curado.'**
+  String get infoCard2Desc3;
+
+  /// No description provided for @infoCard3Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Consejo'**
+  String get infoCard3Title;
+
+  /// No description provided for @infoCard3Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Evita los utensilios de metal al colar tus nódulos; usa cucharas y coladores de plástico o madera para no dañar los microorganismos.'**
+  String get infoCard3Desc;
+
+  /// No description provided for @devDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Gestiona tus fermentaciones de kéfir'**
+  String get devDesc;
+
+  /// No description provided for @notifReadyTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¡El kéfir está listo! 🥛'**
+  String get notifReadyTitle;
+
+  /// No description provided for @notifReadyBody.
+  ///
+  /// In es, this message translates to:
+  /// **'La fermentación de {hours} horas ha terminado. Es hora de colar los nódulos y disfrutar de tu bebida probiótica.'**
+  String notifReadyBody(Object hours);
+
+  /// No description provided for @infoTab1.
+  ///
+  /// In es, this message translates to:
+  /// **'Sobre el Kéfir'**
+  String get infoTab1;
+
+  /// No description provided for @infoTab2.
+  ///
+  /// In es, this message translates to:
+  /// **'Guía de la App'**
+  String get infoTab2;
+
+  /// No description provided for @infoProcessTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'El Proceso de Fermentación'**
+  String get infoProcessTitle;
+
+  /// No description provided for @infoProcessStep1Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparación'**
+  String get infoProcessStep1Title;
+
+  /// No description provided for @infoProcessStep1Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Se introducen los nódulos de kéfir en leche a temperatura ambiente, preferiblemente leche entera (aunque también puede ser semidesnatada o desnatada).'**
+  String get infoProcessStep1Desc;
+
+  /// No description provided for @infoProcessStep2Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Fermentación (24h - 48h)'**
+  String get infoProcessStep2Title;
+
+  /// No description provided for @infoProcessStep2Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Los microorganismos consumen la lactosa de la leche, transformándola en ácido láctico (lo que le da su sabor ácido), dióxido de carbono y otros compuestos beneficiosos. A mayor tiempo, más espeso y ácido se vuelve.'**
+  String get infoProcessStep2Desc;
+
+  /// No description provided for @infoProcessStep3Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Recolección'**
+  String get infoProcessStep3Title;
+
+  /// No description provided for @infoProcessStep3Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Se cuela la mezcla con un colador no metálico. El líquido resultante es la bebida de kéfir lista para consumir, y los nódulos recuperados se vuelven a introducir en nueva leche para repetir el ciclo.'**
+  String get infoProcessStep3Desc;
+
+  /// No description provided for @infoGuideTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Cómo usar Kéfir Control'**
+  String get infoGuideTitle;
+
+  /// No description provided for @infoGuideDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta aplicación está diseñada para ayudarte a llevar un control preciso de los tiempos de tus fermentaciones, evitando que tu kéfir se vuelva excesivamente ácido por olvido.'**
+  String get infoGuideDesc;
+
+  /// No description provided for @infoGuideStep1Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Iniciar Fermentación Ahora'**
+  String get infoGuideStep1Title;
+
+  /// No description provided for @infoGuideStep1Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Pulsa este botón justo después de mezclar la leche con los nódulos. Te pedirá que elijas cuánto tiempo quieres que fermente (24, 36 o 48 horas). La app programará una alarma automática.'**
+  String get infoGuideStep1Desc;
+
+  /// No description provided for @infoGuideStep2Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Registrar Fermentación Pasada'**
+  String get infoGuideStep2Title;
+
+  /// No description provided for @infoGuideStep2Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Se te olvidó darle al botón cuando preparaste el kéfir esta mañana? No pasa nada. Usa esta opción para indicar a qué hora (y día) exacta hiciste la mezcla en la vida real. La app calculará el tiempo transcurrido desde entonces.'**
+  String get infoGuideStep2Desc;
+
+  /// No description provided for @infoGuideStep3Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Notificaciones'**
+  String get infoGuideStep3Title;
+
+  /// No description provided for @infoGuideStep3Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Puedes cerrar la aplicación sin miedo. Cuando el tiempo objetivo se alcance, recibirás una notificación en tu dispositivo avisándote de que es hora de colar el kéfir.'**
+  String get infoGuideStep3Desc;
+
+  /// No description provided for @infoGuideStep4Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Finalizar Fermentación'**
+  String get infoGuideStep4Title;
+
+  /// No description provided for @infoGuideStep4Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Pulsa este botón rojo una vez hayas colado el kéfir para limpiar el temporizador y dejar la aplicación lista para tu próxima recolección.'**
+  String get infoGuideStep4Desc;
+
+  /// No description provided for @historyDeleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Registro eliminado'**
+  String get historyDeleted;
+
+  /// No description provided for @historyItemTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Fermentación {hours}h'**
+  String historyItemTitle(Object hours);
+
+  /// No description provided for @historyItemStart.
+  ///
+  /// In es, this message translates to:
+  /// **'Inicio: {date}'**
+  String historyItemStart(Object date);
+
+  /// No description provided for @historyItemEnd.
+  ///
+  /// In es, this message translates to:
+  /// **'Fin: {date}'**
+  String historyItemEnd(Object date);
+
+  /// No description provided for @timeDays.
+  ///
+  /// In es, this message translates to:
+  /// **'DÍAS'**
+  String get timeDays;
+
+  /// No description provided for @timeHours.
+  ///
+  /// In es, this message translates to:
+  /// **'HORAS'**
+  String get timeHours;
+
+  /// No description provided for @timeMinutes.
+  ///
+  /// In es, this message translates to:
+  /// **'MINUTOS'**
+  String get timeMinutes;
+
+  /// No description provided for @timeSeconds.
+  ///
+  /// In es, this message translates to:
+  /// **'SEGUNDOS'**
+  String get timeSeconds;
+
+  /// No description provided for @timelineStart.
+  ///
+  /// In es, this message translates to:
+  /// **'Inicio'**
+  String get timelineStart;
+
+  /// No description provided for @timelineEnd.
+  ///
+  /// In es, this message translates to:
+  /// **'Fin'**
+  String get timelineEnd;
+
+  /// No description provided for @step0Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Etapa láctea'**
+  String get step0Title;
+
+  /// No description provided for @step0Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'La leche está infusionándose y empezando a espesar ligeramente.'**
+  String get step0Desc;
+
+  /// No description provided for @step1Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Iniciando fermentación'**
+  String get step1Title;
+
+  /// No description provided for @step1Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'El kéfir comienza a tomar forma con una acidez suave.'**
+  String get step1Desc;
+
+  /// No description provided for @step2Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Fermentación ideal'**
+  String get step2Title;
+
+  /// No description provided for @step2Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Momento perfecto para la mayoría de los gustos. Textura cremosa.'**
+  String get step2Desc;
+
+  /// No description provided for @step3Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Fermentación fuerte'**
+  String get step3Title;
+
+  /// No description provided for @step3Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Sabor más pronunciado. Puede empezar a separarse el suero.'**
+  String get step3Desc;
+
+  /// No description provided for @step4Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Muy ácido'**
+  String get step4Title;
+
+  /// No description provided for @step4Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Sabor muy agresivo. Ideal para recetas que requieran acidez fuerte.'**
+  String get step4Desc;
+}
+
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
+  const _AppLocalizationsDelegate();
+
+  @override
+  Future<AppLocalizations> load(Locale locale) {
+    return SynchronousFuture<AppLocalizations>(lookupAppLocalizations(locale));
+  }
+
+  @override
+  bool isSupported(Locale locale) =>
+      <String>['en', 'es'].contains(locale.languageCode);
+
+  @override
+  bool shouldReload(_AppLocalizationsDelegate old) => false;
+}
+
+AppLocalizations lookupAppLocalizations(Locale locale) {
+  // Lookup logic when only language code is specified.
+  switch (locale.languageCode) {
+    case 'en':
+      return AppLocalizationsEn();
+    case 'es':
+      return AppLocalizationsEs();
+  }
+
+  throw FlutterError(
+      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
+}

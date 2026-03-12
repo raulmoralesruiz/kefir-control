@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kefir_control/l10n/app_localizations.dart';
 
 class InfoScreen extends StatelessWidget {
   const InfoScreen({super.key});
@@ -9,11 +10,11 @@ class InfoScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Información'),
-          bottom: const TabBar(
+          title: Text(AppLocalizations.of(context)!.infoTitle),
+          bottom: TabBar(
             tabs: [
-              Tab(text: 'Sobre el Kéfir', icon: Icon(Icons.info_outline)),
-              Tab(text: 'Guía de la App', icon: Icon(Icons.help_outline)),
+              Tab(text: AppLocalizations.of(context)!.infoTab1, icon: const Icon(Icons.info_outline)),
+              Tab(text: AppLocalizations.of(context)!.infoTab2, icon: const Icon(Icons.help_outline)),
             ],
           ),
         ),
@@ -39,20 +40,20 @@ class _KefirInfoTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '¿Qué es el Kéfir de Leche?',
+            AppLocalizations.of(context)!.infoCard1Title,
             style: Theme.of(context)
                 .textTheme
                 .headlineSmall
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          const Text(
-            'El kéfir de leche es una bebida láctea fermentada originaria de la región del Cáucaso. Se produce mediante la acción de los "nódulos o gránulos de kéfir", que son una combinación simbiótica de bacterias probióticas y levaduras en una matriz de proteínas, lípidos y azúcares.',
-            style: TextStyle(fontSize: 16, height: 1.5),
+          Text(
+            AppLocalizations.of(context)!.infoCard1Desc,
+            style: const TextStyle(fontSize: 16, height: 1.5),
           ),
           const SizedBox(height: 24),
           Text(
-            'El Proceso de Fermentación',
+            AppLocalizations.of(context)!.infoProcessTitle,
             style: Theme.of(context)
                 .textTheme
                 .titleLarge
@@ -61,31 +62,44 @@ class _KefirInfoTab extends StatelessWidget {
           const SizedBox(height: 16),
           _buildInfoRow(
             Icons.looks_one,
-            'Preparación',
-            'Se introducen los nódulos de kéfir en leche a temperatura ambiente, preferiblemente leche entera (aunque también puede ser semidesnatada o desnatada).',
+            AppLocalizations.of(context)!.infoProcessStep1Title,
+            AppLocalizations.of(context)!.infoProcessStep1Desc,
           ),
           _buildInfoRow(
             Icons.looks_two,
-            'Fermentación (24h - 48h)',
-            'Los microorganismos consumen la lactosa de la leche, transformándola en ácido láctico (lo que le da su sabor ácido), dióxido de carbono y otros compuestos beneficiosos. A mayor tiempo, más espeso y ácido se vuelve.',
+            AppLocalizations.of(context)!.infoProcessStep2Title,
+            AppLocalizations.of(context)!.infoProcessStep2Desc,
           ),
           _buildInfoRow(
             Icons.looks_3,
-            'Recolección',
-            'Se cuela la mezcla con un colador no metálico. El líquido resultante es la bebida de kéfir lista para consumir, y los nódulos recuperados se vuelven a introducir en nueva leche para repetir el ciclo.',
+            AppLocalizations.of(context)!.infoProcessStep3Title,
+            AppLocalizations.of(context)!.infoProcessStep3Desc,
           ),
           const SizedBox(height: 24),
-          const Card(
+          Card(
             child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Icons.lightbulb_outline, color: Colors.amber, size: 32),
-                  SizedBox(width: 16),
+                  const Icon(Icons.lightbulb_outline, color: Colors.amber, size: 28),
+                  const SizedBox(width: 12),
                   Expanded(
-                    child: Text(
-                      'Consejo: Nunca uses utensilios de metal (cucharas, coladores) al manipular los gránulos, ya que pueden dañarlos.',
-                      style: TextStyle(fontStyle: FontStyle.italic),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.infoCard3Title,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          AppLocalizations.of(context)!.infoCard3Desc,
+                          style: const TextStyle(
+                              fontStyle: FontStyle.italic, height: 1.4),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -134,37 +148,37 @@ class _AppGuideTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Cómo usar Kéfir Control',
+            AppLocalizations.of(context)!.infoGuideTitle,
             style: Theme.of(context)
                 .textTheme
                 .headlineSmall
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          const Text(
-            'Esta aplicación está diseñada para ayudarte a llevar un control preciso de los tiempos de tus fermentaciones, evitando que tu kéfir se vuelva excesivamente ácido por olvido.',
-            style: TextStyle(fontSize: 16, height: 1.5),
+          Text(
+            AppLocalizations.of(context)!.infoGuideDesc,
+            style: const TextStyle(fontSize: 16, height: 1.5),
           ),
           const SizedBox(height: 24),
           _buildGuideStep(
             Icons.play_circle_fill,
-            'Iniciar Fermentación Ahora',
-            'Pulsa este botón justo después de mezclar la leche con los nódulos. Te pedirá que elijas cuánto tiempo quieres que fermente (24, 36 o 48 horas). La app programará una alarma automática.',
+            AppLocalizations.of(context)!.infoGuideStep1Title,
+            AppLocalizations.of(context)!.infoGuideStep1Desc,
           ),
           _buildGuideStep(
             Icons.history,
-            'Registrar Fermentación Pasada',
-            '¿Se te olvidó darle al botón cuando preparaste el kéfir esta mañana? No pasa nada. Usa esta opción para indicar a qué hora (y día) exacta hiciste la mezcla en la vida real. La app calculará el tiempo transcurrido desde entonces.',
+            AppLocalizations.of(context)!.infoGuideStep2Title,
+            AppLocalizations.of(context)!.infoGuideStep2Desc,
           ),
           _buildGuideStep(
             Icons.notifications_active,
-            'Notificaciones',
-            'Puedes cerrar la aplicación sin miedo. Cuando el tiempo objetivo se alcance, recibirás una notificación en tu dispositivo avisándote de que es hora de colar el kéfir.',
+            AppLocalizations.of(context)!.infoGuideStep3Title,
+            AppLocalizations.of(context)!.infoGuideStep3Desc,
           ),
           _buildGuideStep(
             Icons.stop_circle_outlined,
-            'Finalizar Fermentación',
-            'Pulsa este botón rojo una vez hayas colado el kéfir para limpiar el temporizador y dejar la aplicación lista para tu próxima recolección.',
+            AppLocalizations.of(context)!.infoGuideStep4Title,
+            AppLocalizations.of(context)!.infoGuideStep4Desc,
           ),
         ],
       ),

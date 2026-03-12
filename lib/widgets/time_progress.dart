@@ -6,12 +6,10 @@ import 'fermentation_elapsed_time.dart';
 
 class TimeProgress extends StatelessWidget {
   final Fermentation fermentation;
-  final Widget? actionButtons;
 
   const TimeProgress({
     super.key,
     required this.fermentation,
-    this.actionButtons,
   });
 
   @override
@@ -47,11 +45,6 @@ class TimeProgress extends StatelessWidget {
                   child: Column(
                     children: [
                       FermentationStepper(fermentation: fermentation),
-                      if (actionButtons != null)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: actionButtons!,
-                        ),
                       const SizedBox(height: 32),
                     ],
                   ),
@@ -61,6 +54,7 @@ class TimeProgress extends StatelessWidget {
           );
         }
 
+        // Portrait
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -77,12 +71,7 @@ class TimeProgress extends StatelessWidget {
                 child: Column(
                   children: [
                     FermentationStepper(fermentation: fermentation),
-                    if (actionButtons != null)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: actionButtons!,
-                      ),
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 100), // espacio para el FAB
                   ],
                 ),
               ),

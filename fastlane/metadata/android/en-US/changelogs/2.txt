@@ -1,0 +1,6 @@
+• Full support for English and Spanish languages.
+• Refreshed UI design with Material 3 components and Navigation Drawer.
+• Optimized interface with dynamic action buttons (FAB).
+• New donation option via PayPal to support the project.
+• Improved history view with swipe-to-delete functionality.
+• Visual refinements to progress trackers and info cards.

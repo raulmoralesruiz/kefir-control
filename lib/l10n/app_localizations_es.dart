@@ -1,0 +1,300 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Spanish Castilian (`es`).
+class AppLocalizationsEs extends AppLocalizations {
+  AppLocalizationsEs([String locale = 'es']) : super(locale);
+
+  @override
+  String get appTitle => 'Kéfir Control';
+
+  @override
+  String get accept => 'Aceptar';
+
+  @override
+  String get cancel => 'Cancelar';
+
+  @override
+  String get history => 'Historial';
+
+  @override
+  String get changeLanguage => 'Cambiar idioma';
+
+  @override
+  String get drawerDonate => 'Invítame a un café ☕';
+
+  @override
+  String get drawerDonateSubtitle => 'Apoya el desarrollo vía PayPal';
+
+  @override
+  String get historyTitle => 'Historial';
+
+  @override
+  String get historyEmpty => 'No hay fermentaciones registradas.';
+
+  @override
+  String get historyClear => 'Limpiar';
+
+  @override
+  String get historyClearTitle => '¿Borrar historial?';
+
+  @override
+  String get historyClearContent => 'Esta acción no se puede deshacer.';
+
+  @override
+  String get historyClearConfirm => 'Borrar';
+
+  @override
+  String get homeNoActiveFermentationTitle => 'Sin fermentación activa';
+
+  @override
+  String get homeNoActiveFermentationDesc =>
+      'Selecciona una opción del menú para comenzar.';
+
+  @override
+  String get homeEstimatedFinish => 'Tiempo estimado';
+
+  @override
+  String get homeRemainingTime => 'Quedan';
+
+  @override
+  String get homeCompleted => 'Completado';
+
+  @override
+  String get homeStopTitle => '¿Finalizar fermentación anticipadamente?';
+
+  @override
+  String get homeStopContent =>
+      'Estás a punto de parar el temporizador. Asegúrate de colar los nódulos.';
+
+  @override
+  String get homeStopConfirm => 'Finalizar';
+
+  @override
+  String get btnStartFermentation => 'Iniciar fermentación';
+
+  @override
+  String get btnStartPastFermentation => 'Registrar fermentación pasada';
+
+  @override
+  String get btnStopFermentation => 'Finalizar fermentación';
+
+  @override
+  String get dialogManualTitle => 'Iniciar fermentación pasada';
+
+  @override
+  String get dialogManualDesc =>
+      'Selecciona la fecha y hora a la que mezclaste la leche con los nódulos para calcular el progreso actual y programar la alarma.';
+
+  @override
+  String get dialogManualDate => 'Fecha de inicio';
+
+  @override
+  String get dialogManualTime => 'Hora de inicio';
+
+  @override
+  String get dialogManualDuration => 'Duración objetivo';
+
+  @override
+  String get dialogManualBtnStart => 'Iniciar';
+
+  @override
+  String get dialogOption24h => '24 horas';
+
+  @override
+  String get dialogOption36h => '36 horas';
+
+  @override
+  String get dialogOption48h => '48 horas';
+
+  @override
+  String get infoTitle => 'Información y Guía';
+
+  @override
+  String get infoCard1Title => '🥛 ¿Qué es el Kéfir de leche?';
+
+  @override
+  String get infoCard1Desc =>
+      'El kéfir de leche es una bebida fermentada rica en probióticos que se elabora añadiendo nódulos de kéfir a leche entera a temperatura ambiente.';
+
+  @override
+  String get infoCard2Title => '⏱️ Tiempos de Fermentación';
+
+  @override
+  String get infoCard2Subtitle1 => '24 Horas';
+
+  @override
+  String get infoCard2Desc1 =>
+      'Sabor suave y consistencia líquida, parecido a un yogur para beber con toques dulces. Efecto ligeramente laxante. Ideal si la temperatura ambiente es alta (>25ºC).';
+
+  @override
+  String get infoCard2Subtitle2 => '36 Horas';
+
+  @override
+  String get infoCard2Desc2 =>
+      'El punto más equilibrado. Textura más cremosa que separa ligeramente el suero. Efecto regulador intestinal.';
+
+  @override
+  String get infoCard2Subtitle3 => '48 Horas';
+
+  @override
+  String get infoCard2Desc3 =>
+      'Sabor ácido y fuerte. El suero formará una bolsa de líquido evidente en la base. Efecto astringente. Recomendado solo si la temperatura ambiente es muy baja o se busca un kéfir curado.';
+
+  @override
+  String get infoCard3Title => 'Consejo';
+
+  @override
+  String get infoCard3Desc =>
+      'Evita los utensilios de metal al colar tus nódulos; usa cucharas y coladores de plástico o madera para no dañar los microorganismos.';
+
+  @override
+  String get devDesc => 'Gestiona tus fermentaciones de kéfir';
+
+  @override
+  String get notifReadyTitle => '¡El kéfir está listo! 🥛';
+
+  @override
+  String notifReadyBody(Object hours) {
+    return 'La fermentación de $hours horas ha terminado. Es hora de colar los nódulos y disfrutar de tu bebida probiótica.';
+  }
+
+  @override
+  String get infoTab1 => 'Sobre el Kéfir';
+
+  @override
+  String get infoTab2 => 'Guía de la App';
+
+  @override
+  String get infoProcessTitle => 'El Proceso de Fermentación';
+
+  @override
+  String get infoProcessStep1Title => 'Preparación';
+
+  @override
+  String get infoProcessStep1Desc =>
+      'Se introducen los nódulos de kéfir en leche a temperatura ambiente, preferiblemente leche entera (aunque también puede ser semidesnatada o desnatada).';
+
+  @override
+  String get infoProcessStep2Title => 'Fermentación (24h - 48h)';
+
+  @override
+  String get infoProcessStep2Desc =>
+      'Los microorganismos consumen la lactosa de la leche, transformándola en ácido láctico (lo que le da su sabor ácido), dióxido de carbono y otros compuestos beneficiosos. A mayor tiempo, más espeso y ácido se vuelve.';
+
+  @override
+  String get infoProcessStep3Title => 'Recolección';
+
+  @override
+  String get infoProcessStep3Desc =>
+      'Se cuela la mezcla con un colador no metálico. El líquido resultante es la bebida de kéfir lista para consumir, y los nódulos recuperados se vuelven a introducir en nueva leche para repetir el ciclo.';
+
+  @override
+  String get infoGuideTitle => 'Cómo usar Kéfir Control';
+
+  @override
+  String get infoGuideDesc =>
+      'Esta aplicación está diseñada para ayudarte a llevar un control preciso de los tiempos de tus fermentaciones, evitando que tu kéfir se vuelva excesivamente ácido por olvido.';
+
+  @override
+  String get infoGuideStep1Title => 'Iniciar Fermentación Ahora';
+
+  @override
+  String get infoGuideStep1Desc =>
+      'Pulsa este botón justo después de mezclar la leche con los nódulos. Te pedirá que elijas cuánto tiempo quieres que fermente (24, 36 o 48 horas). La app programará una alarma automática.';
+
+  @override
+  String get infoGuideStep2Title => 'Registrar Fermentación Pasada';
+
+  @override
+  String get infoGuideStep2Desc =>
+      '¿Se te olvidó darle al botón cuando preparaste el kéfir esta mañana? No pasa nada. Usa esta opción para indicar a qué hora (y día) exacta hiciste la mezcla en la vida real. La app calculará el tiempo transcurrido desde entonces.';
+
+  @override
+  String get infoGuideStep3Title => 'Notificaciones';
+
+  @override
+  String get infoGuideStep3Desc =>
+      'Puedes cerrar la aplicación sin miedo. Cuando el tiempo objetivo se alcance, recibirás una notificación en tu dispositivo avisándote de que es hora de colar el kéfir.';
+
+  @override
+  String get infoGuideStep4Title => 'Finalizar Fermentación';
+
+  @override
+  String get infoGuideStep4Desc =>
+      'Pulsa este botón rojo una vez hayas colado el kéfir para limpiar el temporizador y dejar la aplicación lista para tu próxima recolección.';
+
+  @override
+  String get historyDeleted => 'Registro eliminado';
+
+  @override
+  String historyItemTitle(Object hours) {
+    return 'Fermentación ${hours}h';
+  }
+
+  @override
+  String historyItemStart(Object date) {
+    return 'Inicio: $date';
+  }
+
+  @override
+  String historyItemEnd(Object date) {
+    return 'Fin: $date';
+  }
+
+  @override
+  String get timeDays => 'DÍAS';
+
+  @override
+  String get timeHours => 'HORAS';
+
+  @override
+  String get timeMinutes => 'MINUTOS';
+
+  @override
+  String get timeSeconds => 'SEGUNDOS';
+
+  @override
+  String get timelineStart => 'Inicio';
+
+  @override
+  String get timelineEnd => 'Fin';
+
+  @override
+  String get step0Title => 'Etapa láctea';
+
+  @override
+  String get step0Desc =>
+      'La leche está infusionándose y empezando a espesar ligeramente.';
+
+  @override
+  String get step1Title => 'Iniciando fermentación';
+
+  @override
+  String get step1Desc =>
+      'El kéfir comienza a tomar forma con una acidez suave.';
+
+  @override
+  String get step2Title => 'Fermentación ideal';
+
+  @override
+  String get step2Desc =>
+      'Momento perfecto para la mayoría de los gustos. Textura cremosa.';
+
+  @override
+  String get step3Title => 'Fermentación fuerte';
+
+  @override
+  String get step3Desc =>
+      'Sabor más pronunciado. Puede empezar a separarse el suero.';
+
+  @override
+  String get step4Title => 'Muy ácido';
+
+  @override
+  String get step4Desc =>
+      'Sabor muy agresivo. Ideal para recetas que requieran acidez fuerte.';
+}

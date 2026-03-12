@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kefir_control/l10n/app_localizations.dart';
 import '../models/fermentation_history_item.dart';
 import '../services/fermentation_service.dart';
 
@@ -38,13 +39,12 @@ class _HistoryScreenState extends State<HistoryScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Borrar historial'),
-        content:
-            const Text('¿Estás seguro de que deseas borrar todo el historial?'),
+        title: Text(AppLocalizations.of(context)!.historyClearTitle),
+        content: Text(AppLocalizations.of(context)!.historyClearContent),
         actions: [
           FilledButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancelar'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(context, true),
@@ -52,7 +52,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
               backgroundColor: Theme.of(context).colorScheme.error,
               foregroundColor: Theme.of(context).colorScheme.onError,
             ),
-            child: const Text('Borrar todo'),
+            child: Text(AppLocalizations.of(context)!.historyClearConfirm),
           ),
         ],
       ),
@@ -70,7 +70,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Registro eliminado')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.historyDeleted)),
       );
     }
   }
@@ -79,15 +79,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Historial'),
+        title: Text(AppLocalizations.of(context)!.historyTitle),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.delete_sweep),
-            tooltip: 'Borrar todo',
-            onPressed: _clearHistory,
-          ),
-        ],
       ),
       body: FutureBuilder<List<FermentationHistoryItem>>(
         future: _historyFuture,
@@ -103,13 +96,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
           final history = snapshot.data ?? [];
 
           if (history.isEmpty) {
-            return const Center(
+            return Center(
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  'Aún no hay registros de fermentaciones.',
+                  AppLocalizations.of(context)!.historyEmpty,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
               ),
             );
@@ -148,15 +141,15 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       ),
                     ),
                     title: Text(
-                      'Fermentación ${item.targetDuration.inHours}h',
+                      AppLocalizations.of(context)!.historyItemTitle(item.targetDuration.inHours),
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 4),
-                        Text('Inicio: ${_formatDateTime(item.startTime)}'),
-                        Text('Fin: ${_formatDateTime(item.completedAt)}'),
+                        Text(AppLocalizations.of(context)!.historyItemStart(_formatDateTime(item.startTime))),
+                        Text(AppLocalizations.of(context)!.historyItemEnd(_formatDateTime(item.completedAt))),
                       ],
                     ),
                     isThreeLine: true,
@@ -164,6 +157,21 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 ),
               );
             },
+          );
+        },
+      ),
+      floatingActionButton: FutureBuilder<List<FermentationHistoryItem>>(
+        future: _historyFuture,
+        builder: (context, snapshot) {
+          final hasItems =
+              snapshot.hasData && (snapshot.data?.isNotEmpty ?? false);
+          if (!hasItems) return const SizedBox.shrink();
+          return FloatingActionButton.extended(
+            onPressed: _clearHistory,
+            icon: const Icon(Icons.delete_sweep),
+            label: Text(AppLocalizations.of(context)!.historyClear),
+            backgroundColor: Theme.of(context).colorScheme.error,
+            foregroundColor: Theme.of(context).colorScheme.onError,
           );
         },
       ),

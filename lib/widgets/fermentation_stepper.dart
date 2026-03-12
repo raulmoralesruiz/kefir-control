@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kefir_control/l10n/app_localizations.dart';
 import '../models/fermentation.dart';
 
 class FermentationStepper extends StatelessWidget {
@@ -15,13 +16,16 @@ class FermentationStepper extends StatelessWidget {
     return 4;
   }
 
-  static const List<String> _stageNames = [
-    "Etapa láctea",
-    "Iniciando fermentación",
-    "Fermentación ideal",
-    "Fermentación fuerte",
-    "Muy ácido",
-  ];
+  String _getStageName(BuildContext context, int index) {
+    switch (index) {
+      case 0: return AppLocalizations.of(context)!.step0Title;
+      case 1: return AppLocalizations.of(context)!.step1Title;
+      case 2: return AppLocalizations.of(context)!.step2Title;
+      case 3: return AppLocalizations.of(context)!.step3Title;
+      case 4: return AppLocalizations.of(context)!.step4Title;
+      default: return "";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +45,13 @@ class FermentationStepper extends StatelessWidget {
           final isCurrent = index == currentStage;
           return Step(
             title: Text(
-              _stageNames[index],
+              _getStageName(context, index),
               style: TextStyle(
                 fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
               ),
             ),
             content: Text(
-              _getStageDescription(index),
+              _getStageDescription(context, index),
               style: const TextStyle(color: Colors.grey, fontSize: 13),
             ),
             isActive: index <= currentStage,
@@ -60,20 +64,14 @@ class FermentationStepper extends StatelessWidget {
     );
   }
 
-  String _getStageDescription(int index) {
+  String _getStageDescription(BuildContext context, int index) {
     switch (index) {
-      case 0:
-        return "La leche está infusionándose y empezando a espesar ligeramente.";
-      case 1:
-        return "El kéfir comienza a tomar forma con una acidez suave.";
-      case 2:
-        return "Momento perfecto para la mayoría de los gustos. Textura cremosa.";
-      case 3:
-        return "Sabor más pronunciado. Puede empezar a separarse el suero.";
-      case 4:
-        return "Sabor muy agresivo. Ideal para recetas que requieran acidez fuerte.";
-      default:
-        return "";
+      case 0: return AppLocalizations.of(context)!.step0Desc;
+      case 1: return AppLocalizations.of(context)!.step1Desc;
+      case 2: return AppLocalizations.of(context)!.step2Desc;
+      case 3: return AppLocalizations.of(context)!.step3Desc;
+      case 4: return AppLocalizations.of(context)!.step4Desc;
+      default: return "";
     }
   }
 }

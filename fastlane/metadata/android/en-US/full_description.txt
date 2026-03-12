@@ -1,0 +1,8 @@
+Kefir Control was born out of the need to remember when milk kefir fermentation is at its perfect point. If left for too long, kefir becomes excessively acidic and the whey separates too much. This application simplifies that process with scheduled local notifications and a visual timer.
+
+Core Features:
+- Quick Timers: Choose between 24h, 36h, or 48h of fermentation.
+- Past Fermentation Logging: If you forgot to start the timer, you can set the start time manually.
+- Local Notifications (Off-grid): The app schedules the alarm using your own device, working offline and without servers.
+- Full History: Keep a record of all your past harvests to maintain strict control.
+- Privacy First: No user accounts, no analytics, and no cross-site tracking. Data lives exclusively on your device.

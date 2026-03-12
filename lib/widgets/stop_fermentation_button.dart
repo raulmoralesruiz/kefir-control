@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kefir_control/l10n/app_localizations.dart';
 
 class StopFermentationButton extends StatelessWidget {
   final VoidCallback onStop;
@@ -13,7 +14,7 @@ class StopFermentationButton extends StatelessWidget {
         OutlinedButton.icon(
           onPressed: onStop,
           icon: const Icon(Icons.stop_circle_outlined),
-          label: const Text("Finalizar fermentación"),
+          label: Text(AppLocalizations.of(context)!.btnStopFermentation),
           style: OutlinedButton.styleFrom(
             foregroundColor: Colors.red,
             side: const BorderSide(color: Colors.red),

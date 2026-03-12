@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:kefir_control/l10n/app_localizations.dart';
 import '../models/fermentation.dart';
 
 class FermentationTimeline extends StatelessWidget {
@@ -25,25 +27,9 @@ class FermentationTimeline extends StatelessWidget {
     return '$h:$m';
   }
 
-  String _getDayName(DateTime time) {
-    switch (time.weekday) {
-      case DateTime.monday:
-        return 'Lun';
-      case DateTime.tuesday:
-        return 'Mar';
-      case DateTime.wednesday:
-        return 'Mié';
-      case DateTime.thursday:
-        return 'Jue';
-      case DateTime.friday:
-        return 'Vie';
-      case DateTime.saturday:
-        return 'Sáb';
-      case DateTime.sunday:
-        return 'Dom';
-      default:
-        return '';
-    }
+  String _getDayName(BuildContext context, DateTime time) {
+    String day = DateFormat.E(Localizations.localeOf(context).toString()).format(time);
+    return day.substring(0, 1).toUpperCase() + day.substring(1);
   }
 
   @override
@@ -61,10 +47,10 @@ class FermentationTimeline extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Inicio",
-                    style: TextStyle(fontSize: 11, color: Colors.grey)),
+                Text(AppLocalizations.of(context)!.timelineStart,
+                    style: const TextStyle(fontSize: 11, color: Colors.grey)),
                 Text(
-                    '${_getDayName(fermentation.startTime)} ${_formatDateTime(fermentation.startTime)}',
+                    '${_getDayName(context, fermentation.startTime)} ${_formatDateTime(fermentation.startTime)}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 13)),
               ],
@@ -102,10 +88,10 @@ class FermentationTimeline extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const Text("Fin",
-                    style: TextStyle(fontSize: 11, color: Colors.grey)),
+                Text(AppLocalizations.of(context)!.timelineEnd,
+                    style: const TextStyle(fontSize: 11, color: Colors.grey)),
                 Text(
-                    '${_getDayName(fermentation.estimatedFinishTime)} ${_formatDateTime(fermentation.estimatedFinishTime)}',
+                    '${_getDayName(context, fermentation.estimatedFinishTime)} ${_formatDateTime(fermentation.estimatedFinishTime)}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 13)),
               ],
