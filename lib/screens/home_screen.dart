@@ -70,9 +70,15 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     _startTimer();
 
+    final l10n = AppLocalizations.of(context)!;
     await _notificationService.cancelAll();
-    await _notificationService
-        .scheduleFermentationComplete(startTime.add(targetDuration));
+    await _notificationService.scheduleFermentationComplete(
+      startTime.add(targetDuration),
+      l10n.notifReadyTitle,
+      l10n.notifReadyBody(hours.toString()),
+      l10n.notifReminderTitle,
+      l10n.notifReminderBody,
+    );
   }
 
   Future<void> _showStartDialog({required bool askForDate}) async {

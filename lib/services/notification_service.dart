@@ -37,7 +37,12 @@ class NotificationService {
     _isInit = true;
   }
 
-  Future<void> scheduleFermentationComplete(DateTime scheduledDate) async {
+  Future<void> scheduleFermentationComplete(
+      DateTime scheduledDate,
+      String titleReady,
+      String bodyReady,
+      String titleReminder,
+      String bodyReminder) async {
     if (kIsWeb) return; // No intentamos programar en web
 
     const androidDetails = AndroidNotificationDetails(
@@ -58,10 +63,25 @@ class NotificationService {
     // Ignore if time is already in the past
     if (eventDate.isBefore(now)) return;
 
+    // Schedule the 2 hours reminder if it's not in the past
+    final reminderDate = eventDate.subtract(const Duration(hours: 2));
+    if (reminderDate.isAfter(now)) {
+      await _notificationsPlugin.zonedSchedule(
+        1,
+        titleReminder,
+        bodyReminder,
+        reminderDate,
+        details,
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+      );
+    }
+
     await _notificationsPlugin.zonedSchedule(
       0,
-      'Fermentación Completa',
-      'Tu fermentación de kéfir ha alcanzado el tiempo objetivo.',
+      titleReady,
+      bodyReady,
       eventDate,
       details,
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,

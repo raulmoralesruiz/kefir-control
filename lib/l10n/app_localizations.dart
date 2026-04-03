@@ -386,6 +386,18 @@ abstract class AppLocalizations {
   /// **'La fermentación de {hours} horas ha terminado. Es hora de colar los nódulos y disfrutar de tu bebida probiótica.'**
   String notifReadyBody(Object hours);
 
+  /// No description provided for @notifReminderTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparación para el Kéfir'**
+  String get notifReminderTitle;
+
+  /// No description provided for @notifReminderBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Faltan 2 horas para terminar. ¡Ve preparando recipientes limpios!'**
+  String get notifReminderBody;
+
   /// No description provided for @infoTab1.
   ///
   /// In es, this message translates to:

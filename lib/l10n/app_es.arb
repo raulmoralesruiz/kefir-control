@@ -48,6 +48,8 @@
   "devDesc": "Gestiona tus fermentaciones de kéfir",
   "notifReadyTitle": "¡El kéfir está listo! 🥛",
   "notifReadyBody": "La fermentación de {hours} horas ha terminado. Es hora de colar los nódulos y disfrutar de tu bebida probiótica.",
+  "notifReminderTitle": "Preparación para el Kéfir",
+  "notifReminderBody": "Faltan 2 horas para terminar. ¡Ve preparando recipientes limpios!",
   "infoTab1": "Sobre el Kéfir",
   "infoTab2": "Guía de la App",
   "infoProcessTitle": "El Proceso de Fermentación",

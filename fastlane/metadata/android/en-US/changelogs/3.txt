@@ -1,0 +1,5 @@
+• Improved notification icon
+• Improved notification translation
+• Added notification 2 hours before fermentation completion
+• Created fastlane icon (icon.png)
+• Created promotional banner (featureGraphic.png)

@@ -48,6 +48,8 @@
   "devDesc": "Manage your kefir fermentations",
   "notifReadyTitle": "Kefir is ready! 🥛",
   "notifReadyBody": "The {hours} hour fermentation is complete. It's time to strain the grains and enjoy your probiotic drink.",
+  "notifReminderTitle": "Kefir Preparation",
+  "notifReminderBody": "2 hours left until completion. Start preparing clean containers!",
   "infoTab1": "About Kefir",
   "infoTab2": "App Guide",
   "infoProcessTitle": "The Fermentation Process",

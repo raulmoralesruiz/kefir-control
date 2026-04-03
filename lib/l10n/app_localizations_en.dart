@@ -163,6 +163,13 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get notifReminderTitle => 'Kefir Preparation';
+
+  @override
+  String get notifReminderBody =>
+      '2 hours left until completion. Start preparing clean containers!';
+
+  @override
   String get infoTab1 => 'About Kefir';
 
   @override
