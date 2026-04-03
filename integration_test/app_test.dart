@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:kefir_control/main.dart' as app;
+import 'package:kefir_control/providers/locale_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Idiomas para los que se generarán capturas.
@@ -29,7 +31,11 @@ void main() {
 
       // Arrancar la app y fijar el locale
       app.main();
-      app.appLocaleNotifier.value = Locale(localeCode);
+      await tester.pumpAndSettle();
+
+      final element = tester.element(find.byType(app.KefirControlApp));
+      final rootContainer = ProviderScope.containerOf(element);
+      await rootContainer.read(localeProvider.notifier).setLocale(Locale(localeCode));
       await tester.pumpAndSettle();
 
       // Necesario para Android: convertir la superficie antes de capturar
@@ -97,7 +103,8 @@ void main() {
       await tester.pumpAndSettle();
 
       // Resetear locale para no interferir entre tests
-      app.appLocaleNotifier.value = null;
+      final elementToReset = tester.element(find.byType(app.KefirControlApp));
+      ProviderScope.containerOf(elementToReset).read(localeProvider.notifier).setLocale(null);
     });
   }
 }

@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
 import 'screens/home_screen.dart';
-
-// Notifier global para el locale seleccionado por el usuario.
-// null = usar el locale del sistema.
-final ValueNotifier<Locale?> appLocaleNotifier = ValueNotifier<Locale?>(null);
+import 'providers/locale_provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const KefirControlApp());
+  runApp(const ProviderScope(child: KefirControlApp()));
 }
 
-class KefirControlApp extends StatelessWidget {
+class KefirControlApp extends ConsumerWidget {
   const KefirControlApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = ColorScheme.fromSeed(seedColor: Colors.teal);
-
-    return ValueListenableBuilder<Locale?>(
-      valueListenable: appLocaleNotifier,
-      builder: (context, locale, _) {
-        return MaterialApp(
-          onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
+    final locale = ref.watch(localeProvider);
+    
+    return MaterialApp(
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
           locale: locale,
           localizationsDelegates: const [
             AppLocalizations.delegate,
@@ -67,7 +63,5 @@ class KefirControlApp extends StatelessWidget {
           home: const HomeScreen(),
           debugShowCheckedModeBanner: false,
         );
-      },
-    );
   }
 }

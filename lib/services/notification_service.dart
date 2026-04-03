@@ -43,6 +43,7 @@ class NotificationService {
       String bodyReady,
       String titleReminder,
       String bodyReminder) async {
+    await init();
     if (kIsWeb) return; // No intentamos programar en web
 
     const androidDetails = AndroidNotificationDetails(
@@ -91,6 +92,7 @@ class NotificationService {
   }
 
   Future<void> cancelAll() async {
+    await init();
     if (kIsWeb) return;
     await _notificationsPlugin.cancelAll();
   }
