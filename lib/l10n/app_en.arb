@@ -5,8 +5,8 @@
   "cancel": "Cancel",
   "history": "History",
   "changeLanguage": "Change language",
-  "drawerDonate": "Buy me a coffee ☕",
-  "drawerDonateSubtitle": "Support development via PayPal",
+  "drawerDonate": "Buy me a coffee",
+  "drawerDonateSubtitle": "Support development",
   "historyTitle": "History",
   "historyEmpty": "No past fermentations recorded.",
   "historyClear": "Clear",
@@ -122,5 +122,15 @@
   "stageKombucha1": "Slightly sweet",
   "stageKombucha2": "Balanced (Ideal)",
   "stageKombucha3": "Strong/Acidic",
-  "stageKombucha4": "Vinegary"
+  "stageKombucha4": "Vinegar-like",
+  "historyKefirFinished": "Kefir harvested",
+  "historyCompletedPercent": "Completed: {percent}%",
+  "historyDurationDays": "{days} days",
+  "historyDurationDaysHours": "{days} days & {hours}h",
+  "historyDurationHours": "{hours}h",
+  "historyDurationHoursMinutes": "{hours}h {minutes}m",
+  "historyRealDurationTarget": "Actual duration: {actual} / Target: {target}",
+  "historyCompletedOn": "Completed on {date}",
+  "historyItemDeleteTitle": "Delete record?",
+  "historyItemDeleteContent": "This record will be permanently deleted."
 }

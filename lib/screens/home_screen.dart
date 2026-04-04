@@ -17,13 +17,15 @@ class HomeScreen extends ConsumerWidget {
     AddFermentationSheet.show(context);
   }
 
-  void _onStopSelected(BuildContext context, WidgetRef ref, Fermentation fermentation) async {
+  void _onStopSelected(
+      BuildContext context, WidgetRef ref, Fermentation fermentation) async {
     final l10n = AppLocalizations.of(context)!;
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(l10n.homeStopTitle),
-        content: Text(l10n.homeStopContent), // We might need to update these translations later
+        content: Text(l10n
+            .homeStopContent), // We might need to update these translations later
         actions: [
           FilledButton.tonal(
             onPressed: () => Navigator.pop(context, false),
@@ -46,7 +48,8 @@ class HomeScreen extends ConsumerWidget {
     }
   }
 
-  void _onHarvestKombucha(BuildContext context, WidgetRef ref, Fermentation fermentation) async {
+  void _onHarvestKombucha(
+      BuildContext context, WidgetRef ref, Fermentation fermentation) async {
     final l10n = AppLocalizations.of(context)!;
     final confirmed = await showDialog<bool>(
       context: context,
@@ -57,7 +60,9 @@ class HomeScreen extends ConsumerWidget {
           FilledButton.tonal(
             onPressed: () {
               Navigator.pop(ctx, false);
-              ref.read(activeFermentationsProvider.notifier).stop(fermentation.id, recordHistory: true);
+              ref
+                  .read(activeFermentationsProvider.notifier)
+                  .stop(fermentation.id, recordHistory: true);
             },
             child: Text(l10n.homeHarvestOnly),
           ),
@@ -70,11 +75,8 @@ class HomeScreen extends ConsumerWidget {
     );
 
     if (confirmed == true) {
-      ref.read(activeFermentationsProvider.notifier).stop(
-        fermentation.id, 
-        recordHistory: true, 
-        customIdealTime: fermentation.elapsed
-      );
+      ref.read(activeFermentationsProvider.notifier).stop(fermentation.id,
+          recordHistory: true, customIdealTime: fermentation.elapsed);
     }
   }
 
@@ -205,9 +207,11 @@ class HomeScreen extends ConsumerWidget {
                   background: Container(
                     alignment: Alignment.centerRight,
                     padding: const EdgeInsets.only(right: 20),
-                    color: Colors.red,
-                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    child: const Icon(Icons.delete, color: Colors.white),
+                    color: Theme.of(context).colorScheme.error,
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Icon(Icons.delete,
+                        color: Theme.of(context).colorScheme.onError),
                   ),
                   confirmDismiss: (direction) async {
                     final confirmed = await showDialog<bool>(
@@ -223,8 +227,10 @@ class HomeScreen extends ConsumerWidget {
                           FilledButton(
                             onPressed: () => Navigator.pop(context, true),
                             style: FilledButton.styleFrom(
-                              backgroundColor: Theme.of(context).colorScheme.error,
-                              foregroundColor: Theme.of(context).colorScheme.onError,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.error,
+                              foregroundColor:
+                                  Theme.of(context).colorScheme.onError,
                             ),
                             child: Text(l10n.homeDeleteBtn),
                           ),
@@ -234,12 +240,15 @@ class HomeScreen extends ConsumerWidget {
                     return confirmed;
                   },
                   onDismissed: (direction) {
-                    ref.read(activeFermentationsProvider.notifier).stop(fermentation.id, recordHistory: false);
+                    ref
+                        .read(activeFermentationsProvider.notifier)
+                        .stop(fermentation.id, recordHistory: false);
                   },
                   child: FermentationCard(
                     fermentation: fermentation,
                     onStop: () => _onStopSelected(context, ref, fermentation),
-                    onHarvest: () => _onHarvestKombucha(context, ref, fermentation),
+                    onHarvest: () =>
+                        _onHarvestKombucha(context, ref, fermentation),
                   ),
                 );
               },

@@ -131,13 +131,13 @@ abstract class AppLocalizations {
   /// No description provided for @drawerDonate.
   ///
   /// In es, this message translates to:
-  /// **'Invítame a un café ☕'**
+  /// **'Invítame a un café'**
   String get drawerDonate;
 
   /// No description provided for @drawerDonateSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Apoya el desarrollo vía PayPal'**
+  /// **'Apoya el desarrollo'**
   String get drawerDonateSubtitle;
 
   /// No description provided for @historyTitle.
@@ -835,6 +835,66 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Avinagrada'**
   String get stageKombucha4;
+
+  /// No description provided for @historyKefirFinished.
+  ///
+  /// In es, this message translates to:
+  /// **'Kéfir cosechado'**
+  String get historyKefirFinished;
+
+  /// No description provided for @historyCompletedPercent.
+  ///
+  /// In es, this message translates to:
+  /// **'Completado: {percent}%'**
+  String historyCompletedPercent(Object percent);
+
+  /// No description provided for @historyDurationDays.
+  ///
+  /// In es, this message translates to:
+  /// **'{days} días'**
+  String historyDurationDays(Object days);
+
+  /// No description provided for @historyDurationDaysHours.
+  ///
+  /// In es, this message translates to:
+  /// **'{days} días y {hours}h'**
+  String historyDurationDaysHours(Object days, Object hours);
+
+  /// No description provided for @historyDurationHours.
+  ///
+  /// In es, this message translates to:
+  /// **'{hours}h'**
+  String historyDurationHours(Object hours);
+
+  /// No description provided for @historyDurationHoursMinutes.
+  ///
+  /// In es, this message translates to:
+  /// **'{hours}h {minutes}m'**
+  String historyDurationHoursMinutes(Object hours, Object minutes);
+
+  /// No description provided for @historyRealDurationTarget.
+  ///
+  /// In es, this message translates to:
+  /// **'Duración real: {actual} / Meta: {target}'**
+  String historyRealDurationTarget(Object actual, Object target);
+
+  /// No description provided for @historyCompletedOn.
+  ///
+  /// In es, this message translates to:
+  /// **'Completado el {date}'**
+  String historyCompletedOn(Object date);
+
+  /// No description provided for @historyItemDeleteTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Eliminar registro?'**
+  String get historyItemDeleteTitle;
+
+  /// No description provided for @historyItemDeleteContent.
+  ///
+  /// In es, this message translates to:
+  /// **'Este registro se borrará de forma permanente.'**
+  String get historyItemDeleteContent;
 }
 
 class _AppLocalizationsDelegate

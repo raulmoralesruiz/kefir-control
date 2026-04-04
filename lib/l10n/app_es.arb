@@ -5,8 +5,8 @@
   "cancel": "Cancelar",
   "history": "Historial",
   "changeLanguage": "Cambiar idioma",
-  "drawerDonate": "Invítame a un café ☕",
-  "drawerDonateSubtitle": "Apoya el desarrollo vía PayPal",
+  "drawerDonate": "Invítame a un café",
+  "drawerDonateSubtitle": "Apoya el desarrollo",
   "historyTitle": "Historial",
   "historyEmpty": "No hay fermentaciones registradas.",
   "historyClear": "Limpiar",
@@ -122,5 +122,15 @@
   "stageKombucha1": "Ligeramente dulce",
   "stageKombucha2": "Equilibrada (Ideal)",
   "stageKombucha3": "Fuerte/Ácida",
-  "stageKombucha4": "Avinagrada"
+  "stageKombucha4": "Avinagrada",
+  "historyKefirFinished": "Kéfir cosechado",
+  "historyCompletedPercent": "Completado: {percent}%",
+  "historyDurationDays": "{days} días",
+  "historyDurationDaysHours": "{days} días y {hours}h",
+  "historyDurationHours": "{hours}h",
+  "historyDurationHoursMinutes": "{hours}h {minutes}m",
+  "historyRealDurationTarget": "Duración real: {actual} / Meta: {target}",
+  "historyCompletedOn": "Completado el {date}",
+  "historyItemDeleteTitle": "¿Eliminar registro?",
+  "historyItemDeleteContent": "Este registro se borrará de forma permanente."
 }

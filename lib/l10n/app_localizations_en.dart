@@ -24,10 +24,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get changeLanguage => 'Change language';
 
   @override
-  String get drawerDonate => 'Buy me a coffee ☕';
+  String get drawerDonate => 'Buy me a coffee';
 
   @override
-  String get drawerDonateSubtitle => 'Support development via PayPal';
+  String get drawerDonateSubtitle => 'Support development';
 
   @override
   String get historyTitle => 'History';
@@ -414,5 +414,50 @@ class AppLocalizationsEn extends AppLocalizations {
   String get stageKombucha3 => 'Strong/Acidic';
 
   @override
-  String get stageKombucha4 => 'Vinegary';
+  String get stageKombucha4 => 'Vinegar-like';
+
+  @override
+  String get historyKefirFinished => 'Kefir harvested';
+
+  @override
+  String historyCompletedPercent(Object percent) {
+    return 'Completed: $percent%';
+  }
+
+  @override
+  String historyDurationDays(Object days) {
+    return '$days days';
+  }
+
+  @override
+  String historyDurationDaysHours(Object days, Object hours) {
+    return '$days days & ${hours}h';
+  }
+
+  @override
+  String historyDurationHours(Object hours) {
+    return '${hours}h';
+  }
+
+  @override
+  String historyDurationHoursMinutes(Object hours, Object minutes) {
+    return '${hours}h ${minutes}m';
+  }
+
+  @override
+  String historyRealDurationTarget(Object actual, Object target) {
+    return 'Actual duration: $actual / Target: $target';
+  }
+
+  @override
+  String historyCompletedOn(Object date) {
+    return 'Completed on $date';
+  }
+
+  @override
+  String get historyItemDeleteTitle => 'Delete record?';
+
+  @override
+  String get historyItemDeleteContent =>
+      'This record will be permanently deleted.';
 }

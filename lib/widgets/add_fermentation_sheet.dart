@@ -106,7 +106,7 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
         OutlinedButton.icon(
           onPressed: () =>
               setState(() => _selectedType = FermentationType.kombucha),
-          icon: const Icon(Icons.coffee_outlined),
+          icon: const Icon(Icons.emoji_food_beverage),
           label: Text(l10n.addSheetKombucha),
           style: OutlinedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 20),

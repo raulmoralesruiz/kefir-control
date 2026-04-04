@@ -43,7 +43,7 @@ class FermentationCard extends StatelessWidget {
             Row(
               children: [
                 Icon(
-                  isKombucha ? Icons.coffee_outlined : Icons.local_drink,
+                  isKombucha ? Icons.emoji_food_beverage : Icons.local_drink,
                   color: colorScheme.primary,
                   size: 28,
                 ),

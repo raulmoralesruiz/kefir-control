@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
-import '../models/fermentation.dart';
 import '../models/fermentation_history_item.dart';
 import '../providers/history_provider.dart';
+import '../widgets/history_list_item.dart';
 
 class HistoryScreen extends ConsumerWidget {
   const HistoryScreen({super.key});
 
-  String _formatDateTime(DateTime dt) {
-    final day = dt.day.toString().padLeft(2, '0');
-    final month = dt.month.toString().padLeft(2, '0');
-    final year = dt.year;
-    final hour = dt.hour.toString().padLeft(2, '0');
-    final minute = dt.minute.toString().padLeft(2, '0');
-    return '$day/$month/$year $hour:$minute';
-  }
+
 
   Future<void> _clearHistory(BuildContext context, WidgetRef ref) async {
     final confirmed = await showDialog<bool>(
@@ -82,58 +75,9 @@ class HistoryScreen extends ConsumerWidget {
             itemCount: history.length,
             itemBuilder: (context, index) {
               final item = history[index];
-              final isSuccess = item.isSuccess;
-              final isKombucha = item.type == FermentationType.kombucha;
-
-              return Dismissible(
-                key: Key(item.completedAt.millisecondsSinceEpoch.toString()),
-                direction: DismissDirection.endToStart,
-                background: Container(
-                  alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.only(right: 20),
-                  color: Colors.red,
-                  child: const Icon(Icons.delete, color: Colors.white),
-                ),
-                onDismissed: (direction) {
-                  _deleteItem(context, ref, item);
-                },
-                child: Card(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  elevation: 0,
-                  child: ListTile(
-                    leading: Badge(
-                      isLabelVisible: !isSuccess,
-                      label: const Icon(Icons.cancel, size: 10, color: Colors.white),
-                      backgroundColor: Colors.orange,
-                      offset: const Offset(4, 4),
-                      child: CircleAvatar(
-                        backgroundColor: isSuccess
-                            ? Colors.green.withOpacity(0.2)
-                            : Colors.orange.withOpacity(0.2),
-                        child: Icon(
-                          isKombucha ? Icons.coffee_outlined : Icons.local_drink,
-                          color: isSuccess ? Colors.green : Colors.orange,
-                        ),
-                      ),
-                    ),
-                    title: Text(
-                      isKombucha ? AppLocalizations.of(context)!.historyKombuchaFinished : AppLocalizations.of(context)!.historyItemTitle(item.targetDuration.inHours),
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 4),
-                        Text(AppLocalizations.of(context)!.historyItemStart(_formatDateTime(item.startTime))),
-                        Text(AppLocalizations.of(context)!.historyItemEnd(_formatDateTime(item.completedAt))),
-                        if (isKombucha) 
-                          Text(AppLocalizations.of(context)!.historyKombuchaDuration(num.parse((item.targetDuration.inHours / 24).toStringAsFixed(1)))),
-                      ],
-                    ),
-                    isThreeLine: true,
-                  ),
-                ),
+              return HistoryListItem(
+                item: item,
+                onDismissed: () => _deleteItem(context, ref, item),
               );
             },
           );

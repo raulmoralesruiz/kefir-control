@@ -15,6 +15,16 @@ class FermentationHistoryItem {
     required this.isSuccess,
   });
 
+  Duration get actualDuration {
+    final diff = completedAt.difference(startTime);
+    return diff.isNegative ? Duration.zero : diff;
+  }
+
+  double get completionPercentage {
+    if (targetDuration.inSeconds == 0) return 0.0;
+    return (actualDuration.inSeconds / targetDuration.inSeconds).clamp(0.0, 1.0);
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'type': type.name,
