@@ -9,50 +9,50 @@ part of 'fermentation_provider.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(ActiveFermentation)
-final activeFermentationProvider = ActiveFermentationProvider._();
+@ProviderFor(ActiveFermentations)
+final activeFermentationsProvider = ActiveFermentationsProvider._();
 
-final class ActiveFermentationProvider
-    extends $NotifierProvider<ActiveFermentation, Fermentation?> {
-  ActiveFermentationProvider._()
+final class ActiveFermentationsProvider
+    extends $NotifierProvider<ActiveFermentations, List<Fermentation>> {
+  ActiveFermentationsProvider._()
       : super(
           from: null,
           argument: null,
           retry: null,
-          name: r'activeFermentationProvider',
+          name: r'activeFermentationsProvider',
           isAutoDispose: false,
           dependencies: null,
           $allTransitiveDependencies: null,
         );
 
   @override
-  String debugGetCreateSourceHash() => _$activeFermentationHash();
+  String debugGetCreateSourceHash() => _$activeFermentationsHash();
 
   @$internal
   @override
-  ActiveFermentation create() => ActiveFermentation();
+  ActiveFermentations create() => ActiveFermentations();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(Fermentation? value) {
+  Override overrideWithValue(List<Fermentation> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<Fermentation?>(value),
+      providerOverride: $SyncValueProvider<List<Fermentation>>(value),
     );
   }
 }
 
-String _$activeFermentationHash() =>
-    r'bca2e8c2f67953cc65eec2b3ba9db7fbfaa611f1';
+String _$activeFermentationsHash() =>
+    r'b41f3b8b3df9a35aa9e2d9771d1808b332ed7940';
 
-abstract class _$ActiveFermentation extends $Notifier<Fermentation?> {
-  Fermentation? build();
+abstract class _$ActiveFermentations extends $Notifier<List<Fermentation>> {
+  List<Fermentation> build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<Fermentation?, Fermentation?>;
+    final ref = this.ref as $Ref<List<Fermentation>, List<Fermentation>>;
     final element = ref.element as $ClassProviderElement<
-        AnyNotifier<Fermentation?, Fermentation?>,
-        Fermentation?,
+        AnyNotifier<List<Fermentation>, List<Fermentation>>,
+        List<Fermentation>,
         Object?,
         Object?>;
     element.handleCreate(ref, build);

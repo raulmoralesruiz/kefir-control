@@ -301,4 +301,118 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get step4Desc =>
       'Very aggressive flavor. Ideal for recipes requiring strong acidity.';
+
+  @override
+  String get addSheetTitle => 'What are you fermenting?';
+
+  @override
+  String get addSheetKefir => 'Milk Kefir';
+
+  @override
+  String get addSheetKombucha => 'Kombucha';
+
+  @override
+  String get notifReadyTitleKombucha => 'Kombucha Ready';
+
+  @override
+  String get notifReadyTitleKefir => 'Kefir Ready';
+
+  @override
+  String get notifReadyBodyGeneric => 'Your fermentation has finished';
+
+  @override
+  String get notifReminderTitleGeneric => 'Reminder';
+
+  @override
+  String get notifReminderBodyGeneric => '2 hours left to finish';
+
+  @override
+  String get addSheetPastRecord => 'Record past fermentation';
+
+  @override
+  String addSheetPastSelected(Object date) {
+    return 'Started: $date\nNow choose the duration ⬆️';
+  }
+
+  @override
+  String get addSheetTimeKefir => 'Time for Kefir';
+
+  @override
+  String addSheetHours(Object hours) {
+    return '$hours Hours';
+  }
+
+  @override
+  String get addSheetTimeKombucha => 'Time for Kombucha';
+
+  @override
+  String addSheetIdealTime(Object days) {
+    return 'Your ideal time ($days days)';
+  }
+
+  @override
+  String addSheetDays(Object days) {
+    return '$days Days';
+  }
+
+  @override
+  String get cardTranscurrido => 'Elapsed';
+
+  @override
+  String get cardRestante => 'Remaining';
+
+  @override
+  String get cardCosechar => 'Harvest';
+
+  @override
+  String get cardFinalizar => 'Finish';
+
+  @override
+  String get homeHarvestKombuchaTitle => 'Harvest Kombucha';
+
+  @override
+  String get homeHarvestKombuchaDesc =>
+      'Do you want to memorize this exact time as your ideal duration for future fermentations?';
+
+  @override
+  String get homeHarvestOnly => 'Just harvest';
+
+  @override
+  String get homeHarvestAndSave => 'Harvest and Save';
+
+  @override
+  String get homeDeleteTitle => 'Delete fermentation?';
+
+  @override
+  String get homeDeleteDesc =>
+      'If you delete this card, the process will be discarded and won\'t be saved to history.';
+
+  @override
+  String get homeDeleteBtn => 'Delete';
+
+  @override
+  String get homeNewFermentation => 'New fermentation';
+
+  @override
+  String get historyKombuchaFinished => 'Harvested Kombucha';
+
+  @override
+  String historyKombuchaDuration(Object days) {
+    return 'Duration: $days days';
+  }
+
+  @override
+  String get stageKombucha0 => 'Initial formation';
+
+  @override
+  String get stageKombucha1 => 'Slightly sweet';
+
+  @override
+  String get stageKombucha2 => 'Balanced (Ideal)';
+
+  @override
+  String get stageKombucha3 => 'Strong/Acidic';
+
+  @override
+  String get stageKombucha4 => 'Vinegary';
 }

@@ -209,7 +209,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeStopTitle.
   ///
   /// In es, this message translates to:
-  /// **'¿Finalizar fermentación anticipadamente?'**
+  /// **'¿Finalizar fermentación?'**
   String get homeStopTitle;
 
   /// No description provided for @homeStopContent.
@@ -631,6 +631,210 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Sabor muy agresivo. Ideal para recetas que requieran acidez fuerte.'**
   String get step4Desc;
+
+  /// No description provided for @addSheetTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué vas a fermentar?'**
+  String get addSheetTitle;
+
+  /// No description provided for @addSheetKefir.
+  ///
+  /// In es, this message translates to:
+  /// **'Kéfir de Leche'**
+  String get addSheetKefir;
+
+  /// No description provided for @addSheetKombucha.
+  ///
+  /// In es, this message translates to:
+  /// **'Kombucha'**
+  String get addSheetKombucha;
+
+  /// No description provided for @notifReadyTitleKombucha.
+  ///
+  /// In es, this message translates to:
+  /// **'Kombucha Lista'**
+  String get notifReadyTitleKombucha;
+
+  /// No description provided for @notifReadyTitleKefir.
+  ///
+  /// In es, this message translates to:
+  /// **'Kéfir Listo'**
+  String get notifReadyTitleKefir;
+
+  /// No description provided for @notifReadyBodyGeneric.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu fermentación ha finalizado'**
+  String get notifReadyBodyGeneric;
+
+  /// No description provided for @notifReminderTitleGeneric.
+  ///
+  /// In es, this message translates to:
+  /// **'Recordatorio'**
+  String get notifReminderTitleGeneric;
+
+  /// No description provided for @notifReminderBodyGeneric.
+  ///
+  /// In es, this message translates to:
+  /// **'Faltan 2 horas para terminar'**
+  String get notifReminderBodyGeneric;
+
+  /// No description provided for @addSheetPastRecord.
+  ///
+  /// In es, this message translates to:
+  /// **'Registrar fermentación pasada'**
+  String get addSheetPastRecord;
+
+  /// No description provided for @addSheetPastSelected.
+  ///
+  /// In es, this message translates to:
+  /// **'Inicio: {date}\nAhora elige la duración ⬆️'**
+  String addSheetPastSelected(Object date);
+
+  /// No description provided for @addSheetTimeKefir.
+  ///
+  /// In es, this message translates to:
+  /// **'Tiempo para Kéfir'**
+  String get addSheetTimeKefir;
+
+  /// No description provided for @addSheetHours.
+  ///
+  /// In es, this message translates to:
+  /// **'{hours} Horas'**
+  String addSheetHours(Object hours);
+
+  /// No description provided for @addSheetTimeKombucha.
+  ///
+  /// In es, this message translates to:
+  /// **'Tiempo para Kombucha'**
+  String get addSheetTimeKombucha;
+
+  /// No description provided for @addSheetIdealTime.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu tiempo ideal ({days} días)'**
+  String addSheetIdealTime(Object days);
+
+  /// No description provided for @addSheetDays.
+  ///
+  /// In es, this message translates to:
+  /// **'{days} Días'**
+  String addSheetDays(Object days);
+
+  /// No description provided for @cardTranscurrido.
+  ///
+  /// In es, this message translates to:
+  /// **'Transcurrido'**
+  String get cardTranscurrido;
+
+  /// No description provided for @cardRestante.
+  ///
+  /// In es, this message translates to:
+  /// **'Restante'**
+  String get cardRestante;
+
+  /// No description provided for @cardCosechar.
+  ///
+  /// In es, this message translates to:
+  /// **'Cosechar'**
+  String get cardCosechar;
+
+  /// No description provided for @cardFinalizar.
+  ///
+  /// In es, this message translates to:
+  /// **'Finalizar'**
+  String get cardFinalizar;
+
+  /// No description provided for @homeHarvestKombuchaTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Cosechar Kombucha'**
+  String get homeHarvestKombuchaTitle;
+
+  /// No description provided for @homeHarvestKombuchaDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Deseas memorizar este tiempo exacto como tu tiempo ideal para futuras fermentaciones?'**
+  String get homeHarvestKombuchaDesc;
+
+  /// No description provided for @homeHarvestOnly.
+  ///
+  /// In es, this message translates to:
+  /// **'Solo cosechar'**
+  String get homeHarvestOnly;
+
+  /// No description provided for @homeHarvestAndSave.
+  ///
+  /// In es, this message translates to:
+  /// **'Cosechar y Guardar'**
+  String get homeHarvestAndSave;
+
+  /// No description provided for @homeDeleteTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Eliminar fermentación?'**
+  String get homeDeleteTitle;
+
+  /// No description provided for @homeDeleteDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Si eliminas esta tarjeta, el proceso se descartará y no se guardará en el historial.'**
+  String get homeDeleteDesc;
+
+  /// No description provided for @homeDeleteBtn.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminar'**
+  String get homeDeleteBtn;
+
+  /// No description provided for @homeNewFermentation.
+  ///
+  /// In es, this message translates to:
+  /// **'Nueva fermentación'**
+  String get homeNewFermentation;
+
+  /// No description provided for @historyKombuchaFinished.
+  ///
+  /// In es, this message translates to:
+  /// **'Kombucha cosechada'**
+  String get historyKombuchaFinished;
+
+  /// No description provided for @historyKombuchaDuration.
+  ///
+  /// In es, this message translates to:
+  /// **'Duración: {days} días'**
+  String historyKombuchaDuration(Object days);
+
+  /// No description provided for @stageKombucha0.
+  ///
+  /// In es, this message translates to:
+  /// **'Formación inicial'**
+  String get stageKombucha0;
+
+  /// No description provided for @stageKombucha1.
+  ///
+  /// In es, this message translates to:
+  /// **'Ligeramente dulce'**
+  String get stageKombucha1;
+
+  /// No description provided for @stageKombucha2.
+  ///
+  /// In es, this message translates to:
+  /// **'Equilibrada (Ideal)'**
+  String get stageKombucha2;
+
+  /// No description provided for @stageKombucha3.
+  ///
+  /// In es, this message translates to:
+  /// **'Fuerte/Ácida'**
+  String get stageKombucha3;
+
+  /// No description provided for @stageKombucha4.
+  ///
+  /// In es, this message translates to:
+  /// **'Avinagrada'**
+  String get stageKombucha4;
 }
 
 class _AppLocalizationsDelegate

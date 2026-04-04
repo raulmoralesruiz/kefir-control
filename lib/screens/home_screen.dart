@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../widgets/manual_start_dialog.dart';
-import '../widgets/time_progress.dart';
+import '../widgets/add_fermentation_sheet.dart';
+import '../widgets/fermentation_card.dart';
+import '../models/fermentation.dart';
 import 'info_screen.dart';
 import 'history_screen.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
@@ -12,94 +13,21 @@ import '../providers/locale_provider.dart';
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
-  void _startFermentation(BuildContext context, WidgetRef ref, int hours, {DateTime? customStartTime}) async {
+  void _showAddSheet(BuildContext context) {
+    AddFermentationSheet.show(context);
+  }
+
+  void _onStopSelected(BuildContext context, WidgetRef ref, Fermentation fermentation) async {
     final l10n = AppLocalizations.of(context)!;
-    ref.read(activeFermentationProvider.notifier).start(
-      hours,
-      customStartTime: customStartTime,
-      notifReadyTitle: l10n.notifReadyTitle,
-      notifReadyBody: l10n.notifReadyBody(hours.toString()),
-      notifReminderTitle: l10n.notifReminderTitle,
-      notifReminderBody: l10n.notifReminderBody,
-    );
-  }
-
-  Future<void> _showStartDialog(BuildContext context, WidgetRef ref, {required bool askForDate}) async {
-    final result = await ManualStartDialog.show(context, askForDate: askForDate);
-    if (result != null) {
-      _startFermentation(context, ref, result.hours, customStartTime: result.customStartTime);
-    }
-  }
-
-  void _showStartBottomSheet(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context)!;
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder: (ctx) {
-        return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Center(
-                  child: Container(
-                    width: 40,
-                    height: 4,
-                    margin: const EdgeInsets.only(bottom: 20),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                ),
-                FilledButton.icon(
-                  onPressed: () {
-                    Navigator.pop(ctx);
-                    _showStartDialog(context, ref, askForDate: false);
-                  },
-                  icon: const Icon(Icons.play_circle_fill),
-                  label: Text(l10n.btnStartFermentation),
-                  style: FilledButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    textStyle: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                OutlinedButton.icon(
-                  onPressed: () {
-                    Navigator.pop(ctx);
-                    _showStartDialog(context, ref, askForDate: true);
-                  },
-                  icon: const Icon(Icons.history),
-                  label: Text(l10n.btnStartPastFermentation),
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  void _stopFermentation(BuildContext context, WidgetRef ref) async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.homeStopTitle),
-        content: Text(AppLocalizations.of(context)!.homeStopContent),
+        title: Text(l10n.homeStopTitle),
+        content: Text(l10n.homeStopContent), // We might need to update these translations later
         actions: [
           FilledButton.tonal(
             onPressed: () => Navigator.pop(context, false),
-            child: Text(AppLocalizations.of(context)!.cancel),
+            child: Text(l10n.cancel),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(context, true),
@@ -107,15 +35,47 @@ class HomeScreen extends ConsumerWidget {
               backgroundColor: Theme.of(context).colorScheme.error,
               foregroundColor: Theme.of(context).colorScheme.onError,
             ),
-            child: Text(AppLocalizations.of(context)!.homeStopConfirm),
+            child: Text(l10n.homeStopConfirm),
           ),
         ],
       ),
     );
 
-    if (confirmed != true) return;
+    if (confirmed == true) {
+      ref.read(activeFermentationsProvider.notifier).stop(fermentation.id);
+    }
+  }
 
-    await ref.read(activeFermentationProvider.notifier).stop();
+  void _onHarvestKombucha(BuildContext context, WidgetRef ref, Fermentation fermentation) async {
+    final l10n = AppLocalizations.of(context)!;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.homeHarvestKombuchaTitle),
+        content: Text(l10n.homeHarvestKombuchaDesc),
+        actions: [
+          FilledButton.tonal(
+            onPressed: () {
+              Navigator.pop(ctx, false);
+              ref.read(activeFermentationsProvider.notifier).stop(fermentation.id, recordHistory: true);
+            },
+            child: Text(l10n.homeHarvestOnly),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(l10n.homeHarvestAndSave),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      ref.read(activeFermentationsProvider.notifier).stop(
+        fermentation.id, 
+        recordHistory: true, 
+        customIdealTime: fermentation.elapsed
+      );
+    }
   }
 
   Widget _buildDrawer(BuildContext context, WidgetRef ref) {
@@ -125,7 +85,7 @@ class HomeScreen extends ConsumerWidget {
 
     return NavigationDrawer(
       onDestinationSelected: (index) {
-        Navigator.pop(context); // cierra el drawer
+        Navigator.pop(context);
         if (index == 0) {
           Navigator.push(context,
               MaterialPageRoute(builder: (_) => const HistoryScreen()));
@@ -134,9 +94,8 @@ class HomeScreen extends ConsumerWidget {
               context, MaterialPageRoute(builder: (_) => const InfoScreen()));
         }
       },
-      selectedIndex: null, // ninguno seleccionado (estamos en Home)
+      selectedIndex: null,
       children: [
-        // ── Header ────────────────────────────────────────────────────────────
         DrawerHeader(
           decoration: BoxDecoration(
             color: colorScheme.primaryContainer,
@@ -165,8 +124,6 @@ class HomeScreen extends ConsumerWidget {
             ],
           ),
         ),
-
-        // ── Toggle de idioma ───────────────────────────────────────────────
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
           child: SwitchListTile(
@@ -183,10 +140,7 @@ class HomeScreen extends ConsumerWidget {
             ),
           ),
         ),
-
         const Divider(indent: 16, endIndent: 16, height: 24),
-
-        // ── Destinos ───────────────────────────────────────────────────────
         NavigationDrawerDestination(
           icon: const Icon(Icons.history_outlined),
           selectedIcon: const Icon(Icons.history),
@@ -197,10 +151,7 @@ class HomeScreen extends ConsumerWidget {
           selectedIcon: const Icon(Icons.info),
           label: Text(l10n.infoTitle),
         ),
-
         const Divider(indent: 16, endIndent: 16, height: 24),
-
-        // ── Donación ───────────────────────────────────────────────────────
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: ListTile(
@@ -226,8 +177,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
-    final fermentation = ref.watch(activeFermentationProvider);
-    final hasFermentation = fermentation != null;
+    final fermentations = ref.watch(activeFermentationsProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -235,34 +185,69 @@ class HomeScreen extends ConsumerWidget {
         centerTitle: true,
       ),
       drawer: _buildDrawer(context, ref),
-      body: SafeArea(
-        child: hasFermentation
-            ? TimeProgress(fermentation: fermentation)
-            : Center(
-                child: Text(
-                  l10n.homeNoActiveFermentationTitle,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
-                ),
+      body: fermentations.isEmpty
+          ? Center(
+              child: Text(
+                l10n.homeNoActiveFermentationTitle,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
               ),
-      ),
+            )
+          : ListView.builder(
+              padding: const EdgeInsets.all(16).copyWith(bottom: 100),
+              itemCount: fermentations.length,
+              itemBuilder: (context, index) {
+                final fermentation = fermentations[index];
+                return Dismissible(
+                  key: Key(fermentation.id),
+                  direction: DismissDirection.endToStart,
+                  background: Container(
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.only(right: 20),
+                    color: Colors.red,
+                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: const Icon(Icons.delete, color: Colors.white),
+                  ),
+                  confirmDismiss: (direction) async {
+                    final confirmed = await showDialog<bool>(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text(l10n.homeDeleteTitle),
+                        content: Text(l10n.homeDeleteDesc),
+                        actions: [
+                          FilledButton.tonal(
+                            onPressed: () => Navigator.pop(context, false),
+                            child: Text(l10n.cancel),
+                          ),
+                          FilledButton(
+                            onPressed: () => Navigator.pop(context, true),
+                            style: FilledButton.styleFrom(
+                              backgroundColor: Theme.of(context).colorScheme.error,
+                              foregroundColor: Theme.of(context).colorScheme.onError,
+                            ),
+                            child: Text(l10n.homeDeleteBtn),
+                          ),
+                        ],
+                      ),
+                    );
+                    return confirmed;
+                  },
+                  onDismissed: (direction) {
+                    ref.read(activeFermentationsProvider.notifier).stop(fermentation.id, recordHistory: false);
+                  },
+                  child: FermentationCard(
+                    fermentation: fermentation,
+                    onStop: () => _onStopSelected(context, ref, fermentation),
+                    onHarvest: () => _onHarvestKombucha(context, ref, fermentation),
+                  ),
+                );
+              },
+            ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: hasFermentation ? () => _stopFermentation(context, ref) : () => _showStartBottomSheet(context, ref),
-        icon: Icon(hasFermentation
-            ? Icons.stop_circle_outlined
-            : Icons.play_circle_fill),
-        label: Text(
-          hasFermentation
-              ? l10n.btnStopFermentation
-              : l10n.btnStartFermentation,
-        ),
-        backgroundColor: hasFermentation
-            ? Theme.of(context).colorScheme.error
-            : Theme.of(context).colorScheme.primary,
-        foregroundColor: hasFermentation
-            ? Theme.of(context).colorScheme.onError
-            : Theme.of(context).colorScheme.onPrimary,
+        onPressed: () => _showAddSheet(context),
+        icon: const Icon(Icons.add),
+        label: Text(l10n.homeNewFermentation),
       ),
     );
   }

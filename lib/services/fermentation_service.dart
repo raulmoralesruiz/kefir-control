@@ -4,36 +4,56 @@ import '../models/fermentation.dart';
 import '../models/fermentation_history_item.dart';
 
 class FermentationService {
-  static const String _startTimeKey = 'fermentation_start_time';
-  static const String _durationKey = 'fermentation_duration_hours';
+  static const String _activeListKey = 'fermentation_active_list';
   static const String _historyKey = 'fermentation_history';
+  static const String _kombuchaIdealTimeKey = 'kombucha_ideal_duration_seconds';
 
-  Future<void> saveFermentation(Fermentation fermentation) async {
+  // --- Active Fermentations ---
+  
+  Future<void> saveActiveFermentations(List<Fermentation> fermentations) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(
-        _startTimeKey, fermentation.startTime.millisecondsSinceEpoch);
-    await prefs.setInt(_durationKey, fermentation.targetDuration.inHours);
+    final jsonList = fermentations.map((f) => f.toJson()).toList();
+    await prefs.setString(_activeListKey, jsonEncode(jsonList));
   }
 
-  Future<Fermentation?> loadFermentation() async {
+  Future<List<Fermentation>> loadActiveFermentations() async {
     final prefs = await SharedPreferences.getInstance();
-    final startTimeMillis = prefs.getInt(_startTimeKey);
-    final durationHours = prefs.getInt(_durationKey);
+    
+    // Purge old single tracker data if present to avoid pollution, though we 
+    // are using a new key so it shouldn't conflict, it's just good hygiene.
+    await prefs.remove('fermentation_start_time');
+    await prefs.remove('fermentation_duration_hours');
 
-    if (startTimeMillis != null && durationHours != null) {
-      return Fermentation(
-        startTime: DateTime.fromMillisecondsSinceEpoch(startTimeMillis),
-        targetDuration: Duration(hours: durationHours),
-      );
+    final String? jsonString = prefs.getString(_activeListKey);
+    if (jsonString == null) return [];
+
+    try {
+      final List<dynamic> jsonList = jsonDecode(jsonString);
+      return jsonList
+          .map((item) => Fermentation.fromJson(item as Map<String, dynamic>))
+          .toList();
+    } catch (e) {
+      return [];
+    }
+  }
+
+  // --- Smart Kombucha Settings ---
+  
+  Future<void> saveKombuchaIdealDuration(Duration duration) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_kombuchaIdealTimeKey, duration.inSeconds);
+  }
+
+  Future<Duration?> getKombuchaIdealDuration() async {
+    final prefs = await SharedPreferences.getInstance();
+    final seconds = prefs.getInt(_kombuchaIdealTimeKey);
+    if (seconds != null) {
+      return Duration(seconds: seconds);
     }
     return null;
   }
 
-  Future<void> clearFermentation() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_startTimeKey);
-    await prefs.remove(_durationKey);
-  }
+  // --- History ---
 
   Future<List<FermentationHistoryItem>> getHistory() async {
     final prefs = await SharedPreferences.getInstance();

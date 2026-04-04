@@ -64,7 +64,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get homeCompleted => 'Completado';
 
   @override
-  String get homeStopTitle => '¿Finalizar fermentación anticipadamente?';
+  String get homeStopTitle => '¿Finalizar fermentación?';
 
   @override
   String get homeStopContent =>
@@ -304,4 +304,118 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get step4Desc =>
       'Sabor muy agresivo. Ideal para recetas que requieran acidez fuerte.';
+
+  @override
+  String get addSheetTitle => '¿Qué vas a fermentar?';
+
+  @override
+  String get addSheetKefir => 'Kéfir de Leche';
+
+  @override
+  String get addSheetKombucha => 'Kombucha';
+
+  @override
+  String get notifReadyTitleKombucha => 'Kombucha Lista';
+
+  @override
+  String get notifReadyTitleKefir => 'Kéfir Listo';
+
+  @override
+  String get notifReadyBodyGeneric => 'Tu fermentación ha finalizado';
+
+  @override
+  String get notifReminderTitleGeneric => 'Recordatorio';
+
+  @override
+  String get notifReminderBodyGeneric => 'Faltan 2 horas para terminar';
+
+  @override
+  String get addSheetPastRecord => 'Registrar fermentación pasada';
+
+  @override
+  String addSheetPastSelected(Object date) {
+    return 'Inicio: $date\nAhora elige la duración ⬆️';
+  }
+
+  @override
+  String get addSheetTimeKefir => 'Tiempo para Kéfir';
+
+  @override
+  String addSheetHours(Object hours) {
+    return '$hours Horas';
+  }
+
+  @override
+  String get addSheetTimeKombucha => 'Tiempo para Kombucha';
+
+  @override
+  String addSheetIdealTime(Object days) {
+    return 'Tu tiempo ideal ($days días)';
+  }
+
+  @override
+  String addSheetDays(Object days) {
+    return '$days Días';
+  }
+
+  @override
+  String get cardTranscurrido => 'Transcurrido';
+
+  @override
+  String get cardRestante => 'Restante';
+
+  @override
+  String get cardCosechar => 'Cosechar';
+
+  @override
+  String get cardFinalizar => 'Finalizar';
+
+  @override
+  String get homeHarvestKombuchaTitle => 'Cosechar Kombucha';
+
+  @override
+  String get homeHarvestKombuchaDesc =>
+      '¿Deseas memorizar este tiempo exacto como tu tiempo ideal para futuras fermentaciones?';
+
+  @override
+  String get homeHarvestOnly => 'Solo cosechar';
+
+  @override
+  String get homeHarvestAndSave => 'Cosechar y Guardar';
+
+  @override
+  String get homeDeleteTitle => '¿Eliminar fermentación?';
+
+  @override
+  String get homeDeleteDesc =>
+      'Si eliminas esta tarjeta, el proceso se descartará y no se guardará en el historial.';
+
+  @override
+  String get homeDeleteBtn => 'Eliminar';
+
+  @override
+  String get homeNewFermentation => 'Nueva fermentación';
+
+  @override
+  String get historyKombuchaFinished => 'Kombucha cosechada';
+
+  @override
+  String historyKombuchaDuration(Object days) {
+    return 'Duración: $days días';
+  }
+
+  @override
+  String get stageKombucha0 => 'Formación inicial';
+
+  @override
+  String get stageKombucha1 => 'Ligeramente dulce';
+
+  @override
+  String get stageKombucha2 => 'Equilibrada (Ideal)';
+
+  @override
+  String get stageKombucha3 => 'Fuerte/Ácida';
+
+  @override
+  String get stageKombucha4 => 'Avinagrada';
 }

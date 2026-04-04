@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
+import '../models/fermentation.dart';
 import '../models/fermentation_history_item.dart';
 import '../providers/history_provider.dart';
 
@@ -82,6 +83,7 @@ class HistoryScreen extends ConsumerWidget {
             itemBuilder: (context, index) {
               final item = history[index];
               final isSuccess = item.isSuccess;
+              final isKombucha = item.type == FermentationType.kombucha;
 
               return Dismissible(
                 key: Key(item.completedAt.millisecondsSinceEpoch.toString()),
@@ -100,17 +102,23 @@ class HistoryScreen extends ConsumerWidget {
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   elevation: 0,
                   child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: isSuccess
-                          ? Colors.green.withOpacity(0.2)
-                          : Colors.orange.withOpacity(0.2),
-                      child: Icon(
-                        isSuccess ? Icons.check_circle : Icons.cancel,
-                        color: isSuccess ? Colors.green : Colors.orange,
+                    leading: Badge(
+                      isLabelVisible: !isSuccess,
+                      label: const Icon(Icons.cancel, size: 10, color: Colors.white),
+                      backgroundColor: Colors.orange,
+                      offset: const Offset(4, 4),
+                      child: CircleAvatar(
+                        backgroundColor: isSuccess
+                            ? Colors.green.withOpacity(0.2)
+                            : Colors.orange.withOpacity(0.2),
+                        child: Icon(
+                          isKombucha ? Icons.coffee_outlined : Icons.local_drink,
+                          color: isSuccess ? Colors.green : Colors.orange,
+                        ),
                       ),
                     ),
                     title: Text(
-                      AppLocalizations.of(context)!.historyItemTitle(item.targetDuration.inHours),
+                      isKombucha ? AppLocalizations.of(context)!.historyKombuchaFinished : AppLocalizations.of(context)!.historyItemTitle(item.targetDuration.inHours),
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Column(
@@ -119,6 +127,8 @@ class HistoryScreen extends ConsumerWidget {
                         const SizedBox(height: 4),
                         Text(AppLocalizations.of(context)!.historyItemStart(_formatDateTime(item.startTime))),
                         Text(AppLocalizations.of(context)!.historyItemEnd(_formatDateTime(item.completedAt))),
+                        if (isKombucha) 
+                          Text(AppLocalizations.of(context)!.historyKombuchaDuration(num.parse((item.targetDuration.inHours / 24).toStringAsFixed(1)))),
                       ],
                     ),
                     isThreeLine: true,
