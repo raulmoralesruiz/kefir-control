@@ -895,6 +895,60 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Este registro se borrará de forma permanente.'**
   String get historyItemDeleteContent;
+
+  /// No description provided for @drawerDataManagement.
+  ///
+  /// In es, this message translates to:
+  /// **'Gestión de datos'**
+  String get drawerDataManagement;
+
+  /// No description provided for @drawerBackup.
+  ///
+  /// In es, this message translates to:
+  /// **'Exportar copia'**
+  String get drawerBackup;
+
+  /// No description provided for @drawerRestore.
+  ///
+  /// In es, this message translates to:
+  /// **'Restaurar copia'**
+  String get drawerRestore;
+
+  /// No description provided for @backupSuccessTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Copia exportada'**
+  String get backupSuccessTitle;
+
+  /// No description provided for @backupSuccessDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Los datos se han guardado con éxito.'**
+  String get backupSuccessDesc;
+
+  /// No description provided for @restoreSuccessTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Copia restaurada'**
+  String get restoreSuccessTitle;
+
+  /// No description provided for @restoreSuccessDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Los datos han vuelto a la magia.'**
+  String get restoreSuccessDesc;
+
+  /// No description provided for @restoreErrorTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Error'**
+  String get restoreErrorTitle;
+
+  /// No description provided for @restoreErrorDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'El archivo es inválido o está corrupto.'**
+  String get restoreErrorDesc;
 }
 
 class _AppLocalizationsDelegate

@@ -463,4 +463,31 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get historyItemDeleteContent =>
       'Este registro se borrará de forma permanente.';
+
+  @override
+  String get drawerDataManagement => 'Gestión de datos';
+
+  @override
+  String get drawerBackup => 'Exportar copia';
+
+  @override
+  String get drawerRestore => 'Restaurar copia';
+
+  @override
+  String get backupSuccessTitle => 'Copia exportada';
+
+  @override
+  String get backupSuccessDesc => 'Los datos se han guardado con éxito.';
+
+  @override
+  String get restoreSuccessTitle => 'Copia restaurada';
+
+  @override
+  String get restoreSuccessDesc => 'Los datos han vuelto a la magia.';
+
+  @override
+  String get restoreErrorTitle => 'Error';
+
+  @override
+  String get restoreErrorDesc => 'El archivo es inválido o está corrupto.';
 }

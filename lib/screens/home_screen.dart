@@ -8,7 +8,14 @@ import 'info_screen.dart';
 import 'history_screen.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
 import '../providers/fermentation_provider.dart';
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
+
 import '../providers/locale_provider.dart';
+import '../providers/history_provider.dart';
+import '../providers/service_providers.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -77,6 +84,77 @@ class HomeScreen extends ConsumerWidget {
     if (confirmed == true) {
       ref.read(activeFermentationsProvider.notifier).stop(fermentation.id,
           recordHistory: true, customIdealTime: fermentation.elapsed);
+    }
+  }
+
+  Future<void> _exportBackup(BuildContext context, WidgetRef ref) async {
+    final l10n = AppLocalizations.of(context)!;
+    try {
+      final jsonString = await ref.read(fermentationServiceProvider).exportData();
+      final directory = await getTemporaryDirectory();
+      final path = '${directory.path}/kefir_backup.json';
+      final file = File(path);
+      await file.writeAsString(jsonString);
+      
+      final xfile = XFile(path);
+      await Share.shareXFiles([xfile], text: 'Backup de Kefir Control');
+      if (context.mounted) {
+        showDialog(context: context, builder: (ctx) => AlertDialog(
+          title: Text(l10n.backupSuccessTitle),
+          content: Text(l10n.backupSuccessDesc),
+          actions: [
+            FilledButton.tonal(onPressed: () => Navigator.pop(ctx), child: Text(l10n.accept))
+          ]
+        ));
+      }
+    } catch (e) {
+      // Ignorar o loguear
+    }
+  }
+
+  Future<void> _importBackup(BuildContext context, WidgetRef ref) async {
+    final l10n = AppLocalizations.of(context)!;
+    try {
+      final FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['json'],
+      );
+      if (result != null && result.files.single.path != null) {
+        final file = File(result.files.single.path!);
+        final jsonString = await file.readAsString();
+        final success = await ref.read(fermentationServiceProvider).importData(jsonString);
+        if (context.mounted) {
+          if (success) {
+            ref.invalidate(activeFermentationsProvider);
+            ref.invalidate(historyProvider);
+            showDialog(context: context, builder: (ctx) => AlertDialog(
+              title: Text(l10n.restoreSuccessTitle),
+              content: Text(l10n.restoreSuccessDesc),
+              actions: [
+                FilledButton.tonal(onPressed: () => Navigator.pop(ctx), child: Text(l10n.accept))
+              ]
+            ));
+          } else {
+            showDialog(context: context, builder: (ctx) => AlertDialog(
+              title: Text(l10n.restoreErrorTitle),
+              content: Text(l10n.restoreErrorDesc),
+              actions: [
+                FilledButton.tonal(onPressed: () => Navigator.pop(ctx), child: Text(l10n.accept))
+              ]
+            ));
+          }
+        }
+      }
+    } catch (e) {
+      if (context.mounted) {
+        showDialog(context: context, builder: (ctx) => AlertDialog(
+          title: Text(l10n.restoreErrorTitle),
+          content: Text(l10n.restoreErrorDesc),
+          actions: [
+            FilledButton.tonal(onPressed: () => Navigator.pop(ctx), child: Text(l10n.accept))
+          ]
+        ));
+      }
     }
   }
 
@@ -152,6 +230,42 @@ class HomeScreen extends ConsumerWidget {
           icon: const Icon(Icons.info_outline),
           selectedIcon: const Icon(Icons.info),
           label: Text(l10n.infoTitle),
+        ),
+        const Divider(indent: 16, endIndent: 16, height: 24),
+        Padding(
+          padding: const EdgeInsets.only(left: 28, top: 8, bottom: 8),
+          child: Text(
+            l10n.drawerDataManagement,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: colorScheme.primary,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: ListTile(
+            leading: const Icon(Icons.upload_file),
+            title: Text(l10n.drawerBackup),
+            onTap: () {
+              Navigator.pop(context);
+              _exportBackup(context, ref);
+            },
+            dense: true,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: ListTile(
+            leading: const Icon(Icons.download),
+            title: Text(l10n.drawerRestore),
+            onTap: () {
+              Navigator.pop(context);
+              _importBackup(context, ref);
+            },
+            dense: true,
+          ),
         ),
         const Divider(indent: 16, endIndent: 16, height: 24),
         Padding(

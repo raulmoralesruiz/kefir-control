@@ -132,5 +132,14 @@
   "historyRealDurationTarget": "Duración real: {actual} / Meta: {target}",
   "historyCompletedOn": "Completado el {date}",
   "historyItemDeleteTitle": "¿Eliminar registro?",
-  "historyItemDeleteContent": "Este registro se borrará de forma permanente."
+  "historyItemDeleteContent": "Este registro se borrará de forma permanente.",
+  "drawerDataManagement": "Gestión de datos",
+  "drawerBackup": "Exportar copia",
+  "drawerRestore": "Restaurar copia",
+  "backupSuccessTitle": "Copia exportada",
+  "backupSuccessDesc": "Los datos se han guardado con éxito.",
+  "restoreSuccessTitle": "Copia restaurada",
+  "restoreSuccessDesc": "Los datos han vuelto a la magia.",
+  "restoreErrorTitle": "Error",
+  "restoreErrorDesc": "El archivo es inválido o está corrupto."
 }

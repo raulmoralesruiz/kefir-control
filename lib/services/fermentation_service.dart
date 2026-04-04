@@ -97,4 +97,36 @@ class FermentationService {
         jsonEncode(currentHistory.map((e) => e.toJson()).toList());
     await prefs.setString(_historyKey, updatedJson);
   }
+
+  // --- Backup / Restore ---
+  
+  Future<String> exportData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final Map<String, dynamic> data = {
+      _activeListKey: prefs.getString(_activeListKey),
+      _historyKey: prefs.getString(_historyKey),
+      _kombuchaIdealTimeKey: prefs.getInt(_kombuchaIdealTimeKey),
+    };
+    return jsonEncode(data);
+  }
+
+  Future<bool> importData(String jsonString) async {
+    try {
+      final Map<String, dynamic> data = jsonDecode(jsonString);
+      final prefs = await SharedPreferences.getInstance();
+      
+      if (data.containsKey(_activeListKey) && data[_activeListKey] != null) {
+        await prefs.setString(_activeListKey, data[_activeListKey] as String);
+      }
+      if (data.containsKey(_historyKey) && data[_historyKey] != null) {
+        await prefs.setString(_historyKey, data[_historyKey] as String);
+      }
+      if (data.containsKey(_kombuchaIdealTimeKey) && data[_kombuchaIdealTimeKey] != null) {
+        await prefs.setInt(_kombuchaIdealTimeKey, data[_kombuchaIdealTimeKey] as int);
+      }
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

@@ -132,5 +132,14 @@
   "historyRealDurationTarget": "Actual duration: {actual} / Target: {target}",
   "historyCompletedOn": "Completed on {date}",
   "historyItemDeleteTitle": "Delete record?",
-  "historyItemDeleteContent": "This record will be permanently deleted."
+  "historyItemDeleteContent": "This record will be permanently deleted.",
+  "drawerDataManagement": "Data Management",
+  "drawerBackup": "Export backup",
+  "drawerRestore": "Restore backup",
+  "backupSuccessTitle": "Backup exported",
+  "backupSuccessDesc": "Data successfully saved.",
+  "restoreSuccessTitle": "Backup restored",
+  "restoreSuccessDesc": "The app data has been restored.",
+  "restoreErrorTitle": "Error",
+  "restoreErrorDesc": "The file is invalid or corrupted."
 }
