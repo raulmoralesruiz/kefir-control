@@ -18,6 +18,8 @@ dependencies:
   timezone: ^0.9.4
   flutter_timezone: ^5.0.1
   url_launcher: ^6.3.1
+  flutter_riverpod: ^3.3.1
+  riverpod_annotation: ^4.0.2
 
 dev_dependencies:
   flutter_test:
@@ -27,6 +29,8 @@ dev_dependencies:
   flutter_lints: ^3.0.1
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.4.0
+  build_runner: ^2.13.1
+  riverpod_generator: ^4.0.3
 
 flutter:
   uses-material-design: true

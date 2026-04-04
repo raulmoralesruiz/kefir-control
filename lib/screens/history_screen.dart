@@ -1,30 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
 import '../models/fermentation_history_item.dart';
-import '../services/fermentation_service.dart';
+import '../providers/history_provider.dart';
 
-class HistoryScreen extends StatefulWidget {
+class HistoryScreen extends ConsumerWidget {
   const HistoryScreen({super.key});
-
-  @override
-  State<HistoryScreen> createState() => _HistoryScreenState();
-}
-
-class _HistoryScreenState extends State<HistoryScreen> {
-  final FermentationService _service = FermentationService();
-  late Future<List<FermentationHistoryItem>> _historyFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadHistory();
-  }
-
-  void _loadHistory() {
-    setState(() {
-      _historyFuture = _service.getHistory();
-    });
-  }
 
   String _formatDateTime(DateTime dt) {
     final day = dt.day.toString().padLeft(2, '0');
@@ -35,7 +16,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return '$day/$month/$year $hour:$minute';
   }
 
-  Future<void> _clearHistory() async {
+  Future<void> _clearHistory(BuildContext context, WidgetRef ref) async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
@@ -59,16 +40,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
     );
 
     if (confirmed == true) {
-      await _service.clearHistory();
-      _loadHistory();
+      await ref.read(historyProvider.notifier).clearHistory();
     }
   }
 
-  Future<void> _deleteItem(FermentationHistoryItem item) async {
-    await _service.deleteHistoryEntry(item.completedAt);
-    _loadHistory();
-
-    if (mounted) {
+  Future<void> _deleteItem(BuildContext context, WidgetRef ref, FermentationHistoryItem item) async {
+    await ref.read(historyProvider.notifier).deleteEntry(item.completedAt);
+    if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(AppLocalizations.of(context)!.historyDeleted)),
       );
@@ -76,25 +54,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final historyAsync = ref.watch(historyProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.historyTitle),
         centerTitle: true,
       ),
-      body: FutureBuilder<List<FermentationHistoryItem>>(
-        future: _historyFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          }
-
-          final history = snapshot.data ?? [];
-
+      body: historyAsync.when(
+        data: (history) {
           if (history.isEmpty) {
             return Center(
               child: Padding(
@@ -124,7 +93,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   child: const Icon(Icons.delete, color: Colors.white),
                 ),
                 onDismissed: (direction) {
-                  _deleteItem(item);
+                  _deleteItem(context, ref, item);
                 },
                 child: Card(
                   margin:
@@ -159,21 +128,21 @@ class _HistoryScreenState extends State<HistoryScreen> {
             },
           );
         },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stackTrace) => Center(child: Text('Error: $error')),
       ),
-      floatingActionButton: FutureBuilder<List<FermentationHistoryItem>>(
-        future: _historyFuture,
-        builder: (context, snapshot) {
-          final hasItems =
-              snapshot.hasData && (snapshot.data?.isNotEmpty ?? false);
-          if (!hasItems) return const SizedBox.shrink();
+      floatingActionButton: historyAsync.maybeWhen(
+        data: (history) {
+          if (history.isEmpty) return const SizedBox.shrink();
           return FloatingActionButton.extended(
-            onPressed: _clearHistory,
+            onPressed: () => _clearHistory(context, ref),
             icon: const Icon(Icons.delete_sweep),
             label: Text(AppLocalizations.of(context)!.historyClear),
             backgroundColor: Theme.of(context).colorScheme.error,
             foregroundColor: Theme.of(context).colorScheme.onError,
           );
         },
+        orElse: () => const SizedBox.shrink(),
       ),
     );
   }

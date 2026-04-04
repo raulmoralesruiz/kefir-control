@@ -1,95 +1,37 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../models/fermentation.dart';
-import '../models/fermentation_history_item.dart';
-import '../services/fermentation_service.dart';
-import '../services/notification_service.dart';
 import '../widgets/manual_start_dialog.dart';
 import '../widgets/time_progress.dart';
 import 'info_screen.dart';
 import 'history_screen.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
-import 'package:kefir_control/main.dart' show appLocaleNotifier;
+import '../providers/fermentation_provider.dart';
+import '../providers/locale_provider.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final FermentationService _service = FermentationService();
-  final NotificationService _notificationService = NotificationService();
-
-  Fermentation? _fermentation;
-  Timer? _timer;
-
-  @override
-  void initState() {
-    super.initState();
-    _initNotifications();
-    _loadData();
-  }
-
-  Future<void> _initNotifications() async {
-    await _notificationService.init();
-  }
-
-  Future<void> _loadData() async {
-    final saved = await _service.loadFermentation();
-    if (saved != null) {
-      setState(() {
-        _fermentation = saved;
-      });
-      _startTimer();
-    }
-  }
-
-  void _startTimer() {
-    _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {});
-      if (_fermentation != null && _fermentation!.progress >= 1.0) {
-        _timer?.cancel();
-      }
-    });
-  }
-
-  void _startFermentation(int hours, {DateTime? customStartTime}) async {
-    final startTime = customStartTime ?? DateTime.now();
-    final targetDuration = Duration(hours: hours);
-    final newFermentation = Fermentation(
-      startTime: startTime,
-      targetDuration: targetDuration,
-    );
-    await _service.saveFermentation(newFermentation);
-    setState(() {
-      _fermentation = newFermentation;
-    });
-    _startTimer();
-
+  void _startFermentation(BuildContext context, WidgetRef ref, int hours, {DateTime? customStartTime}) async {
     final l10n = AppLocalizations.of(context)!;
-    await _notificationService.cancelAll();
-    await _notificationService.scheduleFermentationComplete(
-      startTime.add(targetDuration),
-      l10n.notifReadyTitle,
-      l10n.notifReadyBody(hours.toString()),
-      l10n.notifReminderTitle,
-      l10n.notifReminderBody,
+    ref.read(activeFermentationProvider.notifier).start(
+      hours,
+      customStartTime: customStartTime,
+      notifReadyTitle: l10n.notifReadyTitle,
+      notifReadyBody: l10n.notifReadyBody(hours.toString()),
+      notifReminderTitle: l10n.notifReminderTitle,
+      notifReminderBody: l10n.notifReminderBody,
     );
   }
 
-  Future<void> _showStartDialog({required bool askForDate}) async {
-    final result =
-        await ManualStartDialog.show(context, askForDate: askForDate);
+  Future<void> _showStartDialog(BuildContext context, WidgetRef ref, {required bool askForDate}) async {
+    final result = await ManualStartDialog.show(context, askForDate: askForDate);
     if (result != null) {
-      _startFermentation(result.hours, customStartTime: result.customStartTime);
+      _startFermentation(context, ref, result.hours, customStartTime: result.customStartTime);
     }
   }
 
-  void _showStartBottomSheet() {
+  void _showStartBottomSheet(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
@@ -118,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 FilledButton.icon(
                   onPressed: () {
                     Navigator.pop(ctx);
-                    _showStartDialog(askForDate: false);
+                    _showStartDialog(context, ref, askForDate: false);
                   },
                   icon: const Icon(Icons.play_circle_fill),
                   label: Text(l10n.btnStartFermentation),
@@ -132,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 OutlinedButton.icon(
                   onPressed: () {
                     Navigator.pop(ctx);
-                    _showStartDialog(askForDate: true);
+                    _showStartDialog(context, ref, askForDate: true);
                   },
                   icon: const Icon(Icons.history),
                   label: Text(l10n.btnStartPastFermentation),
@@ -148,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _stopFermentation() async {
+  void _stopFermentation(BuildContext context, WidgetRef ref) async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
@@ -173,36 +115,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (confirmed != true) return;
 
-    if (_fermentation != null) {
-      final now = DateTime.now();
-      final isSuccess = now.isAfter(
-              _fermentation!.startTime.add(_fermentation!.targetDuration)) ||
-          now.isAtSameMomentAs(
-              _fermentation!.startTime.add(_fermentation!.targetDuration));
-      final historyItem = FermentationHistoryItem(
-        startTime: _fermentation!.startTime,
-        targetDuration: _fermentation!.targetDuration,
-        completedAt: now,
-        isSuccess: isSuccess,
-      );
-      await _service.addHistoryEntry(historyItem);
-    }
-
-    await _service.clearFermentation();
-    _timer?.cancel();
-    await _notificationService.cancelAll();
-    setState(() {
-      _fermentation = null;
-    });
+    await ref.read(activeFermentationProvider.notifier).stop();
   }
 
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  Widget _buildDrawer(BuildContext context) {
+  Widget _buildDrawer(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     final isEnglish = Localizations.localeOf(context).languageCode == 'en';
     final colorScheme = Theme.of(context).colorScheme;
@@ -259,8 +175,8 @@ class _HomeScreenState extends State<HomeScreen> {
             subtitle: Text(isEnglish ? 'English' : 'Español'),
             value: isEnglish,
             onChanged: (_) {
-              appLocaleNotifier.value =
-                  isEnglish ? const Locale('es') : const Locale('en');
+              ref.read(localeProvider.notifier).setLocale(
+                  isEnglish ? const Locale('es') : const Locale('en'));
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -308,20 +224,20 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
-    final hasFermentation = _fermentation != null;
+    final fermentation = ref.watch(activeFermentationProvider);
+    final hasFermentation = fermentation != null;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.appTitle),
         centerTitle: true,
-        // El icono ☰ aparece automáticamente al definir `drawer`
       ),
-      drawer: _buildDrawer(context),
+      drawer: _buildDrawer(context, ref),
       body: SafeArea(
         child: hasFermentation
-            ? TimeProgress(fermentation: _fermentation!)
+            ? TimeProgress(fermentation: fermentation)
             : Center(
                 child: Text(
                   l10n.homeNoActiveFermentationTitle,
@@ -332,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: hasFermentation ? _stopFermentation : _showStartBottomSheet,
+        onPressed: hasFermentation ? () => _stopFermentation(context, ref) : () => _showStartBottomSheet(context, ref),
         icon: Icon(hasFermentation
             ? Icons.stop_circle_outlined
             : Icons.play_circle_fill),
