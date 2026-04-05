@@ -12,7 +12,7 @@ class NotificationService {
 
   Future<void> init() async {
     if (kIsWeb) {
-      return; // Las notificaciones locales nativas no funcionan en web base
+      return; 
     }
     if (_isInit) return;
 
@@ -38,19 +38,20 @@ class NotificationService {
   }
 
   Future<void> scheduleFermentationComplete(
+      int baseId,
       DateTime scheduledDate,
       String titleReady,
       String bodyReady,
       String titleReminder,
       String bodyReminder) async {
     await init();
-    if (kIsWeb) return; // No intentamos programar en web
+    if (kIsWeb) return; 
 
     const androidDetails = AndroidNotificationDetails(
       'kefir_control_channel',
       'Kefir Control',
       channelDescription:
-          'Notificaciones de finalización de fermentación de kéfir',
+          'Notificaciones de finalización de fermentaciones',
       importance: Importance.max,
       priority: Priority.high,
     );
@@ -61,14 +62,12 @@ class NotificationService {
     final eventDate = tz.TZDateTime.from(scheduledDate, tz.local);
     final now = tz.TZDateTime.now(tz.local);
 
-    // Ignore if time is already in the past
     if (eventDate.isBefore(now)) return;
 
-    // Schedule the 2 hours reminder if it's not in the past
     final reminderDate = eventDate.subtract(const Duration(hours: 2));
     if (reminderDate.isAfter(now)) {
       await _notificationsPlugin.zonedSchedule(
-        1,
+        baseId + 1, // id for reminder
         titleReminder,
         bodyReminder,
         reminderDate,
@@ -80,7 +79,7 @@ class NotificationService {
     }
 
     await _notificationsPlugin.zonedSchedule(
-      0,
+      baseId, // id for ready
       titleReady,
       bodyReady,
       eventDate,
@@ -89,6 +88,13 @@ class NotificationService {
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
     );
+  }
+
+  Future<void> cancel(int baseId) async {
+    await init();
+    if (kIsWeb) return;
+    await _notificationsPlugin.cancel(baseId);
+    await _notificationsPlugin.cancel(baseId + 1);
   }
 
   Future<void> cancelAll() async {

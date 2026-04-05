@@ -24,10 +24,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get changeLanguage => 'Change language';
 
   @override
-  String get drawerDonate => 'Buy me a coffee ☕';
+  String get drawerDonate => 'Buy me a coffee';
 
   @override
-  String get drawerDonateSubtitle => 'Support development via PayPal';
+  String get drawerDonateSubtitle => 'Support development';
 
   @override
   String get historyTitle => 'History';
@@ -152,7 +152,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Avoid metal utensils when straining your grains; use plastic or wooden spoons and strainers to avoid damaging the microorganisms.';
 
   @override
-  String get devDesc => 'Manage your kefir fermentations';
+  String get devDesc => 'Manage your fermentations';
 
   @override
   String get notifReadyTitle => 'Kefir is ready! 🥛';
@@ -301,4 +301,230 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get step4Desc =>
       'Very aggressive flavor. Ideal for recipes requiring strong acidity.';
+
+  @override
+  String get addSheetTitle => 'What are you fermenting?';
+
+  @override
+  String get addSheetKefir => 'Milk Kefir';
+
+  @override
+  String get addSheetKombucha => 'Kombucha';
+
+  @override
+  String get notifReadyTitleKombucha => 'Kombucha Ready';
+
+  @override
+  String get notifReadyTitleKefir => 'Kefir Ready';
+
+  @override
+  String get notifReadyBodyGeneric => 'Your fermentation has finished';
+
+  @override
+  String get notifReminderTitleGeneric => 'Reminder';
+
+  @override
+  String get notifReminderBodyGeneric => '2 hours left to finish';
+
+  @override
+  String get addSheetPastRecord => 'Record past fermentation';
+
+  @override
+  String addSheetPastSelected(Object date) {
+    return 'Started: $date\nNow choose the duration';
+  }
+
+  @override
+  String get addSheetTimeKefir => 'Time for Kefir';
+
+  @override
+  String addSheetHours(Object hours) {
+    return '$hours Hours';
+  }
+
+  @override
+  String get addSheetTimeKombucha => 'Time for Kombucha';
+
+  @override
+  String addSheetIdealTime(Object days) {
+    return 'Your ideal time ($days days)';
+  }
+
+  @override
+  String addSheetDays(Object days) {
+    return '$days Days';
+  }
+
+  @override
+  String get cardTranscurrido => 'Elapsed';
+
+  @override
+  String get cardRestante => 'Remaining';
+
+  @override
+  String get cardCosechar => 'Harvest';
+
+  @override
+  String get cardFinalizar => 'Finish';
+
+  @override
+  String get homeHarvestKombuchaTitle => 'Harvest Kombucha';
+
+  @override
+  String get homeHarvestKombuchaDesc =>
+      'Do you want to memorize this exact time as your ideal duration for future fermentations?';
+
+  @override
+  String get homeHarvestOnly => 'Just harvest';
+
+  @override
+  String get homeHarvestAndSave => 'Harvest and Save';
+
+  @override
+  String get homeDeleteTitle => 'Delete fermentation?';
+
+  @override
+  String get homeDeleteDesc =>
+      'If you delete this card, the process will be discarded and won\'t be saved to history.';
+
+  @override
+  String get homeDeleteBtn => 'Delete';
+
+  @override
+  String get homeNewFermentation => 'New fermentation';
+
+  @override
+  String get historyKombuchaFinished => 'Harvested Kombucha';
+
+  @override
+  String historyKombuchaDuration(Object days) {
+    return 'Duration: $days days';
+  }
+
+  @override
+  String get stageKombucha0 => 'Initial formation';
+
+  @override
+  String get stageKombucha1 => 'Slightly sweet';
+
+  @override
+  String get stageKombucha2 => 'Balanced (Ideal)';
+
+  @override
+  String get stageKombucha3 => 'Strong/Acidic';
+
+  @override
+  String get stageKombucha4 => 'Vinegar-like';
+
+  @override
+  String get historyKefirFinished => 'Kefir harvested';
+
+  @override
+  String historyCompletedPercent(Object percent) {
+    return 'Completed: $percent%';
+  }
+
+  @override
+  String historyDurationDays(Object days) {
+    return '$days days';
+  }
+
+  @override
+  String historyDurationDaysHours(Object days, Object hours) {
+    return '$days days & ${hours}h';
+  }
+
+  @override
+  String historyDurationHours(Object hours) {
+    return '${hours}h';
+  }
+
+  @override
+  String historyDurationHoursMinutes(Object hours, Object minutes) {
+    return '${hours}h ${minutes}m';
+  }
+
+  @override
+  String historyRealDurationTarget(Object actual, Object target) {
+    return 'Actual duration: $actual / Target: $target';
+  }
+
+  @override
+  String historyCompletedOn(Object date) {
+    return 'Completed on $date';
+  }
+
+  @override
+  String get historyItemDeleteTitle => 'Delete record?';
+
+  @override
+  String get historyItemDeleteContent =>
+      'This record will be permanently deleted.';
+
+  @override
+  String get drawerDataManagement => 'Data Management';
+
+  @override
+  String get drawerBackup => 'Export backup';
+
+  @override
+  String get drawerRestore => 'Restore backup';
+
+  @override
+  String get backupSuccessTitle => 'Backup exported';
+
+  @override
+  String get backupSuccessDesc => 'Data successfully saved.';
+
+  @override
+  String get restoreSuccessTitle => 'Backup restored';
+
+  @override
+  String get restoreSuccessDesc => 'The app data has been restored.';
+
+  @override
+  String get restoreErrorTitle => 'Error';
+
+  @override
+  String get restoreErrorDesc => 'The file is invalid or corrupted.';
+
+  @override
+  String addSheetIdealTimeKefir(num hours) {
+    final intl.NumberFormat hoursNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String hoursString = hoursNumberFormat.format(hours);
+
+    return 'Your ideal time (${hoursString}h)';
+  }
+
+  @override
+  String get addSheetCustomTime => 'Custom time';
+
+  @override
+  String get addSheetNoLimit => 'No limit';
+
+  @override
+  String get addSheetCustomHours => 'Hours';
+
+  @override
+  String get addSheetCustomDays => 'Days';
+
+  @override
+  String get addSheetCustomConfirm => 'Use this time';
+
+  @override
+  String get cardNoLimit => 'No limit';
+
+  @override
+  String get cardOpenEndedStage => 'Experimental mode';
+
+  @override
+  String get addSheetNameHint => 'Batch name (optional)';
+
+  @override
+  String get cardRenameTitle => 'Rename';
+
+  @override
+  String get cardRenameHint => 'Batch name';
 }

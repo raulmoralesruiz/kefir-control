@@ -7,23 +7,23 @@ import 'service_providers.dart';
 part 'fermentation_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-class ActiveFermentation extends _$ActiveFermentation {
+class ActiveFermentations extends _$ActiveFermentations {
   Timer? _timer;
 
   @override
-  Fermentation? build() {
+  List<Fermentation> build() {
     _loadInitialData();
     ref.onDispose(() {
       _timer?.cancel();
     });
-    return null;
+    return [];
   }
 
   Future<void> _loadInitialData() async {
     final service = ref.read(fermentationServiceProvider);
-    final saved = await service.loadFermentation();
-    if (saved != null) {
-      state = saved;
+    final saved = await service.loadActiveFermentations();
+    state = saved;
+    if (state.isNotEmpty) {
       _startTimer();
     }
   }
@@ -31,76 +31,145 @@ class ActiveFermentation extends _$ActiveFermentation {
   void _startTimer() {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      // Re-emit state to trigger UI updates for progress/time
-      if (state != null) {
-        state = Fermentation(
-          startTime: state!.startTime,
-          targetDuration: state!.targetDuration,
-        );
-        if (state!.progress >= 1.0) {
-          _timer?.cancel();
-        }
+      if (state.isEmpty) {
+        _timer?.cancel();
+        return;
       }
+      // Re-emitir estado para que la UI actualice progreso/tiempo
+      state = state.map((f) => Fermentation(
+        id: f.id,
+        type: f.type,
+        startTime: f.startTime,
+        targetDuration: f.targetDuration,
+        isOpenEnded: f.isOpenEnded,
+        name: f.name,
+      )).toList();
     });
   }
 
+  int _stringToId(String idStr) {
+    return idStr.hashCode.abs() % 100000;
+  }
+
   Future<void> start(
-    int hours, {
+    int durationSeconds, {
+    FermentationType type = FermentationType.kefir,
     DateTime? customStartTime,
+    bool isOpenEnded = false,
+    String? name,
     required String notifReadyTitle,
     required String notifReadyBody,
     required String notifReminderTitle,
     required String notifReminderBody,
   }) async {
     final startTime = customStartTime ?? DateTime.now();
-    final targetDuration = Duration(hours: hours);
+    final targetDuration = Duration(seconds: durationSeconds);
+
     final newFermentation = Fermentation(
+      type: type,
       startTime: startTime,
       targetDuration: targetDuration,
+      isOpenEnded: isOpenEnded,
+      name: name?.trim().isEmpty == true ? null : name?.trim(),
     );
+
+    final updatedState = [...state, newFermentation];
 
     final service = ref.read(fermentationServiceProvider);
-    await service.saveFermentation(newFermentation);
-    
-    state = newFermentation;
-    _startTimer();
+    await service.saveActiveFermentations(updatedState);
 
-    // Notificaciones
-    final notifService = ref.read(notificationServiceProvider);
-    await notifService.cancelAll();
-    await notifService.scheduleFermentationComplete(
-      startTime.add(targetDuration),
-      notifReadyTitle,
-      notifReadyBody,
-      notifReminderTitle,
-      notifReminderBody,
-    );
-  }
-
-  Future<void> stop() async {
-    if (state != null) {
-      final now = DateTime.now();
-      final isSuccess = now.isAfter(state!.startTime.add(state!.targetDuration)) ||
-          now.isAtSameMomentAs(state!.startTime.add(state!.targetDuration));
-      
-      final historyItem = FermentationHistoryItem(
-        startTime: state!.startTime,
-        targetDuration: state!.targetDuration,
-        completedAt: now,
-        isSuccess: isSuccess,
-      );
-      
-      final service = ref.read(fermentationServiceProvider);
-      await service.addHistoryEntry(historyItem);
+    state = updatedState;
+    if (_timer == null || !_timer!.isActive) {
+      _startTimer();
     }
 
-    final service = ref.read(fermentationServiceProvider);
-    await service.clearFermentation();
-    _timer?.cancel();
-    
-    final notifService = ref.read(notificationServiceProvider);
-    await notifService.cancelAll();
+    // Solo programar notificación si tiene límite de tiempo definido
+    if (!isOpenEnded) {
+      final notifService = ref.read(notificationServiceProvider);
+      final baseId = _stringToId(newFermentation.id);
 
-    state = null;
+      await notifService.scheduleFermentationComplete(
+        baseId,
+        startTime.add(targetDuration),
+        notifReadyTitle,
+        notifReadyBody,
+        notifReminderTitle,
+        notifReminderBody,
+      );
+    }
+  }
+
+  Future<void> stop(String id, {bool recordHistory = true, Duration? customIdealTime}) async {
+    final list = state.where((f) => f.id == id).toList();
+    final fermentation = list.isEmpty ? null : list.first;
+    if (fermentation == null) return;
+
+    if (recordHistory) {
+      final now = DateTime.now();
+
+      // Para fermentaciones con límite, comprobar si se completó dentro del objetivo.
+      // Para sin límite, se considera siempre éxito (cosecha manual).
+      final bool isSuccess = fermentation.isOpenEnded
+          ? true
+          : now.isAfter(
+                fermentation.startTime.add(fermentation.targetDuration),
+              ) ||
+              now.isAtSameMomentAs(
+                fermentation.startTime.add(fermentation.targetDuration),
+              );
+
+      final historyItem = FermentationHistoryItem(
+        type: fermentation.type,
+        startTime: fermentation.startTime,
+        targetDuration: fermentation.targetDuration,
+        completedAt: now,
+        isSuccess: isSuccess,
+        isOpenEnded: fermentation.isOpenEnded,
+      );
+
+      final service = ref.read(fermentationServiceProvider);
+      await service.addHistoryEntry(historyItem);
+
+      // Guardar el tiempo ideal: kéfir → automático, kombucha → solo si el usuario lo pide
+      if (!fermentation.isOpenEnded) {
+        if (customIdealTime != null &&
+            fermentation.type == FermentationType.kombucha) {
+          await service.saveKombuchaIdealDuration(customIdealTime);
+        }
+        if (fermentation.type == FermentationType.kefir) {
+          await service.saveKefirIdealDuration(fermentation.targetDuration);
+        }
+      }
+    }
+
+    final updatedState = state.where((f) => f.id != id).toList();
+    final service = ref.read(fermentationServiceProvider);
+    await service.saveActiveFermentations(updatedState);
+
+    final notifService = ref.read(notificationServiceProvider);
+    await notifService.cancel(_stringToId(id));
+
+    state = updatedState;
+    if (state.isEmpty) {
+      _timer?.cancel();
+    }
+  }
+
+  /// Renombra una fermentación activa sin afectar el timer ni las notificaciones.
+  Future<void> rename(String id, String? newName) async {
+    final trimmed = newName?.trim().isEmpty == true ? null : newName?.trim();
+    state = state.map((f) {
+      if (f.id != id) return f;
+      return Fermentation(
+        id: f.id,
+        type: f.type,
+        startTime: f.startTime,
+        targetDuration: f.targetDuration,
+        isOpenEnded: f.isOpenEnded,
+        name: trimmed,
+      );
+    }).toList();
+    final service = ref.read(fermentationServiceProvider);
+    await service.saveActiveFermentations(state);
   }
 }

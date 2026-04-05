@@ -24,10 +24,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get changeLanguage => 'Cambiar idioma';
 
   @override
-  String get drawerDonate => 'Invítame a un café ☕';
+  String get drawerDonate => 'Invítame a un café';
 
   @override
-  String get drawerDonateSubtitle => 'Apoya el desarrollo vía PayPal';
+  String get drawerDonateSubtitle => 'Apoya el desarrollo';
 
   @override
   String get historyTitle => 'Historial';
@@ -64,7 +64,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get homeCompleted => 'Completado';
 
   @override
-  String get homeStopTitle => '¿Finalizar fermentación anticipadamente?';
+  String get homeStopTitle => '¿Finalizar fermentación?';
 
   @override
   String get homeStopContent =>
@@ -152,7 +152,7 @@ class AppLocalizationsEs extends AppLocalizations {
       'Evita los utensilios de metal al colar tus nódulos; usa cucharas y coladores de plástico o madera para no dañar los microorganismos.';
 
   @override
-  String get devDesc => 'Gestiona tus fermentaciones de kéfir';
+  String get devDesc => 'Gestiona tus fermentaciones';
 
   @override
   String get notifReadyTitle => '¡El kéfir está listo! 🥛';
@@ -304,4 +304,230 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get step4Desc =>
       'Sabor muy agresivo. Ideal para recetas que requieran acidez fuerte.';
+
+  @override
+  String get addSheetTitle => '¿Qué vas a fermentar?';
+
+  @override
+  String get addSheetKefir => 'Kéfir de Leche';
+
+  @override
+  String get addSheetKombucha => 'Kombucha';
+
+  @override
+  String get notifReadyTitleKombucha => 'Kombucha Lista';
+
+  @override
+  String get notifReadyTitleKefir => 'Kéfir Listo';
+
+  @override
+  String get notifReadyBodyGeneric => 'Tu fermentación ha finalizado';
+
+  @override
+  String get notifReminderTitleGeneric => 'Recordatorio';
+
+  @override
+  String get notifReminderBodyGeneric => 'Faltan 2 horas para terminar';
+
+  @override
+  String get addSheetPastRecord => 'Registrar fermentación pasada';
+
+  @override
+  String addSheetPastSelected(Object date) {
+    return 'Inicio: $date\nAhora elige la duración';
+  }
+
+  @override
+  String get addSheetTimeKefir => 'Tiempo para Kéfir';
+
+  @override
+  String addSheetHours(Object hours) {
+    return '$hours Horas';
+  }
+
+  @override
+  String get addSheetTimeKombucha => 'Tiempo para Kombucha';
+
+  @override
+  String addSheetIdealTime(Object days) {
+    return 'Tu tiempo ideal ($days días)';
+  }
+
+  @override
+  String addSheetDays(Object days) {
+    return '$days Días';
+  }
+
+  @override
+  String get cardTranscurrido => 'Transcurrido';
+
+  @override
+  String get cardRestante => 'Restante';
+
+  @override
+  String get cardCosechar => 'Cosechar';
+
+  @override
+  String get cardFinalizar => 'Finalizar';
+
+  @override
+  String get homeHarvestKombuchaTitle => 'Cosechar Kombucha';
+
+  @override
+  String get homeHarvestKombuchaDesc =>
+      '¿Deseas memorizar este tiempo exacto como tu tiempo ideal para futuras fermentaciones?';
+
+  @override
+  String get homeHarvestOnly => 'Solo cosechar';
+
+  @override
+  String get homeHarvestAndSave => 'Cosechar y Guardar';
+
+  @override
+  String get homeDeleteTitle => '¿Eliminar fermentación?';
+
+  @override
+  String get homeDeleteDesc =>
+      'Si eliminas esta tarjeta, el proceso se descartará y no se guardará en el historial.';
+
+  @override
+  String get homeDeleteBtn => 'Eliminar';
+
+  @override
+  String get homeNewFermentation => 'Nueva fermentación';
+
+  @override
+  String get historyKombuchaFinished => 'Kombucha cosechada';
+
+  @override
+  String historyKombuchaDuration(Object days) {
+    return 'Duración: $days días';
+  }
+
+  @override
+  String get stageKombucha0 => 'Formación inicial';
+
+  @override
+  String get stageKombucha1 => 'Ligeramente dulce';
+
+  @override
+  String get stageKombucha2 => 'Equilibrada (Ideal)';
+
+  @override
+  String get stageKombucha3 => 'Fuerte/Ácida';
+
+  @override
+  String get stageKombucha4 => 'Avinagrada';
+
+  @override
+  String get historyKefirFinished => 'Kéfir cosechado';
+
+  @override
+  String historyCompletedPercent(Object percent) {
+    return 'Completado: $percent%';
+  }
+
+  @override
+  String historyDurationDays(Object days) {
+    return '$days días';
+  }
+
+  @override
+  String historyDurationDaysHours(Object days, Object hours) {
+    return '$days días y ${hours}h';
+  }
+
+  @override
+  String historyDurationHours(Object hours) {
+    return '${hours}h';
+  }
+
+  @override
+  String historyDurationHoursMinutes(Object hours, Object minutes) {
+    return '${hours}h ${minutes}m';
+  }
+
+  @override
+  String historyRealDurationTarget(Object actual, Object target) {
+    return 'Duración real: $actual / Meta: $target';
+  }
+
+  @override
+  String historyCompletedOn(Object date) {
+    return 'Completado el $date';
+  }
+
+  @override
+  String get historyItemDeleteTitle => '¿Eliminar registro?';
+
+  @override
+  String get historyItemDeleteContent =>
+      'Este registro se borrará de forma permanente.';
+
+  @override
+  String get drawerDataManagement => 'Gestión de datos';
+
+  @override
+  String get drawerBackup => 'Exportar copia';
+
+  @override
+  String get drawerRestore => 'Restaurar copia';
+
+  @override
+  String get backupSuccessTitle => 'Copia exportada';
+
+  @override
+  String get backupSuccessDesc => 'Los datos se han guardado con éxito.';
+
+  @override
+  String get restoreSuccessTitle => 'Copia restaurada';
+
+  @override
+  String get restoreSuccessDesc => 'Los datos han vuelto a la magia.';
+
+  @override
+  String get restoreErrorTitle => 'Error';
+
+  @override
+  String get restoreErrorDesc => 'El archivo es inválido o está corrupto.';
+
+  @override
+  String addSheetIdealTimeKefir(num hours) {
+    final intl.NumberFormat hoursNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String hoursString = hoursNumberFormat.format(hours);
+
+    return 'Tu tiempo ideal (${hoursString}h)';
+  }
+
+  @override
+  String get addSheetCustomTime => 'Tiempo personalizado';
+
+  @override
+  String get addSheetNoLimit => 'Sin límite';
+
+  @override
+  String get addSheetCustomHours => 'Horas';
+
+  @override
+  String get addSheetCustomDays => 'Días';
+
+  @override
+  String get addSheetCustomConfirm => 'Usar este tiempo';
+
+  @override
+  String get cardNoLimit => 'Sin límite';
+
+  @override
+  String get cardOpenEndedStage => 'Modo experimental';
+
+  @override
+  String get addSheetNameHint => 'Nombre del lote (opcional)';
+
+  @override
+  String get cardRenameTitle => 'Renombrar';
+
+  @override
+  String get cardRenameHint => 'Nombre del lote';
 }
