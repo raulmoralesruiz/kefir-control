@@ -331,7 +331,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String addSheetPastSelected(Object date) {
-    return 'Started: $date\nNow choose the duration ⬆️';
+    return 'Started: $date\nNow choose the duration';
   }
 
   @override
@@ -487,4 +487,35 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get restoreErrorDesc => 'The file is invalid or corrupted.';
+
+  @override
+  String addSheetIdealTimeKefir(num hours) {
+    final intl.NumberFormat hoursNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String hoursString = hoursNumberFormat.format(hours);
+
+    return 'Your ideal time (${hoursString}h)';
+  }
+
+  @override
+  String get addSheetCustomTime => 'Custom time';
+
+  @override
+  String get addSheetNoLimit => 'No limit';
+
+  @override
+  String get addSheetCustomHours => 'Hours';
+
+  @override
+  String get addSheetCustomDays => 'Days';
+
+  @override
+  String get addSheetCustomConfirm => 'Use this time';
+
+  @override
+  String get cardNoLimit => 'No limit';
+
+  @override
+  String get cardOpenEndedStage => 'Experimental mode';
 }

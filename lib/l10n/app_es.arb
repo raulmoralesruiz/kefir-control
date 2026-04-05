@@ -98,7 +98,7 @@
   "notifReminderTitleGeneric": "Recordatorio",
   "notifReminderBodyGeneric": "Faltan 2 horas para terminar",
   "addSheetPastRecord": "Registrar fermentación pasada",
-  "addSheetPastSelected": "Inicio: {date}\nAhora elige la duración ⬆️",
+  "addSheetPastSelected": "Inicio: {date}\nAhora elige la duración",
   "addSheetTimeKefir": "Tiempo para Kéfir",
   "addSheetHours": "{hours} Horas",
   "addSheetTimeKombucha": "Tiempo para Kombucha",
@@ -141,5 +141,18 @@
   "restoreSuccessTitle": "Copia restaurada",
   "restoreSuccessDesc": "Los datos han vuelto a la magia.",
   "restoreErrorTitle": "Error",
-  "restoreErrorDesc": "El archivo es inválido o está corrupto."
+  "restoreErrorDesc": "El archivo es inválido o está corrupto.",
+  "addSheetIdealTimeKefir": "Tu tiempo ideal ({hours}h)",
+  "@addSheetIdealTimeKefir": {
+    "placeholders": {
+      "hours": { "type": "num", "format": "compact" }
+    }
+  },
+  "addSheetCustomTime": "Tiempo personalizado",
+  "addSheetNoLimit": "Sin límite",
+  "addSheetCustomHours": "Horas",
+  "addSheetCustomDays": "Días",
+  "addSheetCustomConfirm": "Usar este tiempo",
+  "cardNoLimit": "Sin límite",
+  "cardOpenEndedStage": "Modo experimental"
 }

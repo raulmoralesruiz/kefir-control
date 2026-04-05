@@ -8,28 +8,38 @@ class Fermentation {
   final FermentationType type;
   final DateTime startTime;
   final Duration targetDuration;
+  final bool isOpenEnded;
 
   Fermentation({
     String? id,
     this.type = FermentationType.kefir,
     required this.startTime,
     required this.targetDuration,
+    this.isOpenEnded = false,
   }) : id = id ?? const Uuid().v4();
 
   Duration get elapsed => DateTime.now().difference(startTime);
 
-  Duration get remaining {
+  /// Null si es sin límite (no hay meta de tiempo).
+  Duration? get remaining {
+    if (isOpenEnded) return null;
     final diff = targetDuration - elapsed;
     return diff.isNegative ? Duration.zero : diff;
   }
 
-  double get progress {
+  /// Null si es sin límite (no hay barra de progreso significativa).
+  double? get progress {
+    if (isOpenEnded) return null;
     if (targetDuration.inSeconds == 0) return 0.0;
     final val = elapsed.inSeconds / targetDuration.inSeconds;
     return val.clamp(0.0, 1.0);
   }
 
-  DateTime get estimatedFinishTime => startTime.add(targetDuration);
+  /// Null si es sin límite.
+  DateTime? get estimatedFinishTime {
+    if (isOpenEnded) return null;
+    return startTime.add(targetDuration);
+  }
 
   String get stage {
     if (type == FermentationType.kefir) {
@@ -50,6 +60,7 @@ class Fermentation {
   }
 
   String getStageLocalized(AppLocalizations l10n) {
+    if (isOpenEnded) return l10n.cardOpenEndedStage;
     if (type == FermentationType.kefir) {
       final hours = elapsed.inHours;
       if (hours < 12) return l10n.step0Title;
@@ -73,6 +84,7 @@ class Fermentation {
       'type': type.name,
       'startTime': startTime.millisecondsSinceEpoch,
       'targetDuration': targetDuration.inSeconds,
+      'isOpenEnded': isOpenEnded,
     };
   }
 
@@ -85,6 +97,7 @@ class Fermentation {
       ),
       startTime: DateTime.fromMillisecondsSinceEpoch(json['startTime'] as int),
       targetDuration: Duration(seconds: json['targetDuration'] as int),
+      isOpenEnded: json['isOpenEnded'] as bool? ?? false,
     );
   }
 }

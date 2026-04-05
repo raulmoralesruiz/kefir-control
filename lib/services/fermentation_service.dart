@@ -7,9 +7,10 @@ class FermentationService {
   static const String _activeListKey = 'fermentation_active_list';
   static const String _historyKey = 'fermentation_history';
   static const String _kombuchaIdealTimeKey = 'kombucha_ideal_duration_seconds';
+  static const String _kefirIdealTimeKey = 'kefir_ideal_duration_seconds';
 
-  // --- Active Fermentations ---
-  
+  // --- Fermentaciones activas ---
+
   Future<void> saveActiveFermentations(List<Fermentation> fermentations) async {
     final prefs = await SharedPreferences.getInstance();
     final jsonList = fermentations.map((f) => f.toJson()).toList();
@@ -18,9 +19,8 @@ class FermentationService {
 
   Future<List<Fermentation>> loadActiveFermentations() async {
     final prefs = await SharedPreferences.getInstance();
-    
-    // Purge old single tracker data if present to avoid pollution, though we 
-    // are using a new key so it shouldn't conflict, it's just good hygiene.
+
+    // Limpiar datos del tracker antiguo (clave única) si existen.
     await prefs.remove('fermentation_start_time');
     await prefs.remove('fermentation_duration_hours');
 
@@ -37,8 +37,8 @@ class FermentationService {
     }
   }
 
-  // --- Smart Kombucha Settings ---
-  
+  // --- Tiempo ideal de Kombucha ---
+
   Future<void> saveKombuchaIdealDuration(Duration duration) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(_kombuchaIdealTimeKey, duration.inSeconds);
@@ -53,7 +53,23 @@ class FermentationService {
     return null;
   }
 
-  // --- History ---
+  // --- Tiempo ideal de Kéfir ---
+
+  Future<void> saveKefirIdealDuration(Duration duration) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_kefirIdealTimeKey, duration.inSeconds);
+  }
+
+  Future<Duration?> getKefirIdealDuration() async {
+    final prefs = await SharedPreferences.getInstance();
+    final seconds = prefs.getInt(_kefirIdealTimeKey);
+    if (seconds != null) {
+      return Duration(seconds: seconds);
+    }
+    return null;
+  }
+
+  // --- Historial ---
 
   Future<List<FermentationHistoryItem>> getHistory() async {
     final prefs = await SharedPreferences.getInstance();
@@ -98,14 +114,15 @@ class FermentationService {
     await prefs.setString(_historyKey, updatedJson);
   }
 
-  // --- Backup / Restore ---
-  
+  // --- Backup / Restaurar ---
+
   Future<String> exportData() async {
     final prefs = await SharedPreferences.getInstance();
     final Map<String, dynamic> data = {
       _activeListKey: prefs.getString(_activeListKey),
       _historyKey: prefs.getString(_historyKey),
       _kombuchaIdealTimeKey: prefs.getInt(_kombuchaIdealTimeKey),
+      _kefirIdealTimeKey: prefs.getInt(_kefirIdealTimeKey),
     };
     return jsonEncode(data);
   }
@@ -114,15 +131,22 @@ class FermentationService {
     try {
       final Map<String, dynamic> data = jsonDecode(jsonString);
       final prefs = await SharedPreferences.getInstance();
-      
+
       if (data.containsKey(_activeListKey) && data[_activeListKey] != null) {
         await prefs.setString(_activeListKey, data[_activeListKey] as String);
       }
       if (data.containsKey(_historyKey) && data[_historyKey] != null) {
         await prefs.setString(_historyKey, data[_historyKey] as String);
       }
-      if (data.containsKey(_kombuchaIdealTimeKey) && data[_kombuchaIdealTimeKey] != null) {
-        await prefs.setInt(_kombuchaIdealTimeKey, data[_kombuchaIdealTimeKey] as int);
+      if (data.containsKey(_kombuchaIdealTimeKey) &&
+          data[_kombuchaIdealTimeKey] != null) {
+        await prefs.setInt(
+            _kombuchaIdealTimeKey, data[_kombuchaIdealTimeKey] as int);
+      }
+      if (data.containsKey(_kefirIdealTimeKey) &&
+          data[_kefirIdealTimeKey] != null) {
+        await prefs.setInt(
+            _kefirIdealTimeKey, data[_kefirIdealTimeKey] as int);
       }
       return true;
     } catch (e) {

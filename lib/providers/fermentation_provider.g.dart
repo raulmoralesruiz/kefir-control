@@ -42,7 +42,7 @@ final class ActiveFermentationsProvider
 }
 
 String _$activeFermentationsHash() =>
-    r'b41f3b8b3df9a35aa9e2d9771d1808b332ed7940';
+    r'753a62cd59e19c43a837389c85bd0fac16d187ff';
 
 abstract class _$ActiveFermentations extends $Notifier<List<Fermentation>> {
   List<Fermentation> build();

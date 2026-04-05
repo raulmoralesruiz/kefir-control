@@ -98,7 +98,7 @@
   "notifReminderTitleGeneric": "Reminder",
   "notifReminderBodyGeneric": "2 hours left to finish",
   "addSheetPastRecord": "Record past fermentation",
-  "addSheetPastSelected": "Started: {date}\nNow choose the duration ⬆️",
+  "addSheetPastSelected": "Started: {date}\nNow choose the duration",
   "addSheetTimeKefir": "Time for Kefir",
   "addSheetHours": "{hours} Hours",
   "addSheetTimeKombucha": "Time for Kombucha",
@@ -141,5 +141,18 @@
   "restoreSuccessTitle": "Backup restored",
   "restoreSuccessDesc": "The app data has been restored.",
   "restoreErrorTitle": "Error",
-  "restoreErrorDesc": "The file is invalid or corrupted."
+  "restoreErrorDesc": "The file is invalid or corrupted.",
+  "addSheetIdealTimeKefir": "Your ideal time ({hours}h)",
+  "@addSheetIdealTimeKefir": {
+    "placeholders": {
+      "hours": { "type": "num", "format": "compact" }
+    }
+  },
+  "addSheetCustomTime": "Custom time",
+  "addSheetNoLimit": "No limit",
+  "addSheetCustomHours": "Hours",
+  "addSheetCustomDays": "Days",
+  "addSheetCustomConfirm": "Use this time",
+  "cardNoLimit": "No limit",
+  "cardOpenEndedStage": "Experimental mode"
 }

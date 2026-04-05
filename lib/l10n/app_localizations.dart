@@ -689,7 +689,7 @@ abstract class AppLocalizations {
   /// No description provided for @addSheetPastSelected.
   ///
   /// In es, this message translates to:
-  /// **'Inicio: {date}\nAhora elige la duración ⬆️'**
+  /// **'Inicio: {date}\nAhora elige la duración'**
   String addSheetPastSelected(Object date);
 
   /// No description provided for @addSheetTimeKefir.
@@ -949,6 +949,54 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'El archivo es inválido o está corrupto.'**
   String get restoreErrorDesc;
+
+  /// No description provided for @addSheetIdealTimeKefir.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu tiempo ideal ({hours}h)'**
+  String addSheetIdealTimeKefir(num hours);
+
+  /// No description provided for @addSheetCustomTime.
+  ///
+  /// In es, this message translates to:
+  /// **'Tiempo personalizado'**
+  String get addSheetCustomTime;
+
+  /// No description provided for @addSheetNoLimit.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin límite'**
+  String get addSheetNoLimit;
+
+  /// No description provided for @addSheetCustomHours.
+  ///
+  /// In es, this message translates to:
+  /// **'Horas'**
+  String get addSheetCustomHours;
+
+  /// No description provided for @addSheetCustomDays.
+  ///
+  /// In es, this message translates to:
+  /// **'Días'**
+  String get addSheetCustomDays;
+
+  /// No description provided for @addSheetCustomConfirm.
+  ///
+  /// In es, this message translates to:
+  /// **'Usar este tiempo'**
+  String get addSheetCustomConfirm;
+
+  /// No description provided for @cardNoLimit.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin límite'**
+  String get cardNoLimit;
+
+  /// No description provided for @cardOpenEndedStage.
+  ///
+  /// In es, this message translates to:
+  /// **'Modo experimental'**
+  String get cardOpenEndedStage;
 }
 
 class _AppLocalizationsDelegate

@@ -5,7 +5,7 @@ import 'package:kefir_control/l10n/app_localizations.dart';
 class FermentationCard extends StatelessWidget {
   final Fermentation fermentation;
   final VoidCallback onStop;
-  final VoidCallback onHarvest; // For Kombucha smart learning
+  final VoidCallback onHarvest; // Para el aprendizaje inteligente de Kombucha
 
   const FermentationCard({
     super.key,
@@ -26,6 +26,10 @@ class FermentationCard extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
     final isKombucha = fermentation.type == FermentationType.kombucha;
+    final isOpenEnded = fermentation.isOpenEnded;
+
+    final progress = fermentation.progress;
+    final remaining = fermentation.remaining;
 
     return Card(
       elevation: 0,
@@ -76,12 +80,20 @@ class FermentationCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            LinearProgressIndicator(
-              value: fermentation.progress,
-              backgroundColor: colorScheme.surfaceContainerHighest,
-              minHeight: 8,
-              borderRadius: BorderRadius.circular(4),
-            ),
+            // Barra de progreso: animada infinita si sin límite, normal si hay meta
+            if (isOpenEnded)
+              LinearProgressIndicator(
+                backgroundColor: colorScheme.surfaceContainerHighest,
+                minHeight: 8,
+                borderRadius: BorderRadius.circular(4),
+              )
+            else
+              LinearProgressIndicator(
+                value: progress,
+                backgroundColor: colorScheme.surfaceContainerHighest,
+                minHeight: 8,
+                borderRadius: BorderRadius.circular(4),
+              ),
             const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -99,10 +111,18 @@ class FermentationCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(l10n.cardRestante, style: const TextStyle(fontSize: 12)),
                     Text(
-                      _formatDuration(fermentation.remaining),
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      isOpenEnded ? '' : l10n.cardRestante,
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                    Text(
+                      isOpenEnded
+                          ? l10n.cardNoLimit
+                          : _formatDuration(remaining ?? Duration.zero),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: isOpenEnded ? colorScheme.secondary : null,
+                      ),
                     ),
                   ],
                 ),

@@ -35,12 +35,13 @@ class ActiveFermentations extends _$ActiveFermentations {
         _timer?.cancel();
         return;
       }
-      // Re-emit state to trigger UI updates for progress/time
+      // Re-emitir estado para que la UI actualice progreso/tiempo
       state = state.map((f) => Fermentation(
         id: f.id,
         type: f.type,
         startTime: f.startTime,
         targetDuration: f.targetDuration,
+        isOpenEnded: f.isOpenEnded,
       )).toList();
     });
   }
@@ -53,6 +54,7 @@ class ActiveFermentations extends _$ActiveFermentations {
     int durationSeconds, {
     FermentationType type = FermentationType.kefir,
     DateTime? customStartTime,
+    bool isOpenEnded = false,
     required String notifReadyTitle,
     required String notifReadyBody,
     required String notifReminderTitle,
@@ -60,35 +62,38 @@ class ActiveFermentations extends _$ActiveFermentations {
   }) async {
     final startTime = customStartTime ?? DateTime.now();
     final targetDuration = Duration(seconds: durationSeconds);
-    
+
     final newFermentation = Fermentation(
       type: type,
       startTime: startTime,
       targetDuration: targetDuration,
+      isOpenEnded: isOpenEnded,
     );
 
     final updatedState = [...state, newFermentation];
-    
+
     final service = ref.read(fermentationServiceProvider);
     await service.saveActiveFermentations(updatedState);
-    
+
     state = updatedState;
     if (_timer == null || !_timer!.isActive) {
       _startTimer();
     }
 
-    // Schedule notification
-    final notifService = ref.read(notificationServiceProvider);
-    final baseId = _stringToId(newFermentation.id);
-    
-    await notifService.scheduleFermentationComplete(
-      baseId,
-      startTime.add(targetDuration),
-      notifReadyTitle,
-      notifReadyBody,
-      notifReminderTitle,
-      notifReminderBody,
-    );
+    // Solo programar notificación si tiene límite de tiempo definido
+    if (!isOpenEnded) {
+      final notifService = ref.read(notificationServiceProvider);
+      final baseId = _stringToId(newFermentation.id);
+
+      await notifService.scheduleFermentationComplete(
+        baseId,
+        startTime.add(targetDuration),
+        notifReadyTitle,
+        notifReadyBody,
+        notifReminderTitle,
+        notifReminderBody,
+      );
+    }
   }
 
   Future<void> stop(String id, {bool recordHistory = true, Duration? customIdealTime}) async {
@@ -98,22 +103,39 @@ class ActiveFermentations extends _$ActiveFermentations {
 
     if (recordHistory) {
       final now = DateTime.now();
-      final isSuccess = now.isAfter(fermentation.startTime.add(fermentation.targetDuration)) ||
-          now.isAtSameMomentAs(fermentation.startTime.add(fermentation.targetDuration));
-      
+
+      // Para fermentaciones con límite, comprobar si se completó dentro del objetivo.
+      // Para sin límite, se considera siempre éxito (cosecha manual).
+      final bool isSuccess = fermentation.isOpenEnded
+          ? true
+          : now.isAfter(
+                fermentation.startTime.add(fermentation.targetDuration),
+              ) ||
+              now.isAtSameMomentAs(
+                fermentation.startTime.add(fermentation.targetDuration),
+              );
+
       final historyItem = FermentationHistoryItem(
         type: fermentation.type,
         startTime: fermentation.startTime,
         targetDuration: fermentation.targetDuration,
         completedAt: now,
         isSuccess: isSuccess,
+        isOpenEnded: fermentation.isOpenEnded,
       );
-      
+
       final service = ref.read(fermentationServiceProvider);
       await service.addHistoryEntry(historyItem);
-      
-      if (customIdealTime != null && fermentation.type == FermentationType.kombucha) {
-        await service.saveKombuchaIdealDuration(customIdealTime);
+
+      // Guardar el tiempo ideal: kéfir → automático, kombucha → solo si el usuario lo pide
+      if (!fermentation.isOpenEnded) {
+        if (customIdealTime != null &&
+            fermentation.type == FermentationType.kombucha) {
+          await service.saveKombuchaIdealDuration(customIdealTime);
+        }
+        if (fermentation.type == FermentationType.kefir) {
+          await service.saveKefirIdealDuration(fermentation.targetDuration);
+        }
       }
     }
 
