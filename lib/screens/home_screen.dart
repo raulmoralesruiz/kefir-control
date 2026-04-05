@@ -164,14 +164,24 @@ class HomeScreen extends ConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return NavigationDrawer(
-      onDestinationSelected: (index) {
+      onDestinationSelected: (index) async {
         Navigator.pop(context);
-        if (index == 0) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (_) => const HistoryScreen()));
-        } else if (index == 1) {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (_) => const InfoScreen()));
+        switch (index) {
+          case 0:
+            Navigator.push(context,
+                MaterialPageRoute(builder: (_) => const HistoryScreen()));
+          case 1:
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => const InfoScreen()));
+          case 2:
+            await _exportBackup(context, ref);
+          case 3:
+            await _importBackup(context, ref);
+          case 4:
+            final url = Uri.parse('https://paypal.me/raulmoralesruiz');
+            if (await canLaunchUrl(url)) {
+              await launchUrl(url, mode: LaunchMode.externalApplication);
+            }
         }
       },
       selectedIndex: null,
@@ -204,10 +214,14 @@ class HomeScreen extends ConsumerWidget {
             ],
           ),
         ),
+        // Switch de idioma: shape y padding igualados al NavigationDrawerDestination
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
           child: SwitchListTile(
-            secondary: const Icon(Icons.language),
+            secondary: Icon(
+              isEnglish ? Icons.language : Icons.language,
+              color: colorScheme.onSurfaceVariant,
+            ),
             title: Text(l10n.changeLanguage),
             subtitle: Text(isEnglish ? 'English' : 'Español'),
             value: isEnglish,
@@ -215,8 +229,9 @@ class HomeScreen extends ConsumerWidget {
               ref.read(localeProvider.notifier).setLocale(
                   isEnglish ? const Locale('es') : const Locale('en'));
             },
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(28),
             ),
           ),
         ),
@@ -232,59 +247,21 @@ class HomeScreen extends ConsumerWidget {
           label: Text(l10n.infoTitle),
         ),
         const Divider(indent: 16, endIndent: 16, height: 24),
-        Padding(
-          padding: const EdgeInsets.only(left: 28, top: 8, bottom: 8),
-          child: Text(
-            l10n.drawerDataManagement,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: colorScheme.primary,
-            ),
-          ),
+        NavigationDrawerDestination(
+          icon: const Icon(Icons.upload_file_outlined),
+          selectedIcon: const Icon(Icons.upload_file),
+          label: Text(l10n.drawerBackup),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: ListTile(
-            leading: const Icon(Icons.upload_file),
-            title: Text(l10n.drawerBackup),
-            onTap: () {
-              Navigator.pop(context);
-              _exportBackup(context, ref);
-            },
-            dense: true,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: ListTile(
-            leading: const Icon(Icons.download),
-            title: Text(l10n.drawerRestore),
-            onTap: () {
-              Navigator.pop(context);
-              _importBackup(context, ref);
-            },
-            dense: true,
-          ),
+        NavigationDrawerDestination(
+          icon: const Icon(Icons.download_outlined),
+          selectedIcon: const Icon(Icons.download),
+          label: Text(l10n.drawerRestore),
         ),
         const Divider(indent: 16, endIndent: 16, height: 24),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: ListTile(
-            leading: const Icon(Icons.coffee_outlined),
-            title: Text(l10n.drawerDonate),
-            subtitle: Text(l10n.drawerDonateSubtitle),
-            onTap: () async {
-              Navigator.pop(context);
-              final url = Uri.parse('https://paypal.me/raulmoralesruiz');
-              if (await canLaunchUrl(url)) {
-                await launchUrl(url, mode: LaunchMode.externalApplication);
-              }
-            },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(28),
-            ),
-          ),
+        NavigationDrawerDestination(
+          icon: const Icon(Icons.coffee_outlined),
+          selectedIcon: const Icon(Icons.coffee),
+          label: Text(l10n.drawerDonate),
         ),
       ],
     );

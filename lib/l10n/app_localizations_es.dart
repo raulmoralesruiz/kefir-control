@@ -152,7 +152,7 @@ class AppLocalizationsEs extends AppLocalizations {
       'Evita los utensilios de metal al colar tus nódulos; usa cucharas y coladores de plástico o madera para no dañar los microorganismos.';
 
   @override
-  String get devDesc => 'Gestiona tus fermentaciones de kéfir';
+  String get devDesc => 'Gestiona tus fermentaciones';
 
   @override
   String get notifReadyTitle => '¡El kéfir está listo! 🥛';

@@ -152,7 +152,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Avoid metal utensils when straining your grains; use plastic or wooden spoons and strainers to avoid damaging the microorganisms.';
 
   @override
-  String get devDesc => 'Manage your kefir fermentations';
+  String get devDesc => 'Manage your fermentations';
 
   @override
   String get notifReadyTitle => 'Kefir is ready! 🥛';

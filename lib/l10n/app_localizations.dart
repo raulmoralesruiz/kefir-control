@@ -371,7 +371,7 @@ abstract class AppLocalizations {
   /// No description provided for @devDesc.
   ///
   /// In es, this message translates to:
-  /// **'Gestiona tus fermentaciones de kéfir'**
+  /// **'Gestiona tus fermentaciones'**
   String get devDesc;
 
   /// No description provided for @notifReadyTitle.
