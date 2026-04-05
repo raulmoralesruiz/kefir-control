@@ -42,6 +42,7 @@ class ActiveFermentations extends _$ActiveFermentations {
         startTime: f.startTime,
         targetDuration: f.targetDuration,
         isOpenEnded: f.isOpenEnded,
+        name: f.name,
       )).toList();
     });
   }
@@ -55,6 +56,7 @@ class ActiveFermentations extends _$ActiveFermentations {
     FermentationType type = FermentationType.kefir,
     DateTime? customStartTime,
     bool isOpenEnded = false,
+    String? name,
     required String notifReadyTitle,
     required String notifReadyBody,
     required String notifReminderTitle,
@@ -68,6 +70,7 @@ class ActiveFermentations extends _$ActiveFermentations {
       startTime: startTime,
       targetDuration: targetDuration,
       isOpenEnded: isOpenEnded,
+      name: name?.trim().isEmpty == true ? null : name?.trim(),
     );
 
     final updatedState = [...state, newFermentation];
@@ -150,5 +153,23 @@ class ActiveFermentations extends _$ActiveFermentations {
     if (state.isEmpty) {
       _timer?.cancel();
     }
+  }
+
+  /// Renombra una fermentación activa sin afectar el timer ni las notificaciones.
+  Future<void> rename(String id, String? newName) async {
+    final trimmed = newName?.trim().isEmpty == true ? null : newName?.trim();
+    state = state.map((f) {
+      if (f.id != id) return f;
+      return Fermentation(
+        id: f.id,
+        type: f.type,
+        startTime: f.startTime,
+        targetDuration: f.targetDuration,
+        isOpenEnded: f.isOpenEnded,
+        name: trimmed,
+      );
+    }).toList();
+    final service = ref.read(fermentationServiceProvider);
+    await service.saveActiveFermentations(state);
   }
 }

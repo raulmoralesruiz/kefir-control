@@ -154,5 +154,8 @@
   "addSheetCustomDays": "Días",
   "addSheetCustomConfirm": "Usar este tiempo",
   "cardNoLimit": "Sin límite",
-  "cardOpenEndedStage": "Modo experimental"
+  "cardOpenEndedStage": "Modo experimental",
+  "addSheetNameHint": "Nombre del lote (opcional)",
+  "cardRenameTitle": "Renombrar",
+  "cardRenameHint": "Nombre del lote"
 }

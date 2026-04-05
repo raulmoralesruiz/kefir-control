@@ -997,6 +997,24 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Modo experimental'**
   String get cardOpenEndedStage;
+
+  /// No description provided for @addSheetNameHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre del lote (opcional)'**
+  String get addSheetNameHint;
+
+  /// No description provided for @cardRenameTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Renombrar'**
+  String get cardRenameTitle;
+
+  /// No description provided for @cardRenameHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre del lote'**
+  String get cardRenameHint;
 }
 
 class _AppLocalizationsDelegate

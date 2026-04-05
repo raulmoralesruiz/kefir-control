@@ -518,4 +518,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cardOpenEndedStage => 'Experimental mode';
+
+  @override
+  String get addSheetNameHint => 'Batch name (optional)';
+
+  @override
+  String get cardRenameTitle => 'Rename';
+
+  @override
+  String get cardRenameHint => 'Batch name';
 }

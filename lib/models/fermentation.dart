@@ -9,6 +9,7 @@ class Fermentation {
   final DateTime startTime;
   final Duration targetDuration;
   final bool isOpenEnded;
+  final String? name;
 
   Fermentation({
     String? id,
@@ -16,6 +17,7 @@ class Fermentation {
     required this.startTime,
     required this.targetDuration,
     this.isOpenEnded = false,
+    this.name,
   }) : id = id ?? const Uuid().v4();
 
   Duration get elapsed => DateTime.now().difference(startTime);
@@ -85,6 +87,7 @@ class Fermentation {
       'startTime': startTime.millisecondsSinceEpoch,
       'targetDuration': targetDuration.inSeconds,
       'isOpenEnded': isOpenEnded,
+      if (name != null) 'name': name,
     };
   }
 
@@ -98,6 +101,7 @@ class Fermentation {
       startTime: DateTime.fromMillisecondsSinceEpoch(json['startTime'] as int),
       targetDuration: Duration(seconds: json['targetDuration'] as int),
       isOpenEnded: json['isOpenEnded'] as bool? ?? false,
+      name: json['name'] as String?,
     );
   }
 }

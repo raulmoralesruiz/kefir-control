@@ -154,5 +154,8 @@
   "addSheetCustomDays": "Days",
   "addSheetCustomConfirm": "Use this time",
   "cardNoLimit": "No limit",
-  "cardOpenEndedStage": "Experimental mode"
+  "cardOpenEndedStage": "Experimental mode",
+  "addSheetNameHint": "Batch name (optional)",
+  "cardRenameTitle": "Rename",
+  "cardRenameHint": "Batch name"
 }

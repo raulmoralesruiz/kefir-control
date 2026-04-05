@@ -521,4 +521,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get cardOpenEndedStage => 'Modo experimental';
+
+  @override
+  String get addSheetNameHint => 'Nombre del lote (opcional)';
+
+  @override
+  String get cardRenameTitle => 'Renombrar';
+
+  @override
+  String get cardRenameHint => 'Nombre del lote';
 }

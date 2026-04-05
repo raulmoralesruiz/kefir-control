@@ -28,6 +28,13 @@ class AddFermentationSheet extends ConsumerStatefulWidget {
 class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
   FermentationType? _selectedType;
   DateTime? _customStartDate;
+  final _nameController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
 
   Future<void> _pickStartDate() async {
     final DateTime? date = await showDatePicker(
@@ -74,6 +81,7 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
           durationSeconds,
           type: _selectedType!,
           customStartTime: _customStartDate,
+          name: _nameController.text,
           notifReadyTitle: l10nTitle,
           notifReadyBody: l10nBody,
           notifReminderTitle: l10nRemTitle,
@@ -96,6 +104,7 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
           type: _selectedType!,
           customStartTime: _customStartDate,
           isOpenEnded: true,
+          name: _nameController.text,
           notifReadyTitle: l10nTitle,
           notifReadyBody: l10nBody,
           notifReminderTitle: l10nRemTitle,
@@ -114,7 +123,21 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 20),
+        // Campo de nombre opcional
+        TextField(
+          controller: _nameController,
+          maxLength: 40,
+          decoration: InputDecoration(
+            hintText: l10n.addSheetNameHint,
+            prefixIcon: const Icon(Icons.label_outline),
+            border: const OutlineInputBorder(),
+            isDense: true,
+            counterText: '',
+          ),
+          textInputAction: TextInputAction.done,
+        ),
+        const SizedBox(height: 20),
         OutlinedButton.icon(
           onPressed: () =>
               setState(() => _selectedType = FermentationType.kefir),
