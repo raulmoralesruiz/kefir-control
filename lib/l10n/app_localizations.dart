@@ -1051,6 +1051,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Planificar para este día'**
   String get calendarPlanButton;
+
+  /// No description provided for @cardStartsIn.
+  ///
+  /// In es, this message translates to:
+  /// **'Comienza en'**
+  String get cardStartsIn;
 }
 
 class _AppLocalizationsDelegate

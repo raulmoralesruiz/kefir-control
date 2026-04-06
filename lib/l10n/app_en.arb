@@ -163,5 +163,6 @@
   "calendarNoFermentations": "No fermentations on this day",
   "calendarActiveBadge": "Active",
   "calendarPlannedBadge": "Planned",
-  "calendarPlanButton": "Plan for this day"
+  "calendarPlanButton": "Plan for this day",
+  "cardStartsIn": "Starts in"
 }

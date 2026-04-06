@@ -237,10 +237,10 @@ class _CalendarWidget extends StatelessWidget {
         ),
         todayTextStyle: TextStyle(color: colorScheme.onPrimaryContainer),
         selectedDecoration: BoxDecoration(
-          color: colorScheme.primary,
+          color: colorScheme.secondaryContainer,
           shape: BoxShape.circle,
         ),
-        selectedTextStyle: TextStyle(color: colorScheme.onPrimary),
+        selectedTextStyle: TextStyle(color: colorScheme.onSecondaryContainer),
         markerDecoration: const BoxDecoration(), // desactivado — usamos builder
         markersMaxCount: 0,
       ),

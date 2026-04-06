@@ -545,4 +545,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get calendarPlanButton => 'Plan for this day';
+
+  @override
+  String get cardStartsIn => 'Starts in';
 }
