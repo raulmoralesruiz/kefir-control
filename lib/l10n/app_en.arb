@@ -157,5 +157,11 @@
   "cardOpenEndedStage": "Experimental mode",
   "addSheetNameHint": "Batch name (optional)",
   "cardRenameTitle": "Rename",
-  "cardRenameHint": "Batch name"
+  "cardRenameHint": "Batch name",
+  "drawerCalendar": "Calendar",
+  "calendarTitle": "My Fermentations",
+  "calendarNoFermentations": "No fermentations on this day",
+  "calendarActiveBadge": "Active",
+  "calendarPlannedBadge": "Planned",
+  "calendarPlanButton": "Plan for this day"
 }

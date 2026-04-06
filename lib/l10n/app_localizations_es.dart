@@ -530,4 +530,22 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get cardRenameHint => 'Nombre del lote';
+
+  @override
+  String get drawerCalendar => 'Calendario';
+
+  @override
+  String get calendarTitle => 'Mis Fermentaciones';
+
+  @override
+  String get calendarNoFermentations => 'Sin fermentaciones este día';
+
+  @override
+  String get calendarActiveBadge => 'Activa';
+
+  @override
+  String get calendarPlannedBadge => 'Planificada';
+
+  @override
+  String get calendarPlanButton => 'Planificar para este día';
 }

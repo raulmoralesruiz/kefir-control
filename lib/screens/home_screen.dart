@@ -6,6 +6,7 @@ import '../widgets/fermentation_card.dart';
 import '../models/fermentation.dart';
 import 'info_screen.dart';
 import 'history_screen.dart';
+import 'calendar_screen.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
 import '../providers/fermentation_provider.dart';
 import 'dart:io';
@@ -174,10 +175,15 @@ class HomeScreen extends ConsumerWidget {
             Navigator.push(
                 context, MaterialPageRoute(builder: (_) => const InfoScreen()));
           case 2:
-            await _exportBackup(context, ref);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => const CalendarScreen()));
           case 3:
-            await _importBackup(context, ref);
+            await _exportBackup(context, ref);
           case 4:
+            await _importBackup(context, ref);
+          case 5:
             final url = Uri.parse('https://paypal.me/raulmoralesruiz');
             if (await canLaunchUrl(url)) {
               await launchUrl(url, mode: LaunchMode.externalApplication);
@@ -245,6 +251,11 @@ class HomeScreen extends ConsumerWidget {
           icon: const Icon(Icons.info_outline),
           selectedIcon: const Icon(Icons.info),
           label: Text(l10n.infoTitle),
+        ),
+        NavigationDrawerDestination(
+          icon: const Icon(Icons.calendar_month_outlined),
+          selectedIcon: const Icon(Icons.calendar_month),
+          label: Text(l10n.drawerCalendar),
         ),
         const Divider(indent: 16, endIndent: 16, height: 24),
         NavigationDrawerDestination(
