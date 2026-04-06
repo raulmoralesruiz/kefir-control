@@ -98,7 +98,7 @@ class HomeScreen extends ConsumerWidget {
       await file.writeAsString(jsonString);
       
       final xfile = XFile(path);
-      await Share.shareXFiles([xfile], text: 'Backup de Kefir Control');
+      await SharePlus.instance.share(ShareParams(files: [xfile], text: 'Backup de Kefir Control'));
       if (context.mounted) {
         showDialog(context: context, builder: (ctx) => AlertDialog(
           title: Text(l10n.backupSuccessTitle),

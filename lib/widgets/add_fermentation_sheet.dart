@@ -231,7 +231,7 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
                   color: Theme.of(context)
                       .colorScheme
                       .primaryContainer
-                      .withOpacity(0.5),
+                      .withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
