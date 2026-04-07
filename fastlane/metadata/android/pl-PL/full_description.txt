@@ -1,0 +1,8 @@
+Kontrola kefiru powstała w potrzebie aby pamiętać kiedy kiedy fermentacja mlekowa na kefir znajduje się w idealnym momencie. Zostawiony na zbyt długo, kefir staje się kwaśny,a serwatka się oddziela. Ta aplikacja upraszcza ten proces dzięki zaplanowanym powiadomieniom lokalnym i wizualnemu czasomierzowi.
+
+Podstawowe funkcje:
+- Szybkie czasomierze: Wybierz czas fermentacji: 24, 36 lub 48 godzin.
+- Rejestr poprzednich fermentacji: jeśli zapomniałeś włączyć licznik czasu, możesz ręcznie ustawić czas rozpoczęcia.
+- Powiadomienia lokalne: aplikacja ustawia alarm przy użyciu twojego urządzenia, działając w trybie offline i bez serwerów.
+- Pełna historia: przechowuj zapis wszystkich poprzednich zbiorów, aby zachować ścisłą kontrolę.
+- Pełna prywatność : brak kont użytkowników, brak analiz i brak śledzenia między witrynami. Dane znajdują się wyłącznie na Twoim urządzeniu.
