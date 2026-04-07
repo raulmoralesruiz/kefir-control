@@ -1015,6 +1015,48 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Nombre del lote'**
   String get cardRenameHint;
+
+  /// No description provided for @drawerCalendar.
+  ///
+  /// In es, this message translates to:
+  /// **'Calendario'**
+  String get drawerCalendar;
+
+  /// No description provided for @calendarTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Mis Fermentaciones'**
+  String get calendarTitle;
+
+  /// No description provided for @calendarNoFermentations.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin fermentaciones este día'**
+  String get calendarNoFermentations;
+
+  /// No description provided for @calendarActiveBadge.
+  ///
+  /// In es, this message translates to:
+  /// **'Activa'**
+  String get calendarActiveBadge;
+
+  /// No description provided for @calendarPlannedBadge.
+  ///
+  /// In es, this message translates to:
+  /// **'Planificada'**
+  String get calendarPlannedBadge;
+
+  /// No description provided for @calendarPlanButton.
+  ///
+  /// In es, this message translates to:
+  /// **'Planificar para este día'**
+  String get calendarPlanButton;
+
+  /// No description provided for @cardStartsIn.
+  ///
+  /// In es, this message translates to:
+  /// **'Comienza en'**
+  String get cardStartsIn;
 }
 
 class _AppLocalizationsDelegate

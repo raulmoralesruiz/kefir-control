@@ -4,6 +4,9 @@ import '../models/fermentation.dart';
 import '../providers/fermentation_provider.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
 
+// Color amber-500 consistente con CalendarDayMarker
+const _kombuchaColor = Color(0xFFF59E0B);
+
 class FermentationCard extends ConsumerWidget {
   final Fermentation fermentation;
   final VoidCallback onStop;
@@ -17,10 +20,11 @@ class FermentationCard extends ConsumerWidget {
   });
 
   String _formatDuration(Duration d) {
-    if (d.inDays > 0) {
-      return '${d.inDays}d ${d.inHours % 24}h ${d.inMinutes % 60}m';
+    final abs = d.abs();
+    if (abs.inDays > 0) {
+      return '${abs.inDays}d ${abs.inHours % 24}h ${abs.inMinutes % 60}m';
     }
-    return '${d.inHours}h ${d.inMinutes % 60}m';
+    return '${abs.inHours}h ${abs.inMinutes % 60}m';
   }
 
   Future<void> _showRenameDialog(
@@ -67,11 +71,14 @@ class FermentationCard extends ConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final isKombucha = fermentation.type == FermentationType.kombucha;
     final isOpenEnded = fermentation.isOpenEnded;
+    final isPlanned = fermentation.elapsed.isNegative;
+
+    // Color de acento según tipo: coincide con los puntos del calendario
+    final typeColor = isKombucha ? _kombuchaColor : colorScheme.primary;
 
     final progress = fermentation.progress;
     final remaining = fermentation.remaining;
 
-    // Título: nombre personalizado si existe, si no el tipo
     final displayTitle = fermentation.name?.isNotEmpty == true
         ? fermentation.name!
         : (isKombucha ? l10n.addSheetKombucha : l10n.addSheetKefir);
@@ -79,120 +86,259 @@ class FermentationCard extends ConsumerWidget {
     return Card(
       elevation: 0,
       color: Theme.of(context).cardColor,
+      clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(color: colorScheme.outlineVariant, width: 1),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(
-              children: [
-                Icon(
-                  isKombucha
-                      ? Icons.emoji_food_beverage
-                      : Icons.local_drink,
-                  color: colorScheme.primary,
-                  size: 28,
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      InkWell(
-                        onTap: () => _showRenameDialog(context, ref),
-                        borderRadius: BorderRadius.circular(4),
-                        child: Text(
-                          displayTitle,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge
-                              ?.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      Text(
-                        fermentation.getStageLocalized(l10n),
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(
-                              color: colorScheme.onSurfaceVariant,
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
-                IconButton(
-                  onPressed: isKombucha ? onHarvest : onStop,
-                  icon: const Icon(Icons.stop_circle_outlined),
-                  color: colorScheme.error,
-                  tooltip:
-                      isKombucha ? l10n.cardCosechar : l10n.cardFinalizar,
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            if (isOpenEnded)
-              LinearProgressIndicator(
-                backgroundColor: colorScheme.surfaceContainerHighest,
-                minHeight: 8,
-                borderRadius: BorderRadius.circular(4),
-              )
-            else
-              LinearProgressIndicator(
-                value: progress,
-                backgroundColor: colorScheme.surfaceContainerHighest,
-                minHeight: 8,
-                borderRadius: BorderRadius.circular(4),
-              ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
+            // ── Banda lateral de color ────────────────────────────
+            Container(width: 5, color: typeColor),
+            // ── Contenido de la tarjeta ───────────────────────────
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(l10n.cardTranscurrido,
-                        style: const TextStyle(fontSize: 12)),
-                    Text(
-                      _formatDuration(fermentation.elapsed),
-                      style:
-                          const TextStyle(fontWeight: FontWeight.bold),
+                    // Cabecera con badge si está planificada
+                    if (isPlanned)
+                      _PlannedBadge(label: l10n.calendarPlannedBadge),
+                    Row(
+                      children: [
+                        Icon(
+                          isKombucha
+                              ? Icons.emoji_food_beverage
+                              : Icons.local_drink,
+                          color: typeColor,
+                          size: 28,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              InkWell(
+                                onTap: () =>
+                                    _showRenameDialog(context, ref),
+                                borderRadius: BorderRadius.circular(4),
+                                child: Text(
+                                  displayTitle,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Text(
+                                isPlanned
+                                    ? l10n.calendarPlannedBadge
+                                    : fermentation
+                                        .getStageLocalized(l10n),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                      color:
+                                          colorScheme.onSurfaceVariant,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        if (!isPlanned)
+                          IconButton(
+                            onPressed: isKombucha ? onHarvest : onStop,
+                            icon:
+                                const Icon(Icons.stop_circle_outlined),
+                            color: colorScheme.error,
+                            tooltip: isKombucha
+                                ? l10n.cardCosechar
+                                : l10n.cardFinalizar,
+                          ),
+                      ],
                     ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      isOpenEnded ? '' : l10n.cardRestante,
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                    Text(
-                      isOpenEnded
-                          ? l10n.cardNoLimit
-                          : _formatDuration(
-                              remaining ?? Duration.zero),
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color:
-                            isOpenEnded ? colorScheme.secondary : null,
+                    const SizedBox(height: 16),
+                    // Barra de progreso
+                    if (isPlanned)
+                      LinearProgressIndicator(
+                        value: 0,
+                        color: typeColor.withValues(alpha: 0.3),
+                        backgroundColor:
+                            colorScheme.surfaceContainerHighest,
+                        minHeight: 8,
+                        borderRadius: BorderRadius.circular(4),
+                      )
+                    else if (isOpenEnded)
+                      LinearProgressIndicator(
+                        backgroundColor:
+                            colorScheme.surfaceContainerHighest,
+                        minHeight: 8,
+                        borderRadius: BorderRadius.circular(4),
+                      )
+                    else
+                      LinearProgressIndicator(
+                        value: progress,
+                        color: typeColor,
+                        backgroundColor:
+                            colorScheme.surfaceContainerHighest,
+                        minHeight: 8,
+                        borderRadius: BorderRadius.circular(4),
                       ),
+                    const SizedBox(height: 12),
+                    // Fila inferior con tiempos
+                    _TimeRow(
+                      isPlanned: isPlanned,
+                      isOpenEnded: isOpenEnded,
+                      fermentation: fermentation,
+                      l10n: l10n,
+                      colorScheme: colorScheme,
+                      formatDuration: _formatDuration,
+                      remaining: remaining,
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+// ── Widgets internos ────────────────────────────────────────────
+
+class _PlannedBadge extends StatelessWidget {
+  final String label;
+
+  const _PlannedBadge({required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+        decoration: BoxDecoration(
+          color: colorScheme.tertiaryContainer,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.schedule,
+                size: 13, color: colorScheme.onTertiaryContainer),
+            const SizedBox(width: 4),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                color: colorScheme.onTertiaryContainer,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _TimeRow extends StatelessWidget {
+  final bool isPlanned;
+  final bool isOpenEnded;
+  final Fermentation fermentation;
+  final AppLocalizations l10n;
+  final ColorScheme colorScheme;
+  final String Function(Duration) formatDuration;
+  final Duration? remaining;
+
+  const _TimeRow({
+    required this.isPlanned,
+    required this.isOpenEnded,
+    required this.fermentation,
+    required this.l10n,
+    required this.colorScheme,
+    required this.formatDuration,
+    required this.remaining,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (isPlanned) {
+      final timeUntilStart =
+          fermentation.startTime.difference(DateTime.now());
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(l10n.cardStartsIn,
+                  style: const TextStyle(fontSize: 12)),
+              Text(
+                formatDuration(timeUntilStart),
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(l10n.dialogManualDuration,
+                  style: const TextStyle(fontSize: 12)),
+              Text(
+                formatDuration(fermentation.targetDuration),
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ],
+      );
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l10n.cardTranscurrido,
+                style: const TextStyle(fontSize: 12)),
+            Text(
+              formatDuration(fermentation.elapsed),
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              isOpenEnded ? '' : l10n.cardRestante,
+              style: const TextStyle(fontSize: 12),
+            ),
+            Text(
+              isOpenEnded
+                  ? l10n.cardNoLimit
+                  : formatDuration(remaining ?? Duration.zero),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: isOpenEnded ? colorScheme.secondary : null,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

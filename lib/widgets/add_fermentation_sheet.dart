@@ -7,7 +7,9 @@ import '../widgets/custom_duration_picker.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
 
 class AddFermentationSheet extends ConsumerStatefulWidget {
-  const AddFermentationSheet({super.key});
+  final DateTime? initialDate;
+
+  const AddFermentationSheet({super.key, this.initialDate});
 
   static Future<void> show(BuildContext context) {
     return showModalBottomSheet(
@@ -20,6 +22,21 @@ class AddFermentationSheet extends ConsumerStatefulWidget {
     );
   }
 
+  /// Abre el sheet con una fecha de inicio preseleccionada (usado desde el calendario).
+  static Future<void> showWithPreselectedDate(
+    BuildContext context,
+    DateTime date,
+  ) {
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (ctx) => AddFermentationSheet(initialDate: date),
+    );
+  }
+
   @override
   ConsumerState<AddFermentationSheet> createState() =>
       _AddFermentationSheetState();
@@ -29,6 +46,17 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
   FermentationType? _selectedType;
   DateTime? _customStartDate;
   final _nameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    // Si se recibió una fecha preseleccionada, usarla como punto de partida.
+    if (widget.initialDate != null) {
+      final d = widget.initialDate!;
+      // Normaliza a medianoche para que el usuario elija la hora manualmente si quiere.
+      _customStartDate = DateTime(d.year, d.month, d.day, 8, 0);
+    }
+  }
 
   @override
   void dispose() {
@@ -203,7 +231,7 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
                   color: Theme.of(context)
                       .colorScheme
                       .primaryContainer
-                      .withOpacity(0.5),
+                      .withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(

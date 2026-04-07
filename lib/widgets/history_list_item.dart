@@ -3,6 +3,9 @@ import 'package:kefir_control/l10n/app_localizations.dart';
 import '../models/fermentation.dart';
 import '../models/fermentation_history_item.dart';
 
+// Color amber-500 consistente con FermentationCard y CalendarDayMarker
+const _kombuchaColor = Color(0xFFF59E0B);
+
 class HistoryListItem extends StatelessWidget {
   final FermentationHistoryItem item;
   final VoidCallback onDismissed;
@@ -44,10 +47,10 @@ class HistoryListItem extends StatelessWidget {
     final isKombucha = item.type == FermentationType.kombucha;
     final percent = item.completionPercentage;
     final l10n = AppLocalizations.of(context)!;
-    
+
     final theme = Theme.of(context);
-    final primaryColor = theme.colorScheme.primary;
-    final surfaceColor = theme.colorScheme.surfaceContainerHighest;
+    final colorScheme = theme.colorScheme;
+    final typeColor = isKombucha ? _kombuchaColor : colorScheme.primary;
 
     return Dismissible(
       key: Key(item.completedAt.millisecondsSinceEpoch.toString()),
@@ -55,8 +58,8 @@ class HistoryListItem extends StatelessWidget {
       background: Container(
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.only(right: 20),
-        color: theme.colorScheme.error,
-        child: Icon(Icons.delete, color: theme.colorScheme.onError),
+        color: colorScheme.error,
+        child: Icon(Icons.delete, color: colorScheme.onError),
       ),
       onDismissed: (_) => onDismissed(),
       confirmDismiss: (direction) async {
@@ -73,8 +76,8 @@ class HistoryListItem extends StatelessWidget {
               FilledButton(
                 onPressed: () => Navigator.pop(context, true),
                 style: FilledButton.styleFrom(
-                  backgroundColor: theme.colorScheme.error,
-                  foregroundColor: theme.colorScheme.onError,
+                  backgroundColor: colorScheme.error,
+                  foregroundColor: colorScheme.onError,
                 ),
                 child: Text(l10n.homeDeleteBtn),
               ),
@@ -85,63 +88,125 @@ class HistoryListItem extends StatelessWidget {
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         elevation: 0,
-        child: ListTile(
-          leading: SizedBox(
-            width: 48,
-            height: 48,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                SizedBox(
-                  width: 48,
-                  height: 48,
-                  child: CircularProgressIndicator(
-                    value: percent,
-                    backgroundColor: surfaceColor,
-                    strokeWidth: 3,
-                    color: primaryColor,
-                  ),
-                ),
-                CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.transparent,
-                  child: Icon(
-                    isKombucha ? Icons.emoji_food_beverage : Icons.local_drink,
-                    color: primaryColor,
-                    size: 20,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          title: Text(
-            isKombucha ? l10n.historyKombuchaFinished : l10n.historyKefirFinished,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: BorderSide(color: colorScheme.outlineVariant, width: 1),
+        ),
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 4),
-              Text(
-                l10n.historyRealDurationTarget(
-                  _formatDuration(item.actualDuration, isKombucha, l10n),
-                  _formatDuration(item.targetDuration, isKombucha, l10n),
-                ),
-                style: const TextStyle(fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                l10n.historyCompletedOn(_formatNiceDate(item.completedAt)),
-                style: TextStyle(
-                  color: theme.textTheme.bodySmall?.color,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 13,
+              // ── Banda lateral de color ────────────────────────────
+              Container(width: 5, color: typeColor),
+              // ── Contenido (layout manual para control total) ──────
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16, vertical: 12),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // Indicador circular + icono centrado
+                      _TypeIndicator(
+                        isKombucha: isKombucha,
+                        percent: percent,
+                        typeColor: typeColor,
+                        surfaceColor: colorScheme.surfaceContainerHighest,
+                      ),
+                      const SizedBox(width: 16),
+                      // Textos — se expanden y rompen línea libremente
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              isKombucha
+                                  ? l10n.addSheetKombucha
+                                  : l10n.addSheetKefir,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              l10n.historyRealDurationTarget(
+                                _formatDuration(
+                                    item.actualDuration, isKombucha, l10n),
+                                _formatDuration(
+                                    item.targetDuration, isKombucha, l10n),
+                              ),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 13,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              l10n.historyCompletedOn(
+                                  _formatNiceDate(item.completedAt)),
+                              style: TextStyle(
+                                color: theme.textTheme.bodySmall?.color,
+                                fontStyle: FontStyle.italic,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
-          titleAlignment: ListTileTitleAlignment.center,
         ),
+      ),
+    );
+  }
+}
+
+// ── Widget interno ──────────────────────────────────────────────
+
+class _TypeIndicator extends StatelessWidget {
+  final bool isKombucha;
+  final double? percent;
+  final Color typeColor;
+  final Color surfaceColor;
+
+  const _TypeIndicator({
+    required this.isKombucha,
+    required this.percent,
+    required this.typeColor,
+    required this.surfaceColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 48,
+      height: 48,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          SizedBox(
+            width: 48,
+            height: 48,
+            child: CircularProgressIndicator(
+              value: percent,
+              backgroundColor: surfaceColor,
+              strokeWidth: 3,
+              color: typeColor,
+            ),
+          ),
+          Icon(
+            isKombucha ? Icons.emoji_food_beverage : Icons.local_drink,
+            color: typeColor,
+            size: 22,
+          ),
+        ],
       ),
     );
   }

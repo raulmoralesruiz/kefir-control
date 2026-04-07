@@ -113,7 +113,7 @@ class _CustomDurationPickerState extends State<CustomDurationPicker> {
               Container(
                 height: 48,
                 decoration: BoxDecoration(
-                  color: colorScheme.primaryContainer.withOpacity(0.4),
+                  color: colorScheme.primaryContainer.withValues(alpha: 0.4),
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),

@@ -157,5 +157,12 @@
   "cardOpenEndedStage": "Modo experimental",
   "addSheetNameHint": "Nombre del lote (opcional)",
   "cardRenameTitle": "Renombrar",
-  "cardRenameHint": "Nombre del lote"
+  "cardRenameHint": "Nombre del lote",
+  "drawerCalendar": "Calendario",
+  "calendarTitle": "Mis Fermentaciones",
+  "calendarNoFermentations": "Sin fermentaciones este día",
+  "calendarActiveBadge": "Activa",
+  "calendarPlannedBadge": "Planificada",
+  "calendarPlanButton": "Planificar para este día",
+  "cardStartsIn": "Comienza en"
 }
