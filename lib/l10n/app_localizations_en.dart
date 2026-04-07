@@ -445,8 +445,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get historyHarvestDate => 'Harvest date';
+
+  @override
   String historyRealDurationTarget(Object actual, Object target) {
-    return 'Actual duration: $actual / Target: $target';
+    return 'Duration: $actual (target $target)';
   }
 
   @override
@@ -548,4 +551,44 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cardStartsIn => 'Starts in';
+
+  @override
+  String get detailStartDate => 'Start';
+
+  @override
+  String get detailStageKombucha0Desc =>
+      'The SCOBY is waking up. The drink is still practically sweet tea.';
+
+  @override
+  String get detailStageKombucha1Desc =>
+      'Fermentation progresses gently. Sweetness still dominates with a slight acidic hint.';
+
+  @override
+  String get detailStageKombucha2Desc =>
+      'The perfect balance between sweetness and acidity. Ideal for most palates.';
+
+  @override
+  String get detailStageKombucha3Desc =>
+      'Pronounced acidity and complex flavor. Suitable for those who prefer an intense taste.';
+
+  @override
+  String get detailStageKombucha4Desc =>
+      'Very advanced fermentation. Intense vinegary flavor, better suited for culinary use.';
+
+  @override
+  String get detailNotesTitle => 'Notes';
+
+  @override
+  String get detailNotesHint => 'Add details about milk, temperature, etc...';
+
+  @override
+  String get detailHistoryTitle => 'Recent History';
+
+  @override
+  String get detailHistoryEmpty => 'No previous harvests';
+
+  @override
+  String detailHistoryLastHarvest(Object duration) {
+    return 'Last batch: $duration';
+  }
 }

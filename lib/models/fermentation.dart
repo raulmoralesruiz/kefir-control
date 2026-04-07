@@ -10,6 +10,7 @@ class Fermentation {
   final Duration targetDuration;
   final bool isOpenEnded;
   final String? name;
+  final String? notes;
 
   Fermentation({
     String? id,
@@ -18,7 +19,27 @@ class Fermentation {
     required this.targetDuration,
     this.isOpenEnded = false,
     this.name,
+    this.notes,
   }) : id = id ?? const Uuid().v4();
+
+  Fermentation copyWith({
+    FermentationType? type,
+    DateTime? startTime,
+    Duration? targetDuration,
+    bool? isOpenEnded,
+    String? name,
+    String? notes,
+  }) {
+    return Fermentation(
+      id: id,
+      type: type ?? this.type,
+      startTime: startTime ?? this.startTime,
+      targetDuration: targetDuration ?? this.targetDuration,
+      isOpenEnded: isOpenEnded ?? this.isOpenEnded,
+      name: name ?? this.name,
+      notes: notes ?? this.notes,
+    );
+  }
 
   Duration get elapsed => DateTime.now().difference(startTime);
 
@@ -88,6 +109,7 @@ class Fermentation {
       'targetDuration': targetDuration.inSeconds,
       'isOpenEnded': isOpenEnded,
       if (name != null) 'name': name,
+      if (notes != null) 'notes': notes,
     };
   }
 
@@ -102,6 +124,7 @@ class Fermentation {
       targetDuration: Duration(seconds: json['targetDuration'] as int),
       isOpenEnded: json['isOpenEnded'] as bool? ?? false,
       name: json['name'] as String?,
+      notes: json['notes'] as String?,
     );
   }
 }

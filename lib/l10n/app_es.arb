@@ -129,7 +129,8 @@
   "historyDurationDaysHours": "{days} días y {hours}h",
   "historyDurationHours": "{hours}h",
   "historyDurationHoursMinutes": "{hours}h {minutes}m",
-  "historyRealDurationTarget": "Duración real: {actual} / Meta: {target}",
+  "historyHarvestDate": "Fecha de cosecha",
+  "historyRealDurationTarget": "Duración: {actual} (objetivo {target})",
   "historyCompletedOn": "Completado el {date}",
   "historyItemDeleteTitle": "¿Eliminar registro?",
   "historyItemDeleteContent": "Este registro se borrará de forma permanente.",
@@ -164,5 +165,16 @@
   "calendarActiveBadge": "Activa",
   "calendarPlannedBadge": "Planificada",
   "calendarPlanButton": "Planificar para este día",
-  "cardStartsIn": "Comienza en"
+  "cardStartsIn": "Comienza en",
+  "detailStartDate": "Inicio",
+  "detailStageKombucha0Desc": "El SCOBY está despertando. La bebida sigue siendo prácticamente té dulce.",
+  "detailStageKombucha1Desc": "La fermentación avanza con suavidad. Aún predomina el dulzor con un ligero toque ácido.",
+  "detailStageKombucha2Desc": "El punto de equilibrio perfecto entre dulzura y acidez. Ideal para la mayoría de paladares.",
+  "detailStageKombucha3Desc": "Acidez pronunciada y sabor complejo. Apto para quienes prefieren un sabor intenso.",
+  "detailStageKombucha4Desc": "Fermentación muy avanzada. Sabor avinagrado intenso, más apto para uso culinario.",
+  "detailNotesTitle": "Notas",
+  "detailNotesHint": "Añade detalles sobre la leche, temperatura, etc...",
+  "detailHistoryTitle": "Historial Reciente",
+  "detailHistoryEmpty": "Sin cosechas previas",
+  "detailHistoryLastHarvest": "Última tanda: {duration}"
 }

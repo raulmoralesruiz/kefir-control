@@ -872,10 +872,16 @@ abstract class AppLocalizations {
   /// **'{hours}h {minutes}m'**
   String historyDurationHoursMinutes(Object hours, Object minutes);
 
+  /// No description provided for @historyHarvestDate.
+  ///
+  /// In es, this message translates to:
+  /// **'Fecha de cosecha'**
+  String get historyHarvestDate;
+
   /// No description provided for @historyRealDurationTarget.
   ///
   /// In es, this message translates to:
-  /// **'Duración real: {actual} / Meta: {target}'**
+  /// **'Duración: {actual} (objetivo {target})'**
   String historyRealDurationTarget(Object actual, Object target);
 
   /// No description provided for @historyCompletedOn.
@@ -1057,6 +1063,72 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Comienza en'**
   String get cardStartsIn;
+
+  /// No description provided for @detailStartDate.
+  ///
+  /// In es, this message translates to:
+  /// **'Inicio'**
+  String get detailStartDate;
+
+  /// No description provided for @detailStageKombucha0Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'El SCOBY está despertando. La bebida sigue siendo prácticamente té dulce.'**
+  String get detailStageKombucha0Desc;
+
+  /// No description provided for @detailStageKombucha1Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'La fermentación avanza con suavidad. Aún predomina el dulzor con un ligero toque ácido.'**
+  String get detailStageKombucha1Desc;
+
+  /// No description provided for @detailStageKombucha2Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'El punto de equilibrio perfecto entre dulzura y acidez. Ideal para la mayoría de paladares.'**
+  String get detailStageKombucha2Desc;
+
+  /// No description provided for @detailStageKombucha3Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Acidez pronunciada y sabor complejo. Apto para quienes prefieren un sabor intenso.'**
+  String get detailStageKombucha3Desc;
+
+  /// No description provided for @detailStageKombucha4Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Fermentación muy avanzada. Sabor avinagrado intenso, más apto para uso culinario.'**
+  String get detailStageKombucha4Desc;
+
+  /// No description provided for @detailNotesTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Notas'**
+  String get detailNotesTitle;
+
+  /// No description provided for @detailNotesHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Añade detalles sobre la leche, temperatura, etc...'**
+  String get detailNotesHint;
+
+  /// No description provided for @detailHistoryTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Historial Reciente'**
+  String get detailHistoryTitle;
+
+  /// No description provided for @detailHistoryEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin cosechas previas'**
+  String get detailHistoryEmpty;
+
+  /// No description provided for @detailHistoryLastHarvest.
+  ///
+  /// In es, this message translates to:
+  /// **'Última tanda: {duration}'**
+  String detailHistoryLastHarvest(Object duration);
 }
 
 class _AppLocalizationsDelegate

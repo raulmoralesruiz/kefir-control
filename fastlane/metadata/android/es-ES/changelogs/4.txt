@@ -1,0 +1,27 @@
+🚀 v2.0.0
+
+✨ Nuevas funcionalidades
+Añadido soporte para registrar fermentaciones de kombucha
+Posibilidad de gestionar múltiples fermentaciones simultáneamente
+Implementación de sistema de copias de seguridad
+Exportación de datos
+Importación de copias existentes
+Opción para renombrar cada lote
+
+♻️ Cambios y refactorización
+Migración completa a Riverpod para la gestión de estado
+Rediseño del sistema de gestión de fermentaciones para soportar múltiples procesos concurrentes
+
+📊 Mejoras en funcionalidad
+El historial ahora muestra el porcentaje de progreso de cada fermentación
+Mayor control en la finalización y eliminación de fermentaciones para evitar errores
+Mejora en la selección de la duración de fermentación
+
+🎨 Mejoras de interfaz
+Mejora visual del historial
+Ajustes de estilo para una experiencia más clara y consistente
+Mejora del menú lateral
+
+🔒 Fiabilidad y datos
+Mejora en la seguridad al gestionar fermentaciones activas
+Mayor robustez en la persistencia y manipulación de datos
