@@ -129,7 +129,8 @@
   "historyDurationDaysHours": "{days} days & {hours}h",
   "historyDurationHours": "{hours}h",
   "historyDurationHoursMinutes": "{hours}h {minutes}m",
-  "historyRealDurationTarget": "Actual duration: {actual} / Target: {target}",
+  "historyHarvestDate": "Harvest date",
+  "historyRealDurationTarget": "Duration: {actual} (target {target})",
   "historyCompletedOn": "Completed on {date}",
   "historyItemDeleteTitle": "Delete record?",
   "historyItemDeleteContent": "This record will be permanently deleted.",
@@ -164,5 +165,16 @@
   "calendarActiveBadge": "Active",
   "calendarPlannedBadge": "Planned",
   "calendarPlanButton": "Plan for this day",
-  "cardStartsIn": "Starts in"
+  "cardStartsIn": "Starts in",
+  "detailStartDate": "Start",
+  "detailStageKombucha0Desc": "The SCOBY is waking up. The drink is still practically sweet tea.",
+  "detailStageKombucha1Desc": "Fermentation progresses gently. Sweetness still dominates with a slight acidic hint.",
+  "detailStageKombucha2Desc": "The perfect balance between sweetness and acidity. Ideal for most palates.",
+  "detailStageKombucha3Desc": "Pronounced acidity and complex flavor. Suitable for those who prefer an intense taste.",
+  "detailStageKombucha4Desc": "Very advanced fermentation. Intense vinegary flavor, better suited for culinary use.",
+  "detailNotesTitle": "Notes",
+  "detailNotesHint": "Add details about milk, temperature, etc...",
+  "detailHistoryTitle": "Recent History",
+  "detailHistoryEmpty": "No previous harvests",
+  "detailHistoryLastHarvest": "Last batch: {duration}"
 }

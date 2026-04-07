@@ -7,6 +7,8 @@ class FermentationHistoryItem {
   final DateTime completedAt;
   final bool isSuccess;
   final bool isOpenEnded;
+  final String? name;
+  final String? notes;
 
   FermentationHistoryItem({
     this.type = FermentationType.kefir,
@@ -15,7 +17,31 @@ class FermentationHistoryItem {
     required this.completedAt,
     required this.isSuccess,
     this.isOpenEnded = false,
+    this.name,
+    this.notes,
   });
+
+  FermentationHistoryItem copyWith({
+    FermentationType? type,
+    DateTime? startTime,
+    Duration? targetDuration,
+    DateTime? completedAt,
+    bool? isSuccess,
+    bool? isOpenEnded,
+    String? name,
+    String? notes,
+  }) {
+    return FermentationHistoryItem(
+      type: type ?? this.type,
+      startTime: startTime ?? this.startTime,
+      targetDuration: targetDuration ?? this.targetDuration,
+      completedAt: completedAt ?? this.completedAt,
+      isSuccess: isSuccess ?? this.isSuccess,
+      isOpenEnded: isOpenEnded ?? this.isOpenEnded,
+      name: name ?? this.name,
+      notes: notes ?? this.notes,
+    );
+  }
 
   Duration get actualDuration {
     final diff = completedAt.difference(startTime);
@@ -37,6 +63,8 @@ class FermentationHistoryItem {
       'completedAt': completedAt.millisecondsSinceEpoch,
       'isSuccess': isSuccess,
       'isOpenEnded': isOpenEnded,
+      if (name != null) 'name': name,
+      if (notes != null) 'notes': notes,
     };
   }
 
@@ -53,6 +81,8 @@ class FermentationHistoryItem {
       completedAt: DateTime.fromMillisecondsSinceEpoch(json['completedAt'] as int),
       isSuccess: json['isSuccess'] as bool,
       isOpenEnded: json['isOpenEnded'] as bool? ?? false,
+      name: json['name'] as String?,
+      notes: json['notes'] as String?,
     );
   }
 }

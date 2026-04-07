@@ -23,4 +23,10 @@ class History extends _$History {
     await service.deleteHistoryEntry(completedAt);
     ref.invalidateSelf();
   }
+
+  Future<void> updateEntry(FermentationHistoryItem item) async {
+    final service = ref.read(fermentationServiceProvider);
+    await service.updateHistoryEntry(item);
+    ref.invalidateSelf();
+  }
 }

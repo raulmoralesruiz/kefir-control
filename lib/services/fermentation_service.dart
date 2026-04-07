@@ -114,6 +114,20 @@ class FermentationService {
     await prefs.setString(_historyKey, updatedJson);
   }
 
+  Future<void> updateHistoryEntry(FermentationHistoryItem newItem) async {
+    final prefs = await SharedPreferences.getInstance();
+    final List<FermentationHistoryItem> currentHistory = await getHistory();
+
+    final index = currentHistory.indexWhere(
+        (item) => item.completedAt == newItem.completedAt);
+    if (index != -1) {
+      currentHistory[index] = newItem;
+      final String updatedJson =
+          jsonEncode(currentHistory.map((e) => e.toJson()).toList());
+      await prefs.setString(_historyKey, updatedJson);
+    }
+  }
+
   // --- Backup / Restaurar ---
 
   Future<String> exportData() async {

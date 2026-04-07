@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
 import '../models/fermentation.dart';
 import '../models/fermentation_history_item.dart';
+import 'fermentation_detail_sheet.dart';
 
 // Color amber-500 consistente con FermentationCard y CalendarDayMarker
 const _kombuchaColor = Color(0xFFF59E0B);
@@ -85,82 +86,89 @@ class HistoryListItem extends StatelessWidget {
           ),
         );
       },
-      child: Card(
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        elevation: 0,
-        clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-          side: BorderSide(color: colorScheme.outlineVariant, width: 1),
-        ),
-        child: IntrinsicHeight(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // ── Banda lateral de color ────────────────────────────
-              Container(width: 5, color: typeColor),
-              // ── Contenido (layout manual para control total) ──────
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16, vertical: 12),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // Indicador circular + icono centrado
-                      _TypeIndicator(
-                        isKombucha: isKombucha,
-                        percent: percent,
-                        typeColor: typeColor,
-                        surfaceColor: colorScheme.surfaceContainerHighest,
-                      ),
-                      const SizedBox(width: 16),
-                      // Textos — se expanden y rompen línea libremente
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              isKombucha
-                                  ? l10n.addSheetKombucha
-                                  : l10n.addSheetKefir,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              l10n.historyRealDurationTarget(
-                                _formatDuration(
-                                    item.actualDuration, isKombucha, l10n),
-                                _formatDuration(
-                                    item.targetDuration, isKombucha, l10n),
-                              ),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 13,
-                              ),
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              l10n.historyCompletedOn(
-                                  _formatNiceDate(item.completedAt)),
-                              style: TextStyle(
-                                color: theme.textTheme.bodySmall?.color,
-                                fontStyle: FontStyle.italic,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
+      child: InkWell(
+        onTap: () =>
+            FermentationDetailSheet.showHistory(context, historyItem: item),
+        borderRadius: BorderRadius.circular(12),
+        child: Card(
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          elevation: 0,
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: BorderSide(color: colorScheme.outlineVariant, width: 1),
+          ),
+          child: IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // ── Banda lateral de color ────────────────────────────
+                Container(width: 5, color: typeColor),
+                // ── Contenido (layout manual para control total) ──────
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Indicador circular + icono centrado
+                        _TypeIndicator(
+                          isKombucha: isKombucha,
+                          percent: percent,
+                          typeColor: typeColor,
+                          surfaceColor: colorScheme.surfaceContainerHighest,
                         ),
-                      ),
-                    ],
+                        const SizedBox(width: 16),
+                        // Textos — se expanden y rompen línea libremente
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                item.name?.isNotEmpty == true
+                                    ? item.name!
+                                    : (isKombucha
+                                        ? l10n.addSheetKombucha
+                                        : l10n.addSheetKefir),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                l10n.historyRealDurationTarget(
+                                  _formatDuration(
+                                      item.actualDuration, isKombucha, l10n),
+                                  _formatDuration(
+                                      item.targetDuration, isKombucha, l10n),
+                                ),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 13,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                l10n.historyCompletedOn(
+                                    _formatNiceDate(item.completedAt)),
+                                style: TextStyle(
+                                  color: theme.textTheme.bodySmall?.color,
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

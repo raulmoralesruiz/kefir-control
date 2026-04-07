@@ -1,0 +1,27 @@
+🚀 v2.0.0
+
+✨ New features
+Added support for tracking kombucha fermentations
+Ability to manage multiple fermentations simultaneously
+Implementation of a backup system
+Data export
+Import of existing backups
+Option to rename each batch
+
+♻️ Changes and refactoring
+Complete migration to Riverpod for state management
+Redesign of the fermentation management system to support multiple concurrent processes
+
+📊 Functionality improvements
+The history now shows the progress percentage for each fermentation
+Greater control in finalizing and deleting fermentations to prevent errors
+Improvement in selecting the fermentation duration
+
+🎨 Interface improvements
+Visual improvement of the history
+Style adjustments for a clearer and more consistent experience
+Improvement of the side menu
+
+🔒 Reliability and data
+Improved security when managing active fermentations
+Greater robustness in data persistence and manipulation

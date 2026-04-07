@@ -1,0 +1,10 @@
+🚀 v2.1.0
+
+We’re continuing to improve the app to make managing your fermentation processes easier and clearer:
+
+📅 New fermentation calendar: organise and view both your current and future processes at a glance.
+🎨 Visual improvements to cards: it’s now easier to tell the difference between kefir and kombucha fermentations.
+🛠️ Internal code update: components have been adapted to the latest Flutter recommendations for better performance and maintenance.
+📝 Detailed view of fermentations: access each card from the main screen or history and add notes during or after the process.
+
+Thank you for continuing to ferment with us! 🫙

@@ -35,15 +35,9 @@ class ActiveFermentations extends _$ActiveFermentations {
         _timer?.cancel();
         return;
       }
-      // Re-emitir estado para que la UI actualice progreso/tiempo
-      state = state.map((f) => Fermentation(
-        id: f.id,
-        type: f.type,
-        startTime: f.startTime,
-        targetDuration: f.targetDuration,
-        isOpenEnded: f.isOpenEnded,
-        name: f.name,
-      )).toList();
+      // Re-emitir estado para que la UI actualice progreso/tiempo.
+      // Usamos copyWith() sin argumentos para obtener una nueva instancia y disparar el listener de Riverpod.
+      state = state.map((f) => f.copyWith()).toList();
     });
   }
 
@@ -57,6 +51,7 @@ class ActiveFermentations extends _$ActiveFermentations {
     DateTime? customStartTime,
     bool isOpenEnded = false,
     String? name,
+    String? notes,
     required String notifReadyTitle,
     required String notifReadyBody,
     required String notifReminderTitle,
@@ -71,6 +66,7 @@ class ActiveFermentations extends _$ActiveFermentations {
       targetDuration: targetDuration,
       isOpenEnded: isOpenEnded,
       name: name?.trim().isEmpty == true ? null : name?.trim(),
+      notes: notes?.trim().isEmpty == true ? null : notes?.trim(),
     );
 
     final updatedState = [...state, newFermentation];
@@ -125,6 +121,8 @@ class ActiveFermentations extends _$ActiveFermentations {
         completedAt: now,
         isSuccess: isSuccess,
         isOpenEnded: fermentation.isOpenEnded,
+        name: fermentation.name,
+        notes: fermentation.notes,
       );
 
       final service = ref.read(fermentationServiceProvider);
@@ -160,14 +158,18 @@ class ActiveFermentations extends _$ActiveFermentations {
     final trimmed = newName?.trim().isEmpty == true ? null : newName?.trim();
     state = state.map((f) {
       if (f.id != id) return f;
-      return Fermentation(
-        id: f.id,
-        type: f.type,
-        startTime: f.startTime,
-        targetDuration: f.targetDuration,
-        isOpenEnded: f.isOpenEnded,
-        name: trimmed,
-      );
+      return f.copyWith(name: trimmed);
+    }).toList();
+    final service = ref.read(fermentationServiceProvider);
+    await service.saveActiveFermentations(state);
+  }
+
+  /// Actualiza las notas de una fermentación activa.
+  Future<void> updateNotes(String id, String? newNotes) async {
+    final trimmed = newNotes?.trim().isEmpty == true ? null : newNotes?.trim();
+    state = state.map((f) {
+      if (f.id != id) return f;
+      return f.copyWith(notes: trimmed);
     }).toList();
     final service = ref.read(fermentationServiceProvider);
     await service.saveActiveFermentations(state);
