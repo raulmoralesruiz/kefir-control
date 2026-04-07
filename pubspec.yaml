@@ -2,7 +2,7 @@ name: kefir_control
 description: A simple Flutter mobile application to track milk kefir fermentation time.
 publish_to: 'none'
 
-version: 2.0.0+4
+version: 2.1.0+5
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
