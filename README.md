@@ -14,6 +14,12 @@
   <img alt="Flutter" src="https://img.shields.io/badge/Flutter-3.x-02569B?style=flat-square&logo=flutter">
 </p>
 
+<p align="center">
+  <a href="https://f-droid.org/packages/eu.raulmorales.kefircontrol">
+    <img alt="Get it on F-Droid" src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="80">
+  </a>
+</p>
+
 ## 🥛 Sobre el Proyecto
 **Kéfir Control** nació de la necesidad de recordar cuándo la fermentación del kéfir de leche está en su punto perfecto (normalmente entre 24 y 48 horas). Si se deja demasiado tiempo, el kéfir se vuelve excesivamente ácido y el suero se separa en exceso. Esta aplicación simplifica ese proceso con notificaciones locales programadas y un temporizador en vivo.
 
