@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/fermentation.dart';
+import '../widgets/infinite_progress_indicator.dart';
 import '../widgets/fermentation_detail_sheet.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
 
@@ -120,13 +121,15 @@ class FermentationCard extends ConsumerWidget {
                           ),
                           if (!isPlanned)
                             IconButton(
-                              onPressed: isKombucha ? onHarvest : onStop,
-                              icon:
-                                  const Icon(Icons.stop_circle_outlined),
-                              color: colorScheme.error,
-                              tooltip: isKombucha
-                                  ? l10n.cardCosechar
-                                  : l10n.cardFinalizar,
+                              onPressed: () => FermentationDetailSheet.show(
+                                context,
+                                fermentation: fermentation,
+                                onStop: onStop,
+                                onHarvest: onHarvest,
+                              ),
+                              icon: const Icon(Icons.more_horiz_rounded),
+                              color: colorScheme.primary,
+                              tooltip: l10n.infoGuideStep1Title,
                             ),
                         ],
                       ),
@@ -142,11 +145,10 @@ class FermentationCard extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(4),
                         )
                       else if (isOpenEnded)
-                        LinearProgressIndicator(
-                          backgroundColor:
-                              colorScheme.surfaceContainerHighest,
-                          minHeight: 8,
-                          borderRadius: BorderRadius.circular(4),
+                        InfiniteProgressIndicator(
+                          color: typeColor,
+                          backgroundColor: colorScheme.surfaceContainerHighest,
+                          height: 8,
                         )
                       else
                         LinearProgressIndicator(

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../models/fermentation.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
 
+const _kombuchaColor = Color(0xFFF59E0B);
+
 /// Picker de duración personalizada con ruedas tipo scrollable.
 /// - Modo kéfir: solo horas (1–72h).
 /// - Modo kombucha: días (1–30) + horas (0–23).
@@ -113,7 +115,8 @@ class _CustomDurationPickerState extends State<CustomDurationPicker> {
               Container(
                 height: 48,
                 decoration: BoxDecoration(
-                  color: colorScheme.primaryContainer.withValues(alpha: 0.4),
+                  color: (_isKombucha ? _kombuchaColor : colorScheme.primaryContainer)
+                      .withValues(alpha: 0.4),
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
@@ -138,7 +141,7 @@ class _CustomDurationPickerState extends State<CustomDurationPicker> {
                               ? FontWeight.bold
                               : FontWeight.normal,
                           color: isSelected
-                              ? colorScheme.primary
+                              ? (_isKombucha ? _kombuchaColor : colorScheme.primary)
                               : colorScheme.onSurfaceVariant,
                         ),
                         child: Text(value.toString().padLeft(2, '0')),
@@ -205,7 +208,7 @@ class _CustomDurationPickerState extends State<CustomDurationPicker> {
                 widget.onConfirm(duration);
               },
               style: FilledButton.styleFrom(
-                backgroundColor: colorScheme.primary,
+                backgroundColor: _isKombucha ? _kombuchaColor : colorScheme.primary,
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
               child: Text(

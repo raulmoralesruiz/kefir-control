@@ -245,9 +245,7 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
                           '${_customStartDate!.day}/${_customStartDate!.month} ${_customStartDate!.hour}:${_customStartDate!.minute.toString().padLeft(2, '0')}'),
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onPrimaryContainer,
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -298,9 +296,8 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
       future: ref.read(fermentationServiceProvider).getKefirIdealDuration(),
       builder: (context, snapshot) {
         final idealSecs = snapshot.data?.inSeconds;
-        final idealHours = snapshot.data != null
-            ? (snapshot.data!.inMinutes / 60.0)
-            : null;
+        final idealHours =
+            snapshot.data != null ? (snapshot.data!.inMinutes / 60.0) : null;
         return Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -311,13 +308,13 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
             if (idealSecs != null && idealHours != null)
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
-                child: FilledButton(
+                child: FilledButton.icon(
                   onPressed: () => _start(idealSecs),
+                  icon: const Icon(Icons.star_rounded),
                   style: FilledButton.styleFrom(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.primary,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
-                  child: Text(l10n.addSheetIdealTimeKefir(
+                  label: Text(l10n.addSheetIdealTimeKefir(
                       num.parse(idealHours.toStringAsFixed(1)))),
                 ),
               ),
@@ -349,13 +346,13 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
             if (idealSecs != null)
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
-                child: FilledButton(
+                child: FilledButton.icon(
                   onPressed: () => _start(idealSecs),
+                  icon: const Icon(Icons.star_rounded),
                   style: FilledButton.styleFrom(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.primary,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
-                  child: Text(l10n.addSheetIdealTime(
+                  label: Text(l10n.addSheetIdealTime(
                       num.parse((idealSecs / 86400).toStringAsFixed(1)))),
                 ),
               ),
@@ -373,14 +370,18 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
-        child: _selectedType == null
-            ? _buildTypeSelection()
-            : _selectedType == FermentationType.kefir
-                ? _buildKefirSelection()
-                : _buildKombuchaSelection(),
+    return Padding(
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24.0),
+          child: _selectedType == null
+              ? _buildTypeSelection()
+              : _selectedType == FermentationType.kefir
+                  ? _buildKefirSelection()
+                  : _buildKombuchaSelection(),
+        ),
       ),
     );
   }

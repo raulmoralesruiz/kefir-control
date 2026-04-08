@@ -33,6 +33,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get historyTitle => 'Historial';
 
   @override
+  String get homeSwipeDeleteHint => 'Desliza una tarjeta para borrarla';
+
+  @override
   String get historyEmpty => 'No hay fermentaciones registradas.';
 
   @override
@@ -170,13 +173,16 @@ class AppLocalizationsEs extends AppLocalizations {
       'Faltan 2 horas para terminar. ¡Ve preparando recipientes limpios!';
 
   @override
-  String get infoTab1 => 'Sobre el Kéfir';
+  String get infoTab1 => 'Guía';
 
   @override
-  String get infoTab2 => 'Guía de la App';
+  String get infoTab2 => 'Fermentos';
 
   @override
-  String get infoProcessTitle => 'El Proceso de Fermentación';
+  String get infoTab3 => 'Avanzado';
+
+  @override
+  String get infoProcessTitle => 'El Proceso del Kéfir';
 
   @override
   String get infoProcessStep1Title => 'Preparación';
@@ -233,6 +239,20 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get infoGuideStep4Desc =>
       'Pulsa este botón rojo una vez hayas colado el kéfir para limpiar el temporizador y dejar la aplicación lista para tu próxima recolección.';
+
+  @override
+  String get infoGuideStepHarvestTitle => 'Cosechar y Reiniciar';
+
+  @override
+  String get infoGuideStepHarvestDesc =>
+      'Cuando termines un lote, usa este nuevo flujo para guardarlo e iniciar el siguiente ciclo inmediatamente con un solo toque.';
+
+  @override
+  String get infoGuideStepAdjustTitle => 'Ajustar Tiempos';
+
+  @override
+  String get infoGuideStepAdjustDesc =>
+      '¿Hace más calor de lo normal? Pulsa sobre el progreso de cualquier fermentación activa para acortar o alargar su duración.';
 
   @override
   String get historyDeleted => 'Registro eliminado';
@@ -595,4 +615,97 @@ class AppLocalizationsEs extends AppLocalizations {
   String detailHistoryLastHarvest(Object duration) {
     return 'Última tanda: $duration';
   }
+
+  @override
+  String get historyRepeat => 'Repetir lote';
+
+  @override
+  String get adjSheetTitle => 'Ajustar tiempo';
+
+  @override
+  String get adjSheetSetNoLimit => 'Pasar a \'Sin límite\'';
+
+  @override
+  String get adjSheetSetTimed => 'Establecer duración';
+
+  @override
+  String get actionSaveIdealTime => 'Guardar tiempo ideal';
+
+  @override
+  String get actionSaveIdealTimeSuccess =>
+      'Tiempo ideal guardado correctamente';
+
+  @override
+  String get dialogSaveIdealConfirm =>
+      '¿Guardar este tiempo como tu referencia ideal?';
+
+  @override
+  String get actionHarvestAndRestart => 'Cosechar y reiniciar';
+
+  @override
+  String get dialogHarvestAndRestartConfirm =>
+      '¿Cosechar lote actual y empezar uno nuevo?';
+
+  @override
+  String get harvestNextStepTitle => 'Siguiente ciclo';
+
+  @override
+  String get actionDelete => 'Borrar';
+
+  @override
+  String get dialogResetConfirm =>
+      'Se guardará en el historial y el contador volverá a 0.';
+
+  @override
+  String secondFermentationName(Object name) {
+    return 'F2: $name';
+  }
+
+  @override
+  String get secondFermentationDefaultName => 'Segunda Fermentación';
+
+  @override
+  String get infoKombuchaTitle => '🍵 ¿Qué es la Kombucha?';
+
+  @override
+  String get infoKombuchaDesc =>
+      'Es té fermentado mediante una colonia simbiótica de bacterias y levaduras (SCOBY). Es rica en ácidos orgánicos y vitaminas.';
+
+  @override
+  String get infoKombuchaProcessTitle => 'El Ciclo de la Kombucha';
+
+  @override
+  String get infoKombuchaStep1Title => 'Preparación';
+
+  @override
+  String get infoKombuchaStep1Desc =>
+      'Se infusiona té con azúcar y, una vez frío, se añade el SCOBY con un poco de líquido iniciador del lote anterior.';
+
+  @override
+  String get infoKombuchaStep2Title => 'Fermentación (7-12 días)';
+
+  @override
+  String get infoKombuchaStep2Desc =>
+      'El SCOBY consume el azúcar y el té. La app aprenderá de tus cosechas para sugerirte tu \'Tiempo Ideal\' personalizado.';
+
+  @override
+  String get infoAdvancedCalendarTitle => 'Calendario';
+
+  @override
+  String get infoAdvancedCalendarDesc =>
+      'Visualiza tus cosechas pasadas y planifica futuras preparaciones desde la pestaña de Calendario.';
+
+  @override
+  String get infoAdvancedHistoryTitle => 'Historial';
+
+  @override
+  String get infoAdvancedHistoryDesc =>
+      'Repite lotes previos fácilmente. Los tiempos de Kombucha se ajustan automáticamente según tus preferencias pasadas.';
+
+  @override
+  String get infoAdvancedDataTitle => 'Seguridad de Datos';
+
+  @override
+  String get infoAdvancedDataDesc =>
+      'Usa las opciones de Exportar y Restaurar para mantener tus registros a salvo o moverlos de dispositivo.';
 }

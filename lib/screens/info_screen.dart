@@ -6,22 +6,26 @@ class InfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.infoTitle),
+          title: Text(l10n.infoTitle),
           bottom: TabBar(
             tabs: [
-              Tab(text: AppLocalizations.of(context)!.infoTab1, icon: const Icon(Icons.info_outline)),
-              Tab(text: AppLocalizations.of(context)!.infoTab2, icon: const Icon(Icons.help_outline)),
+              Tab(text: l10n.infoTab1, icon: const Icon(Icons.help_outline)),
+              Tab(text: l10n.infoTab2, icon: const Icon(Icons.info_outline)),
+              Tab(text: l10n.infoTab3, icon: const Icon(Icons.settings_suggest_outlined)),
             ],
           ),
         ),
         body: const TabBarView(
           children: [
-            _KefirInfoTab(),
             _AppGuideTab(),
+            _FermentsInfoTab(),
+            _AdvancedFeaturesTab(),
           ],
         ),
       ),
@@ -29,126 +33,22 @@ class InfoScreen extends StatelessWidget {
   }
 }
 
-class _KefirInfoTab extends StatelessWidget {
-  const _KefirInfoTab();
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(24.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            AppLocalizations.of(context)!.infoCard1Title,
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall
-                ?.copyWith(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            AppLocalizations.of(context)!.infoCard1Desc,
-            style: const TextStyle(fontSize: 16, height: 1.5),
-          ),
-          const SizedBox(height: 24),
-          Text(
-            AppLocalizations.of(context)!.infoProcessTitle,
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge
-                ?.copyWith(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 16),
-          _buildInfoRow(
-            Icons.looks_one,
-            AppLocalizations.of(context)!.infoProcessStep1Title,
-            AppLocalizations.of(context)!.infoProcessStep1Desc,
-          ),
-          _buildInfoRow(
-            Icons.looks_two,
-            AppLocalizations.of(context)!.infoProcessStep2Title,
-            AppLocalizations.of(context)!.infoProcessStep2Desc,
-          ),
-          _buildInfoRow(
-            Icons.looks_3,
-            AppLocalizations.of(context)!.infoProcessStep3Title,
-            AppLocalizations.of(context)!.infoProcessStep3Desc,
-          ),
-          const SizedBox(height: 24),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(Icons.lightbulb_outline, color: Colors.amber, size: 28),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.infoCard3Title,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 15),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          AppLocalizations.of(context)!.infoCard3Desc,
-                          style: const TextStyle(
-                              fontStyle: FontStyle.italic, height: 1.4),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _buildInfoRow(IconData icon, String title, String description) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, size: 28, color: Colors.teal),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 16)),
-                const SizedBox(height: 4),
-                Text(description, style: const TextStyle(height: 1.4)),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+// ── Pestaña 1: Guía de la App ──────────────────────────────────────────────
 
 class _AppGuideTab extends StatelessWidget {
   const _AppGuideTab();
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            AppLocalizations.of(context)!.infoGuideTitle,
+            l10n.infoGuideTitle,
             style: Theme.of(context)
                 .textTheme
                 .headlineSmall
@@ -156,36 +56,47 @@ class _AppGuideTab extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            AppLocalizations.of(context)!.infoGuideDesc,
+            l10n.infoGuideDesc,
             style: const TextStyle(fontSize: 16, height: 1.5),
           ),
           const SizedBox(height: 24),
           _buildGuideStep(
+            context,
             Icons.play_circle_fill,
-            AppLocalizations.of(context)!.infoGuideStep1Title,
-            AppLocalizations.of(context)!.infoGuideStep1Desc,
+            l10n.infoGuideStep1Title,
+            l10n.infoGuideStep1Desc,
           ),
           _buildGuideStep(
+            context,
+            Icons.refresh_rounded,
+            l10n.infoGuideStepHarvestTitle,
+            l10n.infoGuideStepHarvestDesc,
+          ),
+          _buildGuideStep(
+            context,
+            Icons.tune_rounded,
+            l10n.infoGuideStepAdjustTitle,
+            l10n.infoGuideStepAdjustDesc,
+          ),
+          _buildGuideStep(
+            context,
             Icons.history,
-            AppLocalizations.of(context)!.infoGuideStep2Title,
-            AppLocalizations.of(context)!.infoGuideStep2Desc,
+            l10n.infoGuideStep2Title,
+            l10n.infoGuideStep2Desc,
           ),
           _buildGuideStep(
+            context,
             Icons.notifications_active,
-            AppLocalizations.of(context)!.infoGuideStep3Title,
-            AppLocalizations.of(context)!.infoGuideStep3Desc,
-          ),
-          _buildGuideStep(
-            Icons.stop_circle_outlined,
-            AppLocalizations.of(context)!.infoGuideStep4Title,
-            AppLocalizations.of(context)!.infoGuideStep4Desc,
+            l10n.infoGuideStep3Title,
+            l10n.infoGuideStep3Desc,
           ),
         ],
       ),
     );
   }
 
-  Widget _buildGuideStep(IconData icon, String title, String description) {
+  Widget _buildGuideStep(
+      BuildContext context, IconData icon, String title, String description) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 24.0),
       child: Row(
@@ -194,10 +105,10 @@ class _AppGuideTab extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.teal.withValues(alpha: 0.1),
+              color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, size: 32, color: Colors.teal),
+            child: Icon(icon, size: 32, color: Theme.of(context).colorScheme.primary),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -212,6 +123,210 @@ class _AppGuideTab extends StatelessWidget {
                     style: const TextStyle(height: 1.4, fontSize: 15)),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Pestaña 2: Información de Fermentos ───────────────────────────────────
+
+class _FermentsInfoTab extends StatelessWidget {
+  const _FermentsInfoTab();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // SECCIÓN KÉFIR
+          Text(
+            l10n.infoCard1Title,
+            style: theme.textTheme.headlineSmall
+                ?.copyWith(fontWeight: FontWeight.bold, color: Colors.teal),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            l10n.infoCard1Desc,
+            style: const TextStyle(fontSize: 16, height: 1.5),
+          ),
+          const SizedBox(height: 16),
+          _buildProcessSection(
+            context,
+            l10n.infoProcessTitle,
+            [
+              (Icons.looks_one, l10n.infoProcessStep1Title, l10n.infoProcessStep1Desc),
+              (Icons.looks_two, l10n.infoProcessStep2Title, l10n.infoProcessStep2Desc),
+              (Icons.looks_3, l10n.infoProcessStep3Title, l10n.infoProcessStep3Desc),
+            ],
+            Colors.teal,
+          ),
+          
+          const Divider(height: 48),
+
+          // SECCIÓN KOMBUCHA
+          Text(
+            l10n.infoKombuchaTitle,
+            style: theme.textTheme.headlineSmall
+                ?.copyWith(fontWeight: FontWeight.bold, color: Colors.amber[800]),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            l10n.infoKombuchaDesc,
+            style: const TextStyle(fontSize: 16, height: 1.5),
+          ),
+          const SizedBox(height: 16),
+          _buildProcessSection(
+            context,
+            l10n.infoKombuchaProcessTitle,
+            [
+              (Icons.looks_one, l10n.infoKombuchaStep1Title, l10n.infoKombuchaStep1Desc),
+              (Icons.looks_two, l10n.infoKombuchaStep2Title, l10n.infoKombuchaStep2Desc),
+            ],
+            Colors.amber[800]!,
+          ),
+
+          const SizedBox(height: 24),
+          _buildTipCard(context, l10n.infoCard3Title, l10n.infoCard3Desc),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProcessSection(BuildContext context, String title,
+      List<(IconData, String, String)> steps, Color accentColor) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 16),
+        ...steps.map((step) => Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(step.$1, size: 28, color: accentColor),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(step.$2,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16)),
+                        const SizedBox(height: 4),
+                        Text(step.$3, style: const TextStyle(height: 1.4)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )),
+      ],
+    );
+  }
+
+  Widget _buildTipCard(BuildContext context, String title, String description) {
+    return Card(
+      elevation: 0,
+      color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Icon(Icons.lightbulb_outline, color: Colors.amber, size: 28),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                  const SizedBox(height: 4),
+                  Text(description, style: const TextStyle(fontStyle: FontStyle.italic, height: 1.4)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ── Pestaña 3: Funciones Avanzadas ────────────────────────────────────────
+
+class _AdvancedFeaturesTab extends StatelessWidget {
+  const _AdvancedFeaturesTab();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildAdvancedInfo(
+            context,
+            Icons.calendar_month_outlined,
+            l10n.infoAdvancedCalendarTitle,
+            l10n.infoAdvancedCalendarDesc,
+          ),
+          _buildAdvancedInfo(
+            context,
+            Icons.auto_awesome_outlined,
+            l10n.infoAdvancedHistoryTitle,
+            l10n.infoAdvancedHistoryDesc,
+          ),
+          _buildAdvancedInfo(
+            context,
+            Icons.save_outlined,
+            l10n.infoAdvancedDataTitle,
+            l10n.infoAdvancedDataDesc,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAdvancedInfo(
+      BuildContext context, IconData icon, String title, String description) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 32.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon, color: Theme.of(context).colorScheme.secondary),
+              const SizedBox(width: 12),
+              Text(
+                title,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            description,
+            style: const TextStyle(fontSize: 16, height: 1.5),
           ),
         ],
       ),

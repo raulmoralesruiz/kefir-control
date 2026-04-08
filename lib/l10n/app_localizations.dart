@@ -146,6 +146,12 @@ abstract class AppLocalizations {
   /// **'Historial'**
   String get historyTitle;
 
+  /// No description provided for @homeSwipeDeleteHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Desliza una tarjeta para borrarla'**
+  String get homeSwipeDeleteHint;
+
   /// No description provided for @historyEmpty.
   ///
   /// In es, this message translates to:
@@ -401,19 +407,25 @@ abstract class AppLocalizations {
   /// No description provided for @infoTab1.
   ///
   /// In es, this message translates to:
-  /// **'Sobre el Kéfir'**
+  /// **'Guía'**
   String get infoTab1;
 
   /// No description provided for @infoTab2.
   ///
   /// In es, this message translates to:
-  /// **'Guía de la App'**
+  /// **'Fermentos'**
   String get infoTab2;
+
+  /// No description provided for @infoTab3.
+  ///
+  /// In es, this message translates to:
+  /// **'Avanzado'**
+  String get infoTab3;
 
   /// No description provided for @infoProcessTitle.
   ///
   /// In es, this message translates to:
-  /// **'El Proceso de Fermentación'**
+  /// **'El Proceso del Kéfir'**
   String get infoProcessTitle;
 
   /// No description provided for @infoProcessStep1Title.
@@ -511,6 +523,30 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Pulsa este botón rojo una vez hayas colado el kéfir para limpiar el temporizador y dejar la aplicación lista para tu próxima recolección.'**
   String get infoGuideStep4Desc;
+
+  /// No description provided for @infoGuideStepHarvestTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Cosechar y Reiniciar'**
+  String get infoGuideStepHarvestTitle;
+
+  /// No description provided for @infoGuideStepHarvestDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuando termines un lote, usa este nuevo flujo para guardarlo e iniciar el siguiente ciclo inmediatamente con un solo toque.'**
+  String get infoGuideStepHarvestDesc;
+
+  /// No description provided for @infoGuideStepAdjustTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ajustar Tiempos'**
+  String get infoGuideStepAdjustTitle;
+
+  /// No description provided for @infoGuideStepAdjustDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Hace más calor de lo normal? Pulsa sobre el progreso de cualquier fermentación activa para acortar o alargar su duración.'**
+  String get infoGuideStepAdjustDesc;
 
   /// No description provided for @historyDeleted.
   ///
@@ -1129,6 +1165,168 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Última tanda: {duration}'**
   String detailHistoryLastHarvest(Object duration);
+
+  /// No description provided for @historyRepeat.
+  ///
+  /// In es, this message translates to:
+  /// **'Repetir lote'**
+  String get historyRepeat;
+
+  /// No description provided for @adjSheetTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ajustar tiempo'**
+  String get adjSheetTitle;
+
+  /// No description provided for @adjSheetSetNoLimit.
+  ///
+  /// In es, this message translates to:
+  /// **'Pasar a \'Sin límite\''**
+  String get adjSheetSetNoLimit;
+
+  /// No description provided for @adjSheetSetTimed.
+  ///
+  /// In es, this message translates to:
+  /// **'Establecer duración'**
+  String get adjSheetSetTimed;
+
+  /// No description provided for @actionSaveIdealTime.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardar tiempo ideal'**
+  String get actionSaveIdealTime;
+
+  /// No description provided for @actionSaveIdealTimeSuccess.
+  ///
+  /// In es, this message translates to:
+  /// **'Tiempo ideal guardado correctamente'**
+  String get actionSaveIdealTimeSuccess;
+
+  /// No description provided for @dialogSaveIdealConfirm.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Guardar este tiempo como tu referencia ideal?'**
+  String get dialogSaveIdealConfirm;
+
+  /// No description provided for @actionHarvestAndRestart.
+  ///
+  /// In es, this message translates to:
+  /// **'Cosechar y reiniciar'**
+  String get actionHarvestAndRestart;
+
+  /// No description provided for @dialogHarvestAndRestartConfirm.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cosechar lote actual y empezar uno nuevo?'**
+  String get dialogHarvestAndRestartConfirm;
+
+  /// No description provided for @harvestNextStepTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Siguiente ciclo'**
+  String get harvestNextStepTitle;
+
+  /// No description provided for @actionDelete.
+  ///
+  /// In es, this message translates to:
+  /// **'Borrar'**
+  String get actionDelete;
+
+  /// No description provided for @dialogResetConfirm.
+  ///
+  /// In es, this message translates to:
+  /// **'Se guardará en el historial y el contador volverá a 0.'**
+  String get dialogResetConfirm;
+
+  /// No description provided for @secondFermentationName.
+  ///
+  /// In es, this message translates to:
+  /// **'F2: {name}'**
+  String secondFermentationName(Object name);
+
+  /// No description provided for @secondFermentationDefaultName.
+  ///
+  /// In es, this message translates to:
+  /// **'Segunda Fermentación'**
+  String get secondFermentationDefaultName;
+
+  /// No description provided for @infoKombuchaTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'🍵 ¿Qué es la Kombucha?'**
+  String get infoKombuchaTitle;
+
+  /// No description provided for @infoKombuchaDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Es té fermentado mediante una colonia simbiótica de bacterias y levaduras (SCOBY). Es rica en ácidos orgánicos y vitaminas.'**
+  String get infoKombuchaDesc;
+
+  /// No description provided for @infoKombuchaProcessTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'El Ciclo de la Kombucha'**
+  String get infoKombuchaProcessTitle;
+
+  /// No description provided for @infoKombuchaStep1Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparación'**
+  String get infoKombuchaStep1Title;
+
+  /// No description provided for @infoKombuchaStep1Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Se infusiona té con azúcar y, una vez frío, se añade el SCOBY con un poco de líquido iniciador del lote anterior.'**
+  String get infoKombuchaStep1Desc;
+
+  /// No description provided for @infoKombuchaStep2Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Fermentación (7-12 días)'**
+  String get infoKombuchaStep2Title;
+
+  /// No description provided for @infoKombuchaStep2Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'El SCOBY consume el azúcar y el té. La app aprenderá de tus cosechas para sugerirte tu \'Tiempo Ideal\' personalizado.'**
+  String get infoKombuchaStep2Desc;
+
+  /// No description provided for @infoAdvancedCalendarTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Calendario'**
+  String get infoAdvancedCalendarTitle;
+
+  /// No description provided for @infoAdvancedCalendarDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Visualiza tus cosechas pasadas y planifica futuras preparaciones desde la pestaña de Calendario.'**
+  String get infoAdvancedCalendarDesc;
+
+  /// No description provided for @infoAdvancedHistoryTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Historial'**
+  String get infoAdvancedHistoryTitle;
+
+  /// No description provided for @infoAdvancedHistoryDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Repite lotes previos fácilmente. Los tiempos de Kombucha se ajustan automáticamente según tus preferencias pasadas.'**
+  String get infoAdvancedHistoryDesc;
+
+  /// No description provided for @infoAdvancedDataTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Seguridad de Datos'**
+  String get infoAdvancedDataTitle;
+
+  /// No description provided for @infoAdvancedDataDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Usa las opciones de Exportar y Restaurar para mantener tus registros a salvo o moverlos de dispositivo.'**
+  String get infoAdvancedDataDesc;
 }
 
 class _AppLocalizationsDelegate

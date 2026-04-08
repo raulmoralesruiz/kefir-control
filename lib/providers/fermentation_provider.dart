@@ -174,4 +174,93 @@ class ActiveFermentations extends _$ActiveFermentations {
     final service = ref.read(fermentationServiceProvider);
     await service.saveActiveFermentations(state);
   }
+
+  /// Actualiza la duración o el modo de una fermentación activa, reprogramando notificaciones si es necesario.
+  Future<void> updateDuration(
+    String id,
+    int durationSeconds, {
+    required bool isOpenEnded,
+    required String notifReadyTitle,
+    required String notifReadyBody,
+    required String notifReminderTitle,
+    required String notifReminderBody,
+  }) async {
+    final list = state.where((f) => f.id == id).toList();
+    final fermentation = list.isEmpty ? null : list.first;
+    if (fermentation == null) return;
+
+    final targetDuration = Duration(seconds: durationSeconds);
+
+    // 1. Cancelar notificaciones antiguas
+    final notifService = ref.read(notificationServiceProvider);
+    final baseId = _stringToId(id);
+    await notifService.cancel(baseId);
+
+    // 2. Actualizar estado
+    state = state.map((f) {
+      if (f.id != id) return f;
+      return f.copyWith(
+        targetDuration: targetDuration,
+        isOpenEnded: isOpenEnded,
+      );
+    }).toList();
+
+    // 3. Guardar en disco
+    final service = ref.read(fermentationServiceProvider);
+    await service.saveActiveFermentations(state);
+
+    // 4. Reprogramar notificaciones si es necesario
+    if (!isOpenEnded) {
+      await notifService.scheduleFermentationComplete(
+        baseId,
+        fermentation.startTime.add(targetDuration),
+        notifReadyTitle,
+        notifReadyBody,
+        notifReminderTitle,
+        notifReminderBody,
+      );
+    }
+  }
+
+  /// Guarda la duración actual como ideal para la Kombucha sin detener el proceso.
+  Future<void> saveIdealTime(String id) async {
+    final list = state.where((f) => f.id == id).toList();
+    final fermentation = list.isEmpty ? null : list.first;
+    if (fermentation == null) return;
+
+    if (fermentation.type == FermentationType.kombucha) {
+      final service = ref.read(fermentationServiceProvider);
+      await service.saveKombuchaIdealDuration(fermentation.elapsed);
+    }
+  }
+
+  /// Cosecha el actual (guarda historial) e inicia uno nuevo inmediatamente con la duración dada.
+  Future<void> harvestAndRestart(
+    String id, {
+    required int nextDurationSeconds,
+    required bool nextIsOpenEnded,
+    required String notifReadyTitle,
+    required String notifReadyBody,
+    required String notifReminderTitle,
+    required String notifReminderBody,
+  }) async {
+    final list = state.where((f) => f.id == id).toList();
+    final fermentation = list.isEmpty ? null : list.first;
+    if (fermentation == null) return;
+
+    // 1. Cosechar actual (guardar historial)
+    await stop(id, recordHistory: true);
+
+    // 2. Iniciar nueva fermentación (con la configuración elegida)
+    await start(
+      nextDurationSeconds,
+      type: fermentation.type,
+      isOpenEnded: nextIsOpenEnded,
+      name: fermentation.name,
+      notifReadyTitle: notifReadyTitle,
+      notifReadyBody: notifReadyBody,
+      notifReminderTitle: notifReminderTitle,
+      notifReminderBody: notifReminderBody,
+    );
+  }
 }

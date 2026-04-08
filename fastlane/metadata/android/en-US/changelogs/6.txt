@@ -1,0 +1,20 @@
+🚀 v2.2.0
+
+✨ New Features
+Ability to repeat a fermentation directly from the history
+Option to adjust the fermentation time from the detailed view
+
+♻️ Changes and Refactoring
+Improvements to fermentation management from the detailed view
+Update to the guide screen
+
+📊 Functionality improvements
+Fixed a bug that hid the “batch name” field when creating a new fermentation
+Improvements to the progress bar in “unlimited” mode
+
+🎨 Interface improvements
+Redesigned interface elements for a clearer, more attractive, and easier-to-use experience
+New screenshots to better showcase the app's functionality
+
+🔒 Reliability and data
+Updated integration tests to improve overall stability

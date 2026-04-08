@@ -33,6 +33,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get historyTitle => 'History';
 
   @override
+  String get homeSwipeDeleteHint => 'Swipe a card to delete it';
+
+  @override
   String get historyEmpty => 'No past fermentations recorded.';
 
   @override
@@ -170,13 +173,16 @@ class AppLocalizationsEn extends AppLocalizations {
       '2 hours left until completion. Start preparing clean containers!';
 
   @override
-  String get infoTab1 => 'About Kefir';
+  String get infoTab1 => 'Guide';
 
   @override
-  String get infoTab2 => 'App Guide';
+  String get infoTab2 => 'Ferments';
 
   @override
-  String get infoProcessTitle => 'The Fermentation Process';
+  String get infoTab3 => 'Advanced';
+
+  @override
+  String get infoProcessTitle => 'The Kefir Process';
 
   @override
   String get infoProcessStep1Title => 'Preparation';
@@ -233,6 +239,20 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get infoGuideStep4Desc =>
       'Press this red button once you have strained the kefir to clear the timer and leave the application ready for your next harvest.';
+
+  @override
+  String get infoGuideStepHarvestTitle => 'Harvest and Restart';
+
+  @override
+  String get infoGuideStepHarvestDesc =>
+      'When you finish a batch, use this new flow to save it and start the next cycle immediately with a single touch.';
+
+  @override
+  String get infoGuideStepAdjustTitle => 'Adjust Duration';
+
+  @override
+  String get infoGuideStepAdjustDesc =>
+      'Is it warmer than usual? Tap on the progress of any active fermentation to shorten or lengthen its duration.';
 
   @override
   String get historyDeleted => 'Record deleted';
@@ -591,4 +611,96 @@ class AppLocalizationsEn extends AppLocalizations {
   String detailHistoryLastHarvest(Object duration) {
     return 'Last batch: $duration';
   }
+
+  @override
+  String get historyRepeat => 'Repeat batch';
+
+  @override
+  String get adjSheetTitle => 'Adjust duration';
+
+  @override
+  String get adjSheetSetNoLimit => 'Switch to \'No limit\'';
+
+  @override
+  String get adjSheetSetTimed => 'Set duration';
+
+  @override
+  String get actionSaveIdealTime => 'Save ideal time';
+
+  @override
+  String get actionSaveIdealTimeSuccess => 'Ideal time saved successfully';
+
+  @override
+  String get dialogSaveIdealConfirm =>
+      'Save this time as your ideal reference?';
+
+  @override
+  String get actionHarvestAndRestart => 'Harvest and restart';
+
+  @override
+  String get dialogHarvestAndRestartConfirm =>
+      'Harvest current batch and start a new one?';
+
+  @override
+  String get harvestNextStepTitle => 'Next cycle';
+
+  @override
+  String get actionDelete => 'Delete';
+
+  @override
+  String get dialogResetConfirm =>
+      'It will be saved to history and the timer will restart at 0.';
+
+  @override
+  String secondFermentationName(Object name) {
+    return 'F2: $name';
+  }
+
+  @override
+  String get secondFermentationDefaultName => 'Second Fermentation';
+
+  @override
+  String get infoKombuchaTitle => '🍵 What is Kombucha?';
+
+  @override
+  String get infoKombuchaDesc =>
+      'It is tea fermented by a symbiotic colony of bacteria and yeast (SCOBY). It is rich in organic acids and vitamins.';
+
+  @override
+  String get infoKombuchaProcessTitle => 'The Kombucha Cycle';
+
+  @override
+  String get infoKombuchaStep1Title => 'Preparation';
+
+  @override
+  String get infoKombuchaStep1Desc =>
+      'Tea is infused with sugar and, once cooled, the SCOBY is added along with some starter liquid from the previous batch.';
+
+  @override
+  String get infoKombuchaStep2Title => 'Fermentation (7-12 days)';
+
+  @override
+  String get infoKombuchaStep2Desc =>
+      'The SCOBY consumes the sugar and tea. The app will learn from your harvests to suggest your personalized \'Ideal Time\'.';
+
+  @override
+  String get infoAdvancedCalendarTitle => 'Calendar & Planning';
+
+  @override
+  String get infoAdvancedCalendarDesc =>
+      'Visualize your past harvests and plan future preparations from the Calendar tab.';
+
+  @override
+  String get infoAdvancedHistoryTitle => 'History';
+
+  @override
+  String get infoAdvancedHistoryDesc =>
+      'Repeat previous batches easily. Kombucha times are automatically adjusted based on your past preferences.';
+
+  @override
+  String get infoAdvancedDataTitle => 'Data Security';
+
+  @override
+  String get infoAdvancedDataDesc =>
+      'Use the Export and Restore options to keep your records safe or move them to another device.';
 }

@@ -1,0 +1,20 @@
+🚀 v2.2.0
+
+✨ Nuevas funcionalidades
+Posibilidad de repetir una fermentación directamente desde el historial
+Opción para ajustar el tiempo de fermentación desde la vista detallada
+
+♻️ Cambios y refactorización
+Mejora en la gestión de la fermentación desde la vista detallada
+Actualización de la pantalla de guía
+
+📊 Mejoras en funcionalidad
+Corrección de un error que ocultaba el campo “nombre del lote” al crear una nueva fermentación
+Mejora en la barra de progreso en modo “sin límite”
+
+🎨 Mejoras de interfaz
+Rediseño de elementos de la interfaz para una experiencia más clara, atractiva y fácil de usar
+Nuevas capturas para mostrar mejor el funcionamiento de la app
+
+🔒 Fiabilidad y datos
+Actualización de los tests de integración para mejorar la estabilidad general

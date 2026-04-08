@@ -42,67 +42,79 @@ void main() {
       await binding.convertFlutterSurfaceToImage();
       await tester.pumpAndSettle();
 
-      // ── PANTALLA 1: Home vacío (sin fermentación activa) ──────────────────
+      // ── PANTALLA 1: Home vacío ──────────────────────────────────────────
       await binding.takeScreenshot('${folderName}_01_home_empty');
 
-      // ── PANTALLA 2: Bottom Sheet de opciones de inicio ────────────────────
-      await tester.tap(find.byIcon(Icons.play_circle_fill));
+      // ── PANTALLA 2: Selección de tipo (Kéfir o Kombucha) ──────────────────
+      await tester.tap(find.byIcon(Icons.add));
       await tester.pumpAndSettle();
-      await binding.takeScreenshot('${folderName}_02_start_options');
+      await binding.takeScreenshot('${folderName}_02_type_selection');
 
-      // Tap en "Iniciar fermentación" (primer botón en el BottomSheet, es un FilledButton)
-      await tester.tap(find.byType(FilledButton).first);
-      await tester.pumpAndSettle();
-
-      // ── PANTALLA 3: Diálogo de selección de horas ─────────────────────────
-      await binding.takeScreenshot('${folderName}_03_start_dialog');
-
-      // Tap en el botón "Iniciar" del diálogo (último FilledButton en pantalla)
-      final startBtn = find.byType(FilledButton).last;
-      await tester.tap(startBtn);
+      // Seleccionamos Kombucha para mostrar el nuevo branding
+      await tester.tap(find.byIcon(Icons.emoji_food_beverage));
       await tester.pumpAndSettle();
 
-      // ── PANTALLA 4: Progreso de fermentación activa ────────────────────────
-      await binding.takeScreenshot('${folderName}_04_progress');
+      // ── PANTALLA 3: Selección de duración (Kombucha branding) ─────────────
+      await binding.takeScreenshot('${folderName}_03_duration_selection_kombucha');
 
-      // ── PANTALLA 5: Historial (vía NavigationDrawer) ────────────────────────
-      // Abrir el Drawer
+      // Iniciamos una fermentación de Kombucha para ver la tarjeta
+      // (Tap en el botón de tiempo personalizado o similar, usaremos el primero disponible)
+      await tester.tap(find.byIcon(Icons.tune));
+      await tester.pumpAndSettle();
+      
+      // En el picker, aceptamos (Confirmar)
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      final confirmBtn = find.textContaining(localeCode == 'es' ? 'Usar' : 'Use');
+      expect(confirmBtn, findsOneWidget);
+      await tester.tap(confirmBtn);
+      await tester.pumpAndSettle();
+
+      // ── PANTALLA 4: Tarjeta de progreso activa ───────────────────────────
+      await binding.takeScreenshot('${folderName}_04_progress_card');
+
+      // ── PANTALLA 5: Calendario ───────────────────────────────────────────
       await tester.tap(find.byIcon(Icons.menu));
       await tester.pumpAndSettle();
+      await tester.tap(find.byIcon(Icons.calendar_month_outlined));
+      await tester.pumpAndSettle();
+      await binding.takeScreenshot('${folderName}_05_calendar');
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle();
 
-      // Tap en la opción "Historial" (buscamos por el icono Icons.history_outlined)
+      // ── PANTALLA 6: Historial ────────────────────────────────────────────
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
       await tester.tap(find.byIcon(Icons.history_outlined));
       await tester.pumpAndSettle();
-      await binding.takeScreenshot('${folderName}_05_history');
+      await binding.takeScreenshot('${folderName}_06_history');
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle();
 
-      // Volver a Home
-      if (tester.any(find.byType(BackButton))) {
-        await tester.tap(find.byType(BackButton));
-        await tester.pumpAndSettle();
-      } else {
-        // Fallback si el drawer o la página no tienen back button estándar
-        await tester.pageBack();
-        await tester.pumpAndSettle();
-      }
-
-      // ── PANTALLA 6: Info – pestaña "Sobre el Kéfir" (vía NavigationDrawer) ──
+      // ── PANTALLA 7: Info - Guía ──────────────────────────────────────────
       await tester.tap(find.byIcon(Icons.menu));
       await tester.pumpAndSettle();
       await tester.tap(find.byIcon(Icons.info_outline));
       await tester.pumpAndSettle();
-      await binding.takeScreenshot('${folderName}_06_info_kefir');
-
-      // Cambiar a segunda pestaña (Guía de la App / App Guide)
-      await tester.tap(find.byIcon(Icons.help_outline));
+      // Estamos en la pestaña 1 (Guía) por defecto o tras el refactor
+      await tester.tap(find.byIcon(Icons.help_outline)); // Aseguramos pestaña guía
       await tester.pumpAndSettle();
       await binding.takeScreenshot('${folderName}_07_info_guide');
 
+      // ── PANTALLA 8: Info - Fermentos ─────────────────────────────────────
+      await tester.tap(find.byIcon(Icons.info_outline)); // Icono de la segunda pestaña
+      await tester.pumpAndSettle();
+      await binding.takeScreenshot('${folderName}_08_info_ferments');
+
+      // ── PANTALLA 9: Info - Avanzado ──────────────────────────────────────
+      await tester.tap(find.byIcon(Icons.settings_suggest_outlined)); // Icono de la tercera pestaña
+      await tester.pumpAndSettle();
+      await binding.takeScreenshot('${folderName}_09_info_advanced');
+
       // Volver a Home
-      // await tester.pageBack();
       await tester.tap(find.byType(BackButton));
       await tester.pumpAndSettle();
 
-      // Resetear locale para no interferir entre tests
+      // Resetear locale
       final elementToReset = tester.element(find.byType(app.KefirControlApp));
       ProviderScope.containerOf(elementToReset).read(localeProvider.notifier).setLocale(null);
     });

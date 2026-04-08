@@ -300,8 +300,23 @@ class HomeScreen extends ConsumerWidget {
             )
           : ListView.builder(
               padding: const EdgeInsets.all(16).copyWith(bottom: 100),
-              itemCount: fermentations.length,
+              itemCount: fermentations.length + 1,
               itemBuilder: (context, index) {
+                if (index == fermentations.length) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 24),
+                    child: Text(
+                      l10n.homeSwipeDeleteHint,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSurfaceVariant
+                                .withAlpha(150),
+                          ),
+                    ),
+                  );
+                }
                 final fermentation = fermentations[index];
                 return Dismissible(
                   key: Key(fermentation.id),
