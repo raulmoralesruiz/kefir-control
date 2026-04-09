@@ -1,10 +1,17 @@
 🚀 v2.2.1
 
 ✨ Nuevas funcionalidades
-Se ha implementado la selección entre modo oscuro, claro y sistema
+Selección de tema: modo claro, oscuro o automático según el sistema
 
-se ha mejorado el diseño y funcionamiento del menú lateral
+♻️ Cambios y refactorización
+Mejoras en el diseño y comportamiento del menú lateral
+Optimización del sistema de selección de idioma
 
-se ha mejorado la selección de idioma
+🎨 Mejoras en la interfaz
+Iconos de la aplicación actualizados y mejorados para un aspecto más profesional
 
-Corrección de errores y advertencias en el desarrollo de la app
+📊 Mejoras en funcionalidad
+Ajustes generales para una navegación más fluida
+
+🔒 Fiabilidad y datos
+Corrección de errores y resolución de advertencias detectadas durante el desarrollo

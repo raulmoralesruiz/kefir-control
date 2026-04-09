@@ -1,0 +1,17 @@
+🚀 v2.2.1
+
+✨ New features
+Theme selection: light, dark, or system-based mode
+
+♻️ Changes & refactoring
+Improvements to the side menu design and behavior
+Optimized language selection system
+
+🎨 Interface improvements
+Updated and improved app icons for a more polished look
+
+📊 Functionality improvements
+General adjustments for smoother navigation
+
+🔒 Reliability & data
+Bug fixes and resolution of warnings detected during development
