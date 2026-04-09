@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="assets/icon/app_icon.png" alt="Kéfir Control Logo" width="120" />
+  <img src="assets/icon/app_icon.png" style="border-radius: 50%;" alt="Kéfir Control Logo" width="120" />
   <br/>
   Kéfir Control
 </h1>
