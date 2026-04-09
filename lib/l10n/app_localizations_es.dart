@@ -24,6 +24,18 @@ class AppLocalizationsEs extends AppLocalizations {
   String get changeLanguage => 'Cambiar idioma';
 
   @override
+  String get themeTitle => 'Tema';
+
+  @override
+  String get themeSystem => 'Sistema';
+
+  @override
+  String get themeLight => 'Modo claro';
+
+  @override
+  String get themeDark => 'Modo oscuro';
+
+  @override
   String get drawerDonate => 'Invítame a un café';
 
   @override

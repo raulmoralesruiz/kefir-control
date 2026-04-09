@@ -17,6 +17,7 @@ import 'package:share_plus/share_plus.dart';
 import '../providers/locale_provider.dart';
 import '../providers/history_provider.dart';
 import '../providers/service_providers.dart';
+import '../providers/theme_provider.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -91,22 +92,27 @@ class HomeScreen extends ConsumerWidget {
   Future<void> _exportBackup(BuildContext context, WidgetRef ref) async {
     final l10n = AppLocalizations.of(context)!;
     try {
-      final jsonString = await ref.read(fermentationServiceProvider).exportData();
+      final jsonString =
+          await ref.read(fermentationServiceProvider).exportData();
       final directory = await getTemporaryDirectory();
       final path = '${directory.path}/kefir_backup.json';
       final file = File(path);
       await file.writeAsString(jsonString);
-      
+
       final xfile = XFile(path);
-      await SharePlus.instance.share(ShareParams(files: [xfile], text: 'Backup de Kefir Control'));
+      await SharePlus.instance
+          .share(ShareParams(files: [xfile], text: 'Backup de Kefir Control'));
       if (context.mounted) {
-        showDialog(context: context, builder: (ctx) => AlertDialog(
-          title: Text(l10n.backupSuccessTitle),
-          content: Text(l10n.backupSuccessDesc),
-          actions: [
-            FilledButton.tonal(onPressed: () => Navigator.pop(ctx), child: Text(l10n.accept))
-          ]
-        ));
+        showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                    title: Text(l10n.backupSuccessTitle),
+                    content: Text(l10n.backupSuccessDesc),
+                    actions: [
+                      FilledButton.tonal(
+                          onPressed: () => Navigator.pop(ctx),
+                          child: Text(l10n.accept))
+                    ]));
       }
     } catch (e) {
       // Ignorar o loguear
@@ -123,38 +129,48 @@ class HomeScreen extends ConsumerWidget {
       if (result != null && result.files.single.path != null) {
         final file = File(result.files.single.path!);
         final jsonString = await file.readAsString();
-        final success = await ref.read(fermentationServiceProvider).importData(jsonString);
+        final success =
+            await ref.read(fermentationServiceProvider).importData(jsonString);
         if (context.mounted) {
           if (success) {
             ref.invalidate(activeFermentationsProvider);
             ref.invalidate(historyProvider);
-            showDialog(context: context, builder: (ctx) => AlertDialog(
-              title: Text(l10n.restoreSuccessTitle),
-              content: Text(l10n.restoreSuccessDesc),
-              actions: [
-                FilledButton.tonal(onPressed: () => Navigator.pop(ctx), child: Text(l10n.accept))
-              ]
-            ));
+            showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                        title: Text(l10n.restoreSuccessTitle),
+                        content: Text(l10n.restoreSuccessDesc),
+                        actions: [
+                          FilledButton.tonal(
+                              onPressed: () => Navigator.pop(ctx),
+                              child: Text(l10n.accept))
+                        ]));
           } else {
-            showDialog(context: context, builder: (ctx) => AlertDialog(
-              title: Text(l10n.restoreErrorTitle),
-              content: Text(l10n.restoreErrorDesc),
-              actions: [
-                FilledButton.tonal(onPressed: () => Navigator.pop(ctx), child: Text(l10n.accept))
-              ]
-            ));
+            showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                        title: Text(l10n.restoreErrorTitle),
+                        content: Text(l10n.restoreErrorDesc),
+                        actions: [
+                          FilledButton.tonal(
+                              onPressed: () => Navigator.pop(ctx),
+                              child: Text(l10n.accept))
+                        ]));
           }
         }
       }
     } catch (e) {
       if (context.mounted) {
-        showDialog(context: context, builder: (ctx) => AlertDialog(
-          title: Text(l10n.restoreErrorTitle),
-          content: Text(l10n.restoreErrorDesc),
-          actions: [
-            FilledButton.tonal(onPressed: () => Navigator.pop(ctx), child: Text(l10n.accept))
-          ]
-        ));
+        showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                    title: Text(l10n.restoreErrorTitle),
+                    content: Text(l10n.restoreErrorDesc),
+                    actions: [
+                      FilledButton.tonal(
+                          onPressed: () => Navigator.pop(ctx),
+                          child: Text(l10n.accept))
+                    ]));
       }
     }
   }
@@ -163,6 +179,7 @@ class HomeScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     final isEnglish = Localizations.localeOf(context).languageCode == 'en';
     final colorScheme = Theme.of(context).colorScheme;
+    final currentTheme = ref.watch(themeProvider);
 
     return NavigationDrawer(
       onDestinationSelected: (index) async {
@@ -175,10 +192,8 @@ class HomeScreen extends ConsumerWidget {
             Navigator.push(
                 context, MaterialPageRoute(builder: (_) => const InfoScreen()));
           case 2:
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (_) => const CalendarScreen()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (_) => const CalendarScreen()));
           case 3:
             await _exportBackup(context, ref);
           case 4:
@@ -192,50 +207,123 @@ class HomeScreen extends ConsumerWidget {
       },
       selectedIndex: null,
       children: [
-        DrawerHeader(
+        Container(
+          padding: EdgeInsets.fromLTRB(
+              24, MediaQuery.paddingOf(context).top, 24, 12),
           decoration: BoxDecoration(
-            color: colorScheme.primaryContainer,
+            color: colorScheme.primaryContainer.withAlpha(80),
+            borderRadius: const BorderRadius.vertical(
+              bottom: Radius.circular(32),
+            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(Icons.local_drink, size: 40, color: colorScheme.primary),
-              const SizedBox(height: 12),
-              Text(
-                l10n.appTitle,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: colorScheme.onPrimaryContainer,
-                ),
+              Row(
+                children: [
+                  Icon(Icons.local_drink, size: 32, color: colorScheme.primary),
+                  const SizedBox(width: 12),
+                  Text(
+                    l10n.appTitle,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onPrimaryContainer,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 4),
-              Text(
-                l10n.devDesc,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: colorScheme.onPrimaryContainer.withAlpha(180),
+              Padding(
+                padding: const EdgeInsets.only(left: 4),
+                child: Text(
+                  l10n.devDesc,
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: colorScheme.onPrimaryContainer.withAlpha(180),
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        // Switch de idioma: shape y padding igualados al NavigationDrawerDestination
+        const SizedBox(height: 12),
+        // Cambio de idioma (Bottom Sheet)
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-          child: SwitchListTile(
-            secondary: Icon(
-              isEnglish ? Icons.language : Icons.language,
+          child: ListTile(
+            leading: Icon(
+              Icons.language,
               color: colorScheme.onSurfaceVariant,
             ),
-            title: Text(l10n.changeLanguage),
-            subtitle: Text(isEnglish ? 'English' : 'Español'),
-            value: isEnglish,
-            onChanged: (_) {
-              ref.read(localeProvider.notifier).setLocale(
-                  isEnglish ? const Locale('es') : const Locale('en'));
+            title: Text(isEnglish ? 'English' : 'Español'),
+            onTap: () {
+              _showSelectionSheet<Locale>(
+                context: context,
+                title: l10n.changeLanguage,
+                selectedValue: Localizations.localeOf(context),
+                onSelected: (locale) =>
+                    ref.read(localeProvider.notifier).setLocale(locale),
+                options: [
+                  BottomSheetOption(
+                    value: const Locale('es'),
+                    label: isEnglish ? 'Spanish' : 'Español',
+                    icon: Icons.translate,
+                  ),
+                  BottomSheetOption(
+                    value: const Locale('en'),
+                    label: isEnglish ? 'English' : 'Inglés',
+                    icon: Icons.translate,
+                  ),
+                ],
+              );
             },
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(28),
+            ),
+          ),
+        ),
+        // Selección de tema (Bottom Sheet)
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+          child: ListTile(
+            leading: Icon(
+              _getThemeIcon(currentTheme),
+              color: colorScheme.onSurfaceVariant,
+            ),
+            title: Text(
+              currentTheme == ThemeMode.system
+                  ? l10n.themeSystem
+                  : currentTheme == ThemeMode.light
+                      ? l10n.themeLight
+                      : l10n.themeDark,
+            ),
+            onTap: () {
+              _showSelectionSheet<ThemeMode>(
+                context: context,
+                title: l10n.themeTitle,
+                selectedValue: currentTheme,
+                onSelected: (mode) =>
+                    ref.read(themeProvider.notifier).setThemeMode(mode),
+                options: [
+                  BottomSheetOption(
+                    value: ThemeMode.system,
+                    label: l10n.themeSystem,
+                    icon: Icons.brightness_auto_outlined,
+                  ),
+                  BottomSheetOption(
+                    value: ThemeMode.light,
+                    label: l10n.themeLight,
+                    icon: Icons.light_mode_outlined,
+                  ),
+                  BottomSheetOption(
+                    value: ThemeMode.dark,
+                    label: l10n.themeDark,
+                    icon: Icons.dark_mode_outlined,
+                  ),
+                ],
+              );
+            },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(28),
             ),
@@ -377,4 +465,89 @@ class HomeScreen extends ConsumerWidget {
       ),
     );
   }
+
+  IconData _getThemeIcon(ThemeMode mode) {
+    switch (mode) {
+      case ThemeMode.system:
+        return Icons.brightness_auto_outlined;
+      case ThemeMode.light:
+        return Icons.light_mode_outlined;
+      case ThemeMode.dark:
+        return Icons.dark_mode_outlined;
+    }
+  }
+
+  void _showSelectionSheet<T>({
+    required BuildContext context,
+    required String title,
+    required List<BottomSheetOption<T>> options,
+    required T selectedValue,
+    required ValueChanged<T> onSelected,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      showDragHandle: true,
+      useSafeArea: true,
+      builder: (context) {
+        final colorScheme = Theme.of(context).colorScheme;
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              const SizedBox(height: 8),
+              ...options.map((option) {
+                final isSelected = option.value == selectedValue;
+                return ListTile(
+                  leading: Icon(
+                    option.icon,
+                    color: isSelected
+                        ? colorScheme.primary
+                        : colorScheme.onSurfaceVariant,
+                  ),
+                  title: Text(
+                    option.label,
+                    style: TextStyle(
+                      fontWeight: isSelected ? FontWeight.bold : null,
+                      color: isSelected ? colorScheme.primary : null,
+                    ),
+                  ),
+                  trailing: isSelected
+                      ? Icon(Icons.check, color: colorScheme.primary)
+                      : null,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(28),
+                  ),
+                  onTap: () {
+                    onSelected(option.value);
+                    Navigator.pop(context);
+                  },
+                );
+              }),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class BottomSheetOption<T> {
+  final T value;
+  final String label;
+  final IconData icon;
+
+  BottomSheetOption({
+    required this.value,
+    required this.label,
+    required this.icon,
+  });
 }
