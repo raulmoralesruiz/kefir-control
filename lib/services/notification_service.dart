@@ -45,13 +45,12 @@ class NotificationService {
       String titleReminder,
       String bodyReminder) async {
     await init();
-    if (kIsWeb) return; 
+    if (kIsWeb) return;
 
     const androidDetails = AndroidNotificationDetails(
       'kefir_control_channel',
       'Kefir Control',
-      channelDescription:
-          'Notificaciones de finalización de fermentaciones',
+      channelDescription: 'Notificaciones de finalización de fermentaciones',
       importance: Importance.max,
       priority: Priority.high,
     );
@@ -64,10 +63,11 @@ class NotificationService {
 
     if (eventDate.isBefore(now)) return;
 
+    // 1. Recordatorio 2h antes
     final reminderDate = eventDate.subtract(const Duration(hours: 2));
     if (reminderDate.isAfter(now)) {
       await _notificationsPlugin.zonedSchedule(
-        baseId + 1, // id for reminder
+        baseId + 1, // id for 2h reminder
         titleReminder,
         bodyReminder,
         reminderDate,
@@ -78,6 +78,7 @@ class NotificationService {
       );
     }
 
+    // 2. Notificación de "Listo"
     await _notificationsPlugin.zonedSchedule(
       baseId, // id for ready
       titleReady,
@@ -88,13 +89,34 @@ class NotificationService {
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
     );
+
+    // 3. Notificaciones recurrentes (Cada hora, hasta 5 veces)
+    for (int i = 1; i <= 5; i++) {
+      final followupDate = eventDate.add(Duration(hours: i));
+      if (followupDate.isAfter(now)) {
+        await _notificationsPlugin.zonedSchedule(
+          baseId + 10 + i, // IDs 10+1, 10+2...
+          titleReady,
+          '$bodyReady (Recordatorio #$i)',
+          followupDate,
+          details,
+          androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+          uiLocalNotificationDateInterpretation:
+              UILocalNotificationDateInterpretation.absoluteTime,
+        );
+      }
+    }
   }
 
   Future<void> cancel(int baseId) async {
     await init();
     if (kIsWeb) return;
+    // Cancelar la principal, la de 2h y todas las recurrentes (0, 1, y 11-15)
     await _notificationsPlugin.cancel(baseId);
     await _notificationsPlugin.cancel(baseId + 1);
+    for (int i = 1; i <= 5; i++) {
+      await _notificationsPlugin.cancel(baseId + 10 + i);
+    }
   }
 
   Future<void> cancelAll() async {

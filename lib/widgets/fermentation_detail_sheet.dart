@@ -611,7 +611,91 @@ class _ProgressSection extends StatelessWidget {
                   minHeight: 16,
                 ),
         ),
+        if (historyItem == null && !isOpenEnded) ...[
+          const SizedBox(height: 16),
+          _QuickAdjustmentButtons(
+            fermentation: fermentation!,
+            typeColor: typeColor,
+          ),
+        ],
       ],
+    );
+  }
+}
+
+class _QuickAdjustmentButtons extends ConsumerWidget {
+  final Fermentation fermentation;
+  final Color typeColor;
+
+  const _QuickAdjustmentButtons({
+    required this.fermentation,
+    required this.typeColor,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _AdjustmentButton(
+          label: '-1h',
+          icon: Icons.remove_circle_outline,
+          color: typeColor,
+          onPressed: () => _adjust(ref, l10n, const Duration(hours: -1)),
+        ),
+        const SizedBox(width: 16),
+        _AdjustmentButton(
+          label: '+1h',
+          icon: Icons.add_circle_outline,
+          color: typeColor,
+          onPressed: () => _adjust(ref, l10n, const Duration(hours: 1)),
+        ),
+      ],
+    );
+  }
+
+  void _adjust(WidgetRef ref, AppLocalizations l10n, Duration offset) {
+    final notifTitle = fermentation.type == FermentationType.kombucha
+        ? l10n.notifReadyTitleKombucha
+        : l10n.notifReadyTitleKefir;
+
+    ref.read(activeFermentationsProvider.notifier).adjustDuration(
+          fermentation.id,
+          offset,
+          notifReadyTitle: notifTitle,
+          notifReadyBody: l10n.notifReadyBodyGeneric,
+          notifReminderTitle: l10n.notifReminderTitleGeneric,
+          notifReminderBody: l10n.notifReminderBodyGeneric,
+        );
+  }
+}
+
+class _AdjustmentButton extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final Color color;
+  final VoidCallback onPressed;
+
+  const _AdjustmentButton({
+    required this.label,
+    required this.icon,
+    required this.color,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FilledButton.tonalIcon(
+      onPressed: onPressed,
+      icon: Icon(icon, size: 18),
+      label: Text(label),
+      style: FilledButton.styleFrom(
+        visualDensity: VisualDensity.compact,
+        backgroundColor: color.withValues(alpha: 0.1),
+        foregroundColor: color,
+      ),
     );
   }
 }

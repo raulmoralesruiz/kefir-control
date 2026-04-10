@@ -164,6 +164,35 @@ class ActiveFermentations extends _$ActiveFermentations {
     await service.saveActiveFermentations(state);
   }
 
+  /// Ajusta la duración de una fermentación activa sumando o restando un offset.
+  Future<void> adjustDuration(
+    String id,
+    Duration offset, {
+    required String notifReadyTitle,
+    required String notifReadyBody,
+    required String notifReminderTitle,
+    required String notifReminderBody,
+  }) async {
+    final list = state.where((f) => f.id == id).toList();
+    final fermentation = list.isEmpty ? null : list.first;
+    if (fermentation == null) return;
+
+    final newDuration = fermentation.targetDuration + offset;
+    // No permitir duraciones negativas o de 0 (mínimo 1 minuto por seguridad)
+    final safeDuration =
+        newDuration.inMinutes < 1 ? const Duration(minutes: 1) : newDuration;
+
+    await updateDuration(
+      id,
+      safeDuration.inSeconds,
+      isOpenEnded: fermentation.isOpenEnded,
+      notifReadyTitle: notifReadyTitle,
+      notifReadyBody: notifReadyBody,
+      notifReminderTitle: notifReminderTitle,
+      notifReminderBody: notifReminderBody,
+    );
+  }
+
   /// Actualiza las notas de una fermentación activa.
   Future<void> updateNotes(String id, String? newNotes) async {
     final trimmed = newNotes?.trim().isEmpty == true ? null : newNotes?.trim();
