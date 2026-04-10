@@ -96,6 +96,7 @@ class HomeScreen extends ConsumerWidget {
     try {
       final jsonString =
           await ref.read(fermentationServiceProvider).exportData();
+      late final bool backupSuccessful;
       if (!Platform.isLinux) {
         final directory = await getTemporaryDirectory();
         final path = '${directory.path}/kefir_backup.json';
@@ -103,20 +104,9 @@ class HomeScreen extends ConsumerWidget {
         await file.writeAsString(jsonString);
 
         final xfile = XFile(path);
-        await SharePlus.instance.share(
+        final shareResult = await SharePlus.instance.share(
             ShareParams(files: [xfile], text: 'Backup de Kefir Control'));
-        if (context.mounted) {
-          showDialog(
-              context: context,
-              builder: (ctx) => AlertDialog(
-                      title: Text(l10n.backupSuccessTitle),
-                      content: Text(l10n.backupSuccessDesc),
-                      actions: [
-                        FilledButton.tonal(
-                            onPressed: () => Navigator.pop(ctx),
-                            child: Text(l10n.accept))
-                      ]));
-        }
+        backupSuccessful = shareResult.status == ShareResultStatus.success;
       } else {
         final path = await FilePicker.platform.saveFile(
           dialogTitle: 'Backup de Kefir Control',
@@ -126,18 +116,19 @@ class HomeScreen extends ConsumerWidget {
           lockParentWindow: true,
           bytes: utf8.encode(jsonString),
         );
-        if (path != null && context.mounted) {
-          showDialog(
-              context: context,
-              builder: (ctx) => AlertDialog(
-                      title: Text(l10n.backupSuccessTitle),
-                      content: Text(l10n.backupSuccessDesc),
-                      actions: [
-                        FilledButton.tonal(
-                            onPressed: () => Navigator.pop(ctx),
-                            child: Text(l10n.accept))
-                      ]));
-        }
+        backupSuccessful = path != null;
+      }
+      if (backupSuccessful && context.mounted) {
+        showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                    title: Text(l10n.backupSuccessTitle),
+                    content: Text(l10n.backupSuccessDesc),
+                    actions: [
+                      FilledButton.tonal(
+                          onPressed: () => Navigator.pop(ctx),
+                          child: Text(l10n.accept))
+                    ]));
       }
     } catch (e) {
       // Ignorar o loguear
