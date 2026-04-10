@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -94,25 +96,48 @@ class HomeScreen extends ConsumerWidget {
     try {
       final jsonString =
           await ref.read(fermentationServiceProvider).exportData();
-      final directory = await getTemporaryDirectory();
-      final path = '${directory.path}/kefir_backup.json';
-      final file = File(path);
-      await file.writeAsString(jsonString);
+      if (!Platform.isLinux) {
+        final directory = await getTemporaryDirectory();
+        final path = '${directory.path}/kefir_backup.json';
+        final file = File(path);
+        await file.writeAsString(jsonString);
 
-      final xfile = XFile(path);
-      await SharePlus.instance
-          .share(ShareParams(files: [xfile], text: 'Backup de Kefir Control'));
-      if (context.mounted) {
-        showDialog(
-            context: context,
-            builder: (ctx) => AlertDialog(
-                    title: Text(l10n.backupSuccessTitle),
-                    content: Text(l10n.backupSuccessDesc),
-                    actions: [
-                      FilledButton.tonal(
-                          onPressed: () => Navigator.pop(ctx),
-                          child: Text(l10n.accept))
-                    ]));
+        final xfile = XFile(path);
+        await SharePlus.instance.share(
+            ShareParams(files: [xfile], text: 'Backup de Kefir Control'));
+        if (context.mounted) {
+          showDialog(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                      title: Text(l10n.backupSuccessTitle),
+                      content: Text(l10n.backupSuccessDesc),
+                      actions: [
+                        FilledButton.tonal(
+                            onPressed: () => Navigator.pop(ctx),
+                            child: Text(l10n.accept))
+                      ]));
+        }
+      } else {
+        final path = await FilePicker.platform.saveFile(
+          dialogTitle: 'Backup de Kefir Control',
+          fileName: 'kefir_backup.json',
+          type: FileType.custom,
+          allowedExtensions: const <String>['json'],
+          lockParentWindow: true,
+          bytes: utf8.encode(jsonString),
+        );
+        if (path != null && context.mounted) {
+          showDialog(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                      title: Text(l10n.backupSuccessTitle),
+                      content: Text(l10n.backupSuccessDesc),
+                      actions: [
+                        FilledButton.tonal(
+                            onPressed: () => Navigator.pop(ctx),
+                            child: Text(l10n.accept))
+                      ]));
+        }
       }
     } catch (e) {
       // Ignorar o loguear
