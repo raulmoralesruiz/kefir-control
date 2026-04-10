@@ -177,7 +177,6 @@ class HomeScreen extends ConsumerWidget {
 
   Widget _buildDrawer(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
-    final isEnglish = Localizations.localeOf(context).languageCode == 'en';
     final colorScheme = Theme.of(context).colorScheme;
     final currentTheme = ref.watch(themeProvider);
 
@@ -256,7 +255,7 @@ class HomeScreen extends ConsumerWidget {
               Icons.language,
               color: colorScheme.onSurfaceVariant,
             ),
-            title: Text(isEnglish ? 'English' : 'Español'),
+            title: Text(_getLanguageLabel(Localizations.localeOf(context))),
             onTap: () {
               _showSelectionSheet<Locale>(
                 context: context,
@@ -267,12 +266,17 @@ class HomeScreen extends ConsumerWidget {
                 options: [
                   BottomSheetOption(
                     value: const Locale('es'),
-                    label: isEnglish ? 'Spanish' : 'Español',
+                    label: 'Español',
                     icon: Icons.translate,
                   ),
                   BottomSheetOption(
                     value: const Locale('en'),
-                    label: isEnglish ? 'English' : 'Inglés',
+                    label: 'English',
+                    icon: Icons.translate,
+                  ),
+                  BottomSheetOption(
+                    value: const Locale('es', 'AN'),
+                    label: 'Andalûh',
                     icon: Icons.translate,
                   ),
                 ],
@@ -537,6 +541,20 @@ class HomeScreen extends ConsumerWidget {
         );
       },
     );
+  }
+
+  String _getLanguageLabel(Locale locale) {
+    switch (locale.languageCode) {
+      case 'es':
+        if (locale.countryCode == 'AN') {
+          return 'Andalûh';
+        }
+        return 'Español';
+      case 'en':
+        return 'English';
+      default:
+        return locale.languageCode.toUpperCase();
+    }
   }
 }
 

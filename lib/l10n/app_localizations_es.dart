@@ -721,3 +721,720 @@ class AppLocalizationsEs extends AppLocalizations {
   String get infoAdvancedDataDesc =>
       'Usa las opciones de Exportar y Restaurar para mantener tus registros a salvo o moverlos de dispositivo.';
 }
+
+/// The translations for Spanish Castilian, as used in Netherlands Antilles (`es_AN`).
+class AppLocalizationsEsAn extends AppLocalizationsEs {
+  AppLocalizationsEsAn() : super('es_AN');
+
+  @override
+  String get appTitle => 'Kéfî Contrôh';
+
+  @override
+  String get accept => 'Açêttâh';
+
+  @override
+  String get cancel => 'Cançelâh';
+
+  @override
+  String get history => 'Îttoriâh';
+
+  @override
+  String get changeLanguage => 'Cambiâh idioma';
+
+  @override
+  String get themeTitle => 'Tema';
+
+  @override
+  String get themeSystem => 'Çîttema';
+
+  @override
+  String get themeLight => 'Modo claro';
+
+  @override
+  String get themeDark => 'Modo ôccuro';
+
+  @override
+  String get drawerDonate => 'Imbítame a un café';
+
+  @override
+  String get drawerDonateSubtitle => 'Apoya el deçarroyo';
+
+  @override
+  String get historyTitle => 'Îttoriâh';
+
+  @override
+  String get homeSwipeDeleteHint => 'Dêl-liça una tarheta pa borrâl-la';
+
+  @override
+  String get historyEmpty => 'No ay fermentaçionê rehîttrâh.';
+
+  @override
+  String get historyClear => 'Limpiâh';
+
+  @override
+  String get historyClearTitle => 'Borrâh îttoriâh?';
+
+  @override
+  String get historyClearContent => 'Êtta aççiô no çe pue deçaçêh.';
+
+  @override
+  String get historyClearConfirm => 'Borrâh';
+
+  @override
+  String get homeNoActiveFermentationTitle => 'Çin fermentaçión âttiba';
+
+  @override
+  String get homeNoActiveFermentationDesc =>
+      'Çelêççiona una ôççión der menú pa començâh.';
+
+  @override
+  String get homeEstimatedFinish => 'Tiempo êttimao';
+
+  @override
+  String get homeRemainingTime => 'Quedan';
+
+  @override
+  String get homeCompleted => 'Completao';
+
+  @override
+  String get homeStopTitle => 'Finaliçâh fermentaçión?';
+
+  @override
+  String get homeStopContent =>
+      'Êttâh a punto de parâh er temporiçadôh. Açegúrate de colâh lô nódulô.';
+
+  @override
+  String get homeStopConfirm => 'Finaliçâh';
+
+  @override
+  String get btnStartFermentation => 'Iniçiâh fermentaçión';
+
+  @override
+  String get btnStartPastFermentation => 'Rehîttrâh fermentaçión paçá';
+
+  @override
+  String get btnStopFermentation => 'Finaliçâh fermentaçión';
+
+  @override
+  String get dialogManualTitle => 'Iniçiâh fermentaçión paçá';
+
+  @override
+  String get dialogManualDesc =>
+      'Çeleççiona la fexa y ora a la que mêçclâtte la lexe con lô nódulô pa carculâh er progreço açttuâh y programâ l\'alarma.';
+
+  @override
+  String get dialogManualDate => 'Fexa d\'iniçio';
+
+  @override
+  String get dialogManualTime => 'Ora d\'iniçio';
+
+  @override
+  String get dialogManualDuration => 'Duraççiô objetibo';
+
+  @override
+  String get dialogManualBtnStart => 'Iniçiâh';
+
+  @override
+  String get dialogOption24h => '24 orâ';
+
+  @override
+  String get dialogOption36h => '36 orâ';
+
+  @override
+  String get dialogOption48h => '48 orâ';
+
+  @override
+  String get infoTitle => 'Informaçión y Guía';
+
+  @override
+  String get infoCard1Title => '🥛 ¿Qué êh er Kéfî de lexe?';
+
+  @override
+  String get infoCard1Desc =>
+      'Er kéfî de lexe êh una bebía fermentá rica en probióticô que çe elabora añadiendo nódulô de kéfî a lexe entera a temperatura ambiente.';
+
+  @override
+  String get infoCard2Title => '⏱️ Tiempô de Fermentaçiôh';
+
+  @override
+  String get infoCard2Subtitle1 => '24 Orâ';
+
+  @override
+  String get infoCard2Desc1 =>
+      'Çabô çuabe y conçîttençia líquida, pareçío a un yogûh pa bebêh con toquê durçê. Efêtto liheramente laçante. Ideâh çi la temperatura ambiente êh arta (>25ºC).';
+
+  @override
+  String get infoCard2Subtitle2 => '36 Orâ';
+
+  @override
+  String get infoCard2Desc2 =>
+      'Er punto mâh equilibrao. Tettura mâ cremôça que çepara liheramente er çuero. Efêtto reguladô intêttinâh.';
+
+  @override
+  String get infoCard2Subtitle3 => '48 Orâ';
+
+  @override
+  String get infoCard2Desc3 =>
+      'Çabôh áçido y fuerte. Er çuero formarâ una bôrça de líquido ebidente en la baçe. Efêtto âttrinhente. Recomendao çolo çi la temperatura ambiente êh mu baha o çe bûcca un kéfî curao.';
+
+  @override
+  String get infoCard3Title => 'Conçeho';
+
+  @override
+  String get infoCard3Desc =>
+      'Ebita lô utençiliô de metâh ar colâh tû nódulô; uça cuxarâ y coladorê de pláttico o maera pa no dañâh lô microorganîmmô.';
+
+  @override
+  String get devDesc => 'Hêttiona tû fermentaçionê';
+
+  @override
+  String get notifReadyTitle => '¡Er kéfî êttá lîtto! 🥛';
+
+  @override
+  String notifReadyBody(Object hours) {
+    return 'La fermentaççiô de $hours orâ a terminao. Êh ora de colâh lô nódulô y dîffrutâh de tu bebía probiótica.';
+  }
+
+  @override
+  String get notifReminderTitle => 'Preparaççiô par Kéfî';
+
+  @override
+  String get notifReminderBody =>
+      'Fartan 2 orâ pa terminâh. ¡Be preparando reçipientê limpiô!';
+
+  @override
+  String get infoTab1 => 'Guía';
+
+  @override
+  String get infoTab2 => 'Fermentô';
+
+  @override
+  String get infoTab3 => 'Abançao';
+
+  @override
+  String get infoProcessTitle => 'Er Proçeço der Kéfî';
+
+  @override
+  String get infoProcessStep1Title => 'Preparaçiôn';
+
+  @override
+  String get infoProcessStep1Desc =>
+      'Çe introduçen lô nódulô de kéfî en lexe a te mperatura ambiente, preferibemente lexe entera (aunque tamié pue çê çemidênnatá o dênnatá).';
+
+  @override
+  String get infoProcessStep2Title => 'Fermentaçiôn (24h - 48h)';
+
+  @override
+  String get infoProcessStep2Desc =>
+      'Lô microorganîmmô conçumen la lâttoça de la lexe, trâfformándola en áçido láttico (lo que le da çu çabô áçido), dióççido de carbono y otrô compuêttô benefiçioçô. A mayôh tiempo, mâh êppeço y áçido çe buerbe.';
+
+  @override
+  String get infoProcessStep3Title => 'Recoleççiôn';
+
+  @override
+  String get infoProcessStep3Desc =>
+      'Çe cuela la mêccla con un coladôh no metálico. Er líquido reçurtante êh la bebía de kéfî lîtta pa conçumîh, y lô nódulô recuperáô çe buerben a introduçîh en nueba lexe pa repetîh er çiclo.';
+
+  @override
+  String get infoGuideTitle => 'Cómo uçâh Kéfî Contrôh';
+
+  @override
+  String get infoGuideDesc =>
+      'Êtta aplicaçión êttá diçeñá p\'ayuarte a yebâ un contrôh preçiço de lô tiêmppô de tû fermentaçionê, ebitando que tu kéfî çe buerba êççeçibamente áçido por orbío.';
+
+  @override
+  String get infoGuideStep1Title => 'Iniçiâh Fermentaçiôn Ahora';
+
+  @override
+  String get infoGuideStep1Desc =>
+      'Purça êtte botón hûtto dêppuêh de mêcclâh la lexe con lô nódulô. Te pedirâ que elihâ cuánto tiempo quierê que fermente (24, 36 o 48 orâ). La âpp programarâ una alarma automática.';
+
+  @override
+  String get infoGuideStep2Title => 'Rehîttrâh Fermentaçión Paçá';
+
+  @override
+  String get infoGuideStep2Desc =>
+      'Çe te orbidó dâl-le ar botôn cuando preparâtte er kéfî êtta mañana? No paça ná. Uça êtta oppçiôn pa indicâ a qué ora (y día) êççâtta içîtte la mêccla en la bida reâh. La âpp carculará er tiempo trâccurrío dêdde entonçê.';
+
+  @override
+  String get infoGuideStep3Title => 'Notificaçionê';
+
+  @override
+  String get infoGuideStep3Desc =>
+      'Puê çerrâ la aplicaçión çin miedo. Cuando er tiempo ôhhetibo çe arcançe, reçibirâh una notificaçión en tu dîppoçitibo abiçándote de que êh ora de colâh er kéfî.';
+
+  @override
+  String get infoGuideStep4Title => 'Finaliçâh Fermentaçión';
+
+  @override
+  String get infoGuideStep4Desc =>
+      'Purça êtte botón roho una bêh ayâ colao er kéfî pa limpiâh er temporiçadôh y dehâh la aplicaçión lîtta pa tu próççima recolêççión.';
+
+  @override
+  String get infoGuideStepHarvestTitle => 'Coçexâh y Reiniçiâh';
+
+  @override
+  String get infoGuideStepHarvestDesc =>
+      'Cuando terminê un lote, uça êtte nuebo fluho pa guardâl-lo e iniçiâh er çigiente çiclo îmmediatamente con un çolo toque.';
+
+  @override
+  String get infoGuideStepAdjustTitle => 'Ahûttâh Tiempô';
+
+  @override
+  String get infoGuideStepAdjustDesc =>
+      '¿Haçe mâ calô de lo normâh? Purça çobre er progreço de cuarquiêh fermentaçión âttiba pa acortâh o alargâh çu duraçión.';
+
+  @override
+  String get historyDeleted => 'Rehîttro eliminao';
+
+  @override
+  String historyItemTitle(Object hours) {
+    return 'Fermentaçión ${hours}h';
+  }
+
+  @override
+  String historyItemStart(Object date) {
+    return 'Iniçio: $date';
+  }
+
+  @override
+  String historyItemEnd(Object date) {
+    return 'Fin: $date';
+  }
+
+  @override
+  String get timeDays => 'DÍÂ';
+
+  @override
+  String get timeHours => 'ORÂ';
+
+  @override
+  String get timeMinutes => 'MINUTÔ';
+
+  @override
+  String get timeSeconds => 'ÇEGUNDÔ';
+
+  @override
+  String get timelineStart => 'Iniçio';
+
+  @override
+  String get timelineEnd => 'Fin';
+
+  @override
+  String get step0Title => 'Etapa láttea';
+
+  @override
+  String get step0Desc =>
+      'La lexe êttá infuçionándoçe y empeçando a êppeçâh liheramente.';
+
+  @override
+  String get step1Title => 'Iniçiando fermentaçión';
+
+  @override
+  String get step1Desc =>
+      'Er kéfî comiença a tomâh forma con una açidêh çuabe.';
+
+  @override
+  String get step2Title => 'Fermentaçión ideâh';
+
+  @override
+  String get step2Desc =>
+      'Momento perfêtto pa la mayoría de lô gûttô. Têttura cremoça.';
+
+  @override
+  String get step3Title => 'Fermentaçión fuerte';
+
+  @override
+  String get step3Desc =>
+      'Çabôh mâh pronunçiao. Puede empeçâh a çepararçe er çuero.';
+
+  @override
+  String get step4Title => 'Mu áçido';
+
+  @override
+  String get step4Desc =>
+      'Çabôh mu agreçibo. Ideâh pa reçetâ que requieran açidêh fuerte.';
+
+  @override
+  String get addSheetTitle => '¿Qué bâ a fermentâh?';
+
+  @override
+  String get addSheetKefir => 'Kéfî de Lexe';
+
+  @override
+  String get addSheetKombucha => 'Kombuxa';
+
+  @override
+  String get notifReadyTitleKombucha => 'Kombuxa Lîtta';
+
+  @override
+  String get notifReadyTitleKefir => 'Kéfî Lîtto';
+
+  @override
+  String get notifReadyBodyGeneric => 'Tu fermentaçión a finaliçao';
+
+  @override
+  String get notifReminderTitleGeneric => 'Recordatorio';
+
+  @override
+  String get notifReminderBodyGeneric => 'Fartan 2 orâ pa terminâh';
+
+  @override
+  String get addSheetPastRecord => 'Rehîttrâh fermentaçión paçá';
+
+  @override
+  String addSheetPastSelected(Object date) {
+    return 'Iniçio: $date\nAhora elihe la duraçión';
+  }
+
+  @override
+  String get addSheetTimeKefir => 'Tiempo pa Kéfî';
+
+  @override
+  String addSheetHours(Object hours) {
+    return '$hours Orâ';
+  }
+
+  @override
+  String get addSheetTimeKombucha => 'Tiempo pa Kombuxa';
+
+  @override
+  String addSheetIdealTime(Object days) {
+    return 'Tu tiempo ideâ ($days díâh)';
+  }
+
+  @override
+  String addSheetDays(Object days) {
+    return '$days Díâ';
+  }
+
+  @override
+  String get cardTranscurrido => 'Trâccurrío';
+
+  @override
+  String get cardRestante => 'Rêttante';
+
+  @override
+  String get cardCosechar => 'Coçexâh';
+
+  @override
+  String get cardFinalizar => 'Finaliçâh';
+
+  @override
+  String get homeHarvestKombuchaTitle => 'Coçexâh Kombuxa';
+
+  @override
+  String get homeHarvestKombuchaDesc =>
+      '¿Deçeâ memoriçâh êtte tiempo êççâtto como tu tiempo ideâh pa futurâ fermentaçionê?';
+
+  @override
+  String get homeHarvestOnly => 'Çolo coçexâh';
+
+  @override
+  String get homeHarvestAndSave => 'Coçexâh y Guardâh';
+
+  @override
+  String get homeDeleteTitle => '¿Eliminâh fermentaçión?';
+
+  @override
+  String get homeDeleteDesc =>
+      'Çi eliminâ êtta tarheta, er proçeço çe dêccartará y no çe guardará en l\'ittoriâh.';
+
+  @override
+  String get homeDeleteBtn => 'Eliminâh';
+
+  @override
+  String get homeNewFermentation => 'Nueba fermentaçión';
+
+  @override
+  String get historyKombuchaFinished => 'Kombuxa coçexá';
+
+  @override
+  String historyKombuchaDuration(Object days) {
+    return 'Duraçión: $days díâ';
+  }
+
+  @override
+  String get stageKombucha0 => 'Formaçión iniçiâh';
+
+  @override
+  String get stageKombucha1 => 'Liheramente durçe';
+
+  @override
+  String get stageKombucha2 => 'Equilibrá (Ideâh)';
+
+  @override
+  String get stageKombucha3 => 'Fuerte/Áçida';
+
+  @override
+  String get stageKombucha4 => 'Abinagrá';
+
+  @override
+  String get historyKefirFinished => 'Kéfî coçexao';
+
+  @override
+  String historyCompletedPercent(Object percent) {
+    return 'Completao: $percent%';
+  }
+
+  @override
+  String historyDurationDays(Object days) {
+    return '$days díâ';
+  }
+
+  @override
+  String historyDurationDaysHours(Object days, Object hours) {
+    return '$days díâ y ${hours}h';
+  }
+
+  @override
+  String historyDurationHours(Object hours) {
+    return '${hours}h';
+  }
+
+  @override
+  String historyDurationHoursMinutes(Object hours, Object minutes) {
+    return '${hours}h ${minutes}m';
+  }
+
+  @override
+  String get historyHarvestDate => 'Fexa de coçexa';
+
+  @override
+  String historyRealDurationTarget(Object actual, Object target) {
+    return 'Duraçión: $actual (objetibo $target)';
+  }
+
+  @override
+  String historyCompletedOn(Object date) {
+    return 'Completao er $date';
+  }
+
+  @override
+  String get historyItemDeleteTitle => '¿Eliminâh rehîttro?';
+
+  @override
+  String get historyItemDeleteContent =>
+      'Êtte rehîttro çe borrará de forma permanente.';
+
+  @override
+  String get drawerDataManagement => 'Hêttión de datô';
+
+  @override
+  String get drawerBackup => 'Êpportâh copia';
+
+  @override
+  String get drawerRestore => 'Rêttaurâh copia';
+
+  @override
+  String get backupSuccessTitle => 'Copia êpportá';
+
+  @override
+  String get backupSuccessDesc => 'Lô datô çe an guardao con éççito.';
+
+  @override
+  String get restoreSuccessTitle => 'Copia rêttaurá';
+
+  @override
+  String get restoreSuccessDesc => 'Lô datô an buerto a la mahia.';
+
+  @override
+  String get restoreErrorTitle => 'Errôh';
+
+  @override
+  String get restoreErrorDesc => 'El arxibo êh imbálido o êttá corrûtto.';
+
+  @override
+  String addSheetIdealTimeKefir(num hours) {
+    final intl.NumberFormat hoursNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String hoursString = hoursNumberFormat.format(hours);
+
+    return 'Tu tiempo ideâh (${hoursString}h)';
+  }
+
+  @override
+  String get addSheetCustomTime => 'Tiempo perçonaliçao';
+
+  @override
+  String get addSheetNoLimit => 'Çin límite';
+
+  @override
+  String get addSheetCustomHours => 'Orâ';
+
+  @override
+  String get addSheetCustomDays => 'Díâ';
+
+  @override
+  String get addSheetCustomConfirm => 'Uçâh êtte tiempo';
+
+  @override
+  String get cardNoLimit => 'Çin límite';
+
+  @override
+  String get cardOpenEndedStage => 'Modo êpperimentâh';
+
+  @override
+  String get addSheetNameHint => 'Nombre der lote (ôççionâh)';
+
+  @override
+  String get cardRenameTitle => 'Renombrâh';
+
+  @override
+  String get cardRenameHint => 'Nombre der lote';
+
+  @override
+  String get drawerCalendar => 'Calendario';
+
+  @override
+  String get calendarTitle => 'Mî Fermentaçionê';
+
+  @override
+  String get calendarNoFermentations => 'Çin fermentaçionê êtte día';
+
+  @override
+  String get calendarActiveBadge => 'Âttiba';
+
+  @override
+  String get calendarPlannedBadge => 'Planificá';
+
+  @override
+  String get calendarPlanButton => 'Planificâh pa êtte día';
+
+  @override
+  String get cardStartsIn => 'Comiença en';
+
+  @override
+  String get detailStartDate => 'Iniçio';
+
+  @override
+  String get detailStageKombucha0Desc =>
+      'Er SCOBY êttá dêppertando. La bebida çige çiendo prátticamente té durçe.';
+
+  @override
+  String get detailStageKombucha1Desc =>
+      'La fermentaçión abança con çuabidá. Aún predomina er durçôh con un lihero toque áçido.';
+
+  @override
+  String get detailStageKombucha2Desc =>
+      'Er punto de equilibrio perfêtto entre durçura y açidêh. Ideâh pa la mayoría de paladarê.';
+
+  @override
+  String get detailStageKombucha3Desc =>
+      'Açidêh pronunçiá y çabôh compleho. Âtto pa quienê prefieren un çabôh intenço.';
+
+  @override
+  String get detailStageKombucha4Desc =>
+      'Fermentaçión mu abançá. Çabôh abinagrao intenço, mâh âtto pa uço culinario.';
+
+  @override
+  String get detailNotesTitle => 'Notâ';
+
+  @override
+  String get detailNotesHint =>
+      'Añade detayê çobre la lexe, temperatura, ettç...';
+
+  @override
+  String get detailHistoryTitle => 'Îttoriâh Reçiente';
+
+  @override
+  String get detailHistoryEmpty => 'Çin coçexâ prebiâ';
+
+  @override
+  String detailHistoryLastHarvest(Object duration) {
+    return 'Úrtima tanda: $duration';
+  }
+
+  @override
+  String get historyRepeat => 'Repetîh lote';
+
+  @override
+  String get adjSheetTitle => 'Ahûttâh tiempo';
+
+  @override
+  String get adjSheetSetNoLimit => 'Paçâh a \'Çin límite\'';
+
+  @override
+  String get adjSheetSetTimed => 'Êttableçêh duraçión';
+
+  @override
+  String get actionSaveIdealTime => 'Guardâh tiempo ideâh';
+
+  @override
+  String get actionSaveIdealTimeSuccess => 'Tiempo ideâh guardao corrêttamente';
+
+  @override
+  String get dialogSaveIdealConfirm =>
+      '¿Guardâh êtte tiempo como tu referençia ideâh?';
+
+  @override
+  String get actionHarvestAndRestart => 'Coçexâh y reiniçiâh';
+
+  @override
+  String get dialogHarvestAndRestartConfirm =>
+      '¿Coçexâh lote âttuâh y empeçâh uno nuebo?';
+
+  @override
+  String get harvestNextStepTitle => 'Çigiente çiclo';
+
+  @override
+  String get actionDelete => 'Borrâh';
+
+  @override
+  String get dialogResetConfirm =>
+      'Çe guardará en el îttoriâh y er contadôh borberá a 0.';
+
+  @override
+  String secondFermentationName(Object name) {
+    return 'F2: $name';
+  }
+
+  @override
+  String get secondFermentationDefaultName => 'Çegunda Fermentaçión';
+
+  @override
+  String get infoKombuchaTitle => '🍵 ¿Qué êh la Kombuxa?';
+
+  @override
+  String get infoKombuchaDesc =>
+      'Êh té fermentao mediante una colonia çimbiótica de bâtteriâ y lebadurâ (SCOBY). Êh rica en áçíô orgánicô y bitaminâ.';
+
+  @override
+  String get infoKombuchaProcessTitle => 'Er Ciclo de la Kombuxa';
+
+  @override
+  String get infoKombuchaStep1Title => 'Preparaçión';
+
+  @override
+  String get infoKombuchaStep1Desc =>
+      'Çe infuçiona té con açúcâ y, una bêh frío, çe añade er SCOBY con un poco de líquido iniçiadôh der lote anteriôh.';
+
+  @override
+  String get infoKombuchaStep2Title => 'Fermentaçión (7-12 díâ)';
+
+  @override
+  String get infoKombuchaStep2Desc =>
+      'Er SCOBY conçume el açúcâ y er té. La âpp aprenderá de tû coçexâ pa çuherirte  tu \'Tiempo Ideâ\' perçonaliçao.';
+
+  @override
+  String get infoAdvancedCalendarTitle => 'Calendario';
+
+  @override
+  String get infoAdvancedCalendarDesc =>
+      'Biçualiça tû coçexâ paçâh y planifica futurâ preparaçionê dêdde la pêttaña de Calendario.';
+
+  @override
+  String get infoAdvancedHistoryTitle => 'Îttoriâh';
+
+  @override
+  String get infoAdvancedHistoryDesc =>
+      'Repite lotê prebiô fáçirmente. Lô tiempô de Kombuxa çe ahûttan automáticamente çegún tû preferençiâ paçâh.';
+
+  @override
+  String get infoAdvancedDataTitle => 'Çeguridá de Datô';
+
+  @override
+  String get infoAdvancedDataDesc =>
+      'Uça lâ ôççionê de Êpportâh y Rêttaurâh pa mantenêh tû rehîttrô a çarbo o mobêl-lô de dîppoçitibo.';
+}
