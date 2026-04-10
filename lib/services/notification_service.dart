@@ -12,7 +12,7 @@ class NotificationService {
 
   Future<void> init() async {
     if (kIsWeb) {
-      return; 
+      return;
     }
     if (_isInit) return;
 
