@@ -45,13 +45,12 @@ class NotificationService {
       String titleReminder,
       String bodyReminder) async {
     await init();
-    if (kIsWeb) return; 
+    if (kIsWeb) return;
 
     const androidDetails = AndroidNotificationDetails(
       'kefir_control_channel',
       'Kefir Control',
-      channelDescription:
-          'Notificaciones de finalización de fermentaciones',
+      channelDescription: 'Notificaciones de finalización de fermentaciones',
       importance: Importance.max,
       priority: Priority.high,
     );
