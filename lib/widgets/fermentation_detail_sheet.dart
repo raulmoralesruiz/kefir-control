@@ -9,6 +9,7 @@ import '../providers/history_provider.dart';
 import '../providers/service_providers.dart';
 import '../widgets/time_adjustment_sheet.dart';
 import '../widgets/custom_duration_picker.dart';
+import '../services/haptic_service.dart';
 
 // Color amber-500 consistente con el resto de la app
 const _kombuchaColor = Color(0xFFF59E0B);
@@ -336,6 +337,9 @@ class _FermentationDetailSheetState extends ConsumerState<FermentationDetailShee
                             ),
                           );
                           if (confirmed == true) {
+                            // Feedback háptico pesado para borrar
+                            HapticService.heavy();
+                            
                             if (!isHistory) {
                               ref
                                   .read(activeFermentationsProvider.notifier)
@@ -661,6 +665,9 @@ class _QuickAdjustmentButtons extends ConsumerWidget {
         ? l10n.notifReadyTitleKombucha
         : l10n.notifReadyTitleKefir;
 
+    // Feedback háptico ligero al ajustar
+    HapticService.light();
+
     ref.read(activeFermentationsProvider.notifier).adjustDuration(
           fermentation.id,
           offset,
@@ -969,6 +976,7 @@ class _FermentationActionsGrid extends ConsumerWidget {
                   );
 
                   if (confirmed == true) {
+                    HapticService.medium();
                     ref
                         .read(activeFermentationsProvider.notifier)
                         .saveIdealTime(id);
@@ -1052,6 +1060,9 @@ class _FermentationActionsGrid extends ConsumerWidget {
     final notifTitle = type == FermentationType.kombucha
         ? l10n.notifReadyTitleKombucha
         : l10n.notifReadyTitleKefir;
+
+    // Feedback de éxito al cosechar y reiniciar
+    HapticService.success();
 
     ref.read(activeFermentationsProvider.notifier).harvestAndRestart(
           id,

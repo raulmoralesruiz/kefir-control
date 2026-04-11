@@ -3,6 +3,8 @@ import 'package:kefir_control/l10n/app_localizations.dart';
 import '../models/fermentation.dart';
 import '../models/fermentation_history_item.dart';
 import 'fermentation_detail_sheet.dart';
+import '../services/haptic_service.dart';
+
 
 // Color amber-500 consistente con FermentationCard y CalendarDayMarker
 const _kombuchaColor = Color(0xFFF59E0B);
@@ -75,7 +77,10 @@ class HistoryListItem extends StatelessWidget {
                 child: Text(l10n.cancel),
               ),
               FilledButton(
-                onPressed: () => Navigator.pop(context, true),
+                onPressed: () {
+                  HapticService.heavy();
+                  Navigator.pop(context, true);
+                },
                 style: FilledButton.styleFrom(
                   backgroundColor: colorScheme.error,
                   foregroundColor: colorScheme.onError,

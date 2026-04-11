@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/fermentation.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
+import '../services/haptic_service.dart';
 
 const _kombuchaColor = Color(0xFFF59E0B);
 
@@ -126,7 +127,10 @@ class _CustomDurationPickerState extends State<CustomDurationPicker> {
                 perspective: 0.003,
                 diameterRatio: 2.0,
                 physics: const FixedExtentScrollPhysics(),
-                onSelectedItemChanged: (index) => onChanged(items[index]),
+                onSelectedItemChanged: (index) {
+                  HapticService.selection();
+                  onChanged(items[index]);
+                },
                 childDelegate: ListWheelChildBuilderDelegate(
                   childCount: items.length,
                   builder: (context, index) {
@@ -204,6 +208,7 @@ class _CustomDurationPickerState extends State<CustomDurationPicker> {
                 final duration = _currentDuration;
                 // Validar que hay al menos 1 hora de duración
                 if (duration.inHours < 1) return;
+                HapticService.medium();
                 Navigator.pop(context);
                 widget.onConfirm(duration);
               },

@@ -5,6 +5,7 @@ import '../providers/fermentation_provider.dart';
 import '../providers/service_providers.dart';
 import '../widgets/custom_duration_picker.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
+import '../services/haptic_service.dart';
 
 class AddFermentationSheet extends ConsumerStatefulWidget {
   final DateTime? initialDate;
@@ -98,6 +99,10 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
   Future<void> _start(int durationSeconds) async {
     final l10n = AppLocalizations.of(context)!;
     Navigator.pop(context);
+    
+    // Feedback háptico al iniciar
+    HapticService.medium();
+
     final l10nTitle = _selectedType == FermentationType.kombucha
         ? l10n.notifReadyTitleKombucha
         : l10n.notifReadyTitleKefir;
@@ -120,6 +125,10 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
   Future<void> _startOpenEnded() async {
     final l10n = AppLocalizations.of(context)!;
     Navigator.pop(context);
+
+    // Feedback háptico al iniciar
+    HapticService.medium();
+
     final l10nTitle = _selectedType == FermentationType.kombucha
         ? l10n.notifReadyTitleKombucha
         : l10n.notifReadyTitleKefir;

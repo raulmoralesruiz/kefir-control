@@ -5,6 +5,7 @@ import '../models/fermentation.dart';
 import '../providers/fermentation_provider.dart';
 import '../providers/service_providers.dart';
 import '../widgets/custom_duration_picker.dart';
+import '../services/haptic_service.dart';
 
 class TimeAdjustmentSheet extends ConsumerWidget {
   final Fermentation fermentation;
@@ -26,6 +27,9 @@ class TimeAdjustmentSheet extends ConsumerWidget {
   void _update(
       WidgetRef ref, BuildContext context, int seconds, bool isOpenEnded) {
     final l10n = AppLocalizations.of(context)!;
+    
+    // Feedback háptico al actualizar el tiempo
+    HapticService.medium();
 
     final l10nTitle = fermentation.type == FermentationType.kombucha
         ? l10n.notifReadyTitleKombucha
