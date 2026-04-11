@@ -1,0 +1,11 @@
+🚀 v2.2.2
+
+✨ Nuevas funcionalidades
+Implementación del idioma Andaluh
+Creación de notificaciones para evitar la sobrefermentación
+
+📊 Mejoras en funcionalidad
+Ajuste rápido (+1h / -1h) en el detalle de la fermentación
+
+🎨 Mejoras en la interfaz
+Implementación de feedback háptico en acciones
