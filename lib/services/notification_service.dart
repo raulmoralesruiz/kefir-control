@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
@@ -12,7 +14,7 @@ class NotificationService {
 
   Future<void> init() async {
     if (kIsWeb) {
-      return; 
+      return;
     }
     if (_isInit) return;
 
@@ -23,8 +25,10 @@ class NotificationService {
 
     const androidSettings = AndroidInitializationSettings('ic_stat_kefir');
     const darwinSettings = DarwinInitializationSettings();
-    const initSettings =
-        InitializationSettings(android: androidSettings, iOS: darwinSettings);
+    const linuxSettings =
+        LinuxInitializationSettings(defaultActionName: 'defaultAction');
+    const initSettings = InitializationSettings(
+        android: androidSettings, iOS: darwinSettings, linux: linuxSettings);
     await _notificationsPlugin.initialize(initSettings);
 
     final androidPlugin =
@@ -62,6 +66,10 @@ class NotificationService {
     final now = tz.TZDateTime.now(tz.local);
 
     if (eventDate.isBefore(now)) return;
+    if (Platform.isLinux) {
+      // zonedSchedule() has not been implemented yet
+      return;
+    }
 
     // 1. Recordatorio 2h antes
     final reminderDate = eventDate.subtract(const Duration(hours: 2));
