@@ -32,11 +32,26 @@
   <nav>
     <div class="container nav-content">
       <div class="logo">
-        <img src="landing/icon.png" style="border-radius: 50%;" alt="Kefir Control Logo">
+        <img src="landing/img/icon.png" style="border-radius: 50%;" alt="Kefir Control Logo">
         <span>Kefir Control</span>
       </div>
-      <div class="nav-links">
-        <a href="#demo" class="btn btn-secondary">Try Demo</a>
+      <div class="nav-right">
+        <div class="lang-selector">
+          <button class="lang-btn" id="lang-btn">
+            <img id="current-lang-flag" src="landing/img/languages/en.svg" alt="Flag" class="flag-icon">
+            <span id="current-lang-name">English</span>
+          </button>
+          <div class="lang-dropdown" id="lang-dropdown">
+            <button onclick="setLanguage('en')"><img src="landing/img/languages/en.svg" alt="English"> English</button>
+            <button onclick="setLanguage('es')"><img src="landing/img/languages/es.svg" alt="Castellano">
+              Castellano</button>
+            <button onclick="setLanguage('and')"><img src="landing/img/languages/and.svg" alt="Andalûh">
+              Andalûh</button>
+          </div>
+        </div>
+        <div class="nav-links">
+          <a href="#demo" class="btn btn-secondary" data-i18n="nav-demo">Try Demo</a>
+        </div>
       </div>
     </div>
   </nav>
@@ -44,17 +59,18 @@
   <!-- Hero Section -->
   <header class="container hero">
     <div class="hero-content reveal">
-      <h1>Perfect Milk Kefir.<br>Every Single Time.</h1>
-      <p>The minimalist, privacy-first tracker for your home fermentations. Get notified at the ideal moment and keep
+      <h1 data-i18n="hero-title">Perfect Milk Kefir.<br>Every Single Time.</h1>
+      <p data-i18n="hero-subtitle">The minimalist, privacy-first tracker for your home fermentations. Get notified at
+        the ideal moment and keep
         your grains healthy.</p>
       <div class="cta-group">
-        <a href="https://f-droid.org/packages/eu.raulmorales.kefircontrol" class="btn btn-primary"
-          target="_blank">Download</a>
-        <a href="#demo" class="btn btn-secondary">Try Demo</a>
+        <a href="https://f-droid.org/packages/eu.raulmorales.kefircontrol" class="btn btn-primary" target="_blank"
+          data-i18n="cta-download">Download</a>
+        <a href="#demo" class="btn btn-secondary" data-i18n="cta-demo">Try Demo</a>
       </div>
     </div>
     <div class="hero-image">
-      <img src="landing/hero.png" alt="Kefir Control App Mockup">
+      <img src="landing/img/hero.png" alt="Kefir Control App Mockup">
     </div>
   </header>
 
@@ -62,21 +78,22 @@
   <section class="features" id="features">
     <div class="container">
       <div class="section-title reveal">
-        <h2>Why Kefir Control?</h2>
-        <p>Designed for enthusiasts who value precision and simplicity.</p>
+        <h2 data-i18n="why-title">Why Kefir Control?</h2>
+        <p data-i18n="why-subtitle">Designed for enthusiasts who value precision and simplicity.</p>
       </div>
       <div class="features-grid">
         <div class="feature-card reveal">
-          <h3>Smart Timers</h3>
-          <p>Quick presets. Manual override for total control.</p>
+          <h3 data-i18n="feat-1-title">Smart Timers</h3>
+          <p data-i18n="feat-1-desc">Quick presets. Manual override for total control.</p>
         </div>
         <div class="feature-card reveal">
-          <h3>Privacy First</h3>
-          <p>100% offline. No accounts, no trackers, no data collection. Your data stays on your device.</p>
+          <h3 data-i18n="feat-2-title">Privacy First</h3>
+          <p data-i18n="feat-2-desc">100% offline. No accounts, no trackers, no data collection. Your data stays on your
+            device.</p>
         </div>
         <div class="feature-card reveal">
-          <h3>Visual Stages</h3>
-          <p>Live progress showing exactly which fermentation stage your kefir is in.</p>
+          <h3 data-i18n="feat-3-title">Visual Stages</h3>
+          <p data-i18n="feat-3-desc">Live progress showing exactly which fermentation stage your kefir is in.</p>
         </div>
       </div>
     </div>
@@ -85,17 +102,18 @@
   <!-- Demo Section -->
   <section class="demo-section" id="demo">
     <div class="container reveal">
-      <h2>Experience the App</h2>
-      <p>Try the actual mobile interface right here in your browser.</p>
+      <h2 data-i18n="demo-title">Experience the App</h2>
+      <p data-i18n="demo-subtitle">Try the actual mobile interface right here in your browser.</p>
 
       <div class="phone-container">
         <div class="phone-screen">
           <iframe id="flutter-app-frame" frameborder="0" style="width:100%; height:100%; border-radius: 30px;"></iframe>
           <div class="demo-overlay" id="demo-overlay">
-            <h3>Interactive Demo</h3>
-            <p>Experience the real Flutter app in action.</p>
-            <button class="btn btn-primary" id="start-demo-btn">Start Live Demo</button>
-            <p id="demo-loading-text" style="display:none; margin-top:1rem;">Initializing engine...</p>
+            <h3 data-i18n="demo-overlay-title">Interactive Demo</h3>
+            <p data-i18n="demo-overlay-desc">Experience the real Flutter app in action.</p>
+            <button class="btn btn-primary" id="start-demo-btn" data-i18n="demo-start">Start Live Demo</button>
+            <p id="demo-loading-text" style="display:none; margin-top:1rem;" data-i18n="demo-loading">Initializing
+              engine...</p>
           </div>
         </div>
       </div>
@@ -105,10 +123,12 @@
   <!-- Final CTA -->
   <section class="container" style="padding: 4rem 0; text-align: center;">
     <div class="reveal">
-      <h2>Ready to master your fermentation?</h2>
-      <p style="margin-bottom: 2rem;">Join the open-source community and download Kefir Control today.</p>
-      <a href="https://f-droid.org/packages/eu.raulmorales.kefircontrol" target="_blank" class="btn btn-primary">Get it
-        on F-Droid</a>
+      <h2 data-i18n="final-cta-title">Ready to master your fermentation?</h2>
+      <p data-i18n="final-cta-subtitle" style="margin-bottom: 2rem;">Join the open-source community and download Kefir
+        Control today.</p>
+      <a href="https://f-droid.org/packages/eu.raulmorales.kefircontrol" target="_blank">
+        <img alt="Get it on F-Droid" src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="80">
+      </a>
     </div>
   </section>
 
@@ -116,16 +136,19 @@
   <footer>
     <div class="container">
       <div class="social-links">
-        <a href="https://github.com/raulmoralesruiz/kefir-control" target="_blank">GitHub</a>
+        <a href="https://github.com/raulmoralesruiz/kefir-control" target="_blank">
+          <img src="landing/img/github.svg" alt="GitHub">
+        </a>
       </div>
 
-      <p class="developed">Developed by
+      <p class="developed"><span data-i18n="footer-developed">Developed by</span>
         <a href="https://portfolio.raulmorales.eu" target="_blank">Raúl Morales</a>
       </p>
     </div>
   </footer>
 
   <!-- Custom Landing Scripts -->
+  <script src="landing/translations.js"></script>
   <script src="landing/landing_script.js"></script>
 </body>
 

@@ -88,6 +88,100 @@ nav {
     height: 28px;
 }
 
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Language Selector */
+.lang-selector {
+    position: relative;
+}
+
+.lang-btn {
+    background: white;
+    border: 1px solid var(--primary-light);
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.lang-btn:hover {
+    background-color: var(--primary-light);
+    border-color: var(--primary);
+}
+
+.lang-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 180px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    display: none;
+    flex-direction: column;
+    gap: 0.2rem;
+    animation: fadeInUp 0.3s ease-out;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.lang-dropdown.show {
+    display: flex;
+}
+
+.lang-btn img,
+.lang-dropdown img {
+    width: 20px;
+    height: 14px;
+    object-fit: cover;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.lang-dropdown button {
+    background: none;
+    border: none;
+    padding: 0.8rem 1rem;
+    text-align: left;
+    font-family: inherit;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.lang-dropdown button:hover {
+    background-color: var(--bg);
+    color: var(--primary-dark);
+}
+
+/* Media Queries for Navbar */
+@media (max-width: 600px) {
+    .nav-right {
+        gap: 0.5rem;
+    }
+
+    .lang-btn #current-lang-name {
+        display: none;
+    }
+
+    .lang-btn {
+        padding: 0.5rem;
+    }
+}
+
 /* Hero (mobile first) */
 .hero {
     display: grid;
@@ -268,6 +362,11 @@ footer {
 
 .social-links a:hover {
     color: var(--primary);
+}
+
+.social-links img {
+    width: 48px;
+    height: 48px;
 }
 
 .developed {

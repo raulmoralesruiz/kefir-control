@@ -15,6 +15,12 @@
 </p>
 
 <p align="center">
+  <a href="https://f-droid.org/packages/eu.raulmorales.kefircontrol" target="_blank">
+    <img alt="Get it on F-Droid" src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="80">
+  </a>
+</p>
+
+<p align="center">
   <a href="readme_i18n/README_es.md">Spanish</a> |
   <a href="README.md">English</a> |
   <a href="readme_i18n/README_and.md">Andalusian</a>
@@ -25,7 +31,6 @@
   <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/en-US_02_type_selection.png" alt="Type Selection Screen" width="200" />
   <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/en-US_03_duration_selection_kombucha.png" alt="Duration Selection Screen" width="200" />
   <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/en-US_04_progress_card.png" alt="Progress Card Screen" width="200" />
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/en-US_05_calendar.png" alt="Calendar Screen" width="200" />
 </p>
 
 ## 🥛 About the Project
