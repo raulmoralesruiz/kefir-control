@@ -1,11 +1,11 @@
 <h1 align="center">
-  <img src="assets/icon/app_icon.png" style="border-radius: 50%;" alt="Kéfir Control Logo" width="120" />
+  <img src="assets/icon/app_icon.png" style="border-radius: 50%;" alt="Kefir Control Logo" width="120" />
   <br/>
-  Kéfir Control
+  Kefir Control
 </h1>
 
 <p align="center">
-  Una aplicación minimalista, open-source y libre de rastreadores para gestionar tus fermentaciones de kéfir de leche, asegurando que nunca más se pasen de tiempo.
+  A minimalist, open-source, and tracker-free application to manage your milk kefir and kombucha fermentations, ensuring they never over-ferment again.
 </p>
 
 <p align="center">
@@ -15,51 +15,64 @@
 </p>
 
 <p align="center">
-  <a href="https://f-droid.org/packages/eu.raulmorales.kefircontrol">
-    <img alt="Get it on F-Droid" src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="80">
-  </a>
+  <a href="readme_i18n/README_es.md">Spanish</a> |
+  <a href="README.md">English</a> |
+  <a href="readme_i18n/README_and.md">Andalusian</a>
 </p>
 
-## 🥛 Sobre el Proyecto
-**Kéfir Control** nació de la necesidad de recordar cuándo la fermentación del kéfir de leche está en su punto perfecto (normalmente entre 24 y 48 horas). Si se deja demasiado tiempo, el kéfir se vuelve excesivamente ácido y el suero se separa en exceso. Esta aplicación simplifica ese proceso con notificaciones locales programadas y un temporizador en vivo.
+<p align="center">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/en-US_01_home_empty.png" alt="Home Screen" width="200" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/en-US_02_type_selection.png" alt="Type Selection Screen" width="200" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/en-US_03_duration_selection_kombucha.png" alt="Duration Selection Screen" width="200" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/en-US_04_progress_card.png" alt="Progress Card Screen" width="200" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/en-US_05_calendar.png" alt="Calendar Screen" width="200" />
+</p>
 
-El proyecto es **100% Free and Open Source Software (FOSS)**, centrado en la privacidad y con una interfaz moderna basada en Material Design 3.
+## 🥛 About the Project
+**Kefir Control** was born from the need to remember when your fermentation is at its perfect point. Whether it's milk kefir or kombucha, this app simplifies the process with scheduled local notifications, a live timer, and learning based on your preferences.
 
-## ✨ Características Principales
-- **Temporizadores Rápidos**: Selecciona entre 24h, 36h o 48h de fermentación.
-- **Registro de Fermentaciones Pasadas**: ¿Olvidaste iniciar el temporizador en el momento exacto? Puedes configurar la hora de inicio manualmente.
-- **Notificaciones Locales (Off-grid)**: La app programa una alarma usando tu propio dispositivo (sin servidores externos ni internet). Recibirás un aviso incluso si la app está completamente cerrada.
-- **Historial Completo**: Guarda un registro de todas tus cosechas pasadas para llevar un control de la salud de tus nódulos.
-- **Tema Dinámico y Minimalista**: Diseño limpio y sin sombras ('flat design') adherido a Material 3.
-- **Privacidad Primero**: Sin cuentas de usuario, sin analytics y sin seguimiento cruzado. Los datos viven en tu dispositivo.
+The project is **100% Free and Open Source Software (FOSS)**, privacy-focused, and features a modern UI based on Material Design 3.
 
-## 🛠️ Tecnologías y Requisitos
+## ✨ Main Features
+- **🥛 Kefir & Kombucha Management**: Specific support for different fermentation types with custom stages.
+- **⏱️ Smart Ideal Times**: The app learns from your past harvests to suggest the fermentation time you like best.
+- **🔔 Notifications & Pre-alerts**: Local alarms (no internet required) that notify you when finished and 2 hours before.
+- **♾️ Open-ended Mode**: Start fermentations without a time limit for total manual control.
+- **📅 Integrated Calendar**: View your history and plan future batches visually.
+- **📱 Material You**: Dynamic color support and dark/light theme following Material Design 3.
+- **📳 Haptic Feedback**: Physical interactions through vibration for a more immersive experience.
+- **💾 Backups**: Export and import data in JSON format.
+- **🌍 Multilingual**: Available in Spanish, English, and Andalusian (EPA).
+- **🔒 Privacy First**: No accounts, no trackers, and no analytics. Your data is yours alone.
+
+## 🛠️ Technologies and Requirements
 - [Flutter SDK](https://flutter.dev/) (>= 3.0.0)
-- Paquetes clave utilizados:
-  - `shared_preferences` (Persistencia local)
-  - `flutter_local_notifications` (Notificadores Nativos)
-  - `flutter_timezone` (Gestión de alarmas en la zona horaria del sistema)
+- Key packages used:
+  - `shared_preferences` (Local persistence)
+  - `flutter_local_notifications` (Native Notifications)
+  - `flutter_timezone` (Timezone management)
+  - `flex_color_scheme` (Advanced M3 Theming)
 
-## 🚀 Instalación y Compilación para Desarrolladores
-Si deseas compilar la aplicación tú mismo desde el código fuente:
+## 🚀 Installation and Build for Developers
+To build the application yourself from source:
 
-1. Clona este repositorio:
+1. Clone this repository:
    ```bash
    git clone https://github.com/raulmoralesruiz/kefir-control.git
    ```
-2. Accede a la carpeta del proyecto:
+2. Enter the project folder:
    ```bash
    cd kefir-control
    ```
-3. Descarga las dependencias:
+3. Download dependencies:
    ```bash
    flutter pub get
    ```
-4. Ejecuta la aplicación en tu emulador o dispositivo físico:
+4. Run the app on your emulator or physical device:
    ```bash
    flutter run
    ```
 
-## 📜 Licencia
-Este proyecto está licenciado bajo la **GNU Affero General Public License v3.0 (AGPLv3)**.
-Eres libre de usar, modificar y distribuir el software, pero las modificaciones y versiones de red de este software deben ser distribuidas bajo la misma licencia. Consulta el archivo [LICENSE](LICENSE) para más información.
+## 📜 License
+This project is licensed under the **GNU Affero General Public License v3.0 (AGPLv3)**.
+You are free to use, modify, and distribute the software, but modifications and network versions of this software must be distributed under the same license. See the [LICENSE](../LICENSE) file for more information.

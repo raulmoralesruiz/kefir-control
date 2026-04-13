@@ -1,120 +1,132 @@
-<!DOCTYPE html><html><head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+<!DOCTYPE html>
+<html lang="en">
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
+<head>
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description"
+    content="Kefir Control - The ultimate minimalist app for milk kefir enthusiasts. Track fermentations and never over-sour your batches again.">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="kefir_control">
+  <meta name="apple-mobile-web-app-title" content="Kefir Control">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <title>Kefir Control</title>
+  <title>Kefir Control | Perfect Milk Kefir, Every Time</title>
   <link rel="manifest" href="manifest.json">
-  
-  
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-  <style id="splash-screen-style">
-    html {
-      height: 100%
-    }
 
-    body {
-      margin: 0;
-      min-height: 100%;
-      background-color: #FFFFFF;
-          background-size: 100% 100%;
-    }
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    .center {
-      margin: 0;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-    }
-
-    .contain {
-      display:block;
-      width:100%; height:100%;
-      object-fit: contain;
-    }
-
-    .stretch {
-      display:block;
-      width:100%; height:100%;
-    }
-
-    .cover {
-      display:block;
-      width:100%; height:100%;
-      object-fit: cover;
-    }
-
-    .bottom {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      -ms-transform: translate(-50%, 0);
-      transform: translate(-50%, 0);
-    }
-
-    .bottomLeft {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-    }
-
-    .bottomRight {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-    }
-  </style>
-  <script id="splash-screen-script">
-    function removeSplashFromWeb() {
-      document.getElementById("splash")?.remove();
-      document.getElementById("splash-branding")?.remove();
-      document.body.style.background = "transparent";
-    }
-  </script>
+  <!-- Custom Landing Styles -->
+  <link rel="stylesheet" href="landing/landing_style.css">
 </head>
 
 <body>
-  <picture id="splash">
-      <source srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x" media="(prefers-color-scheme: light)">
-      <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
-      <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
-  </picture>
-  
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
+  <!-- Navbar -->
+  <nav>
+    <div class="container nav-content">
+      <div class="logo">
+        <img src="landing/icon.png" style="border-radius: 50%;" alt="Kefir Control Logo">
+        <span>Kefir Control</span>
+      </div>
+      <div class="nav-links">
+        <a href="#demo" class="btn btn-secondary">Try Demo</a>
+      </div>
+    </div>
+  </nav>
 
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
-  <script src="flutter_bootstrap.js" async=""></script>
+  <!-- Hero Section -->
+  <header class="container hero">
+    <div class="hero-content reveal">
+      <h1>Perfect Milk Kefir.<br>Every Single Time.</h1>
+      <p>The minimalist, privacy-first tracker for your home fermentations. Get notified at the ideal moment and keep
+        your grains healthy.</p>
+      <div class="cta-group">
+        <a href="https://f-droid.org/packages/eu.raulmorales.kefircontrol" class="btn btn-primary"
+          target="_blank">Download</a>
+        <a href="#demo" class="btn btn-secondary">Try Demo</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="landing/hero.png" alt="Kefir Control App Mockup">
+    </div>
+  </header>
 
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-title reveal">
+        <h2>Why Kefir Control?</h2>
+        <p>Designed for enthusiasts who value precision and simplicity.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <h3>Smart Timers</h3>
+          <p>Quick presets. Manual override for total control.</p>
+        </div>
+        <div class="feature-card reveal">
+          <h3>Privacy First</h3>
+          <p>100% offline. No accounts, no trackers, no data collection. Your data stays on your device.</p>
+        </div>
+        <div class="feature-card reveal">
+          <h3>Visual Stages</h3>
+          <p>Live progress showing exactly which fermentation stage your kefir is in.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-</body></html>
+  <!-- Demo Section -->
+  <section class="demo-section" id="demo">
+    <div class="container reveal">
+      <h2>Experience the App</h2>
+      <p>Try the actual mobile interface right here in your browser.</p>
+
+      <div class="phone-container">
+        <div class="phone-screen">
+          <iframe id="flutter-app-frame" frameborder="0" style="width:100%; height:100%; border-radius: 30px;"></iframe>
+          <div class="demo-overlay" id="demo-overlay">
+            <h3>Interactive Demo</h3>
+            <p>Experience the real Flutter app in action.</p>
+            <button class="btn btn-primary" id="start-demo-btn">Start Live Demo</button>
+            <p id="demo-loading-text" style="display:none; margin-top:1rem;">Initializing engine...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="container" style="padding: 4rem 0; text-align: center;">
+    <div class="reveal">
+      <h2>Ready to master your fermentation?</h2>
+      <p style="margin-bottom: 2rem;">Join the open-source community and download Kefir Control today.</p>
+      <a href="https://f-droid.org/packages/eu.raulmorales.kefircontrol" target="_blank" class="btn btn-primary">Get it
+        on F-Droid</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="social-links">
+        <a href="https://github.com/raulmoralesruiz/kefir-control" target="_blank">GitHub</a>
+      </div>
+
+      <p class="developed">Developed by
+        <a href="https://portfolio.raulmorales.eu" target="_blank">Raúl Morales</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Custom Landing Scripts -->
+  <script src="landing/landing_script.js"></script>
+</body>
+
+</html>

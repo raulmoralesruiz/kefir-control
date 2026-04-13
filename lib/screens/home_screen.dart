@@ -224,7 +224,7 @@ class HomeScreen extends ConsumerWidget {
       children: [
         Container(
           padding: EdgeInsets.fromLTRB(
-              24, MediaQuery.paddingOf(context).top, 24, 12),
+              24, MediaQuery.paddingOf(context).top + 12, 24, 12),
           decoration: BoxDecoration(
             color: colorScheme.primaryContainer.withAlpha(80),
             borderRadius: const BorderRadius.vertical(
