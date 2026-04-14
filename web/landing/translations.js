@@ -1,6 +1,6 @@
 const translations = {
     'en': {
-        'nav-demo': 'Try Demo',
+        'nav-demo': 'Demo',
         'hero-title': 'Perfect Milk Kefir.<br>Every Single Time.',
         'hero-subtitle': 'The minimalist, privacy-first tracker for your home fermentations. Get notified at the ideal moment and keep your grains healthy.',
         'cta-download': 'Download',
@@ -28,7 +28,7 @@ const translations = {
         'meta-title': 'Kefir Control | Perfect Milk Kefir, Every Time'
     },
     'es': {
-        'nav-demo': 'Probar Demo',
+        'nav-demo': 'Demo',
         'hero-title': 'Kéfir de leche perfecto.<br>Siempre, sin fallos.',
         'hero-subtitle': 'El rastreador minimalista y privado para tus fermentaciones caseras. Recibe avisos en el momento ideal y cuida tus nódulos.',
         'cta-download': 'Descargar',
@@ -56,7 +56,7 @@ const translations = {
         'meta-title': 'Kéfir Control | Tu kéfir perfecto, siempre'
     },
     'and': {
-        'nav-demo': 'Probâh Demo',
+        'nav-demo': 'Demo',
         'hero-title': 'Kéfî de lexe perfêtto.<br>Çiempre, çin fayô',
         'hero-subtitle': 'El râttreadôh minimalîtta y pribao pa tû fermentaçionê caçerâ. Reçibe abiçô en er momento ideâh y cuida tû nódulô.',
         'cta-download': 'Dêccargâh',

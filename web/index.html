@@ -24,7 +24,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <!-- Custom Landing Styles -->
-  <link rel="stylesheet" href="landing/landing_style.css">
+  <link rel="stylesheet" href="./landing/landing_style.css">
 </head>
 
 <body>
@@ -32,20 +32,21 @@
   <nav>
     <div class="container nav-content">
       <div class="logo">
-        <img src="landing/img/icon.png" style="border-radius: 50%;" alt="Kefir Control Logo">
+        <img src="./landing/img/icon.png" style="border-radius: 50%;" alt="Kefir Control Logo">
         <span>Kefir Control</span>
       </div>
       <div class="nav-right">
         <div class="lang-selector">
           <button class="lang-btn" id="lang-btn">
-            <img id="current-lang-flag" src="landing/img/languages/en.svg" alt="Flag" class="flag-icon">
+            <img id="current-lang-flag" src="./landing/img/languages/en.svg" alt="Flag" class="flag-icon">
             <span id="current-lang-name">English</span>
           </button>
           <div class="lang-dropdown" id="lang-dropdown">
-            <button onclick="setLanguage('en')"><img src="landing/img/languages/en.svg" alt="English"> English</button>
-            <button onclick="setLanguage('es')"><img src="landing/img/languages/es.svg" alt="Castellano">
+            <button onclick="setLanguage('en')"><img src="./landing/img/languages/en.svg" alt="English">
+              English</button>
+            <button onclick="setLanguage('es')"><img src="./landing/img/languages/es.svg" alt="Castellano">
               Castellano</button>
-            <button onclick="setLanguage('and')"><img src="landing/img/languages/and.svg" alt="Andalûh">
+            <button onclick="setLanguage('and')"><img src="./landing/img/languages/and.svg" alt="Andalûh">
               Andalûh</button>
           </div>
         </div>
@@ -70,7 +71,7 @@
       </div>
     </div>
     <div class="hero-image">
-      <img src="landing/img/hero.png" alt="Kefir Control App Mockup">
+      <img src="./landing/img/hero.png" alt="Kefir Control App Mockup">
     </div>
   </header>
 
@@ -121,7 +122,7 @@
   </section>
 
   <!-- Final CTA -->
-  <section class="container" style="padding: 4rem 0; text-align: center;">
+  <section class="container final-cta">
     <div class="reveal">
       <h2 data-i18n="final-cta-title">Ready to master your fermentation?</h2>
       <p data-i18n="final-cta-subtitle" style="margin-bottom: 2rem;">Join the open-source community and download Kefir
@@ -137,7 +138,7 @@
     <div class="container">
       <div class="social-links">
         <a href="https://github.com/raulmoralesruiz/kefir-control" target="_blank">
-          <img src="landing/img/github.svg" alt="GitHub">
+          <img src="./landing/img/github.svg" alt="GitHub">
         </a>
       </div>
 
@@ -148,8 +149,20 @@
   </footer>
 
   <!-- Custom Landing Scripts -->
-  <script src="landing/translations.js"></script>
-  <script src="landing/landing_script.js"></script>
+  <script src="./landing/translations.js"></script>
+  <script src="./landing/landing.js"></script>
+
+  <!-- <script>
+    // Force unregister service worker to prevent persistent caching of old landing versions
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+          console.log('Service Worker unregistered to refresh landing page.');
+        }
+      });
+    }
+  </script> -->
 </body>
 
 </html>

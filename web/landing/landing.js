@@ -1,4 +1,5 @@
-window.addEventListener('load', () => {
+// window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
     // --- Language Logic ---
     const langBtn = document.getElementById('lang-btn');
     const langDropdown = document.getElementById('lang-dropdown');
@@ -6,11 +7,11 @@ window.addEventListener('load', () => {
     const langName = document.getElementById('current-lang-name');
 
     const flags = { 
-        'en': 'landing/img/languages/en.svg', 
-        'es': 'landing/img/languages/es.svg', 
-        'and': 'landing/img/languages/and.svg' 
+        'en': './landing/img/languages/en.svg', 
+        'es': './landing/img/languages/es.svg', 
+        'and': './landing/img/languages/and.svg' 
     };
-    const names = { 'en': 'English', 'es': 'Castellano', 'and': 'Andalú' };
+    const names = { 'en': 'English', 'es': 'Castellano', 'and': 'Andalûh' };
 
     // Toggle dropdown
     if (langBtn) {
@@ -22,12 +23,16 @@ window.addEventListener('load', () => {
 
     // Close dropdown on click outside
     window.addEventListener('click', () => {
-        if (langDropdown) langDropdown.classList.remove('show');
+        if (langDropdown && langDropdown.classList.contains('show')) {
+            langDropdown.classList.remove('show');
+        }
     });
 
     // Translation function
     window.setLanguage = (lang) => {
-        localStorage.setItem('kefir_control_lang', lang);
+        try {
+            localStorage.setItem('kefir_control_lang', lang);
+        } catch (e) {}
         
         // Update UI
         if (langFlag) langFlag.src = flags[lang];
@@ -35,10 +40,11 @@ window.addEventListener('load', () => {
         if (langDropdown) langDropdown.classList.remove('show');
 
         // Update all elements with data-i18n
-        document.querySelectorAll('[data-i18n]').forEach(el => {
+        const i18nElements = document.querySelectorAll('[data-i18n]');
+
+        i18nElements.forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (translations[lang] && translations[lang][key]) {
-                // Use innerHTML for titles that might have <br>
                 if (key.includes('title')) {
                     el.innerHTML = translations[lang][key];
                 } else {
@@ -48,15 +54,28 @@ window.addEventListener('load', () => {
         });
 
         // Update Meta Tags
-        document.title = translations[lang]['meta-title'];
+        if (translations[lang]['meta-title']) {
+            document.title = translations[lang]['meta-title'];
+        }
         const metaDesc = document.querySelector('meta[name="description"]');
-        if (metaDesc) metaDesc.setAttribute('content', translations[lang]['meta-description']);
+        if (metaDesc && translations[lang]['meta-description']) {
+            metaDesc.setAttribute('content', translations[lang]['meta-description']);
+        }
     };
 
     // Auto-detect or load initial language
-    const savedLang = localStorage.getItem('kefir_control_lang');
-    const browserLang = navigator.language.split('-')[0];
-    const initialLang = savedLang || (translations[browserLang] ? browserLang : 'en');
+    let initialLang = 'en';
+    try {
+        const savedLang = localStorage.getItem('kefir_control_lang');
+        const browserLang = navigator.language.split('-')[0];
+        
+        if (savedLang && translations[savedLang]) {
+            initialLang = savedLang;
+        } else if (translations[browserLang]) {
+            initialLang = browserLang;
+        }
+    } catch (e) {}
+    
     setLanguage(initialLang);
 
     // --- Reveal Animations ---
@@ -79,6 +98,7 @@ window.addEventListener('load', () => {
     if (demoBtn) {
         demoBtn.addEventListener('click', () => {
             const currentLang = localStorage.getItem('kefir_control_lang') || 'en';
+            
             demoBtn.style.display = 'none';
             demoLoadingText.style.display = 'block';
             demoLoadingText.textContent = translations[currentLang]['demo-launching'];
@@ -88,7 +108,6 @@ window.addEventListener('load', () => {
             demoFrame.onload = () => {
                 setTimeout(() => {
                     demoOverlay.classList.add('hidden');
-                    console.log("Kefir Control Demo Loaded in Iframe.");
                 }, 2000);
             };
         });
