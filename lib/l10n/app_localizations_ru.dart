@@ -345,10 +345,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get addSheetKombucha => 'Комбуча';
 
   @override
+  String get addSheetFruitKefir => 'Водный кефир';
+
+  @override
   String get notifReadyTitleKombucha => 'Комбуча готова';
 
   @override
   String get notifReadyTitleKefir => 'Кефир готов';
+
+  @override
+  String get notifReadyTitleFruitKefir => 'Водный кефир готов';
 
   @override
   String get notifReadyBodyGeneric => 'Ферментация завершена';
@@ -377,6 +383,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get addSheetTimeKombucha => 'Время для комбучи';
+
+  @override
+  String get addSheetTimeFruitKefir => 'Время для водного кефира';
 
   @override
   String addSheetIdealTime(Object days) {
@@ -451,6 +460,24 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get historyKefirFinished => 'Кефир собран';
+
+  @override
+  String get historyFruitKefirFinished => 'Водный кефир собран';
+
+  @override
+  String get stageFruitKefir0 => 'Начало';
+
+  @override
+  String get stageFruitKefir1 => 'Активная ферментация';
+
+  @override
+  String get stageFruitKefir2 => 'Сбалансированная (Идеал)';
+
+  @override
+  String get stageFruitKefir3 => 'Крепкий';
+
+  @override
+  String get stageFruitKefir4 => 'Очень ферментированный';
 
   @override
   String historyCompletedPercent(Object percent) {
@@ -534,6 +561,16 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String addSheetIdealTimeFruitKefir(num hours) {
+    final intl.NumberFormat hoursNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String hoursString = hoursNumberFormat.format(hours);
+
+    return 'Ваше идеальное время ($hoursString ч.)';
+  }
+
+  @override
   String get addSheetCustomTime => 'Своё время';
 
   @override
@@ -606,6 +643,26 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get detailStageKombucha4Desc =>
       'Очень глубокая ферментация. Интенсивный уксусный вкус, подходит для кулинарии.';
+
+  @override
+  String get detailStageFruitKefir0Desc =>
+      'Зерна начинают увлажняться и активировать ферментацию.';
+
+  @override
+  String get detailStageFruitKefir1Desc =>
+      'Начинают образовываться маленькие пузырьки, сахар постепенно потребляется.';
+
+  @override
+  String get detailStageFruitKefir2Desc =>
+      'Идеальный баланс сладости и кислотности. Освежающий и слегка газированный.';
+
+  @override
+  String get detailStageFruitKefir3Desc =>
+      'Сахар почти полностью потреблен, вкус более сухой и менее сладкий.';
+
+  @override
+  String get detailStageFruitKefir4Desc =>
+      'Продвинутая ферментация, интенсивный вкус с очень малым остатком сахара.';
 
   @override
   String get detailNotesTitle => 'Заметки';

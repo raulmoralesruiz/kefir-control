@@ -105,7 +105,9 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
 
     final l10nTitle = _selectedType == FermentationType.kombucha
         ? l10n.notifReadyTitleKombucha
-        : l10n.notifReadyTitleKefir;
+        : _selectedType == FermentationType.fruitKefir
+            ? l10n.notifReadyTitleFruitKefir
+            : l10n.notifReadyTitleKefir;
     final l10nBody = l10n.notifReadyBodyGeneric;
     final l10nRemTitle = l10n.notifReminderTitleGeneric;
     final l10nRemBody = l10n.notifReminderBodyGeneric;
@@ -131,7 +133,9 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
 
     final l10nTitle = _selectedType == FermentationType.kombucha
         ? l10n.notifReadyTitleKombucha
-        : l10n.notifReadyTitleKefir;
+        : _selectedType == FermentationType.fruitKefir
+            ? l10n.notifReadyTitleFruitKefir
+            : l10n.notifReadyTitleKefir;
     final l10nBody = l10n.notifReadyBodyGeneric;
     final l10nRemTitle = l10n.notifReminderTitleGeneric;
     final l10nRemBody = l10n.notifReminderBodyGeneric;
@@ -191,6 +195,17 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
               setState(() => _selectedType = FermentationType.kombucha),
           icon: const Icon(Icons.emoji_food_beverage),
           label: Text(l10n.addSheetKombucha),
+          style: OutlinedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            textStyle: const TextStyle(fontSize: 18),
+          ),
+        ),
+        const SizedBox(height: 16),
+        OutlinedButton.icon(
+          onPressed: () =>
+              setState(() => _selectedType = FermentationType.fruitKefir),
+          icon: const Icon(Icons.bubble_chart),
+          label: Text(l10n.addSheetFruitKefir),
           style: OutlinedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 20),
             textStyle: const TextStyle(fontSize: 18),
@@ -377,6 +392,46 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
     );
   }
 
+  Widget _buildFruitKefirSelection() {
+    final l10n = AppLocalizations.of(context)!;
+    return FutureBuilder<Duration?>(
+      future: ref.read(fermentationServiceProvider).getFruitKefirIdealDuration(),
+      builder: (context, snapshot) {
+        final idealSecs = snapshot.data?.inSeconds;
+        final idealHours =
+            snapshot.data != null ? (snapshot.data!.inMinutes / 60.0) : null;
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _buildHeader(l10n.addSheetTimeFruitKefir),
+            const SizedBox(height: 16),
+            // Botón favorito fruit kefir
+            if (idealSecs != null && idealHours != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: FilledButton.icon(
+                  onPressed: () => _start(idealSecs),
+                  icon: const Icon(Icons.star_rounded),
+                  style: FilledButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                  ),
+                  label: Text(l10n.addSheetIdealTimeFruitKefir(
+                      num.parse(idealHours.toStringAsFixed(1)))),
+                ),
+              ),
+            // Tiempo personalizado
+            _buildCustomTimeButton(l10n),
+            // Sin límite
+            _buildNoLimitButton(l10n),
+            // Fecha pasada
+            _buildPastDateSelector(),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -389,7 +444,9 @@ class _AddFermentationSheetState extends ConsumerState<AddFermentationSheet> {
               ? _buildTypeSelection()
               : _selectedType == FermentationType.kefir
                   ? _buildKefirSelection()
-                  : _buildKombuchaSelection(),
+                  : _selectedType == FermentationType.kombucha
+                      ? _buildKombuchaSelection()
+                      : _buildFruitKefirSelection(),
         ),
       ),
     );

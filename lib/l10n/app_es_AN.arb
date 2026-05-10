@@ -102,8 +102,10 @@
   "addSheetTitle": "¿Qué bâ a fermentâh?",
   "addSheetKefir": "Kefî de Lexe",
   "addSheetKombucha": "Kombuxa",
+  "addSheetFruitKefir": "Kefî de Frutâ",
   "notifReadyTitleKombucha": "Kombuxa Lîtta",
   "notifReadyTitleKefir": "Kefî Lîtto",
+  "notifReadyTitleFruitKefir": "Kefî de Frutâ Lîtto",
   "notifReadyBodyGeneric": "Tu fermentaçión a finaliçao",
   "notifReminderTitleGeneric": "Recordatorio",
   "notifReminderBodyGeneric": "Fartan 2 orâ pa terminâh",
@@ -112,6 +114,7 @@
   "addSheetTimeKefir": "Tiempo pa Kefî",
   "addSheetHours": "{hours} Orâ",
   "addSheetTimeKombucha": "Tiempo pa Kombuxa",
+  "addSheetTimeFruitKefir": "Tiempo pa Kefî de Frutâ",
   "addSheetIdealTime": "Tu tiempo ideâh ({days} díâh)",
   "addSheetDays": "{days} Diâ",
   "cardTranscurrido": "Trâccurrío",
@@ -134,6 +137,12 @@
   "stageKombucha3": "Fuerte/Áçida",
   "stageKombucha4": "Abinagrá",
   "historyKefirFinished": "Kefî coçexao",
+  "historyFruitKefirFinished": "Kefî de frutâ coçexao",
+  "stageFruitKefir0": "Iniçio",
+  "stageFruitKefir1": "Fermentaçión âttiba",
+  "stageFruitKefir2": "Equilibrá (Ideâh)",
+  "stageFruitKefir3": "Fuerte",
+  "stageFruitKefir4": "Mu fermentao",
   "historyCompletedPercent": "Completao: {percent}%",
   "historyDurationDays": "{days} diâ",
   "historyDurationDaysHours": "{days} diâ y {hours}h",
@@ -154,6 +163,17 @@
   "restoreErrorTitle": "Errôh",
   "restoreErrorDesc": "El arxibo êh imbálido o êttá corrûtto.",
   "addSheetIdealTimeKefir": "Tu tiempo ideâh ({hours}h)",
+  "@addSheetIdealTimeKefir": {
+    "placeholders": {
+      "hours": { "type": "num", "format": "compact" }
+    }
+  },
+  "addSheetIdealTimeFruitKefir": "Tu tiempo ideâh ({hours}h)",
+  "@addSheetIdealTimeFruitKefir": {
+    "placeholders": {
+      "hours": { "type": "num", "format": "compact" }
+    }
+  },
   "addSheetCustomTime": "Tiempo perçonaliçao",
   "addSheetNoLimit": "Çin límite",
   "addSheetCustomHours": "Orâ",
@@ -177,6 +197,11 @@
   "detailStageKombucha2Desc": "Er punto d'equilibrio perfêtto entre durçura y açidêh. Ideâh pa la mayoría de paladarê.",
   "detailStageKombucha3Desc": "Açidêh pronunçiá y çabôh compleho. Âtto pa quienê prefieren un çabôh intenço.",
   "detailStageKombucha4Desc": "Fermentaçión mu abançá. Çabôh abinagrao intenço, mâ âtto pa uço culinario.",
+  "detailStageFruitKefir0Desc": "Lô nódulô empieçan a îdratarçe y âttibâh la fermentaçión.",
+  "detailStageFruitKefir1Desc": "Ç'empieçan a formâh pequeñâ burbuhâ, el açúcâh çe conçume poco a poco.",
+  "detailStageFruitKefir2Desc": "Equilibrio ideâh de durçôh y açidêh. Refrêccante y liheramente burbuheante.",
+  "detailStageFruitKefir3Desc": "El açúcâh ç'a conçumío caçi por completo, çabôh mâ çeco y menô durçe.",
+  "detailStageFruitKefir4Desc": "Fermentaçión abançá, çabôh intenço con mu poco açúcâh rêttante.",
   "detailNotesTitle": "Notâ",
   "detailNotesHint": "Añade detayê çobre la lexe, temperatura, etc...",
   "detailHistoryTitle": "Îttoriâh Reçiente",

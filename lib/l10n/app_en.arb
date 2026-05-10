@@ -104,8 +104,10 @@
   "addSheetTitle": "What are you fermenting?",
   "addSheetKefir": "Milk Kefir",
   "addSheetKombucha": "Kombucha",
+  "addSheetFruitKefir": "Water Kefir",
   "notifReadyTitleKombucha": "Kombucha Ready",
   "notifReadyTitleKefir": "Kefir Ready",
+  "notifReadyTitleFruitKefir": "Water Kefir Ready",
   "notifReadyBodyGeneric": "Your fermentation has finished",
   "notifReminderTitleGeneric": "Reminder",
   "notifReminderBodyGeneric": "2 hours left to finish",
@@ -114,6 +116,7 @@
   "addSheetTimeKefir": "Time for Kefir",
   "addSheetHours": "{hours} Hours",
   "addSheetTimeKombucha": "Time for Kombucha",
+  "addSheetTimeFruitKefir": "Time for Water Kefir",
   "addSheetIdealTime": "Your ideal time ({days} days)",
   "addSheetDays": "{days} Days",
   "cardTranscurrido": "Elapsed",
@@ -136,6 +139,12 @@
   "stageKombucha3": "Strong/Acidic",
   "stageKombucha4": "Vinegar-like",
   "historyKefirFinished": "Kefir harvested",
+  "historyFruitKefirFinished": "Water Kefir harvested",
+  "stageFruitKefir0": "Start",
+  "stageFruitKefir1": "Active fermentation",
+  "stageFruitKefir2": "Balanced (Ideal)",
+  "stageFruitKefir3": "Strong",
+  "stageFruitKefir4": "Very fermented",
   "historyCompletedPercent": "Completed: {percent}%",
   "historyDurationDays": "{days} days",
   "historyDurationDaysHours": "{days} days & {hours}h",
@@ -157,6 +166,12 @@
   "restoreErrorDesc": "The file is invalid or corrupted.",
   "addSheetIdealTimeKefir": "Your ideal time ({hours}h)",
   "@addSheetIdealTimeKefir": {
+    "placeholders": {
+      "hours": { "type": "num", "format": "compact" }
+    }
+  },
+  "addSheetIdealTimeFruitKefir": "Your ideal time ({hours}h)",
+  "@addSheetIdealTimeFruitKefir": {
     "placeholders": {
       "hours": { "type": "num", "format": "compact" }
     }
@@ -184,6 +199,11 @@
   "detailStageKombucha2Desc": "The perfect balance between sweetness and acidity. Ideal for most palates.",
   "detailStageKombucha3Desc": "Pronounced acidity and complex flavor. Suitable for those who prefer an intense taste.",
   "detailStageKombucha4Desc": "Very advanced fermentation. Intense vinegary flavor, better suited for culinary use.",
+  "detailStageFruitKefir0Desc": "The grains begin to hydrate and activate the fermentation.",
+  "detailStageFruitKefir1Desc": "Small bubbles begin to form, sugar is consumed progressively.",
+  "detailStageFruitKefir2Desc": "Ideal balance of sweetness and acidity. Refreshing and slightly bubbly.",
+  "detailStageFruitKefir3Desc": "The sugar has been mostly consumed, drier and less sweet taste.",
+  "detailStageFruitKefir4Desc": "Advanced fermentation, intense flavor with very little sugar left.",
   "detailNotesTitle": "Notes",
   "detailNotesHint": "Add details about milk, temperature, etc...",
   "detailHistoryTitle": "Recent History",

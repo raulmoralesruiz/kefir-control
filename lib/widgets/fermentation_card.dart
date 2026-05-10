@@ -7,6 +7,8 @@ import 'package:kefir_control/l10n/app_localizations.dart';
 
 // Color amber-500 consistente con CalendarDayMarker
 const _kombuchaColor = Color(0xFFF59E0B);
+// Color sky-500 para el Kéfir de Frutas
+const _fruitKefirColor = Color(0xFF0EA5E9);
 
 class FermentationCard extends ConsumerWidget {
   final Fermentation fermentation;
@@ -33,18 +35,27 @@ class FermentationCard extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
     final isKombucha = fermentation.type == FermentationType.kombucha;
+    final isFruitKefir = fermentation.type == FermentationType.fruitKefir;
     final isOpenEnded = fermentation.isOpenEnded;
     final isPlanned = fermentation.elapsed.isNegative;
 
     // Color de acento según tipo: coincide con los puntos del calendario
-    final typeColor = isKombucha ? _kombuchaColor : colorScheme.primary;
+    final typeColor = isKombucha
+        ? _kombuchaColor
+        : isFruitKefir
+            ? _fruitKefirColor
+            : colorScheme.primary;
 
     final progress = fermentation.progress;
     final remaining = fermentation.remaining;
 
     final displayTitle = fermentation.name?.isNotEmpty == true
         ? fermentation.name!
-        : (isKombucha ? l10n.addSheetKombucha : l10n.addSheetKefir);
+        : isKombucha
+            ? l10n.addSheetKombucha
+            : isFruitKefir
+                ? l10n.addSheetFruitKefir
+                : l10n.addSheetKefir;
 
     return InkWell(
       onTap: () => FermentationDetailSheet.show(
@@ -84,7 +95,9 @@ class FermentationCard extends ConsumerWidget {
                           Icon(
                             isKombucha
                                 ? Icons.emoji_food_beverage
-                                : Icons.local_drink,
+                                : isFruitKefir
+                                    ? Icons.bubble_chart
+                                    : Icons.local_drink,
                             color: typeColor,
                             size: 28,
                           ),

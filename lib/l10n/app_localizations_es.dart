@@ -347,10 +347,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get addSheetKombucha => 'Kombucha';
 
   @override
+  String get addSheetFruitKefir => 'Kéfir de Frutas';
+
+  @override
   String get notifReadyTitleKombucha => 'Kombucha Lista';
 
   @override
   String get notifReadyTitleKefir => 'Kéfir Listo';
+
+  @override
+  String get notifReadyTitleFruitKefir => 'Kéfir de Frutas Listo';
 
   @override
   String get notifReadyBodyGeneric => 'Tu fermentación ha finalizado';
@@ -379,6 +385,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get addSheetTimeKombucha => 'Tiempo para Kombucha';
+
+  @override
+  String get addSheetTimeFruitKefir => 'Tiempo para Kéfir de Frutas';
 
   @override
   String addSheetIdealTime(Object days) {
@@ -453,6 +462,24 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get historyKefirFinished => 'Kéfir cosechado';
+
+  @override
+  String get historyFruitKefirFinished => 'Kéfir de frutas cosechado';
+
+  @override
+  String get stageFruitKefir0 => 'Inicio';
+
+  @override
+  String get stageFruitKefir1 => 'Fermentación activa';
+
+  @override
+  String get stageFruitKefir2 => 'Equilibrada (Ideal)';
+
+  @override
+  String get stageFruitKefir3 => 'Fuerte';
+
+  @override
+  String get stageFruitKefir4 => 'Muy fermentado';
 
   @override
   String historyCompletedPercent(Object percent) {
@@ -537,6 +564,16 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String addSheetIdealTimeFruitKefir(num hours) {
+    final intl.NumberFormat hoursNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String hoursString = hoursNumberFormat.format(hours);
+
+    return 'Tu tiempo ideal (${hoursString}h)';
+  }
+
+  @override
   String get addSheetCustomTime => 'Tiempo personalizado';
 
   @override
@@ -609,6 +646,26 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get detailStageKombucha4Desc =>
       'Fermentación muy avanzada. Sabor avinagrado intenso, más apto para uso culinario.';
+
+  @override
+  String get detailStageFruitKefir0Desc =>
+      'Los nódulos empiezan a hidratarse y activar la fermentación.';
+
+  @override
+  String get detailStageFruitKefir1Desc =>
+      'Se empiezan a formar pequeñas burbujas, el azúcar se consume progresivamente.';
+
+  @override
+  String get detailStageFruitKefir2Desc =>
+      'Equilibrio ideal de dulzor y acidez. Refrescante y ligeramente burbujeante.';
+
+  @override
+  String get detailStageFruitKefir3Desc =>
+      'El azúcar ha sido consumido casi por completo, sabor más seco y menos dulce.';
+
+  @override
+  String get detailStageFruitKefir4Desc =>
+      'Fermentación avanzada, sabor intenso con muy poca azúcar restante.';
 
   @override
   String get detailNotesTitle => 'Notas';
@@ -1065,10 +1122,16 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   String get addSheetKombucha => 'Kombuxa';
 
   @override
+  String get addSheetFruitKefir => 'Kefî de Frutâ';
+
+  @override
   String get notifReadyTitleKombucha => 'Kombuxa Lîtta';
 
   @override
   String get notifReadyTitleKefir => 'Kefî Lîtto';
+
+  @override
+  String get notifReadyTitleFruitKefir => 'Kefî de Frutâ Lîtto';
 
   @override
   String get notifReadyBodyGeneric => 'Tu fermentaçión a finaliçao';
@@ -1097,6 +1160,9 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String get addSheetTimeKombucha => 'Tiempo pa Kombuxa';
+
+  @override
+  String get addSheetTimeFruitKefir => 'Tiempo pa Kefî de Frutâ';
 
   @override
   String addSheetIdealTime(Object days) {
@@ -1171,6 +1237,24 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String get historyKefirFinished => 'Kefî coçexao';
+
+  @override
+  String get historyFruitKefirFinished => 'Kefî de frutâ coçexao';
+
+  @override
+  String get stageFruitKefir0 => 'Iniçio';
+
+  @override
+  String get stageFruitKefir1 => 'Fermentaçión âttiba';
+
+  @override
+  String get stageFruitKefir2 => 'Equilibrá (Ideâh)';
+
+  @override
+  String get stageFruitKefir3 => 'Fuerte';
+
+  @override
+  String get stageFruitKefir4 => 'Mu fermentao';
 
   @override
   String historyCompletedPercent(Object percent) {
@@ -1255,6 +1339,16 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   }
 
   @override
+  String addSheetIdealTimeFruitKefir(num hours) {
+    final intl.NumberFormat hoursNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String hoursString = hoursNumberFormat.format(hours);
+
+    return 'Tu tiempo ideâh (${hoursString}h)';
+  }
+
+  @override
   String get addSheetCustomTime => 'Tiempo perçonaliçao';
 
   @override
@@ -1327,6 +1421,26 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   @override
   String get detailStageKombucha4Desc =>
       'Fermentaçión mu abançá. Çabôh abinagrao intenço, mâ âtto pa uço culinario.';
+
+  @override
+  String get detailStageFruitKefir0Desc =>
+      'Lô nódulô empieçan a îdratarçe y âttibâh la fermentaçión.';
+
+  @override
+  String get detailStageFruitKefir1Desc =>
+      'Ç\'empieçan a formâh pequeñâ burbuhâ, el açúcâh çe conçume poco a poco.';
+
+  @override
+  String get detailStageFruitKefir2Desc =>
+      'Equilibrio ideâh de durçôh y açidêh. Refrêccante y liheramente burbuheante.';
+
+  @override
+  String get detailStageFruitKefir3Desc =>
+      'El açúcâh ç\'a conçumío caçi por completo, çabôh mâ çeco y menô durçe.';
+
+  @override
+  String get detailStageFruitKefir4Desc =>
+      'Fermentaçión abançá, çabôh intenço con mu poco açúcâh rêttante.';
 
   @override
   String get detailNotesTitle => 'Notâ';

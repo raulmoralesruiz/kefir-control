@@ -102,8 +102,10 @@
   "addSheetTitle": "Что будем ферментировать?",
   "addSheetKefir": "Молочный кефир",
   "addSheetKombucha": "Комбуча",
+  "addSheetFruitKefir": "Водный кефир",
   "notifReadyTitleKombucha": "Комбуча готова",
   "notifReadyTitleKefir": "Кефир готов",
+  "notifReadyTitleFruitKefir": "Водный кефир готов",
   "notifReadyBodyGeneric": "Ферментация завершена",
   "notifReminderTitleGeneric": "Напоминание",
   "notifReminderBodyGeneric": "Осталось 2 часа до завершения",
@@ -112,6 +114,7 @@
   "addSheetTimeKefir": "Время для кефира",
   "addSheetHours": "{hours} ч.",
   "addSheetTimeKombucha": "Время для комбучи",
+  "addSheetTimeFruitKefir": "Время для водного кефира",
   "addSheetIdealTime": "Ваше идеальное время ({days} дн.)",
   "addSheetDays": "{days} дн.",
   "cardTranscurrido": "Прошло",
@@ -134,6 +137,12 @@
   "stageKombucha3": "Крепкая/Кислая",
   "stageKombucha4": "Уксусная",
   "historyKefirFinished": "Кефир собран",
+  "historyFruitKefirFinished": "Водный кефир собран",
+  "stageFruitKefir0": "Начало",
+  "stageFruitKefir1": "Активная ферментация",
+  "stageFruitKefir2": "Сбалансированная (Идеал)",
+  "stageFruitKefir3": "Крепкий",
+  "stageFruitKefir4": "Очень ферментированный",
   "historyCompletedPercent": "Завершено: {percent}%",
   "historyDurationDays": "{days} дн.",
   "historyDurationDaysHours": "{days} дн. и {hours} ч.",
@@ -155,6 +164,12 @@
   "restoreErrorDesc": "Файл повреждён или недействителен.",
   "addSheetIdealTimeKefir": "Ваше идеальное время ({hours} ч.)",
   "@addSheetIdealTimeKefir": {
+    "placeholders": {
+      "hours": { "type": "num", "format": "compact" }
+    }
+  },
+  "addSheetIdealTimeFruitKefir": "Ваше идеальное время ({hours} ч.)",
+  "@addSheetIdealTimeFruitKefir": {
     "placeholders": {
       "hours": { "type": "num", "format": "compact" }
     }
@@ -182,6 +197,11 @@
   "detailStageKombucha2Desc": "Идеальный баланс сладости и кислоты. Подходит большинству.",
   "detailStageKombucha3Desc": "Выраженная кислота и сложный вкус. Для любителей насыщенного вкуса.",
   "detailStageKombucha4Desc": "Очень глубокая ферментация. Интенсивный уксусный вкус, подходит для кулинарии.",
+  "detailStageFruitKefir0Desc": "Зерна начинают увлажняться и активировать ферментацию.",
+  "detailStageFruitKefir1Desc": "Начинают образовываться маленькие пузырьки, сахар постепенно потребляется.",
+  "detailStageFruitKefir2Desc": "Идеальный баланс сладости и кислотности. Освежающий и слегка газированный.",
+  "detailStageFruitKefir3Desc": "Сахар почти полностью потреблен, вкус более сухой и менее сладкий.",
+  "detailStageFruitKefir4Desc": "Продвинутая ферментация, интенсивный вкус с очень малым остатком сахара.",
   "detailNotesTitle": "Заметки",
   "detailNotesHint": "Добавьте детали о молоке, температуре и т.д.",
   "detailHistoryTitle": "Недавняя история",

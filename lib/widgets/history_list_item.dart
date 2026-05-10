@@ -8,6 +8,8 @@ import '../services/haptic_service.dart';
 
 // Color amber-500 consistente con FermentationCard y CalendarDayMarker
 const _kombuchaColor = Color(0xFFF59E0B);
+// Color sky-500 para el Kéfir de Frutas
+const _fruitKefirColor = Color(0xFF0EA5E9);
 
 class HistoryListItem extends StatelessWidget {
   final FermentationHistoryItem item;
@@ -48,12 +50,17 @@ class HistoryListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isKombucha = item.type == FermentationType.kombucha;
+    final isFruitKefir = item.type == FermentationType.fruitKefir;
     final percent = item.completionPercentage;
     final l10n = AppLocalizations.of(context)!;
 
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final typeColor = isKombucha ? _kombuchaColor : colorScheme.primary;
+    final typeColor = isKombucha
+        ? _kombuchaColor
+        : isFruitKefir
+            ? _fruitKefirColor
+            : colorScheme.primary;
 
     return Dismissible(
       key: Key(item.completedAt.millisecondsSinceEpoch.toString()),
@@ -120,6 +127,7 @@ class HistoryListItem extends StatelessWidget {
                         // Indicador circular + icono centrado
                         _TypeIndicator(
                           isKombucha: isKombucha,
+                          isFruitKefir: isFruitKefir,
                           percent: percent,
                           typeColor: typeColor,
                           surfaceColor: colorScheme.surfaceContainerHighest,
@@ -134,9 +142,11 @@ class HistoryListItem extends StatelessWidget {
                               Text(
                                 item.name?.isNotEmpty == true
                                     ? item.name!
-                                    : (isKombucha
+                                    : isKombucha
                                         ? l10n.addSheetKombucha
-                                        : l10n.addSheetKefir),
+                                        : isFruitKefir
+                                            ? l10n.addSheetFruitKefir
+                                            : l10n.addSheetKefir,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
@@ -185,12 +195,14 @@ class HistoryListItem extends StatelessWidget {
 
 class _TypeIndicator extends StatelessWidget {
   final bool isKombucha;
+  final bool isFruitKefir;
   final double? percent;
   final Color typeColor;
   final Color surfaceColor;
 
   const _TypeIndicator({
     required this.isKombucha,
+    required this.isFruitKefir,
     required this.percent,
     required this.typeColor,
     required this.surfaceColor,
@@ -215,7 +227,11 @@ class _TypeIndicator extends StatelessWidget {
             ),
           ),
           Icon(
-            isKombucha ? Icons.emoji_food_beverage : Icons.local_drink,
+            isKombucha
+                ? Icons.emoji_food_beverage
+                : isFruitKefir
+                    ? Icons.bubble_chart
+                    : Icons.local_drink,
             color: typeColor,
             size: 22,
           ),

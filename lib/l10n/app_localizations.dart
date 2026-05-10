@@ -713,6 +713,12 @@ abstract class AppLocalizations {
   /// **'Kombucha'**
   String get addSheetKombucha;
 
+  /// No description provided for @addSheetFruitKefir.
+  ///
+  /// In es, this message translates to:
+  /// **'Kéfir de Frutas'**
+  String get addSheetFruitKefir;
+
   /// No description provided for @notifReadyTitleKombucha.
   ///
   /// In es, this message translates to:
@@ -724,6 +730,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Kéfir Listo'**
   String get notifReadyTitleKefir;
+
+  /// No description provided for @notifReadyTitleFruitKefir.
+  ///
+  /// In es, this message translates to:
+  /// **'Kéfir de Frutas Listo'**
+  String get notifReadyTitleFruitKefir;
 
   /// No description provided for @notifReadyBodyGeneric.
   ///
@@ -772,6 +784,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Tiempo para Kombucha'**
   String get addSheetTimeKombucha;
+
+  /// No description provided for @addSheetTimeFruitKefir.
+  ///
+  /// In es, this message translates to:
+  /// **'Tiempo para Kéfir de Frutas'**
+  String get addSheetTimeFruitKefir;
 
   /// No description provided for @addSheetIdealTime.
   ///
@@ -905,6 +923,42 @@ abstract class AppLocalizations {
   /// **'Kéfir cosechado'**
   String get historyKefirFinished;
 
+  /// No description provided for @historyFruitKefirFinished.
+  ///
+  /// In es, this message translates to:
+  /// **'Kéfir de frutas cosechado'**
+  String get historyFruitKefirFinished;
+
+  /// No description provided for @stageFruitKefir0.
+  ///
+  /// In es, this message translates to:
+  /// **'Inicio'**
+  String get stageFruitKefir0;
+
+  /// No description provided for @stageFruitKefir1.
+  ///
+  /// In es, this message translates to:
+  /// **'Fermentación activa'**
+  String get stageFruitKefir1;
+
+  /// No description provided for @stageFruitKefir2.
+  ///
+  /// In es, this message translates to:
+  /// **'Equilibrada (Ideal)'**
+  String get stageFruitKefir2;
+
+  /// No description provided for @stageFruitKefir3.
+  ///
+  /// In es, this message translates to:
+  /// **'Fuerte'**
+  String get stageFruitKefir3;
+
+  /// No description provided for @stageFruitKefir4.
+  ///
+  /// In es, this message translates to:
+  /// **'Muy fermentado'**
+  String get stageFruitKefir4;
+
   /// No description provided for @historyCompletedPercent.
   ///
   /// In es, this message translates to:
@@ -1024,6 +1078,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Tu tiempo ideal ({hours}h)'**
   String addSheetIdealTimeKefir(num hours);
+
+  /// No description provided for @addSheetIdealTimeFruitKefir.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu tiempo ideal ({hours}h)'**
+  String addSheetIdealTimeFruitKefir(num hours);
 
   /// No description provided for @addSheetCustomTime.
   ///
@@ -1162,6 +1222,36 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Fermentación muy avanzada. Sabor avinagrado intenso, más apto para uso culinario.'**
   String get detailStageKombucha4Desc;
+
+  /// No description provided for @detailStageFruitKefir0Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Los nódulos empiezan a hidratarse y activar la fermentación.'**
+  String get detailStageFruitKefir0Desc;
+
+  /// No description provided for @detailStageFruitKefir1Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Se empiezan a formar pequeñas burbujas, el azúcar se consume progresivamente.'**
+  String get detailStageFruitKefir1Desc;
+
+  /// No description provided for @detailStageFruitKefir2Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Equilibrio ideal de dulzor y acidez. Refrescante y ligeramente burbujeante.'**
+  String get detailStageFruitKefir2Desc;
+
+  /// No description provided for @detailStageFruitKefir3Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'El azúcar ha sido consumido casi por completo, sabor más seco y menos dulce.'**
+  String get detailStageFruitKefir3Desc;
+
+  /// No description provided for @detailStageFruitKefir4Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Fermentación avanzada, sabor intenso con muy poca azúcar restante.'**
+  String get detailStageFruitKefir4Desc;
 
   /// No description provided for @detailNotesTitle.
   ///

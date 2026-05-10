@@ -8,6 +8,7 @@ class FermentationService {
   static const String _historyKey = 'fermentation_history';
   static const String _kombuchaIdealTimeKey = 'kombucha_ideal_duration_seconds';
   static const String _kefirIdealTimeKey = 'kefir_ideal_duration_seconds';
+  static const String _fruitKefirIdealTimeKey = 'fruit_kefir_ideal_duration_seconds';
 
   // --- Fermentaciones activas ---
 
@@ -63,6 +64,22 @@ class FermentationService {
   Future<Duration?> getKefirIdealDuration() async {
     final prefs = await SharedPreferences.getInstance();
     final seconds = prefs.getInt(_kefirIdealTimeKey);
+    if (seconds != null) {
+      return Duration(seconds: seconds);
+    }
+    return null;
+  }
+
+  // --- Tiempo ideal de Kéfir de Frutas ---
+
+  Future<void> saveFruitKefirIdealDuration(Duration duration) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_fruitKefirIdealTimeKey, duration.inSeconds);
+  }
+
+  Future<Duration?> getFruitKefirIdealDuration() async {
+    final prefs = await SharedPreferences.getInstance();
+    final seconds = prefs.getInt(_fruitKefirIdealTimeKey);
     if (seconds != null) {
       return Duration(seconds: seconds);
     }
@@ -137,6 +154,7 @@ class FermentationService {
       _historyKey: prefs.getString(_historyKey),
       _kombuchaIdealTimeKey: prefs.getInt(_kombuchaIdealTimeKey),
       _kefirIdealTimeKey: prefs.getInt(_kefirIdealTimeKey),
+      _fruitKefirIdealTimeKey: prefs.getInt(_fruitKefirIdealTimeKey),
     };
     return jsonEncode(data);
   }
@@ -161,6 +179,11 @@ class FermentationService {
           data[_kefirIdealTimeKey] != null) {
         await prefs.setInt(
             _kefirIdealTimeKey, data[_kefirIdealTimeKey] as int);
+      }
+      if (data.containsKey(_fruitKefirIdealTimeKey) &&
+          data[_fruitKefirIdealTimeKey] != null) {
+        await prefs.setInt(
+            _fruitKefirIdealTimeKey, data[_fruitKefirIdealTimeKey] as int);
       }
       return true;
     } catch (e) {

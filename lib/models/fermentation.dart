@@ -1,7 +1,7 @@
 import 'package:uuid/uuid.dart';
 import 'package:kefir_control/l10n/app_localizations.dart';
 
-enum FermentationType { kefir, kombucha }
+enum FermentationType { kefir, kombucha, fruitKefir }
 
 class Fermentation {
   final String id;
@@ -72,13 +72,20 @@ class Fermentation {
       if (hours < 36) return "Fermentación ideal";
       if (hours < 48) return "Fermentación fuerte";
       return "Muy ácido";
-    } else {
+    } else if (type == FermentationType.kombucha) {
       final days = elapsed.inDays;
       if (days < 3) return "Formación inicial";
       if (days < 6) return "Ligeramente dulce";
       if (days < 10) return "Equilibrada (Ideal)";
       if (days < 14) return "Fuerte/Ácida";
       return "Avinagrada";
+    } else {
+      final hours = elapsed.inHours;
+      if (hours < 12) return "Inicio";
+      if (hours < 24) return "Fermentación activa";
+      if (hours < 36) return "Equilibrada (Ideal)";
+      if (hours < 48) return "Fuerte";
+      return "Muy fermentado";
     }
   }
 
@@ -91,13 +98,20 @@ class Fermentation {
       if (hours < 36) return l10n.step2Title;
       if (hours < 48) return l10n.step3Title;
       return l10n.step4Title;
-    } else {
+    } else if (type == FermentationType.kombucha) {
       final days = elapsed.inDays;
       if (days < 3) return l10n.stageKombucha0;
       if (days < 6) return l10n.stageKombucha1;
       if (days < 10) return l10n.stageKombucha2;
       if (days < 14) return l10n.stageKombucha3;
       return l10n.stageKombucha4;
+    } else {
+      final hours = elapsed.inHours;
+      if (hours < 12) return l10n.stageFruitKefir0;
+      if (hours < 24) return l10n.stageFruitKefir1;
+      if (hours < 36) return l10n.stageFruitKefir2;
+      if (hours < 48) return l10n.stageFruitKefir3;
+      return l10n.stageFruitKefir4;
     }
   }
 

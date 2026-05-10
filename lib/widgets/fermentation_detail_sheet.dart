@@ -13,6 +13,8 @@ import '../services/haptic_service.dart';
 
 // Color amber-500 consistente con el resto de la app
 const _kombuchaColor = Color(0xFFF59E0B);
+// Color sky-500 para el Kéfir de Frutas
+const _fruitKefirColor = Color(0xFF0EA5E9);
 
 /// BottomSheet con el detalle completo de una fermentación (activa o histórica).
 /// Permite editar nombre, notas y ver datos de tiempo detallados.
@@ -136,7 +138,9 @@ class _FermentationDetailSheetState extends ConsumerState<FermentationDetailShee
 
     final l10nTitle = item.type == FermentationType.kombucha
         ? l10n.notifReadyTitleKombucha
-        : l10n.notifReadyTitleKefir;
+        : item.type == FermentationType.fruitKefir
+            ? l10n.notifReadyTitleFruitKefir
+            : l10n.notifReadyTitleKefir;
     final l10nBody = l10n.notifReadyBodyGeneric;
     final l10nRemTitle = l10n.notifReminderTitleGeneric;
     final l10nRemBody = l10n.notifReminderBodyGeneric;
@@ -201,7 +205,12 @@ class _FermentationDetailSheetState extends ConsumerState<FermentationDetailShee
     final fermentationName =
         isHistory ? liveHistoryItem!.name : liveFermentation!.name;
     final isKombucha = type == FermentationType.kombucha;
-    final typeColor = isKombucha ? _kombuchaColor : colorScheme.primary;
+    final isFruitKefir = type == FermentationType.fruitKefir;
+    final typeColor = isKombucha
+        ? _kombuchaColor
+        : isFruitKefir
+            ? _fruitKefirColor
+            : colorScheme.primary;
 
     // Lógica específica según modo
     final bool isOpenEnded;
@@ -224,7 +233,11 @@ class _FermentationDetailSheetState extends ConsumerState<FermentationDetailShee
 
     final displayTitle = fermentationName?.isNotEmpty == true
         ? fermentationName!
-        : (isKombucha ? l10n.addSheetKombucha : l10n.addSheetKefir);
+        : isKombucha
+            ? l10n.addSheetKombucha
+            : isFruitKefir
+                ? l10n.addSheetFruitKefir
+                : l10n.addSheetKefir;
 
     return Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -256,7 +269,11 @@ class _FermentationDetailSheetState extends ConsumerState<FermentationDetailShee
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: Icon(
-                        isKombucha ? Icons.emoji_food_beverage : Icons.local_drink,
+                        isKombucha
+                            ? Icons.emoji_food_beverage
+                            : isFruitKefir
+                                ? Icons.bubble_chart
+                                : Icons.local_drink,
                         color: typeColor,
                         size: 28,
                       ),
@@ -507,13 +524,20 @@ class _StageDescriptionCard extends StatelessWidget {
       if (hours < 36) return l10n.step2Desc;
       if (hours < 48) return l10n.step3Desc;
       return l10n.step4Desc;
-    } else {
+    } else if (fermentation.type == FermentationType.kombucha) {
       final days = fermentation.elapsed.inDays;
       if (days < 3) return l10n.detailStageKombucha0Desc;
       if (days < 6) return l10n.detailStageKombucha1Desc;
       if (days < 10) return l10n.detailStageKombucha2Desc;
       if (days < 14) return l10n.detailStageKombucha3Desc;
       return l10n.detailStageKombucha4Desc;
+    } else {
+      final hours = fermentation.elapsed.inHours;
+      if (hours < 12) return l10n.detailStageFruitKefir0Desc;
+      if (hours < 24) return l10n.detailStageFruitKefir1Desc;
+      if (hours < 36) return l10n.detailStageFruitKefir2Desc;
+      if (hours < 48) return l10n.detailStageFruitKefir3Desc;
+      return l10n.detailStageFruitKefir4Desc;
     }
   }
 
@@ -663,7 +687,9 @@ class _QuickAdjustmentButtons extends ConsumerWidget {
   void _adjust(WidgetRef ref, AppLocalizations l10n, Duration offset) {
     final notifTitle = fermentation.type == FermentationType.kombucha
         ? l10n.notifReadyTitleKombucha
-        : l10n.notifReadyTitleKefir;
+        : fermentation.type == FermentationType.fruitKefir
+            ? l10n.notifReadyTitleFruitKefir
+            : l10n.notifReadyTitleKefir;
 
     // Feedback háptico ligero al ajustar
     HapticService.light();

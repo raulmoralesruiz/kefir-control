@@ -15,6 +15,8 @@ class CalendarDayMarker extends StatelessWidget {
         fermentations.any((f) => f.type == FermentationType.kefir);
     final hasKombucha =
         fermentations.any((f) => f.type == FermentationType.kombucha);
+    final hasFruitKefir =
+        fermentations.any((f) => f.type == FermentationType.fruitKefir);
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -25,6 +27,10 @@ class CalendarDayMarker extends StatelessWidget {
           const SizedBox(width: 3),
         if (hasKombucha)
           const _Dot(color: Color(0xFFF59E0B)), // amber-500
+        if ((hasKefir || hasKombucha) && hasFruitKefir)
+          const SizedBox(width: 3),
+        if (hasFruitKefir)
+          const _Dot(color: Color(0xFF0EA5E9)), // sky-500
       ],
     );
   }
