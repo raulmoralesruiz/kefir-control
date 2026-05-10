@@ -9,9 +9,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const flags = { 
         'en': './landing/img/languages/en.svg', 
         'es': './landing/img/languages/es.svg', 
-        'and': './landing/img/languages/and.svg' 
+        'and': './landing/img/languages/and.svg',
+        'ru': './landing/img/languages/ru.svg' 
     };
-    const names = { 'en': 'English', 'es': 'Castellano', 'and': 'Andalûh' };
+    const names = { 'en': 'English', 'es': 'Castellano', 'and': 'Andalûh', 'ru': 'Русский' };
 
     // Toggle dropdown
     if (langBtn) {
