@@ -1,1 +1,1 @@
-Minimalist app to track milk kefir fermentation times.
+Minimalist app to track milk kefir, water kefir, and kombucha fermentation times.

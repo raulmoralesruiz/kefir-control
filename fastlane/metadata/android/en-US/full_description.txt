@@ -1,7 +1,8 @@
-Kefir Control was born out of the need to remember when milk kefir fermentation is at its perfect point. If left for too long, kefir becomes excessively acidic and the whey separates too much. This application simplifies that process with scheduled local notifications and a visual timer.
+Kefir Control was born out of the need to remember when your fermentation is at its perfect point. Whether it's milk kefir, water kefir (fruit kefir), or kombucha, if left for too long, it becomes excessively acidic. This application simplifies that process with scheduled local notifications and a visual timer.
 
 Core Features:
-- Quick Timers: Choose between 24h, 36h, or 48h of fermentation.
+- Multiple Ferments: Track milk kefir, water kefir, and kombucha simultaneously.
+- Quick Timers: Choose between preset durations or set your own custom time.
 - Past Fermentation Logging: If you forgot to start the timer, you can set the start time manually.
 - Local Notifications (Off-grid): The app schedules the alarm using your own device, working offline and without servers.
 - Full History: Keep a record of all your past harvests to maintain strict control.

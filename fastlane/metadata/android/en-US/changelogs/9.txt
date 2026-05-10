@@ -1,0 +1,4 @@
+- Fruit Kefir (Water Kefir) support with specific times and stages.
+- New language added: Russian.
+- UI improvements and minor bug fixes.
+- Landing page created: https://kefircontrol.raulmorales.eu

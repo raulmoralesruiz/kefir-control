@@ -1,0 +1,4 @@
+- Soporte para Kéfir de Frutas (Kéfir de Agua) con tiempos y estados específicos.
+- Nuevo idioma disponible: Ruso.
+- Mejoras en la interfaz y corrección de errores menores.
+- Se crea landing page: https://kefircontrol.raulmorales.eu
