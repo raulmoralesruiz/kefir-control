@@ -295,6 +295,11 @@ class HomeScreen extends ConsumerWidget {
                     label: 'Andalûh',
                     icon: Icons.translate,
                   ),
+                  BottomSheetOption(
+                    value: const Locale('ru'),
+                    label: 'Русский',
+                    icon: Icons.translate,
+                  ),
                 ],
               );
             },
@@ -568,6 +573,8 @@ class HomeScreen extends ConsumerWidget {
         return 'Español';
       case 'en':
         return 'English';
+      case 'ru':
+        return 'Русский';
       default:
         return locale.languageCode.toUpperCase();
     }

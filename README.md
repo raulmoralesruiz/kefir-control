@@ -23,7 +23,8 @@
 <p align="center">
   <a href="readme_i18n/README_es.md">Spanish</a> |
   <a href="README.md">English</a> |
-  <a href="readme_i18n/README_and.md">Andalusian</a>
+  <a href="readme_i18n/README_and.md">Andalusian</a> |
+  <a href="readme_i18n/README_ru.md">Russian</a>
 </p>
 
 <p align="center">
@@ -47,7 +48,7 @@ The project is **100% Free and Open Source Software (FOSS)**, privacy-focused, a
 - **📱 Material You**: Dynamic color support and dark/light theme following Material Design 3.
 - **📳 Haptic Feedback**: Physical interactions through vibration for a more immersive experience.
 - **💾 Backups**: Export and import data in JSON format.
-- **🌍 Multilingual**: Available in Spanish, English, and Andalusian (EPA).
+- **🌍 Multilingual**: Available in Spanish, English, Andalusian (EPA), and Russian.
 - **🔒 Privacy First**: No accounts, no trackers, and no analytics. Your data is yours alone.
 
 ## 🛠️ Technologies and Requirements

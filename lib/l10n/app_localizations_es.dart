@@ -727,7 +727,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   AppLocalizationsEsAn() : super('es_AN');
 
   @override
-  String get appTitle => 'Kéfî Contrôh';
+  String get appTitle => 'Kefî Contrôh';
 
   @override
   String get accept => 'Açêttâh';
@@ -757,16 +757,16 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   String get drawerDonate => 'Imbítame a un café';
 
   @override
-  String get drawerDonateSubtitle => 'Apoya el deçarroyo';
+  String get drawerDonateSubtitle => 'Apoya er deçarroyo';
 
   @override
   String get historyTitle => 'Îttoriâh';
 
   @override
-  String get homeSwipeDeleteHint => 'Dêl-liça una tarheta pa borrâl-la';
+  String get homeSwipeDeleteHint => 'Dêl-liça una taheta pa borrâl-la';
 
   @override
-  String get historyEmpty => 'No ay fermentaçionê rehîttrâh.';
+  String get historyEmpty => 'N\'ay fermentaçionê rehîttrâh.';
 
   @override
   String get historyClear => 'Limpiâh';
@@ -775,7 +775,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   String get historyClearTitle => 'Borrâh îttoriâh?';
 
   @override
-  String get historyClearContent => 'Êtta aççiô no çe pue deçaçêh.';
+  String get historyClearContent => 'Êtta aççión no çe puê deçaçêh.';
 
   @override
   String get historyClearConfirm => 'Borrâh';
@@ -791,7 +791,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   String get homeEstimatedFinish => 'Tiempo êttimao';
 
   @override
-  String get homeRemainingTime => 'Quedan';
+  String get homeRemainingTime => 'Quean';
 
   @override
   String get homeCompleted => 'Completao';
@@ -801,7 +801,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String get homeStopContent =>
-      'Êttâh a punto de parâh er temporiçadôh. Açegúrate de colâh lô nódulô.';
+      'Êttâh a punto de parâh er temporiçaôh. Açegúrate de colâh lô nódulô.';
 
   @override
   String get homeStopConfirm => 'Finaliçâh';
@@ -820,7 +820,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String get dialogManualDesc =>
-      'Çeleççiona la fexa y ora a la que mêçclâtte la lexe con lô nódulô pa carculâh er progreço açttuâh y programâ l\'alarma.';
+      'Çeleççiona la fexa y ora a la que mêçclâtte la lexe con lô nódulô pa carculâh er pogreço âttuâh y programâh l\'alarma.';
 
   @override
   String get dialogManualDate => 'Fexa d\'iniçio';
@@ -829,7 +829,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   String get dialogManualTime => 'Ora d\'iniçio';
 
   @override
-  String get dialogManualDuration => 'Duraççiô objetibo';
+  String get dialogManualDuration => 'Duraççión ohetibo';
 
   @override
   String get dialogManualBtnStart => 'Iniçiâh';
@@ -844,66 +844,66 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   String get dialogOption48h => '48 orâ';
 
   @override
-  String get infoTitle => 'Informaçión y Guía';
+  String get infoTitle => 'Informaçión y Gía';
 
   @override
-  String get infoCard1Title => '🥛 ¿Qué êh er Kéfî de lexe?';
+  String get infoCard1Title => '🥛 ¿Q\'êh er Kefî de lexe?';
 
   @override
   String get infoCard1Desc =>
-      'Er kéfî de lexe êh una bebía fermentá rica en probióticô que çe elabora añadiendo nódulô de kéfî a lexe entera a temperatura ambiente.';
+      'Er kefî de lexe êh una bebía fermentá rica en probióticô que ç\'elabora añadiendo nódulô de kéfî a lexe entera a temperatura ambiente.';
 
   @override
-  String get infoCard2Title => '⏱️ Tiempô de Fermentaçiôh';
+  String get infoCard2Title => '⏱️ Tiempô de Fermentaçión';
 
   @override
   String get infoCard2Subtitle1 => '24 Orâ';
 
   @override
   String get infoCard2Desc1 =>
-      'Çabô çuabe y conçîttençia líquida, pareçío a un yogûh pa bebêh con toquê durçê. Efêtto liheramente laçante. Ideâh çi la temperatura ambiente êh arta (>25ºC).';
+      'Çabôh çuabe y conçîttençia líquida, pareçío a un yogûh pa bebêh con toquê durçê. Efêtto liheramente laçante. Ideâh çi la temperatura ambiente êh arta (>25ºC).';
 
   @override
   String get infoCard2Subtitle2 => '36 Orâ';
 
   @override
   String get infoCard2Desc2 =>
-      'Er punto mâh equilibrao. Tettura mâ cremôça que çepara liheramente er çuero. Efêtto reguladô intêttinâh.';
+      'Er punto mâ equilibrao. Têttura mâ cremôça que çepara liheramente er çuero. Efêtto regulaôh intêttinâh.';
 
   @override
   String get infoCard2Subtitle3 => '48 Orâ';
 
   @override
   String get infoCard2Desc3 =>
-      'Çabôh áçido y fuerte. Er çuero formarâ una bôrça de líquido ebidente en la baçe. Efêtto âttrinhente. Recomendao çolo çi la temperatura ambiente êh mu baha o çe bûcca un kéfî curao.';
+      'Çabôh áçido y fuerte. Er çuero formará una bôrça de líquido ebidente en la baçe. Efêtto âttrinhente. Recomendao çolo çi la temperatura ambiente êh mu baha o çe bûcca un kefî curao.';
 
   @override
   String get infoCard3Title => 'Conçeho';
 
   @override
   String get infoCard3Desc =>
-      'Ebita lô utençiliô de metâh ar colâh tû nódulô; uça cuxarâ y coladorê de pláttico o maera pa no dañâh lô microorganîmmô.';
+      'Ebita lô utençiliô de metâh ar colâh tû nódulô; uça cuxarâ y colaorê de pláttico o maera pa no dañâh lô microrganîmmô.';
 
   @override
   String get devDesc => 'Hêttiona tû fermentaçionê';
 
   @override
-  String get notifReadyTitle => '¡Er kéfî êttá lîtto! 🥛';
+  String get notifReadyTitle => '¡Er kefî êttá lîtto! 🥛';
 
   @override
   String notifReadyBody(Object hours) {
-    return 'La fermentaççiô de $hours orâ a terminao. Êh ora de colâh lô nódulô y dîffrutâh de tu bebía probiótica.';
+    return 'La fermentaççión de $hours orâ a terminao. Êh ora de colâh lô nódulô y dîffrutâh de tu bebía probiótica.';
   }
 
   @override
-  String get notifReminderTitle => 'Preparaççiô par Kéfî';
+  String get notifReminderTitle => 'Preparaççiób par Kefî';
 
   @override
   String get notifReminderBody =>
       'Fartan 2 orâ pa terminâh. ¡Be preparando reçipientê limpiô!';
 
   @override
-  String get infoTab1 => 'Guía';
+  String get infoTab1 => 'Gía';
 
   @override
   String get infoTab2 => 'Fermentô';
@@ -912,63 +912,63 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   String get infoTab3 => 'Abançao';
 
   @override
-  String get infoProcessTitle => 'Er Proçeço der Kéfî';
+  String get infoProcessTitle => 'Er Proçeço der Kefî';
 
   @override
   String get infoProcessStep1Title => 'Preparaçiôn';
 
   @override
   String get infoProcessStep1Desc =>
-      'Çe introduçen lô nódulô de kéfî en lexe a te mperatura ambiente, preferibemente lexe entera (aunque tamié pue çê çemidênnatá o dênnatá).';
+      'Ç\'introduçen lô nódulô de kefî en lexe a temperatura ambiente, preferibemente lexe entera (manque tamié pue çê çemidênnatá o dênnatá).';
 
   @override
-  String get infoProcessStep2Title => 'Fermentaçiôn (24h - 48h)';
+  String get infoProcessStep2Title => 'Fermentaçión (24h - 48h)';
 
   @override
   String get infoProcessStep2Desc =>
-      'Lô microorganîmmô conçumen la lâttoça de la lexe, trâfformándola en áçido láttico (lo que le da çu çabô áçido), dióççido de carbono y otrô compuêttô benefiçioçô. A mayôh tiempo, mâh êppeço y áçido çe buerbe.';
+      'Lô microrganîmmô conçumen la lâttoça de la lexe, trâfformándola en áçido láttico (lo que le da çu çabôh áçido), dióççido de carbono y otrô compuêttô benefiçioçô. A mayôh tiempo, mâ êppeço y áçido çe buerbe.';
 
   @override
-  String get infoProcessStep3Title => 'Recoleççiôn';
+  String get infoProcessStep3Title => 'Recoleççión';
 
   @override
   String get infoProcessStep3Desc =>
-      'Çe cuela la mêccla con un coladôh no metálico. Er líquido reçurtante êh la bebía de kéfî lîtta pa conçumîh, y lô nódulô recuperáô çe buerben a introduçîh en nueba lexe pa repetîh er çiclo.';
+      'Çe cuela la mêccla con un colaôh no metálico. Er líquido reçurtante êh la bebía de krfî lîtta pa conçumîh, y lô nódulô recuperoô çe buerben a introduçîh en nueba lexe pa repetîh er çiclo.';
 
   @override
-  String get infoGuideTitle => 'Cómo uçâh Kéfî Contrôh';
+  String get infoGuideTitle => 'Cómo uçâh Kefî Contrôh';
 
   @override
   String get infoGuideDesc =>
-      'Êtta aplicaçión êttá diçeñá p\'ayuarte a yebâ un contrôh preçiço de lô tiêmppô de tû fermentaçionê, ebitando que tu kéfî çe buerba êççeçibamente áçido por orbío.';
+      'Êtta aplicaçión êttá diçeñá p\'ayuarte a yebâh un contrôh preçiço de lô tiempô de tû fermentaçionê, ebitando que tu kefî çe buerba êççeçibamente áçido por orbío.';
 
   @override
-  String get infoGuideStep1Title => 'Iniçiâh Fermentaçiôn Ahora';
+  String get infoGuideStep1Title => 'Iniçiâh Fermentaçión Aora';
 
   @override
   String get infoGuideStep1Desc =>
-      'Purça êtte botón hûtto dêppuêh de mêcclâh la lexe con lô nódulô. Te pedirâ que elihâ cuánto tiempo quierê que fermente (24, 36 o 48 orâ). La âpp programarâ una alarma automática.';
+      'Purça êtte botón hûtto dêppuêh de mêcclâh la lexe con lô nódulô. Te pedirâ que elihâ cuánto tiempo quierê que fermente (24, 36 o 48 orâ). La app programará una alarma automática.';
 
   @override
   String get infoGuideStep2Title => 'Rehîttrâh Fermentaçión Paçá';
 
   @override
   String get infoGuideStep2Desc =>
-      'Çe te orbidó dâl-le ar botôn cuando preparâtte er kéfî êtta mañana? No paça ná. Uça êtta oppçiôn pa indicâ a qué ora (y día) êççâtta içîtte la mêccla en la bida reâh. La âpp carculará er tiempo trâccurrío dêdde entonçê.';
+      'Çe t\'orbió dâl-le ar botôn cuando preparâtte er kefî êtta mañana? No paça ná. Uça êtta ôççión pa indicâh a qué ora (y día) êççâtta içîtte la mêccla en la bía reâh. La app carculará er tiempo trâccurrío dêdde entonçê.';
 
   @override
   String get infoGuideStep3Title => 'Notificaçionê';
 
   @override
   String get infoGuideStep3Desc =>
-      'Puê çerrâ la aplicaçión çin miedo. Cuando er tiempo ôhhetibo çe arcançe, reçibirâh una notificaçión en tu dîppoçitibo abiçándote de que êh ora de colâh er kéfî.';
+      'Puê çerrâh la aplicaçión çin mieo. Cuando er tiempo ohetibo ç\'arcançe, reçibirâh una notificaçión en tu dîppoçitibo abiçándote de q\'êh ora de colâh er kefî.';
 
   @override
   String get infoGuideStep4Title => 'Finaliçâh Fermentaçión';
 
   @override
   String get infoGuideStep4Desc =>
-      'Purça êtte botón roho una bêh ayâ colao er kéfî pa limpiâh er temporiçadôh y dehâh la aplicaçión lîtta pa tu próççima recolêççión.';
+      'Purça êtte botón roho una bêh ayâ colao er kefî pa limpiâh er temporiçaôh y dehâh la aplicaçión lîtta pa tu próççima recolêççión.';
 
   @override
   String get infoGuideStepHarvestTitle => 'Coçexâh y Reiniçiâh';
@@ -982,7 +982,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String get infoGuideStepAdjustDesc =>
-      '¿Haçe mâ calô de lo normâh? Purça çobre er progreço de cuarquiêh fermentaçión âttiba pa acortâh o alargâh çu duraçión.';
+      'Haçe mâ calô de lo normâh? Purça çobre er pogreço de cuarquiêh fermentaçión âttiba pa acortâh o alargâh çu duraçión.';
 
   @override
   String get historyDeleted => 'Rehîttro eliminao';
@@ -1003,7 +1003,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   }
 
   @override
-  String get timeDays => 'DÍÂ';
+  String get timeDays => 'DIÂ';
 
   @override
   String get timeHours => 'ORÂ';
@@ -1032,7 +1032,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String get step1Desc =>
-      'Er kéfî comiença a tomâh forma con una açidêh çuabe.';
+      'Er kefî comiença a tomâh forma con una açidêh çuabe.';
 
   @override
   String get step2Title => 'Fermentaçión ideâh';
@@ -1046,7 +1046,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String get step3Desc =>
-      'Çabôh mâh pronunçiao. Puede empeçâh a çepararçe er çuero.';
+      'Çabôh mâ pronunçiao. Puede empeçâh a çepararçe er çuero.';
 
   @override
   String get step4Title => 'Mu áçido';
@@ -1059,7 +1059,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   String get addSheetTitle => '¿Qué bâ a fermentâh?';
 
   @override
-  String get addSheetKefir => 'Kéfî de Lexe';
+  String get addSheetKefir => 'Kefî de Lexe';
 
   @override
   String get addSheetKombucha => 'Kombuxa';
@@ -1068,7 +1068,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   String get notifReadyTitleKombucha => 'Kombuxa Lîtta';
 
   @override
-  String get notifReadyTitleKefir => 'Kéfî Lîtto';
+  String get notifReadyTitleKefir => 'Kefî Lîtto';
 
   @override
   String get notifReadyBodyGeneric => 'Tu fermentaçión a finaliçao';
@@ -1088,7 +1088,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   }
 
   @override
-  String get addSheetTimeKefir => 'Tiempo pa Kéfî';
+  String get addSheetTimeKefir => 'Tiempo pa Kefî';
 
   @override
   String addSheetHours(Object hours) {
@@ -1100,12 +1100,12 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String addSheetIdealTime(Object days) {
-    return 'Tu tiempo ideâ ($days díâh)';
+    return 'Tu tiempo ideâh ($days díâh)';
   }
 
   @override
   String addSheetDays(Object days) {
-    return '$days Díâ';
+    return '$days Diâ';
   }
 
   @override
@@ -1134,11 +1134,11 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   String get homeHarvestAndSave => 'Coçexâh y Guardâh';
 
   @override
-  String get homeDeleteTitle => '¿Eliminâh fermentaçión?';
+  String get homeDeleteTitle => 'Eliminâh fermentaçión?';
 
   @override
   String get homeDeleteDesc =>
-      'Çi eliminâ êtta tarheta, er proçeço çe dêccartará y no çe guardará en l\'ittoriâh.';
+      'Çi eliminâ êtta taheta, er proçeço çe dêccartará y no çe guardará en l\'îttoriâh.';
 
   @override
   String get homeDeleteBtn => 'Eliminâh';
@@ -1151,7 +1151,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String historyKombuchaDuration(Object days) {
-    return 'Duraçión: $days díâ';
+    return 'Duraçión: $days diâ';
   }
 
   @override
@@ -1170,7 +1170,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   String get stageKombucha4 => 'Abinagrá';
 
   @override
-  String get historyKefirFinished => 'Kéfî coçexao';
+  String get historyKefirFinished => 'Kefî coçexao';
 
   @override
   String historyCompletedPercent(Object percent) {
@@ -1179,12 +1179,12 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String historyDurationDays(Object days) {
-    return '$days díâ';
+    return '$days diâ';
   }
 
   @override
   String historyDurationDaysHours(Object days, Object hours) {
-    return '$days díâ y ${hours}h';
+    return '$days diâ y ${hours}h';
   }
 
   @override
@@ -1202,7 +1202,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String historyRealDurationTarget(Object actual, Object target) {
-    return 'Duraçión: $actual (objetibo $target)';
+    return 'Duraçión: $actual (ohetibo $target)';
   }
 
   @override
@@ -1230,7 +1230,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   String get backupSuccessTitle => 'Copia êpportá';
 
   @override
-  String get backupSuccessDesc => 'Lô datô çe an guardao con éççito.';
+  String get backupSuccessDesc => 'Lô datô ç\'an guardao con éççito.';
 
   @override
   String get restoreSuccessTitle => 'Copia rêttaurá';
@@ -1264,7 +1264,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
   String get addSheetCustomHours => 'Orâ';
 
   @override
-  String get addSheetCustomDays => 'Díâ';
+  String get addSheetCustomDays => 'Diâ';
 
   @override
   String get addSheetCustomConfirm => 'Uçâh êtte tiempo';
@@ -1310,7 +1310,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String get detailStageKombucha0Desc =>
-      'Er SCOBY êttá dêppertando. La bebida çige çiendo prátticamente té durçe.';
+      'El SCOBY êttá dêppertando. La bebía çige çiendo prátticamente té durçe.';
 
   @override
   String get detailStageKombucha1Desc =>
@@ -1318,7 +1318,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String get detailStageKombucha2Desc =>
-      'Er punto de equilibrio perfêtto entre durçura y açidêh. Ideâh pa la mayoría de paladarê.';
+      'Er punto d\'equilibrio perfêtto entre durçura y açidêh. Ideâh pa la mayoría de paladarê.';
 
   @override
   String get detailStageKombucha3Desc =>
@@ -1326,14 +1326,14 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String get detailStageKombucha4Desc =>
-      'Fermentaçión mu abançá. Çabôh abinagrao intenço, mâh âtto pa uço culinario.';
+      'Fermentaçión mu abançá. Çabôh abinagrao intenço, mâ âtto pa uço culinario.';
 
   @override
   String get detailNotesTitle => 'Notâ';
 
   @override
   String get detailNotesHint =>
-      'Añade detayê çobre la lexe, temperatura, ettç...';
+      'Añade detayê çobre la lexe, temperatura, etc...';
 
   @override
   String get detailHistoryTitle => 'Îttoriâh Reçiente';
@@ -1366,14 +1366,14 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String get dialogSaveIdealConfirm =>
-      '¿Guardâh êtte tiempo como tu referençia ideâh?';
+      'Guardâh êtte tiempo como tu referençia ideâh?';
 
   @override
   String get actionHarvestAndRestart => 'Coçexâh y reiniçiâh';
 
   @override
   String get dialogHarvestAndRestartConfirm =>
-      '¿Coçexâh lote âttuâh y empeçâh uno nuebo?';
+      'Coçexâh lote âttuâh y empeçâh uno nuebo?';
 
   @override
   String get harvestNextStepTitle => 'Çigiente çiclo';
@@ -1398,7 +1398,7 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String get infoKombuchaDesc =>
-      'Êh té fermentao mediante una colonia çimbiótica de bâtteriâ y lebadurâ (SCOBY). Êh rica en áçíô orgánicô y bitaminâ.';
+      'Êh té fermentao mediante una colonia çimbiótica de bâtteriâ y lebaurâ (SCOBY). Êh rica en áçidô orgánicô y bitaminâ.';
 
   @override
   String get infoKombuchaProcessTitle => 'Er Ciclo de la Kombuxa';
@@ -1408,14 +1408,14 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String get infoKombuchaStep1Desc =>
-      'Çe infuçiona té con açúcâ y, una bêh frío, çe añade er SCOBY con un poco de líquido iniçiadôh der lote anteriôh.';
+      'Çe infuçiona té con açucâ y, una bêh frío, ç\'añade el SCOBY con un poco de líquido iniçiaôh der lote anteriôh.';
 
   @override
-  String get infoKombuchaStep2Title => 'Fermentaçión (7-12 díâ)';
+  String get infoKombuchaStep2Title => 'Fermentaçión (7-12 diâ)';
 
   @override
   String get infoKombuchaStep2Desc =>
-      'Er SCOBY conçume el açúcâ y er té. La âpp aprenderá de tû coçexâ pa çuherirte  tu \'Tiempo Ideâ\' perçonaliçao.';
+      'El SCOBY conçume el açucâ y er té. La app aprenderá de tû coçexâ pa çuherirte tu \'Tiempo Ideâh\' perçonaliçao.';
 
   @override
   String get infoAdvancedCalendarTitle => 'Calendario';
@@ -1429,10 +1429,10 @@ class AppLocalizationsEsAn extends AppLocalizationsEs {
 
   @override
   String get infoAdvancedHistoryDesc =>
-      'Repite lotê prebiô fáçirmente. Lô tiempô de Kombuxa çe ahûttan automáticamente çegún tû preferençiâ paçâh.';
+      'Repite lotê prebiô fáçirmente. Lô tiempô de Kombuxa ç\'ahûttan automáticamente çegún tû preferençiâ paçâh.';
 
   @override
-  String get infoAdvancedDataTitle => 'Çeguridá de Datô';
+  String get infoAdvancedDataTitle => 'Çeguriá de Datô';
 
   @override
   String get infoAdvancedDataDesc =>
