@@ -10,7 +10,7 @@
 
 <p align="center">
   <img alt="GitHub Release" src="https://img.shields.io/github/v/release/raulmoralesruiz/kefir-control?style=flat-square">
-  <img alt="License" src="https://img.shields.io/github/license/raulmoralesruiz/kefir-control?style=flat-square&color=blue">
+  <img alt="License" src="https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg">
   <img alt="Flutter" src="https://img.shields.io/badge/Flutter-3.x-02569B?style=flat-square&logo=flutter">
 </p>
 
@@ -79,5 +79,5 @@ To build the application yourself from source:
    ```
 
 ## 📜 License
-This project is licensed under the **GNU Affero General Public License v3.0 (AGPLv3)**.
+This project is licensed under the **GNU Affero General Public License v3.0 only (AGPLv3-only)**.
 You are free to use, modify, and distribute the software, but modifications and network versions of this software must be distributed under the same license. See the [LICENSE](../LICENSE) file for more information.
