@@ -1,0 +1,1 @@
+Minimalistyczna aplikacja do śledzenia procesu fermentacji kefiru mlecznego.
